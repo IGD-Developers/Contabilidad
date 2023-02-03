@@ -53,11 +53,11 @@ namespace Aplicacion.Contabilidad.Consecutivos
                     throw new Exception("Registro no encontrado");
                 };
                 //Ojo la sucursal no es modificable
-                consecutivo.id_tipocomprobante = request.id_tipocomprobante;
+                consecutivo.IdTipocomprobante = request.id_tipocomprobante;
                 //consecutivo.id_sucursal = request.id_sucursal;
-                consecutivo.co_ano = request.co_ano;
-                consecutivo.co_mes = request.co_mes;
-                consecutivo.co_consecutivo = request.co_consecutivo;
+                consecutivo.CoAno = request.co_ano;
+                consecutivo.CoMes = request.co_mes;
+                consecutivo.CoConsecutivo = request.co_consecutivo;
                 var resultado=  await context.SaveChangesAsync();
                 if (resultado>0)
                 {

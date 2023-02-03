@@ -44,9 +44,9 @@ namespace Aplicacion.Contabilidad.NotaAclaratorias
             {
                
                 var notaAclaratorias = await _context.cntNotaAclaratorias
-                    .Include(t => t.notaAclaratoriaTipo)
-                    .Include(p => p.cntPuct)
-                    .Where(n => n.estado=="A")
+                    .Include(t => t.NotaAclaratoriaTipo)
+                    .Include(p => p.CntPuct)
+                    .Where(n => n.Estado=="A")
                     .ToListAsync();
 
                 var notaAclaratoriasModel = _mapper.Map<List<CntNotaAclaratoria>, List<ListarNotaAclaratoriaModel>>(notaAclaratorias);

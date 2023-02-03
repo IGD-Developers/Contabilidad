@@ -12,30 +12,30 @@ namespace Persistencia.Mapeo.Contabilidad
         {
 
             builder.ToTable("cnt_puc")
-                .HasKey(e => e.id);
+                .HasKey(e => e.Id);
 
-            builder.HasOne<CntPucTipo>(p => p.pucTipo)
-                .WithMany(t => t.cntPucTipoPucs)
-                .HasForeignKey(p => p.id_puctipo);
+            builder.HasOne<CntPucTipo>(p => p.PucTipo)
+                .WithMany(t => t.CntPucTipoPucs)
+                .HasForeignKey(p => p.IdPuctipo);
 
-            builder.HasOne<CntTipoCuenta>(p => p.tipoCuenta)
+            builder.HasOne<CntTipoCuenta>(p => p.TipoCuenta)
                     .WithMany(t => t.TipoCuentaPucs)
-                    .HasForeignKey(p => p.id_tipocuenta);
+                    .HasForeignKey(p => p.IdTipocuenta);
             
-            builder.HasOne<CntTipoImpuesto>(p => p.tipoImpuesto)
-                    .WithMany(t => t.tipoImpuestoPuc)
-                    .HasForeignKey(p => p.id_tipoimpuesto);
+            builder.HasOne<CntTipoImpuesto>(p => p.TipoImpuesto)
+                    .WithMany(t => t.TipoImpuestoPuc)
+                    .HasForeignKey(p => p.IdTipoimpuesto);
 
-            builder.HasOne<CnfUsuario>(p => p.usuario)
-                .WithMany(u => u.usuarioPucs)
-                .HasForeignKey(p => p.id_usuario);
+            builder.HasOne<CnfUsuario>(p => p.Usuario)
+                .WithMany(u => u.UsuarioPucs)
+                .HasForeignKey(p => p.IdUsuario);
 
             // builder
             //     .Property(b => b.id_tipoimpuesto)
             //     .HasDefaultValueSql(0);
             
             builder
-                .Property(b => b.created_at)
+                .Property(b => b.CreatedAt)
                 .HasDefaultValueSql("DateTime.Now");
 
             

@@ -45,8 +45,8 @@ namespace Aplicacion.Contabilidad.Uvts
             {
                 var uvt = new CntUvt
                 {
-                    uvt_ano =  request.uvt_ano,
-                    uvt_valor = request.uvt_valor
+                    UvtAno =  request.uvt_ano,
+                    UvtValor = request.uvt_valor
                 };
 
                 context.cntUvts.Add(uvt);

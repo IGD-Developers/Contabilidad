@@ -7,7 +7,7 @@ namespace Dominio.Configuracion
     public class CnfUsuario
     {
         public int id { get; set; }
-        public int id_tercero { get; set; }
+        public int IdTercero { get; set; }
         public string usu_usuario { get; set; }
         public string usu_password { get; set; }
         public DateTime usu_fecha_nacimiento { get; set; }

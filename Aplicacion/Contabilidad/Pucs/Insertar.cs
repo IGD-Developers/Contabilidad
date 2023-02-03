@@ -66,23 +66,23 @@ namespace Aplicacion.Contabilidad.Pucs
                 if (longitud == 1)
                 {
                      var idClase= tipoCuentas
-                        .Where(t => t.codigo == "CLA")
-                        .Select(t=>new IdPucModel(){Id=t.id}).SingleOrDefault();
+                        .Where(t => t.Codigo == "CLA")
+                        .Select(t=>new IdPucModel(){Id=t.Id}).SingleOrDefault();
                     request.id_tipocuenta=idClase.Id;    
                 
                 }
                 else if (longitud == 2)
                 {
                      var idClase= tipoCuentas
-                        .Where(t => t.codigo == "GRU")
-                        .Select(t=>new IdPucModel(){Id=t.id}).SingleOrDefault();
+                        .Where(t => t.Codigo == "GRU")
+                        .Select(t=>new IdPucModel(){Id=t.Id}).SingleOrDefault();
                     request.id_tipocuenta=idClase.Id;    
                 }
                 else if (longitud == 4)
                 {
                      var idClase= tipoCuentas
-                        .Where(t => t.codigo == "CUE")
-                        .Select(t=>new IdPucModel(){Id=t.id}).SingleOrDefault();
+                        .Where(t => t.Codigo == "CUE")
+                        .Select(t=>new IdPucModel(){Id=t.Id}).SingleOrDefault();
                     request.id_tipocuenta=idClase.Id;    
 
                 }
@@ -90,16 +90,16 @@ namespace Aplicacion.Contabilidad.Pucs
                 else if (longitud == 6)
                 {
                      var idClase= tipoCuentas
-                        .Where(t => t.codigo == "SUB")
-                        .Select(t=>new IdPucModel(){Id=t.id}).SingleOrDefault();
+                        .Where(t => t.Codigo == "SUB")
+                        .Select(t=>new IdPucModel(){Id=t.Id}).SingleOrDefault();
                     request.id_tipocuenta=idClase.Id;    
 
                 }
                 else if (longitud == 8)
                 {
                      var idClase= tipoCuentas
-                        .Where(t => t.codigo == "AUX")
-                        .Select(t=>new IdPucModel(){Id=t.id}).SingleOrDefault();
+                        .Where(t => t.Codigo == "AUX")
+                        .Select(t=>new IdPucModel(){Id=t.Id}).SingleOrDefault();
                     request.id_tipocuenta=idClase.Id;    
 
                 }

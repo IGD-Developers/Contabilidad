@@ -68,7 +68,7 @@ namespace Aplicacion.Contabilidad.Terceros
                     var terceroDto = _mapper.Map<InsertarTerceroModel, CntTercero>(request);
                     await _context.CntTerceros.AddAsync(terceroDto);
                     var valor = await _context.SaveChangesAsync();
-                    var idTercero = terceroDto.id;
+                    var idTercero = terceroDto.Id;
                     
                     if(request.responsabilidadTerceroModel == null){
                         //TODO:AGGD - VALIDAR QUE ENVIE MINIMO NO RESPONSABLE
@@ -87,7 +87,7 @@ namespace Aplicacion.Contabilidad.Terceros
                         foreach (int idResponsabilidad in idResponsabilidades)
                         {
                             registro.id_responsabilidad = idResponsabilidad;
-                            registro.id_tercero = idTercero;
+                            registro.IdTercero = idTercero;
 
                             var responsabilidad = await _context.cntResponsabilidades.FindAsync(registro.id_responsabilidad);
                             if (responsabilidad == null)

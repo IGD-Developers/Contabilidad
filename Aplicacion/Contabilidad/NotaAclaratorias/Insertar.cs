@@ -45,15 +45,15 @@ namespace Aplicacion.Contabilidad.NotaAclaratorias
                 //TODO: NO USAR LAS ENTIDADES DE DOMINIO EN LO POSIBLE
                 try {
                     var notaTipo = await _context.cntNotaAclaratoriaTipos
-                        .Where(t => t.id == request.id_notaaclaratoriatipo)
-                        .Select(x => new CntNotaAclaratoriaTipo() {codigo = x.codigo, nombre=x.nombre})
+                        .Where(t => t.Id == request.id_notaaclaratoriatipo)
+                        .Select(x => new CntNotaAclaratoriaTipo() {Codigo = x.Codigo, Nombre=x.Nombre})
                         .SingleOrDefaultAsync();
 
                     if(notaTipo == null){
                         throw new Exception("Tipo de nota Aclaratoria no existe");
                     }
                     
-                    if(notaTipo.codigo == "CUE"){
+                    if(notaTipo.Codigo == "CUE"){
 
                         var codCuenta = await _context.cntPucs.FindAsync(request.id_puc);
                         if(codCuenta == null){

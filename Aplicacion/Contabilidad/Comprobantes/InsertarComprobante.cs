@@ -40,13 +40,13 @@ namespace Aplicacion.Contabilidad.Comprobantes
 
             var resu = await _insertarConsecutivo.Insertar(cns);
             System.Console.WriteLine(resu);
-            model.cco_ano = resu.co_ano;
-            model.cco_mes = resu.co_mes;
-            model.cco_consecutivo = resu.co_consecutivo;
+            model.cco_ano = resu.CoAno;
+            model.cco_mes = resu.CoMes;
+            model.cco_consecutivo = resu.CoConsecutivo;
 
             IdComprobanteModel idComprobante = new IdComprobanteModel{Id = -1};
             var entidadDto = _mapper.Map<InsertarComprobantesModel, CntComprobante>(model);
-            if(entidadDto.tcredito!=entidadDto.tdebito)
+            if(entidadDto.Tcredito!=entidadDto.Tdebito)
             {
                 
                  throw new Exception("Los Débitos y Créditos no son iguales" );
@@ -61,7 +61,7 @@ namespace Aplicacion.Contabilidad.Comprobantes
 
             await _context.cntComprobantes.AddAsync(entidadDto);
             var respuesta1 = await _context.SaveChangesAsync();
-            int nuevoid = entidadDto.id;
+            int nuevoid = entidadDto.Id;
             idComprobante.Id = nuevoid;
             Console.WriteLine(nuevoid);
 

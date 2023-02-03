@@ -10,6 +10,6 @@ namespace Aplicacion.Models.Configuracion.Sucursales
         public string nombre { get; set; }
         public int id_empresa { get; set; }
 
-        public EmpresasModel empresa { get; set; }
+        public EmpresasModel Empresa { get; set; }
     }
 }

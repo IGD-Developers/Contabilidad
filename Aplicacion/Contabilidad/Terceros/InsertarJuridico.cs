@@ -49,13 +49,13 @@ namespace Aplicacion.Contabilidad.Terceros
 
             public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
             {
-               var genero = await _context.CntGeneros.Where(p => p.codigo == "NA")
+               var genero = await _context.CntGeneros.Where(p => p.Codigo == "NA")
                     .SingleOrDefaultAsync();
                 if(genero == null){
                     throw new Exception("No se encontro genero");
                 }
 
-                var tipoPersona = await _context.CntTipoPersonas.Where(p => p.codigo == "J")
+                var tipoPersona = await _context.CntTipoPersonas.Where(p => p.Codigo == "J")
                     .SingleOrDefaultAsync();
 
                 if(tipoPersona == null){
@@ -70,7 +70,7 @@ namespace Aplicacion.Contabilidad.Terceros
                     var entidadDto = _mapper.Map<InsertarJuridicoModel, CntTercero>(request);
                     await _context.CntTerceros.AddAsync(entidadDto);
                     var valor = await _context.SaveChangesAsync();
-                    var idTercero = entidadDto.id;
+                    var idTercero = entidadDto.Id;
 
                     if(request.responsabilidadTerceroJuridicoModel != null){
                        
@@ -82,7 +82,7 @@ namespace Aplicacion.Contabilidad.Terceros
                         foreach (int idResponsabilidad in idResponsabilidades)
                         {
                             registro.id_responsabilidad = idResponsabilidad;
-                            registro.id_tercero = idTercero;
+                            registro.IdTercero = idTercero;
                             
                             var responsabilidad = await _context.cntResponsabilidades.FindAsync(registro.id_responsabilidad);
                             if(responsabilidad == null){

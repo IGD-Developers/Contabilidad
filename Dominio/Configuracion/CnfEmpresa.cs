@@ -13,7 +13,7 @@ namespace Dominio.Configuracion
         public ICollection<CnfSucursal> EmpresaSucursales { get; set; }
 
         // public string nombregerente { get{
-        //     if(this.id_tercero_gerente!=null)
+        //     if(this.IdTerceroGerente!=null)
         //     {
         //         string pa = terceroEmpresa.ter_priapellido ?? "c";
         //         string sa = terceroEmpresa.ter_segapellido ?? "c";

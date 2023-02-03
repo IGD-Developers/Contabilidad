@@ -10,7 +10,7 @@ namespace Persistencia.Mapeo.Contabilidad
         {
             builder
                 .ToTable("cnt_banco")  
-                .HasKey(entity => entity.id);
+                .HasKey(entity => entity.Id);
         }
     }
 }

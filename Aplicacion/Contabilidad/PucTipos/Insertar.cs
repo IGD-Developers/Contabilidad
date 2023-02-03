@@ -40,8 +40,8 @@ namespace Aplicacion.Contabilidad.PucTipos
             {
                 var pucTipo = new CntPucTipo
                 {
-                    codigo = request.codigo,
-                    nombre =request.nombre
+                    Codigo = request.codigo,
+                    Nombre =request.nombre
                 };
                 context.cntPucTipos.Add(pucTipo);
                 var respuesta = await context.SaveChangesAsync();

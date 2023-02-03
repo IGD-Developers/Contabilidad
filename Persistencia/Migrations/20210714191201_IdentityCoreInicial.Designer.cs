@@ -25,7 +25,7 @@ namespace Persistencia.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int>("id_tercero_gerente")
+                    b.Property<int>("IdTerceroGerente")
                         .HasColumnType("int");
 
                     b.Property<string>("nit")
@@ -70,7 +70,7 @@ namespace Persistencia.Migrations
                     b.Property<DateTime?>("created_at")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<int>("id_tercero")
+                    b.Property<int>("IdTercero")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("update_at")
@@ -151,7 +151,7 @@ namespace Persistencia.Migrations
                     b.Property<DateTime?>("created_at")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<int>("id_tercero")
+                    b.Property<int>("IdTercero")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("update_at")
@@ -334,7 +334,7 @@ namespace Persistencia.Migrations
                     b.Property<int>("id_sucursal")
                         .HasColumnType("int");
 
-                    b.Property<int>("id_tercero")
+                    b.Property<int>("IdTercero")
                         .HasColumnType("int");
 
                     b.Property<int>("id_tipocomprobante")
@@ -476,7 +476,7 @@ namespace Persistencia.Migrations
                     b.Property<int>("id_puc")
                         .HasColumnType("int");
 
-                    b.Property<int>("id_tercero")
+                    b.Property<int>("IdTercero")
                         .HasColumnType("int");
 
                     b.HasKey("id");
@@ -499,7 +499,7 @@ namespace Persistencia.Migrations
                     b.Property<string>("codigo")
                         .HasColumnType("longtext");
 
-                    b.Property<int>("id_tercero")
+                    b.Property<int>("IdTercero")
                         .HasColumnType("int");
 
                     b.Property<int>("id_tipoimpuesto")
@@ -510,7 +510,7 @@ namespace Persistencia.Migrations
 
                     b.HasKey("id");
 
-                    b.HasIndex("id_tercero");
+                    b.HasIndex("IdTercero");
 
                     b.HasIndex("id_tipoimpuesto");
 
@@ -632,7 +632,7 @@ namespace Persistencia.Migrations
                     b.Property<int>("id_puc")
                         .HasColumnType("int");
 
-                    b.Property<int>("id_tercero")
+                    b.Property<int>("IdTercero")
                         .HasColumnType("int");
 
                     b.Property<int>("id_tipoimpuesto")
@@ -659,7 +659,7 @@ namespace Persistencia.Migrations
 
                     b.HasIndex("id_puc");
 
-                    b.HasIndex("id_tercero");
+                    b.HasIndex("IdTercero");
 
                     b.HasIndex("id_tipoimpuesto");
 
@@ -909,14 +909,14 @@ namespace Persistencia.Migrations
                     b.Property<int>("id_responsabilidad")
                         .HasColumnType("int");
 
-                    b.Property<int>("id_tercero")
+                    b.Property<int>("IdTercero")
                         .HasColumnType("int");
 
                     b.HasKey("id");
 
                     b.HasIndex("id_responsabilidad");
 
-                    b.HasIndex("id_tercero");
+                    b.HasIndex("IdTercero");
 
                     b.ToTable("cnt_responsabilidad_ter");
                 });
@@ -1336,13 +1336,13 @@ namespace Persistencia.Migrations
 
             modelBuilder.Entity("Dominio.Configuracion.CnfSucursal", b =>
                 {
-                    b.HasOne("Dominio.Configuracion.CnfEmpresa", "empresa")
+                    b.HasOne("Dominio.Configuracion.CnfEmpresa", "Empresa")
                         .WithMany("empresaSucursales")
                         .HasForeignKey("id_empresa")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("empresa");
+                    b.Navigation("Empresa");
                 });
 
             modelBuilder.Entity("Dominio.Contabilidad.CntAno", b =>
@@ -1471,7 +1471,7 @@ namespace Persistencia.Migrations
                 {
                     b.HasOne("Dominio.Contabilidad.CntTercero", "tercero")
                         .WithMany("entidadTerceros")
-                        .HasForeignKey("id_tercero")
+                        .HasForeignKey("IdTercero")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -1532,7 +1532,7 @@ namespace Persistencia.Migrations
 
                     b.HasOne("Dominio.Contabilidad.CntTercero", "tercero")
                         .WithMany("liquidaImpuestoTerceros")
-                        .HasForeignKey("id_tercero")
+                        .HasForeignKey("IdTercero")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -1644,7 +1644,7 @@ namespace Persistencia.Migrations
 
                     b.HasOne("Dominio.Contabilidad.CntTercero", "Tercero")
                         .WithMany("responsabilidadTerceros")
-                        .HasForeignKey("id_tercero")
+                        .HasForeignKey("IdTercero")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

@@ -53,7 +53,7 @@ namespace Aplicacion.Contabilidad.TipoComprobantes
 
                 //TODO: MARIA Validaciones id_usuario 
                 //TODO: MARIA Liberar de memoria para volver a utilizar entidad No me permite usar el mismo nombre 
-                using (var entidad = await _context.cntCategoriaComprobantes.SingleOrDefaultAsync(t => t.id == request.id_categoriacomprobante))
+                using (var entidad = await _context.cntCategoriaComprobantes.SingleOrDefaultAsync(t => t.Id == request.id_categoriacomprobante))
                 {
                     if (entidad == null)
                     {
@@ -64,7 +64,7 @@ namespace Aplicacion.Contabilidad.TipoComprobantes
                 try
                 {
                     var entidad2 = await _context.cntCategoriaComprobantes
-                   .SingleOrDefaultAsync(t => t.id == request.id_categoriacomprobante);
+                   .SingleOrDefaultAsync(t => t.Id == request.id_categoriacomprobante);
 
                     if (entidad2 == null)
                     {

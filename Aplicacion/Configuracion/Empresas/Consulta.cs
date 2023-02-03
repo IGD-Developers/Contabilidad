@@ -40,7 +40,7 @@ namespace Aplicacion.Configuracion.Empresas
             {
 
                 var entidades = await _context.cnfEmpresas
-                .Include(t=> t.terceroEmpresa)
+                .Include(t=> t.TerceroEmpresa)
                 .ToListAsync();
 
                 var entidadesDto = _mapper.Map<List<CnfEmpresa>,List<ListarEmpresasModel>>(entidades);

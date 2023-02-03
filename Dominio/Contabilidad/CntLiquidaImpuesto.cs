@@ -6,32 +6,24 @@ namespace Dominio.Contabilidad
 {
     public class CntLiquidaImpuesto
     {
-        public int id { get; set; }
-        public int id_tipoimpuesto { get; set; }
-        public int id_comprobante { get; set; }
-        public int id_puc { get; set; }
-        public int id_tercero { get; set; }
+        public int Id { get; set; }
+        public int IdTipoimpuesto { get; set; }
+        public int IdComprobante { get; set; }
+        public int IdPuc { get; set; }
+        public int IdTercero { get; set; }
         //public DateTime lim_fecha { get; set; }
-        public DateTime lim_fechainicial { get; set; }
-        public DateTime lim_fechafinal { get; set; }
-        public DateTime? created_at { get; set; }
-        public DateTime? updated_at { get; set; }
-        public string estado { get; set; }
+        public DateTime LimFechainicial { get; set; }
+        public DateTime LimFechafinal { get; set; }
+        public DateTime? CreatedAt { get; set; }
+        public DateTime? UpdatedAt { get; set; }
+        public string Estado { get; set; }
 
 
 
-        public CntTipoImpuesto tipoImpuesto { get; set; }
-        public CntTercero tercero { get; set; }
+        public CntTipoImpuesto TipoImpuesto { get; set; }
+        public CntTercero Tercero { get; set; }
 
-        public CntPuc puc { get; set; }
-        public CntComprobante comprobante { get; set; }
-
-      
-
-        
-
-
-
-
+        public CntPuc Puc { get; set; }
+        public CntComprobante Comprobante { get; set; }
     }
 }

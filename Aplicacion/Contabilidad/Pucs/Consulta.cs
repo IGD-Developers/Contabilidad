@@ -34,8 +34,8 @@ namespace Aplicacion.Contabilidad.Pucs
                 // var cntPucs = await _context.cntPucs
                 // .ToListAsync();
                 var entidadesDto = await _context.cntPucs
-                .Include(x=>x.pucTipo)
-                .Include(x=>x.tipoCuenta)
+                .Include(x=>x.PucTipo)
+                .Include(x=>x.TipoCuenta)
                 .Select(p =>  mapper.Map<CntPuc,ListarPucModel>(p))
                 .ToListAsync();
 

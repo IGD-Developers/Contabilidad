@@ -9,15 +9,15 @@ namespace Persistencia.Mapeo.Contabilidad
         public void Configure(EntityTypeBuilder<CntResponsabilidadTer> builder)
         {
             builder.ToTable("cnt_responsabilidad_ter")
-                .HasKey(pk => pk.id);
+                .HasKey(pk => pk.Id);
 
             builder.HasOne<CntTercero>(rter => rter.Tercero)
-                .WithMany(ter => ter.responsabilidadTerceros)
-                .HasForeignKey(rter => rter.id_tercero);
+                .WithMany(ter => ter.ResponsabilidadTerceros)
+                .HasForeignKey(rter => rter.IdTercero);
                 
             builder.HasOne<CntResponsabilidad>(rter => rter.Responsabilidad)
-                .WithMany(res => res.reponsabilidadResponsabilidadTerceros)
-                .HasForeignKey(rter => rter.id_responsabilidad);
+                .WithMany(res => res.ReponsabilidadResponsabilidadTerceros)
+                .HasForeignKey(rter => rter.IdResponsabilidad);
             
         }
     }

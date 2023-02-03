@@ -36,13 +36,13 @@ namespace Aplicacion.Contabilidad.LiquidaImpuestos
             {
 
                 var entidad = await _context.cntLiquidaImpuestos
-                .Include(t => t.tercero)
-               .Include(ti => ti.tipoImpuesto)
-               .Include(co => co.comprobante)
-               .ThenInclude(tipoc => tipoc.tipoComprobante)
-               .Include(co => co.comprobante)
-               .ThenInclude(dt => dt.comprobanteDetalleComprobantes)
-               .Where(i => i.id == request.Id)
+                .Include(t => t.Tercero)
+               .Include(ti => ti.TipoImpuesto)
+               .Include(co => co.Comprobante)
+               .ThenInclude(tipoc => tipoc.TipoComprobante)
+               .Include(co => co.Comprobante)
+               .ThenInclude(dt => dt.ComprobanteDetalleComprobantes)
+               .Where(i => i.Id == request.Id)
                 .Select(p => _mapper.Map<CntLiquidaImpuesto, ListarLiquidaImpuestosModel>(p))
                .FirstOrDefaultAsync();
 

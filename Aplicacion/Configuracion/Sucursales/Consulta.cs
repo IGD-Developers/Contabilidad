@@ -44,7 +44,7 @@ namespace Aplicacion.Configuracion.Sucursales
                 // El contexto devuelve desde el dbset
 
                 var entidades = await _context.cnfSucursales
-                .Include(e=>e.empresa)
+                .Include(e=>e.Empresa)
                 .ToListAsync();
 
                 var entidadesDto = _mapper.Map<List<CnfSucursal>,List<ListarSucursalModel>>(entidades);

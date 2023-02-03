@@ -26,7 +26,7 @@ namespace Aplicacion.Contabilidad.Comprobantes
             {
                 // RuleFor(x => x.id_sucursal).NotEmpty();
                 // RuleFor(x => x.id_tipocomprobante).NotEmpty();
-                RuleFor(x => x.id_tercero).NotEmpty();
+                RuleFor(x => x.IdTercero).NotEmpty();
                 // RuleFor(x => x.cco_ano).NotEmpty();
                 // RuleFor(x => x.cco_mes).NotEmpty();
                 // RuleFor(x => x.cco_consecutivo).NotEmpty();
@@ -61,9 +61,9 @@ namespace Aplicacion.Contabilidad.Comprobantes
                 }
 
                 var comprobante = await context.cntComprobantes
-                .Include(t => t.tipoComprobante)
-                .Include(d => d.comprobanteDetalleComprobantes)
-                .FirstOrDefaultAsync(cmp => cmp.id == request.Id);
+                .Include(t => t.TipoComprobante)
+                .Include(d => d.ComprobanteDetalleComprobantes)
+                .FirstOrDefaultAsync(cmp => cmp.Id == request.Id);
 
 
                 if (comprobante == null)
@@ -71,18 +71,18 @@ namespace Aplicacion.Contabilidad.Comprobantes
                     throw new Exception("Comprobante no encontrado");
                 }
 
-                if (comprobante.tipoComprobante.editable == "F")
+                if (comprobante.TipoComprobante.Editable == "F")
                 {
                     throw new Exception("Comprobante no permite Edición");
                 }
 
-                if (comprobante.estado != "A" )
+                if (comprobante.Estado != "A" )
                 {
                     throw new Exception("El Comprobante no está disponible para Edición porque ha sido sometido algún proceso que cambió su Estado ");
                 }
 
                var entidadDto = _mapper.Map<EditarComprobantesModel, CntComprobante>(request);
-                if(entidadDto.tcredito!=entidadDto.tdebito)
+                if(entidadDto.Tcredito!=entidadDto.Tdebito)
                 {
                     
                     throw new Exception("Los Débitos y Créditos no son iguales" );
@@ -97,11 +97,11 @@ namespace Aplicacion.Contabilidad.Comprobantes
 
                 try
                 {
-                    comprobante.id_modulo = request.id_modulo ?? comprobante.id_modulo;
-                    comprobante.id_tercero = request.id_tercero ?? comprobante.id_tercero;
-                    comprobante.cco_documento = request.cco_documento ?? comprobante.cco_documento;
-                    comprobante.cco_detalle = request.cco_detalle ?? comprobante.cco_detalle;
-                    comprobante.cco_fecha = request.cco_fecha ?? comprobante.cco_fecha;
+                    comprobante.IdModulo = request.id_modulo ?? comprobante.IdModulo;
+                    comprobante.IdTercero = request.IdTercero ?? comprobante.IdTercero;
+                    comprobante.CcoDocumento = request.cco_documento ?? comprobante.CcoDocumento;
+                    comprobante.CcoDetalle = request.cco_detalle ?? comprobante.CcoDetalle;
+                    comprobante.CcoFecha = request.cco_fecha ?? comprobante.CcoFecha;
 
 
 
@@ -111,7 +111,7 @@ namespace Aplicacion.Contabilidad.Comprobantes
                         {
                             /*Eliminar detalles de comprobante*/
                             var detalles =  await context.cntDetalleComprobantes
-                                .Where(x => x.id_comprobante == request.Id)
+                                .Where(x => x.IdComprobante == request.Id)
                                 .ToListAsync();
 
                             //var detalles = comprobante.comprobanteDetalleComprobantes;
@@ -132,15 +132,15 @@ namespace Aplicacion.Contabilidad.Comprobantes
                                 var nuevoDetalle = new CntDetalleComprobante
                                 {
 
-                                    id_comprobante = request.Id,
-                                    id_centrocosto = detalle.id_centrocosto,
-                                    id_puc = detalle.id_puc,
-                                    id_tercero = detalle.id_tercero,
-                                    dco_base = detalle.dco_base,
-                                    dco_tarifa = detalle.dco_tarifa,
-                                    dco_debito = detalle.dco_debito,
-                                    dco_credito = detalle.dco_credito,
-                                    dco_detalle = detalle.dco_detalle
+                                    IdComprobante = request.Id,
+                                    IdCentrocosto = detalle.id_centrocosto,
+                                    IdPuc = detalle.id_puc,
+                                    IdTercero = detalle.IdTercero,
+                                    DcoBase = detalle.dco_base,
+                                    DcoTarifa = detalle.dco_tarifa,
+                                    DcoDebito = detalle.dco_debito,
+                                    DcoCredito = detalle.dco_credito,
+                                    DcoDetalle = detalle.dco_detalle
                                 };
                                 await context.cntDetalleComprobantes.AddAsync(nuevoDetalle);
                             }

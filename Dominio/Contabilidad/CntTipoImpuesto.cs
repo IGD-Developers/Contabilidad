@@ -4,14 +4,14 @@ namespace Dominio.Contabilidad
 {
     public class CntTipoImpuesto
     {
-        public int id { get; set; }
-        public string codigo { get; set; }
-        public string nombre { get; set; }
+        public int Id { get; set; }
+        public string Codigo { get; set; }
+        public string Nombre { get; set; }
 
 
-        public ICollection<CntCuentaImpuesto> cntTipoImpuestoCntCuentaImpuestos { get; set; }
-        public ICollection<CntEntidad> tipoImpuestoEntidades { get; set; }
-        public ICollection<CntLiquidaImpuesto> tipoImpuestoLiquidaImpuestos { get; set; }
-        public ICollection<CntPuc> tipoImpuestoPuc { get; set; }
+        public ICollection<CntCuentaImpuesto> CntTipoImpuestoCntCuentaImpuestos { get; set; }
+        public ICollection<CntEntidad> TipoImpuestoEntidades { get; set; }
+        public ICollection<CntLiquidaImpuesto> TipoImpuestoLiquidaImpuestos { get; set; }
+        public ICollection<CntPuc> TipoImpuestoPuc { get; set; }
     }
 }

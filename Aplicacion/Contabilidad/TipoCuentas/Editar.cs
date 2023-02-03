@@ -47,8 +47,8 @@ namespace Aplicacion.Contabilidad.TipoCuentas
                         throw new Exception("Registro no encontrado");
                 };  
 
-                tipoCuenta.codigo = request.codigo;
-                tipoCuenta.nombre = request.nombre; 
+                tipoCuenta.Codigo = request.codigo;
+                tipoCuenta.Nombre = request.nombre; 
 
                 var resultado=  await context.SaveChangesAsync();
                 if (resultado>0)

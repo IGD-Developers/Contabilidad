@@ -44,9 +44,9 @@ namespace Aplicacion.Contabilidad.ExogenaConceptos
 
                 var exogenaConcepto = new CntExogenaConcepto
                 {
-                    codigo = request.codigo,
-                    nombre = request.nombre,
-                    estado = request.estado
+                    Codigo = request.codigo,
+                    Nombre = request.nombre,
+                    Estado = request.estado
 
                 };
                 context.cntExogenaConceptos.Add(exogenaConcepto);

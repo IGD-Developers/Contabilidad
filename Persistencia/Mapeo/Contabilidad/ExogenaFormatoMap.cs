@@ -9,7 +9,7 @@ namespace Persistencia.Mapeo.Contabilidad
         public void Configure(EntityTypeBuilder<CntExogenaFormato> builder)
         {
             builder.ToTable("cnt_exogenaformato")  
-                .HasKey(entity => entity.id);
+                .HasKey(entity => entity.Id);
         }
     }
 }

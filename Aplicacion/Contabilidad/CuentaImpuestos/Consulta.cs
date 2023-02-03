@@ -36,8 +36,8 @@ namespace Aplicacion.Contabilidad.CuentaImpuestos
             {
                
                 var entidadesDto1 = await _context.cntCuentaImpuestos
-                                    .Include(p => p.puc)
-                                    .Include(p => p.tipoImpuesto)
+                                    .Include(p => p.Puc)
+                                    .Include(p => p.TipoImpuesto)
                                     .Select(p =>  _mapper.Map<CntCuentaImpuesto,ListarCuentaImpuestosModel>(p))
                                     .ToListAsync();
                 

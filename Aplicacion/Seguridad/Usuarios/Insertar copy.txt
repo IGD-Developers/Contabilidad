@@ -10,7 +10,7 @@ namespace Aplicacion.Configuracion.Usuarios
     public class Insertar
     {
         public class Ejecuta: IRequest {
-            public int id_tercero { get; set; }
+            public int IdTercero { get; set; }
             public string UserName { get; set; }
             public string PasswordHash { get; set; }
             public string Email { get; set; }
@@ -33,7 +33,7 @@ namespace Aplicacion.Configuracion.Usuarios
             {
                 var usuario = new CnfUsuario() 
                     {
-                    id_tercero=request.id_tercero,
+                    IdTercero=request.IdTercero,
                     UserName=request.UserName, 
                    PasswordHash=request.PasswordHash,
                     usu_estado=request.usu_estado,

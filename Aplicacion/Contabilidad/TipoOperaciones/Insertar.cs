@@ -58,9 +58,9 @@ namespace Aplicacion.Contabilidad.TipoOperaciones
 
                 var tipoOperacion = new CntTipoOperacion
                 {
-                    codigo = request.codigo,
-                    nombre = request.nombre,
-                    formula = request.formula ?? ""
+                    Codigo = request.codigo,
+                    Nombre = request.nombre,
+                    Formula = request.formula ?? ""
 
                 };
                 

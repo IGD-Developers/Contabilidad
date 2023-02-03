@@ -41,8 +41,8 @@ namespace Aplicacion.Contabilidad.TipoCuentas
             {
                 var tipoCuenta = new CntTipoCuenta 
                 {
-                    codigo = request.codigo,
-                    nombre = request.nombre
+                    Codigo = request.codigo,
+                    Nombre = request.nombre
                 };
 
                 context.cntTipoCuentas.Add(tipoCuenta);

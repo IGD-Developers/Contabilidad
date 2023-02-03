@@ -11,7 +11,7 @@ namespace Aplicacion.Seguridad
     public class Insertar
     {
         public class Ejecuta: IRequest {
-            public int id_tercero { get; set; }
+            public int IdTercero { get; set; }
             public string UserName { get; set; }
             public string Password { get; set; }
             public string Email { get; set; }
@@ -55,7 +55,7 @@ namespace Aplicacion.Seguridad
 
                 // var usuario = new CnfUsuario() 
                 //     {
-                //     id_tercero=request.id_tercero,
+                //     IdTercero=request.IdTercero,
                 //     UserName=request.UserName, 
                 //    Password=request.Password,
                 //     usu_estado=request.usu_estado,

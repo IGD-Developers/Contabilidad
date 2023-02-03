@@ -37,8 +37,8 @@ namespace Aplicacion.Contabilidad.NotaAclaratoriaCuentas
             {
                 var nota = new CntNotaAclaratoriaCuenta{
                     
-                    id_notaaclaratoria = request.id_notaaclaratoria,
-                    id_puc = request.id_puc                    
+                    IdNotaaclaratoria = request.id_notaaclaratoria,
+                    IdPuc = request.id_puc                    
                 };
 
                 _context.cntNotaAclaratoriaCuentas.Add(nota);

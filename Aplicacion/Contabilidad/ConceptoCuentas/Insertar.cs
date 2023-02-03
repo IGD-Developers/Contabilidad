@@ -32,11 +32,11 @@ namespace Aplicacion.Contabilidad.ConceptoCuentas
             {
                 var conceptoCuenta=new CntConceptoCuenta
                 {
-                    id_exogenaconcepto =request.id_exogenaconcepto,
-                    id_puc =request.id_puc,
-                    id_formatocolumna=request.id_formatocolumna,
-                    id_tipooperacion =request.id_tipooperacion,
-                    estado=request.estado
+                    IdExogenaconcepto =request.id_exogenaconcepto,
+                    IdPuc =request.id_puc,
+                    IdFormatocolumna=request.id_formatocolumna,
+                    IdTipooperacion =request.id_tipooperacion,
+                    Estado=request.estado
                 };
                 context.cntConceptoCuentas.Add(conceptoCuenta);
                 var respuesta= await context.SaveChangesAsync();

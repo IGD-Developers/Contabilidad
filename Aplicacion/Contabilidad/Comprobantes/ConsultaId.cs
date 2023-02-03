@@ -40,12 +40,12 @@ namespace Aplicacion.Contabilidad.Comprobantes
                 // return comprobante;
 
                 var comprobante = await context.cntComprobantes
-                .Include(t => t.tipoComprobante)
-                .ThenInclude(ctg => ctg.categoria)
-                .Include(s => s.sucursal)
-                .Include(u => u.usuario)
-                .Include(d => d.comprobanteDetalleComprobantes)
-                .FirstOrDefaultAsync(cmp => cmp.id == request.Id);
+                .Include(t => t.TipoComprobante)
+                .ThenInclude(ctg => ctg.Categoria)
+                .Include(s => s.Sucursal)
+                .Include(u => u.Usuario)
+                .Include(d => d.ComprobanteDetalleComprobantes)
+                .FirstOrDefaultAsync(cmp => cmp.Id == request.Id);
                 // Nota:la condicion del FirstOrDefaultAsync puede ir en un Where(cmp => cmp.id == request.Id) 
 
                 if (comprobante == null) {

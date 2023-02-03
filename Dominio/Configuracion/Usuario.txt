@@ -8,7 +8,7 @@ namespace Dominio.Configuracion
     public class Usuario: IdentityUser
     {
 
-        public int id_tercero { get; set; }
+        public int IdTercero { get; set; }
         public bool usu_estado { get; set; }
         public bool usu_supervisor { get; set; }
         public DateTime? created_at { get; set; }

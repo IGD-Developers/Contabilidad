@@ -51,11 +51,11 @@ public class EjecutaValidador : AbstractValidator<Ejecuta>
                     throw new Exception("Concepto no encontrado");
                 };
 
-                    conceptoCuenta.id_exogenaconcepto =request.id_exogenaconcepto;
-                    conceptoCuenta.id_puc =request.id_puc;
-                    conceptoCuenta.id_formatocolumna=request.id_formatocolumna;
-                    conceptoCuenta.id_tipooperacion =request.id_tipooperacion;
-                    conceptoCuenta.estado=request.estado;
+                    conceptoCuenta.IdExogenaconcepto =request.id_exogenaconcepto;
+                    conceptoCuenta.IdPuc =request.id_puc;
+                    conceptoCuenta.IdFormatocolumna=request.id_formatocolumna;
+                    conceptoCuenta.IdTipooperacion =request.id_tipooperacion;
+                    conceptoCuenta.Estado=request.estado;
 
             var resultado=  await context.SaveChangesAsync();
                 if (resultado>0)

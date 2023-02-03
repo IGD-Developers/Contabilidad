@@ -36,7 +36,7 @@ namespace Persistencia.Migrations
                 {
                     Id = table.Column<string>(type: "varchar(255)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    id_tercero = table.Column<int>(type: "int", nullable: false),
+                    IdTercero = table.Column<int>(type: "int", nullable: false),
                     usu_estado = table.Column<bool>(type: "tinyint(1)", nullable: false),
                     usu_supervisor = table.Column<bool>(type: "tinyint(1)", nullable: false),
                     created_at = table.Column<DateTime>(type: "datetime(6)", nullable: true),
@@ -80,7 +80,7 @@ namespace Persistencia.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     razon_social = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    id_tercero_gerente = table.Column<int>(type: "int", nullable: false)
+                    IdTerceroGerente = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -94,7 +94,7 @@ namespace Persistencia.Migrations
                 {
                     id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    id_tercero = table.Column<int>(type: "int", nullable: false),
+                    IdTercero = table.Column<int>(type: "int", nullable: false),
                     usu_usuario = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     usu_password = table.Column<string>(type: "longtext", nullable: true)
@@ -867,7 +867,7 @@ namespace Persistencia.Migrations
                     id_sucursal = table.Column<int>(type: "int", nullable: false),
                     id_tipocomprobante = table.Column<int>(type: "int", nullable: false),
                     id_modulo = table.Column<int>(type: "int", nullable: false),
-                    id_tercero = table.Column<int>(type: "int", nullable: false),
+                    IdTercero = table.Column<int>(type: "int", nullable: false),
                     id_reversion = table.Column<int>(type: "int", nullable: true),
                     cco_ano = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
@@ -1114,7 +1114,7 @@ namespace Persistencia.Migrations
                     id_comprobante = table.Column<int>(type: "int", nullable: false),
                     id_centrocosto = table.Column<int>(type: "int", nullable: false),
                     id_puc = table.Column<int>(type: "int", nullable: false),
-                    id_tercero = table.Column<int>(type: "int", nullable: false),
+                    IdTercero = table.Column<int>(type: "int", nullable: false),
                     dco_base = table.Column<double>(type: "double", nullable: false),
                     dco_tarifa = table.Column<double>(type: "double", nullable: false),
                     dco_debito = table.Column<double>(type: "double", nullable: false),
@@ -1156,7 +1156,7 @@ namespace Persistencia.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     nombre = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    id_tercero = table.Column<int>(type: "int", nullable: false),
+                    IdTercero = table.Column<int>(type: "int", nullable: false),
                     id_tipoimpuesto = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -1164,7 +1164,7 @@ namespace Persistencia.Migrations
                     table.PrimaryKey("PK_cnt_entidad", x => x.id);
                     table.ForeignKey(
                         name: "FK_cnt_entidad_cnt_tercero_id_tercero",
-                        column: x => x.id_tercero,
+                        column: x => x.IdTercero,
                         principalTable: "cnt_tercero",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
@@ -1186,7 +1186,7 @@ namespace Persistencia.Migrations
                     id_tipoimpuesto = table.Column<int>(type: "int", nullable: false),
                     id_comprobante = table.Column<int>(type: "int", nullable: false),
                     id_puc = table.Column<int>(type: "int", nullable: false),
-                    id_tercero = table.Column<int>(type: "int", nullable: false),
+                    IdTercero = table.Column<int>(type: "int", nullable: false),
                     lim_fecha = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     lim_fechainicial = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     lim_fechafinal = table.Column<DateTime>(type: "datetime(6)", nullable: false),
@@ -1217,7 +1217,7 @@ namespace Persistencia.Migrations
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_cnt_liquidaimpuesto_cnt_tercero_id_tercero",
-                        column: x => x.id_tercero,
+                        column: x => x.IdTercero,
                         principalTable: "cnt_tercero",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
@@ -1236,7 +1236,7 @@ namespace Persistencia.Migrations
                 {
                     id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    id_tercero = table.Column<int>(type: "int", nullable: false),
+                    IdTercero = table.Column<int>(type: "int", nullable: false),
                     id_responsabilidad = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -1250,7 +1250,7 @@ namespace Persistencia.Migrations
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_cnt_responsabilidad_ter_cnt_tercero_id_tercero",
-                        column: x => x.id_tercero,
+                        column: x => x.IdTercero,
                         principalTable: "cnt_tercero",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
@@ -1367,7 +1367,7 @@ namespace Persistencia.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_cnt_entidad_id_tercero",
                 table: "cnt_entidad",
-                column: "id_tercero");
+                column: "IdTercero");
 
             migrationBuilder.CreateIndex(
                 name: "IX_cnt_entidad_id_tipoimpuesto",
@@ -1402,7 +1402,7 @@ namespace Persistencia.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_cnt_liquidaimpuesto_id_tercero",
                 table: "cnt_liquidaimpuesto",
-                column: "id_tercero");
+                column: "IdTercero");
 
             migrationBuilder.CreateIndex(
                 name: "IX_cnt_liquidaimpuesto_id_tipoimpuesto",
@@ -1462,7 +1462,7 @@ namespace Persistencia.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_cnt_responsabilidad_ter_id_tercero",
                 table: "cnt_responsabilidad_ter",
-                column: "id_tercero");
+                column: "IdTercero");
 
             migrationBuilder.CreateIndex(
                 name: "IX_cnt_tercero_id_ciiu",

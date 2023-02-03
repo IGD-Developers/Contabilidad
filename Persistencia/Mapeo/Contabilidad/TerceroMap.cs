@@ -9,34 +9,34 @@ namespace Persistencia.Mapeo.Contabilidad
         public void Configure(EntityTypeBuilder<CntTercero> builder)
         {
                 builder.ToTable("cnt_tercero")
-                    .HasKey( pk => pk.id);
+                    .HasKey( pk => pk.Id);
                                    
-                builder.HasOne(terc => terc.documentos)
-                    .WithMany(tDoc => tDoc.documentoTerceros)
-                    .HasForeignKey(ter => ter.id_tipodocumento);
+                builder.HasOne(terc => terc.Documentos)
+                    .WithMany(tDoc => tDoc.DocumentoTerceros)
+                    .HasForeignKey(ter => ter.IdTipodocumento);
 
-                builder.HasOne(terc => terc.genero)
-                    .WithMany(gen => gen.generoTerceros)
-                    .HasForeignKey(ter => ter.id_genero);
+                builder.HasOne(terc => terc.Genero)
+                    .WithMany(gen => gen.GeneroTerceros)
+                    .HasForeignKey(ter => ter.IdGenero);
                 
-                builder.HasOne<CntMunicipio>(terc => terc.municipio)
-                    .WithMany(mun => mun.municipioTerceros)
-                    .HasForeignKey(ter => ter.id_municipio);
+                builder.HasOne<CntMunicipio>(terc => terc.Municipio)
+                    .WithMany(mun => mun.MunicipioTerceros)
+                    .HasForeignKey(ter => ter.IdMunicipio);
 
-                builder.HasOne<CntRegimen>(ter => ter.regimen)
-                    .WithMany(reg => reg.regimenTerceros)
-                    .HasForeignKey(ter => ter.id_regimen);
+                builder.HasOne<CntRegimen>(ter => ter.Regimen)
+                    .WithMany(reg => reg.RegimenTerceros)
+                    .HasForeignKey(ter => ter.IdRegimen);
 
-                builder.HasOne<CntTipoPersona>(ter => ter.tipoPersona)
+                builder.HasOne<CntTipoPersona>(ter => ter.TipoPersona)
                     .WithMany(tPer => tPer.tipoPersonaTercero)
-                    .HasForeignKey(ter => ter.id_tippersona);
+                    .HasForeignKey(ter => ter.IdTippersona);
 
-                builder.HasOne<CntCiiu>(ter => ter.ciiu)
-                    .WithMany(ciiu => ciiu.ciiuTerceros)
-                    .HasForeignKey(ter => ter.id_ciiu);  
+                builder.HasOne<CntCiiu>(ter => ter.Ciiu)
+                    .WithMany(ciiu => ciiu.CiiuTerceros)
+                    .HasForeignKey(ter => ter.IdCiiu);  
 
                 builder
-                    .Property(b => b.created_at)
+                    .Property(b => b.CreatedAt)
                     .HasDefaultValueSql("DateTime.Now");             
 
                 

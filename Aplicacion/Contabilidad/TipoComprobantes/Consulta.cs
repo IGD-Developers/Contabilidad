@@ -46,7 +46,7 @@ namespace Aplicacion.Contabilidad.TipoComprobantes
             {
                 // El contexto devuelve desde el dbset
                 var entidades = await _context.cntTipoComprobantes
-                .Include(t => t.categoria)
+                .Include(t => t.Categoria)
                 .ToListAsync();
 
                 var entidadesDto = _mapper.Map<List<CntTipoComprobante>, List<ListarTipoComprobanteModel>>(entidades);

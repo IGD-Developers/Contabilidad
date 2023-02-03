@@ -35,9 +35,9 @@ namespace Aplicacion.Contabilidad.CuentaImpuestos
             {
 
             var entidadDto = await _context.cntCuentaImpuestos
-                                    .Include(p => p.puc)
-                                    .Include(p => p.tipoImpuesto)
-                                    .Where(p=>p.id == request.Id)
+                                    .Include(p => p.Puc)
+                                    .Include(p => p.TipoImpuesto)
+                                    .Where(p=>p.Id == request.Id)
                                     .Select(p =>  _mapper.Map<CntCuentaImpuesto,ListarCuentaImpuestosModel>(p))
                                     .SingleOrDefaultAsync();
                 

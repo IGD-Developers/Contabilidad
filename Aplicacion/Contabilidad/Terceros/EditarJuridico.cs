@@ -56,31 +56,31 @@ namespace Aplicacion.Contabilidad.Terceros
                     throw new Exception("No se encontro tercero");
                 }   
                 
-                var tipoPersona = await _context.CntTipoPersonas.Where(p => p.codigo == "J")
+                var tipoPersona = await _context.CntTipoPersonas.Where(p => p.Codigo == "J")
                     .SingleOrDefaultAsync();
                 if(tipoPersona == null){
                     throw new Exception("No se encontro tipo persona");
                 }
 
-                var genero = await _context.CntGeneros.Where(p => p.codigo == "NA")
+                var genero = await _context.CntGeneros.Where(p => p.Codigo == "NA")
                     .SingleOrDefaultAsync();                   
                 if(genero == null){
                     throw new Exception("No se encontro genero");
                 }
                 
-                request.id_tippersona = tipoPersona.id;
-                request.id_genero = genero.id;
-                request.ter_digitoverificacion = _funciones.CalcularDigitoVerificacion(tercero.ter_documento);
-                request.id_tipodocumento = request.id_tipodocumento ?? tercero.id_tipodocumento;
-                request.id_municipio = request.id_municipio ?? tercero.id_municipio;
-                request.id_regimen = request.id_regimen ?? tercero.id_regimen;
-                request.id_ciiu = request.id_ciiu ?? tercero.id_ciiu;
+                request.id_tippersona = tipoPersona.Id;
+                request.id_genero = genero.Id;
+                request.ter_digitoverificacion = _funciones.CalcularDigitoVerificacion(tercero.TerDocumento);
+                request.id_tipodocumento = request.id_tipodocumento ?? tercero.IdTipodocumento;
+                request.id_municipio = request.id_municipio ?? tercero.IdMunicipio;
+                request.id_regimen = request.id_regimen ?? tercero.IdRegimen;
+                request.id_ciiu = request.id_ciiu ?? tercero.IdCiiu;
                 //request.id_usuario = request.id_usuario;
-                request.ter_documento = request.ter_documento ?? tercero.ter_documento;
-                request.ter_razonsocial = request.ter_razonsocial ?? tercero.ter_razonsocial;
+                request.ter_documento = request.ter_documento ?? tercero.TerDocumento;
+                request.ter_razonsocial = request.ter_razonsocial ?? tercero.TerRazonsocial;
                                 
                 var responsabilidades = _context.cntResponsabilidadTerceros
-                    .Where(z => z.id_tercero == request.Id)
+                    .Where(z => z.IdTercero == request.Id)
                     .ToList();                              
                 
                     
@@ -101,7 +101,7 @@ namespace Aplicacion.Contabilidad.Terceros
                         foreach (int idResponsabilidad in idResponsabilidades)
                         {
                             registro.id_responsabilidad = idResponsabilidad;
-                            registro.id_tercero = request.Id;                       
+                            registro.IdTercero = request.Id;                       
                             
                             var responsabilidad = await _context.cntResponsabilidades.FindAsync(registro.id_responsabilidad);
                             if(responsabilidad == null){

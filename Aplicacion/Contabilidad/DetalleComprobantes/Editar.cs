@@ -18,7 +18,7 @@ namespace Aplicacion.Contabilidad.DetalleComprobantes
             public int id_comprobante { get; set; }
             public int id_centrocosto { get; set; }
             public int id_puc { get; set; }
-            public int id_tercero { get; set; }
+            public int IdTercero { get; set; }
             public double dco_base { get; set; }
             public double dco_tarifa { get; set; }
             public double dco_debito { get; set; }
@@ -36,7 +36,7 @@ public class EjecutaValidador : AbstractValidator<Ejecuta>
                 RuleFor(x=>x.id_comprobante).NotEmpty();
                 RuleFor(x=>x.id_centrocosto).NotEmpty();
                 RuleFor(x=>x.id_puc).NotEmpty();
-                RuleFor(x=>x.id_tercero).NotEmpty();
+                RuleFor(x=>x.IdTercero).NotEmpty();
                 RuleFor(x=>x.dco_tarifa).NotEmpty();
                 RuleFor(x=>x.dco_debito).NotEmpty();
                 RuleFor(x=>x.dco_credito).NotEmpty();
@@ -60,15 +60,15 @@ public class EjecutaValidador : AbstractValidator<Ejecuta>
                     throw new Exception("Registro no encontrado");
                 };
 
-                    detalleComprobante.id_comprobante = request.id_comprobante;
-                    detalleComprobante.id_centrocosto= request.id_centrocosto;
-                    detalleComprobante.id_puc  = request.id_puc;
-                    detalleComprobante.id_tercero  =request.id_tercero;
-                    detalleComprobante.dco_base =request.dco_base;
-                    detalleComprobante.dco_tarifa = request.dco_tarifa;
-                    detalleComprobante.dco_debito = request.dco_tarifa;
-                    detalleComprobante.dco_credito = request.dco_credito;
-                    detalleComprobante.dco_detalle= request.dco_detalle;
+                    detalleComprobante.IdComprobante = request.id_comprobante;
+                    detalleComprobante.IdCentrocosto= request.id_centrocosto;
+                    detalleComprobante.IdPuc  = request.id_puc;
+                    detalleComprobante.IdTercero  =request.IdTercero;
+                    detalleComprobante.DcoBase =request.dco_base;
+                    detalleComprobante.DcoTarifa = request.dco_tarifa;
+                    detalleComprobante.DcoDebito = request.dco_tarifa;
+                    detalleComprobante.DcoCredito = request.dco_credito;
+                    detalleComprobante.DcoDetalle= request.dco_detalle;
 
 
                 var resultado=  await context.SaveChangesAsync();

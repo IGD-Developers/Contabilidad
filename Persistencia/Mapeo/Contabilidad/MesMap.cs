@@ -11,18 +11,18 @@ namespace Persistencia.Mapeo.Contabilidad
         {
             builder
                 .ToTable("cnt_mes")
-                .HasKey(entity => entity.id);
+                .HasKey(entity => entity.Id);
 
             builder
-            .HasOne<CnfUsuario>(m => m.usuario)
-                .WithMany(u=>u.usuarioMeses)
-                .HasForeignKey(m => m.id_usuario); 
+            .HasOne<CnfUsuario>(m => m.Usuario)
+                .WithMany(u=>u.UsuarioMeses)
+                .HasForeignKey(m => m.IdUsuario); 
 
             builder
-                .Property(b => b.created_at);
+                .Property(b => b.CreatedAt);
              
              builder
-                .Property(b => b.created_at);      
+                .Property(b => b.CreatedAt);      
      
         }
     }

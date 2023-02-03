@@ -43,8 +43,8 @@ namespace Aplicacion.Contabilidad.NotaAclaratoriaCuentas
                     throw new Exception("No se encontro nota");
                 }
 
-                nota.id_notaaclaratoria = request.id_notaaclaratoria ?? nota.id_notaaclaratoria;
-                nota.id_puc = request.id_puc ?? nota.id_puc;
+                nota.IdNotaaclaratoria = request.id_notaaclaratoria ?? nota.IdNotaaclaratoria;
+                nota.IdPuc = request.id_puc ?? nota.IdPuc;
 
                 var resultado = await _context.SaveChangesAsync();
 

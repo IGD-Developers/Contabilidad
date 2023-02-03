@@ -29,8 +29,8 @@ namespace Aplicacion.Contabilidad.CategoriaComprobantes
             public async Task<ListarCategoriaComprobantesModel> Handle(ConsultarId request, CancellationToken cancellationToken)
             {
             var entidad = await _context.cntCategoriaComprobantes
-                .Include(c => c.categoriaTipoComprobantes)
-                .SingleOrDefaultAsync(i => i.id == request.Id);
+                .Include(c => c.CategoriaTipoComprobantes)
+                .SingleOrDefaultAsync(i => i.Id == request.Id);
                 if (entidad == null) {
                     throw new Exception("Registro no encontrado");
                 };

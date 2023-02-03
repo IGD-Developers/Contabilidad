@@ -9,14 +9,14 @@ namespace Persistencia.Mapeo.Contabilidad
         public void Configure(EntityTypeBuilder<CntCentroCosto> builder)
         {
             builder.ToTable("cnt_centrocosto")
-                .HasKey(entity => entity.id);
+                .HasKey(entity => entity.Id);
 
             builder
-                .Property(b => b.estado)
+                .Property(b => b.Estado)
                 .HasDefaultValueSql("A");    
                     
             builder
-                .Property(b => b.created_at)
+                .Property(b => b.CreatedAt)
                 .HasDefaultValueSql("DateTime.Now");        
     
          }

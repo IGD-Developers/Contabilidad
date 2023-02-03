@@ -34,7 +34,7 @@ namespace Aplicacion.Contabilidad.Bancos
 
 
                 var entidad = await _context.cntBancos
-                .SingleOrDefaultAsync(i => i.id == request.Id);
+                .SingleOrDefaultAsync(i => i.Id == request.Id);
 
                 if (entidad == null)
                 {

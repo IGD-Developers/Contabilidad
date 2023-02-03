@@ -35,9 +35,9 @@ namespace Aplicacion.Contabilidad.Pucs
             {
 
                 var entidadDto = await context.cntPucs
-                .Include(x=>x.pucTipo)
-                .Include(x=>x.tipoCuenta)
-                .Where(p=>p.id == request.Id)
+                .Include(x=>x.PucTipo)
+                .Include(x=>x.TipoCuenta)
+                .Where(p=>p.Id == request.Id)
                 .Select(p =>  mapper.Map<CntPuc, ListarPucModel>(p))
                 .SingleOrDefaultAsync();
 
@@ -59,16 +59,16 @@ namespace Aplicacion.Contabilidad.Pucs
 
 
                 var clase = await context.cntPucs
-                                    .Where(p=>p.codigo == codigoclase)
-                                    .Select(c=> new nombreModel{nombre=c.nombre})
+                                    .Where(p=>p.Codigo == codigoclase)
+                                    .Select(c=> new nombreModel{nombre=c.Nombre})
                                     .SingleOrDefaultAsync(); 
                 entidadDto.clase = clase.nombre;    
 
                 if (longitud>1)
                 {
                     var grupo = await context.cntPucs
-                        .Where(p=>p.codigo == codigogrupo)
-                        .Select(c=> new nombreModel{nombre=c.nombre})
+                        .Where(p=>p.Codigo == codigogrupo)
+                        .Select(c=> new nombreModel{nombre=c.Nombre})
                         .SingleOrDefaultAsync(); 
                         entidadDto.grupo = grupo.nombre;    
                 } else {entidadDto.grupo ="";}
@@ -77,8 +77,8 @@ namespace Aplicacion.Contabilidad.Pucs
                 if (longitud>3)
                 {
                     var cuenta = await context.cntPucs
-                        .Where(p=>p.codigo == codigocuenta)
-                        .Select(c=> new nombreModel{nombre=c.nombre})
+                        .Where(p=>p.Codigo == codigocuenta)
+                        .Select(c=> new nombreModel{nombre=c.Nombre})
                         .SingleOrDefaultAsync(); 
                     entidadDto.cuenta = cuenta.nombre;   
                 } else {entidadDto.cuenta="";}
@@ -87,8 +87,8 @@ namespace Aplicacion.Contabilidad.Pucs
                 if (longitud>5)
                 {    
                     var subcuenta = await context.cntPucs
-                        .Where(p=>p.codigo == codigosubcuenta)
-                        .Select(c=> new {nombre=c.nombre})
+                        .Where(p=>p.Codigo == codigosubcuenta)
+                        .Select(c=> new {nombre=c.Nombre})
                         .SingleOrDefaultAsync(); 
                     entidadDto.subcuenta = subcuenta.nombre;   
                 } else {entidadDto.subcuenta="";}     

@@ -42,10 +42,10 @@ namespace Aplicacion.Contabilidad.Meses
             public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
             {
                 var mes = new CntMes{
-                    mes_ano = request.mes_ano,
-                    mes_mes = request.mes_mes,
-                    mes_cerrado = request.mes_cerrado,
-                    id_usuario = request.id_usuario
+                    MesAno = request.mes_ano,
+                    MesMes = request.mes_mes,
+                    MesCerrado = request.mes_cerrado,
+                    IdUsuario = request.id_usuario
 
                 };
 

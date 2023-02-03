@@ -48,14 +48,14 @@ namespace Aplicacion.Contabilidad.Meses
                     throw new Exception("No se encontró cierre");
                 }
 
-                cierre.mes_mes = request.mes_mes ?? cierre.mes_mes;
-                cierre.mes_ano = request.mes_ano ?? cierre.mes_ano;
-                cierre.mes_cerrado = request.mes_cerrado ?? cierre.mes_cerrado;
+                cierre.MesMes = request.mes_mes ?? cierre.MesMes;
+                cierre.MesAno = request.mes_ano ?? cierre.MesAno;
+                cierre.MesCerrado = request.mes_cerrado ?? cierre.MesCerrado;
                 // if (request.id_usuario!=null){
                 //     cierre.id_usuario = request.id_usuario;
                 // };
                 //cierre.id_usuario = request.id_usuario ?? cierre.id_usuario;
-                cierre.id_usuario = request.id_usuario;
+                cierre.IdUsuario = request.id_usuario;
 
                // _context.Add(cierre);
                 var resultado = await _context.SaveChangesAsync();

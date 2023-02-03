@@ -32,8 +32,8 @@ namespace Aplicacion.Contabilidad.TipoComprobantes
             public async Task<ListarTipoComprobanteModel> Handle(ConsultarId request, CancellationToken cancellationToken)
             {
                 var entidad = await _context.cntTipoComprobantes
-                .Include(t => t.categoria)
-                .SingleOrDefaultAsync(i => i.id == request.Id);
+                .Include(t => t.Categoria)
+                .SingleOrDefaultAsync(i => i.Id == request.Id);
 
                 if (entidad == null)
                 {

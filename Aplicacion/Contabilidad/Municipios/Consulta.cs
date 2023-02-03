@@ -28,7 +28,7 @@ namespace Aplicacion.Contabilidad.Municipios
             public async Task<List<MunicipioModel>> Handle(ListarMunicipios request, CancellationToken cancellationToken)
             {
                 var listarMunicipios = await _context.CntMunucipios
-                                        .Include(d=>d.departamento)
+                                        .Include(d=>d.Departamento)
                                         .ToListAsync();
                 var listarMunicipiosModel = _mapper.Map<List<CntMunicipio>,List<MunicipioModel>>(listarMunicipios);
                 

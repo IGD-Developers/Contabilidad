@@ -38,7 +38,7 @@ namespace Aplicacion.Seguridad
                 //El userManager busca a un usuario en la base de datos con ese userName y lo va a devolver 
                 var usuario =  await _userManager.FindByNameAsync(_usuarioSesion.ObtenerUsuarioSesion());
                 return new UsuarioData{
-                    id_tercero=usuario.id_tercero,
+                    IdTercero=usuario.IdTercero,
                     Token= _jwtGenerador.CrearToken(usuario),
                     Email = usuario.Email,
                     UserName= usuario.UserName  

@@ -10,23 +10,23 @@ namespace Persistencia.Mapeo.Contabilidad
         {
             builder
                 .ToTable("cnt_detallecomprobante")
-                .HasKey(e => e.id);     
+                .HasKey(e => e.Id);     
 
-            builder.HasOne<CntComprobante>(d =>d.comprobante)
-                .WithMany(c=>c.comprobanteDetalleComprobantes)
-                .HasForeignKey(d => d.id_comprobante);
+            builder.HasOne<CntComprobante>(d =>d.Comprobante)
+                .WithMany(c=>c.ComprobanteDetalleComprobantes)
+                .HasForeignKey(d => d.IdComprobante);
 
-            builder.HasOne<CntCentroCosto>(d => d.centroCosto)
-                .WithMany(c=>c.centroCostoDetalleComprobantes)
-                .HasForeignKey(d => d.id_centrocosto);
+            builder.HasOne<CntCentroCosto>(d => d.CentroCosto)
+                .WithMany(c=>c.CentroCostoDetalleComprobantes)
+                .HasForeignKey(d => d.IdCentrocosto);
                 
-            builder.HasOne<CntPuc>(d => d.puc)
-                .WithMany(p=>p.pucDetalleComprobantes)
-                .HasForeignKey(d => d.id_puc);
+            builder.HasOne<CntPuc>(d => d.Puc)
+                .WithMany(p=>p.PucDetalleComprobantes)
+                .HasForeignKey(d => d.IdPuc);
            
-            builder.HasOne<CntTercero>(d => d.tercero)
-                .WithMany(p=>p.detalleComprobanteTerceros)
-                .HasForeignKey(d => d.id_tercero);
+            builder.HasOne<CntTercero>(d => d.Tercero)
+                .WithMany(p=>p.DetalleComprobanteTerceros)
+                .HasForeignKey(d => d.IdTercero);
             }
     }
 }

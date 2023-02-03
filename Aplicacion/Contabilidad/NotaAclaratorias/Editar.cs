@@ -46,8 +46,8 @@ namespace Aplicacion.Contabilidad.NotaAclaratorias
             public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
             {
                 var nota = await _context.cntNotaAclaratorias
-                .Where(y => y.estado == "A")
-                .SingleOrDefaultAsync(y => y.id == request.ID);
+                .Where(y => y.Estado == "A")
+                .SingleOrDefaultAsync(y => y.Id == request.ID);
 
                 if(nota==null){
                     throw new Exception("No se encontro nota Aclaratoria o su estado no es activo");
@@ -63,10 +63,10 @@ namespace Aplicacion.Contabilidad.NotaAclaratorias
                     throw new Exception("Codigo de cuenta no existe en el puc");
                 }
 
-                request.nac_fecha = request.nac_fecha ?? nota.nac_fecha;
-                request.id_notaaclaratoriatipo = request.id_notaaclaratoriatipo ?? nota.id_notaaclaratoriatipo;
-                request.nac_titulo = request.nac_titulo ?? nota.nac_titulo;
-                request.nac_detalle = request.nac_detalle ?? nota.nac_detalle;
+                request.nac_fecha = request.nac_fecha ?? nota.NacFecha;
+                request.id_notaaclaratoriatipo = request.id_notaaclaratoriatipo ?? nota.IdNotaaclaratoriatipo;
+                request.nac_titulo = request.nac_titulo ?? nota.NacTitulo;
+                request.nac_detalle = request.nac_detalle ?? nota.NacDetalle;
                 request.id_usuario = request.id_usuario;
 
                 var notaModel = _mapper.Map<EditarNotaAclaratoriaModel, CntNotaAclaratoria>(request, nota);

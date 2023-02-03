@@ -32,9 +32,9 @@ namespace Aplicacion.Contabilidad.Entidades
             {
                 
                 var entidad = await _context.cntEntidades
-                .Include(t=>t.tercero)
-                .Include(i=>i.tipoImpuesto)
-                .SingleOrDefaultAsync(i => i.id == request.Id);
+                .Include(t=>t.Tercero)
+                .Include(i=>i.TipoImpuesto)
+                .SingleOrDefaultAsync(i => i.Id == request.Id);
                 
                 
                  if (entidad == null) {

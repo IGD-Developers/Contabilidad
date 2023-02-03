@@ -39,7 +39,7 @@ namespace Aplicacion.Contabilidad.Consecutivos
             public async Task<CntConsecutivo> Handle(Ejecuta request, CancellationToken cancellationToken)
             {
                 var tipo = await context.cntTipoComprobantes
-                .FirstOrDefaultAsync(t => t.id == request.id_tipocomprobante);
+                .FirstOrDefaultAsync(t => t.Id == request.id_tipocomprobante);
                 if (tipo == null)
                 {
                     throw new Exception("Tipo de comprobante no encontrado");
@@ -47,22 +47,22 @@ namespace Aplicacion.Contabilidad.Consecutivos
 
                 var consecutivo = new CntConsecutivo
                 {
-                    id_tipocomprobante = request.id_tipocomprobante,
-                    co_ano = "0000",
-                    co_mes = "00",
-                    co_consecutivo = 0
+                    IdTipocomprobante = request.id_tipocomprobante,
+                    CoAno = "0000",
+                    CoMes = "00",
+                    CoConsecutivo = 0
                 };
                 string ano = request.fecha.Year.ToString();
                 string mes = request.fecha.Month.ToString();
 
-                if (tipo.tco_incremento == "A")
+                if (tipo.TcoIncremento == "A")
                 {
-                    consecutivo.co_ano = ano;
+                    consecutivo.CoAno = ano;
                 }
-                else if (tipo.tco_incremento == "M")
+                else if (tipo.TcoIncremento == "M")
                 {
-                    consecutivo.co_ano = ano;
-                    consecutivo.co_mes = mes;
+                    consecutivo.CoAno = ano;
+                    consecutivo.CoMes = mes;
                 }
                 else
                 {
@@ -71,16 +71,16 @@ namespace Aplicacion.Contabilidad.Consecutivos
 
 
                 var consecutivoActual = await context.cntConsecutivos
-                .FirstOrDefaultAsync(t => (t.id == request.id_tipocomprobante)
-                                       && (t.co_ano == consecutivo.co_ano)
-                                       && (t.co_mes == consecutivo.co_mes));
+                .FirstOrDefaultAsync(t => (t.Id == request.id_tipocomprobante)
+                                       && (t.CoAno == consecutivo.CoAno)
+                                       && (t.CoMes == consecutivo.CoMes));
 
 
 
                 if (consecutivoActual == null)
                 {
                     //  Insertamos un registro nuevo;
-                    consecutivo.co_consecutivo = 1;
+                    consecutivo.CoConsecutivo = 1;
                     await context.cntConsecutivos.AddAsync(consecutivo);
 
 
@@ -90,8 +90,8 @@ namespace Aplicacion.Contabilidad.Consecutivos
                 else
                 {
                     //Sobreescribimos registro
-                    int nuevoid = consecutivoActual.co_consecutivo + 1;
-                    consecutivo.co_consecutivo = nuevoid;
+                    int nuevoid = consecutivoActual.CoConsecutivo + 1;
+                    consecutivo.CoConsecutivo = nuevoid;
 
 
                 };

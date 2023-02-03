@@ -6,28 +6,20 @@ namespace Dominio.Contabilidad
     public class CntNotaAclaratoria
     {
 
-        public int id { get; set; }
-        public int nac_consecutivo { get; set; }
-        public DateTime nac_fecha { get; set; }
-        public int? id_puc { get; set; }
-        public int id_notaaclaratoriatipo { get; set; }
-        public string nac_titulo { get; set; }
-        public string nac_detalle { get; set; }
-        public DateTime created_at { get; set; }
-        public DateTime? updated_at { get; set; }
-        public string id_usuario { get; set; }
-        public string estado {get; set;} 
+        public int Id { get; set; }
+        public int NacConsecutivo { get; set; }
+        public DateTime NacFecha { get; set; }
+        public int? IdPuc { get; set; }
+        public int IdNotaaclaratoriatipo { get; set; }
+        public string NacTitulo { get; set; }
+        public string NacDetalle { get; set; }
+        public DateTime CreatedAt { get; set; }
+        public DateTime? UpdatedAt { get; set; }
+        public string IdUsuario { get; set; }
+        public string Estado {get; set;} 
       
-
-
-        public CntNotaAclaratoriaTipo notaAclaratoriaTipo { get; set; }
-        public CntPuc cntPuct { get; set; }
+        public CntNotaAclaratoriaTipo NotaAclaratoriaTipo { get; set; }
+        public CntPuc CntPuct { get; set; }
         /* public ICollection<CntNotaAclaratoriaCuenta> notaAclaratoriaNotaAclaratoriaCuentas { get; set; } */
-
-
-
-
-
-
     }
 }

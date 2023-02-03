@@ -47,9 +47,9 @@ namespace Aplicacion.Contabilidad.TipoOperaciones
                         throw new Exception("Registro no encontrado");
                 };     
 
-                tipoOperacion.codigo = request.codigo;
-                tipoOperacion.nombre = request.nombre ;
-                tipoOperacion.formula = request.formula ?? tipoOperacion.formula;
+                tipoOperacion.Codigo = request.codigo;
+                tipoOperacion.Nombre = request.nombre ;
+                tipoOperacion.Formula = request.formula ?? tipoOperacion.Formula;
                 var resultado=  await context.SaveChangesAsync();
                 if (resultado>0)
                 {

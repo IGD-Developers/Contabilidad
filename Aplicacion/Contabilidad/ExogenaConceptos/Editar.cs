@@ -48,9 +48,9 @@ namespace Aplicacion.Contabilidad.ExogenaConceptos
                 if (exogenaConcepto == null) {  
                     throw new Exception("Registro no encontrado");
                 };     
-                exogenaConcepto.codigo = request.codigo;
-                exogenaConcepto.nombre = request.nombre;
-                exogenaConcepto.estado = request.estado;
+                exogenaConcepto.Codigo = request.codigo;
+                exogenaConcepto.Nombre = request.nombre;
+                exogenaConcepto.Estado = request.estado;
 
                 var resultado=  await context.SaveChangesAsync();
                 if (resultado>0)

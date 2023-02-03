@@ -28,7 +28,7 @@ namespace Aplicacion.Contabilidad.Terceros
                 }
 
                 var responsabilidades = _context.cntResponsabilidadTerceros
-                    .Where(z => z.id_tercero == request.Id)
+                    .Where(z => z.IdTercero == request.Id)
                     .ToList();
 
 

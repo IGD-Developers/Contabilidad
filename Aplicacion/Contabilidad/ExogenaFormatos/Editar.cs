@@ -44,8 +44,8 @@ namespace Aplicacion.Contabilidad.ExogenaFormatos
                 if (exogenaFormato == null) {  
                     throw new Exception("Registro no encontrado");
                 };         
-                exogenaFormato.codigo = request.nombre;
-                exogenaFormato.nombre= request.nombre;              
+                exogenaFormato.Codigo = request.nombre;
+                exogenaFormato.Nombre= request.nombre;              
                 var resultado=  await context.SaveChangesAsync();
                 if (resultado>0)
                 {

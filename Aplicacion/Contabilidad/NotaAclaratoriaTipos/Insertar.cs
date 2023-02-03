@@ -41,8 +41,8 @@ namespace Aplicacion.Contabilidad.NotaAclaratoriaTipos
             public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
             {
                 var nota = new CntNotaAclaratoriaTipo{
-                    codigo = request.codigo,
-                    nombre = request.nombre
+                    Codigo = request.codigo,
+                    Nombre = request.nombre
                 };
 
                 _context.cntNotaAclaratoriaTipos.Add(nota);

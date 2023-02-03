@@ -55,20 +55,20 @@ namespace Aplicacion.Contabilidad.LiquidaImpuestos
 
 
                 var entidadesDto = await _context.cntLiquidaImpuestos
-                .Include(t => t.tercero)
-                .Include(ti => ti.tipoImpuesto)
-                .Include(c=>c.comprobante)
-                .Include(co => co.comprobante)
-                .ThenInclude(tipoc => tipoc.tipoComprobante)
-                .Include(co => co.comprobante)
-                .ThenInclude(dt => dt.comprobanteDetalleComprobantes)
-                .Include(co=>co.comprobante)
-                .ThenInclude(t=>t.usuario)
-                .ThenInclude(tu=>tu.tercero)
-                .Where(li=>li.comprobante.cco_fecha>= request.fechainicial
-                        &&li.comprobante.cco_fecha<= request.fechafinal
-                        && li.comprobante.id_sucursal == request.id_sucursal
-                        && li.estado == "A")
+                .Include(t => t.Tercero)
+                .Include(ti => ti.TipoImpuesto)
+                .Include(c=>c.Comprobante)
+                .Include(co => co.Comprobante)
+                .ThenInclude(tipoc => tipoc.TipoComprobante)
+                .Include(co => co.Comprobante)
+                .ThenInclude(dt => dt.ComprobanteDetalleComprobantes)
+                .Include(co=>co.Comprobante)
+                .ThenInclude(t=>t.Usuario)
+                .ThenInclude(tu=>tu.Tercero)
+                .Where(li=>li.Comprobante.CcoFecha>= request.fechainicial
+                        &&li.Comprobante.CcoFecha <= request.fechafinal
+                        && li.Comprobante.IdSucursal == request.id_sucursal
+                        && li.Estado == "A")
                 .Select(p => _mapper.Map<CntLiquidaImpuesto, ListarLiquidaImpuestosModel>(p))
                 .ToListAsync();
               

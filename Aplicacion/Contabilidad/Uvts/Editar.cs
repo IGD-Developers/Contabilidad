@@ -50,8 +50,8 @@ namespace Aplicacion.Contabilidad.Uvts
                 if (uvt == null) {  
                         throw new Exception("Registro no encontrado");
                 };   
-                uvt.uvt_ano =  request.uvt_ano;
-                uvt.uvt_valor = request.uvt_valor; 
+                uvt.UvtAno =  request.uvt_ano;
+                uvt.UvtValor = request.uvt_valor; 
 
                 var resultado=  await context.SaveChangesAsync();
                 if (resultado>0)

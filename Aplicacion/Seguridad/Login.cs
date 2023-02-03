@@ -69,7 +69,7 @@ namespace Aplicacion.Seguridad
                 var resultado=await _signInManager.CheckPasswordSignInAsync(usuario,request.Password,false);
                 if (resultado.Succeeded){
                     return new UsuarioData{
-                        id_tercero =usuario.id_tercero,
+                        IdTercero =usuario.IdTercero,
                         Token= _jwtGenerador.CrearToken(usuario),
                         Email= usuario.Email ,
                         UserName = usuario.UserName

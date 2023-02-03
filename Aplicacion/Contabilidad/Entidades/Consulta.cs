@@ -33,8 +33,8 @@ namespace Aplicacion.Contabilidad.Entidades
             {
                 //TODO: MARIA- Validar existe tercero, existe tipoimpuesto
                 var entidades = await _context.cntEntidades
-                .Include(t=>t.tercero)
-                .Include(i=>i.tipoImpuesto)
+                .Include(t=>t.Tercero)
+                .Include(i=>i.TipoImpuesto)
                 .ToListAsync();
                 var entidadesDto = _mapper.Map<List<CntEntidad>,List<ListarEntidadesModel>>(entidades);
                 

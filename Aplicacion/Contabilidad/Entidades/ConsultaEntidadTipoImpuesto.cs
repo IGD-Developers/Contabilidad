@@ -33,9 +33,9 @@ namespace Aplicacion.Contabilidad.Entidades
             public async Task<List<ListarEntidadesModel>> Handle(ConsultarEntidadTipoImpuesto request, CancellationToken cancellationToken)
             {
                 var entidadDto = await _context.cntEntidades
-                .Include(t=>t.tercero)
-                .Include(i=>i.tipoImpuesto)
-                .Where(i => i.id_tipoimpuesto == request.Id)
+                .Include(t=>t.Tercero)
+                .Include(i=>i.TipoImpuesto)
+                .Where(i => i.IdTipoimpuesto == request.Id)
                 .Select(p => _mapper.Map<CntEntidad, ListarEntidadesModel>(p))
                 .ToListAsync();
                 

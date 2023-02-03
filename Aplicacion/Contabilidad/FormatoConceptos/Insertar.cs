@@ -46,8 +46,8 @@ namespace Aplicacion.Contabilidad.FormatoConceptos
 
                 var formatoConcepto = new CntFormatoConcepto
                 {
-                    id_exogenaformato = request.id_exogenaformato,
-                    id_exogenaconcepto = request.id_exogenaconcepto
+                    IdExogenaformato = request.id_exogenaformato,
+                    IdExogenaconcepto = request.id_exogenaconcepto
                 };
 
                 context.cntFormatoConceptos.Add(formatoConcepto);

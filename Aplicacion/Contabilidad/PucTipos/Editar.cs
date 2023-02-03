@@ -45,8 +45,8 @@ namespace Aplicacion.Contabilidad.PucTipos
                     throw new Exception("Registro no encontrado");
                };
 
-                pucTipo.codigo = request.codigo;
-                pucTipo.nombre =request.nombre;
+                pucTipo.Codigo = request.codigo;
+                pucTipo.Nombre =request.nombre;
 
                 var resultado=  await context.SaveChangesAsync();
                 if (resultado>0)

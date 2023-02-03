@@ -48,8 +48,8 @@ namespace Aplicacion.Contabilidad.FormatoConceptos
                     throw new Exception("Registro no encontrado");
                 };       
 
-                formatoConcepto.id_exogenaformato = request.id_exogenaformato;
-                formatoConcepto.id_exogenaconcepto = request.id_exogenaconcepto;
+                formatoConcepto.IdExogenaformato = request.id_exogenaformato;
+                formatoConcepto.IdExogenaconcepto = request.id_exogenaconcepto;
 
                 var resultado=  await context.SaveChangesAsync();
                 if (resultado>0)

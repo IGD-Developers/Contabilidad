@@ -32,10 +32,10 @@ namespace Aplicacion.Contabilidad.NotaAclaratorias
                     throw new Exception("Nota Consultada no existe");
                 }
 
-                if(nota.estado == "A"){
+                if(nota.Estado == "A"){
                     request.estado = "I";
 
-                }else if(nota.estado == "I"){
+                }else if(nota.Estado == "I"){
                     request.estado = "A";
                 }
 

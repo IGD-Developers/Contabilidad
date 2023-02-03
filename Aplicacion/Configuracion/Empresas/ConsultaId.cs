@@ -46,7 +46,7 @@ namespace Aplicacion.Configuracion.Empresas
                  return entidadDto;
 
 
-                // return empresa;
+                // return Empresa;
 
             }
         }

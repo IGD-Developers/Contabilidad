@@ -41,8 +41,8 @@ namespace Aplicacion.Contabilidad.ExogenaFormatos
 
                 var exogenaFormato= new CntExogenaFormato()
                 {
-                    codigo = request.nombre,
-                    nombre= request.nombre
+                    Codigo = request.nombre,
+                    Nombre= request.nombre
                 };
 
                 context.cntExogenaFormatos.Add(exogenaFormato);

@@ -13,7 +13,7 @@ namespace Aplicacion.Models.Contabilidad.Comprobantes
         public int Id { get; set; }
         //public int? id_sucursal { get; set; }
         public int? id_modulo { get; set; }
-        public int? id_tercero { get; set; }
+        public int? IdTercero { get; set; }
         //public int? id_reversion { get; set; }
         public DateTime? cco_fecha { get; set; }
         public string cco_documento { get; set; }

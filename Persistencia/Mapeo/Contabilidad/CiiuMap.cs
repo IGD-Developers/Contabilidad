@@ -10,15 +10,15 @@ namespace Persistencia.Mapeo.Contabilidad
         {
         
             builder.ToTable("cnt_ciiu")
-                .HasKey( pk => pk.id);
+                .HasKey( pk => pk.Id);
                 
-            builder.HasOne<CntSeccionCiiu>(ciiu => ciiu.ciiuSeccionCiiu)
-                .WithMany(sCiiu => sCiiu.seccionCiiuCiiu)
-                .HasForeignKey(ciiu => ciiu.id_seccionciiu);
+            builder.HasOne<CntSeccionCiiu>(ciiu => ciiu.CiiuSeccionCiiu)
+                .WithMany(sCiiu => sCiiu.SeccionCiiuCiiu)
+                .HasForeignKey(ciiu => ciiu.IdSeccionciiu);
                 
-            builder.HasOne<CntTipoCiiu>(ciiu => ciiu.ciiuTipoCiiu)
-                .WithMany(tCiiu => tCiiu.tipoCiiuCiiu)
-                .HasForeignKey(ciiu => ciiu.id_tipociuu);
+            builder.HasOne<CntTipoCiiu>(ciiu => ciiu.CiiuTipoCiiu)
+                .WithMany(tCiiu => tCiiu.TipoCiiuCiiu)
+                .HasForeignKey(ciiu => ciiu.IdTipociuu);
                     
             
         }

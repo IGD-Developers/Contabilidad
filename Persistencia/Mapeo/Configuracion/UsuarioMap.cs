@@ -15,7 +15,7 @@ namespace Persistencia.Mapeo.Configuracion
                 .HasKey(entity => entity.Id);
 
                 builder.HasOne<CntTercero>(t => t.Tercero)
-                .WithMany(ter => ter.usuarioTerceros)
+                .WithMany(ter => ter.UsuarioTerceros)
                 .HasForeignKey(rter => rter.IdTercero);
             builder
                 .Property(b => b.CreatedAt)     

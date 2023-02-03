@@ -43,8 +43,8 @@ namespace Aplicacion.Contabilidad.NotaAclaratoriaTipos
                     throw new Exception("No se encontro nota aclaratoria tipo");
                 }
 
-                nota.nombre = request.nombre ?? nota.nombre;
-                nota.codigo = request.codigo ?? nota.codigo;
+                nota.Nombre = request.nombre ?? nota.Nombre;
+                nota.Codigo = request.codigo ?? nota.Codigo;
 
                 var resultado = await _context.SaveChangesAsync();
 

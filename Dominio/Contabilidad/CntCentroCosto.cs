@@ -6,14 +6,14 @@ namespace Dominio.Contabilidad
     public class CntCentroCosto
     {
 
-        public int id { get; set; }
-        public string codigo { get; set; }
-        public string nombre { get; set; }
-        public string estado { get; set; }
-        public DateTime? created_at { get; set; }
-        public DateTime? updated_at { get; set; }
+        public int Id { get; set; }
+        public string Codigo { get; set; }
+        public string Nombre { get; set; }
+        public string Estado { get; set; }
+        public DateTime? CreatedAt { get; set; }
+        public DateTime? UpdatedAt { get; set; }
 
-        public ICollection<CntDetalleComprobante> centroCostoDetalleComprobantes { get; set; }
+        public ICollection<CntDetalleComprobante> CentroCostoDetalleComprobantes { get; set; }
 
     }
 }
