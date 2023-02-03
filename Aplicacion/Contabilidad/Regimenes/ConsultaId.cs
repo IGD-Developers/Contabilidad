@@ -7,36 +7,35 @@ using Dominio.Contabilidad;
 using MediatR;
 using Persistencia;
 
-namespace Aplicacion.Contabilidad.Regimenes
+namespace Aplicacion.Contabilidad.Regimenes;
+
+public class ConsultaId
 {
-    public class ConsultaId
+    public class ConsultarId : IRequest<RegimenModel>{
+        public int Id;
+    }
+
+    public class Manejador : IRequestHandler<ConsultarId, RegimenModel>
     {
-        public class ConsultarId : IRequest<RegimenModel>{
-            public int Id;
+        private readonly CntContext _context;
+        private readonly IMapper _mapper;
+
+        public Manejador(CntContext context, IMapper mapper)
+        {
+            _context = context;
+            _mapper = mapper;
         }
 
-        public class Manejador : IRequestHandler<ConsultarId, RegimenModel>
+        public async Task<RegimenModel> Handle(ConsultarId request, CancellationToken cancellationToken)
         {
-            private readonly CntContext _context;
-            private readonly IMapper _mapper;
+            var consultaId = await _context.CntRegimenes.FindAsync(request.Id);
 
-            public Manejador(CntContext context, IMapper mapper)
-            {
-                _context = context;
-                _mapper = mapper;
+            if(consultaId==null){
+                throw new Exception("Regimen Consultado no Existe");
             }
 
-            public async Task<RegimenModel> Handle(ConsultarId request, CancellationToken cancellationToken)
-            {
-                var consultaId = await _context.CntRegimenes.FindAsync(request.Id);
-
-                if(consultaId==null){
-                    throw new Exception("Regimen Consultado no Existe");
-                }
-
-                var consultaIdModel = _mapper.Map<CntRegimen, RegimenModel>(consultaId);
-                return consultaIdModel;
-            }
+            var consultaIdModel = _mapper.Map<CntRegimen, RegimenModel>(consultaId);
+            return consultaIdModel;
         }
     }
 }

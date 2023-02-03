@@ -8,66 +8,65 @@ using Aplicacion.Models.Contabilidad.CategoriaComprobantes;
 using AutoMapper;
 using Dominio.Contabilidad;
 
-namespace Aplicacion.Contabilidad.CategoriaComprobantes
+namespace Aplicacion.Contabilidad.CategoriaComprobantes;
+
+public class Editar
 {
-    public class Editar
+
+    public class Ejecuta : EditarCategoriaComprobantesModel, IRequest
+    { }
+
+    public class EjecutaValidador : AbstractValidator<Ejecuta>
     {
-
-        public class Ejecuta : EditarCategoriaComprobantesModel, IRequest
-        { }
-
-        public class EjecutaValidador : AbstractValidator<Ejecuta>
+        public EjecutaValidador()
         {
-            public EjecutaValidador()
-            {
-                RuleFor(x => x.codigo).NotEmpty();
-                RuleFor(x => x.nombre).NotEmpty();
+            RuleFor(x => x.codigo).NotEmpty();
+            RuleFor(x => x.nombre).NotEmpty();
 
-            }
+        }
+    }
+
+    public class Manejador : IRequestHandler<Ejecuta>
+    {
+        private readonly CntContext _context;
+        private readonly IMapper _mapper;
+
+        public Manejador(CntContext context, IMapper mapper)
+        {
+            _context = context;
+            _mapper = mapper;
         }
 
-        public class Manejador : IRequestHandler<Ejecuta>
+        public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
         {
-            private readonly CntContext _context;
-            private readonly IMapper _mapper;
 
-            public Manejador(CntContext context, IMapper mapper)
-            {
-                _context = context;
-                _mapper = mapper;
-            }
-
-            public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
             {
 
+                try
                 {
+                    var entidad = await _context.cntCategoriaComprobantes.FindAsync(request.Id);
 
-                    try
+                    if (entidad == null)
                     {
-                        var entidad = await _context.cntCategoriaComprobantes.FindAsync(request.Id);
+                        throw new Exception("Categoría no encontrada");
+                    };
 
-                        if (entidad == null)
-                        {
-                            throw new Exception("Categoría no encontrada");
-                        };
+                    var entidadDto = _mapper.Map<EditarCategoriaComprobantesModel, CntCategoriaComprobante>(request, entidad);
 
-                        var entidadDto = _mapper.Map<EditarCategoriaComprobantesModel, CntCategoriaComprobante>(request, entidad);
-
-                        var resultado = await _context.SaveChangesAsync();
-                        if (resultado > 0)
-                        {
-                            return Unit.Value;
-                        }
-
-                        throw new Exception("No se realizaron cambios en la base de datos");
-                    }
-                    catch (Exception ex)
+                    var resultado = await _context.SaveChangesAsync();
+                    if (resultado > 0)
                     {
-                        //TODO: MARIA  Llave duplicada  CODIGO BANCO Implementar
-
-                        throw new Exception("Error al editar registro catch " + ex.Message);
-
+                        return Unit.Value;
                     }
+
+                    throw new Exception("No se realizaron cambios en la base de datos");
+                }
+                catch (Exception ex)
+                {
+                    //TODO: MARIA  Llave duplicada  CODIGO BANCO Implementar
+
+                    throw new Exception("Error al editar registro catch " + ex.Message);
+
                 }
             }
         }

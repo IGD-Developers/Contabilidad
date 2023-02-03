@@ -8,91 +8,90 @@ using FluentValidation;
 using Aplicacion.Models.Configuracion.Sucursales;
 using AutoMapper;
 
-namespace Aplicacion.Configuracion.Sucursales
+namespace Aplicacion.Configuracion.Sucursales;
+
+public class Editar
 {
-    public class Editar
+
+    public class Ejecuta : EditarSucursalModel, IRequest
     {
 
-        public class Ejecuta : EditarSucursalModel, IRequest
+    }
+
+
+    public class EjecutaValidador : AbstractValidator<Ejecuta>
+    {
+        public EjecutaValidador()
         {
+           //RuleFor(x => x.Id).NotEmpty();
+            RuleFor(x => x.codigo).NotEmpty();
+            RuleFor(x => x.nombre).NotEmpty();
+            RuleFor(x => x.id_empresa).NotEmpty();
+
+        }
+    }
+
+
+
+    public class Manejador : IRequestHandler<Ejecuta>
+    {
+        private readonly CntContext _context;
+        private readonly IMapper _mapper;
+
+
+
+        public Manejador(CntContext context, IMapper mapper)
+        {
+            _context = context;
+            _mapper = mapper;
+
+
 
         }
 
-
-        public class EjecutaValidador : AbstractValidator<Ejecuta>
+        public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
         {
-            public EjecutaValidador()
             {
-               //RuleFor(x => x.Id).NotEmpty();
-                RuleFor(x => x.codigo).NotEmpty();
-                RuleFor(x => x.nombre).NotEmpty();
-                RuleFor(x => x.id_empresa).NotEmpty();
+                var consulta = await _context.cnfEmpresas.FindAsync(request.id_empresa);
+                    if (consulta == null)
+                    {
+                        throw new Exception("Empresa no encontrada");
+                    };
 
-            }
-        }
-
-
-
-        public class Manejador : IRequestHandler<Ejecuta>
-        {
-            private readonly CntContext _context;
-            private readonly IMapper _mapper;
-
-
-
-            public Manejador(CntContext context, IMapper mapper)
-            {
-                _context = context;
-                _mapper = mapper;
-
-
-
-            }
-
-            public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
-            {
+                try
                 {
-                    var consulta = await _context.cnfEmpresas.FindAsync(request.id_empresa);
-                        if (consulta == null)
-                        {
-                            throw new Exception("Empresa no encontrada");
-                        };
+                    
 
-                    try
+                    var consultaDb = await _context.cnfSucursales.FindAsync(request.Id);
+                    if (consultaDb == null)
                     {
-                        
-
-                        var consultaDb = await _context.cnfSucursales.FindAsync(request.Id);
-                        if (consultaDb == null)
-                        {
-                            throw new Exception("Sucursal no encontrada");
-                        };
+                        throw new Exception("Sucursal no encontrada");
+                    };
 
 
-                        //Como vamos a grabar primero el modelo y luego la entidad:
-                        var empresasDto = _mapper.Map<EditarSucursalModel, CnfSucursal>(request, consultaDb);
+                    //Como vamos a grabar primero el modelo y luego la entidad:
+                    var empresasDto = _mapper.Map<EditarSucursalModel, CnfSucursal>(request, consultaDb);
 
-                        //El mapeo va asi en el mappingprofile: CreateMap<EditarSucursalModel,CnfSucursal>();
+                    //El mapeo va asi en el mappingprofile: CreateMap<EditarSucursalModel,CnfSucursal>();
 
 
-                        var resultado = await _context.SaveChangesAsync();
-                        if (resultado > 0)
-                        {
-                            return Unit.Value;
-                        }
-                        //Ojo 00 Vista con mensaje
-
-                        throw new Exception("No se realizaron modificaciones al registro");
-
-                    }
-                    catch (Exception ex)
+                    var resultado = await _context.SaveChangesAsync();
+                    if (resultado > 0)
                     {
-                        throw new Exception("Error al editar registro catch " + ex.Message);
+                        return Unit.Value;
                     }
+                    //Ojo 00 Vista con mensaje
+
+                    throw new Exception("No se realizaron modificaciones al registro");
 
                 }
+                catch (Exception ex)
+                {
+                    throw new Exception("Error al editar registro catch " + ex.Message);
+                }
+
             }
         }
-
     }
+
 }

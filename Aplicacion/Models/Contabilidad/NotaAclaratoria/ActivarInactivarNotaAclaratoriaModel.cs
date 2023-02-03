@@ -1,8 +1,7 @@
-namespace Aplicacion.Models.Contabilidad.NotaAclaratoria
+namespace Aplicacion.Models.Contabilidad.NotaAclaratoria;
+
+public class ActivarInactivarNotaAclaratoriaModel
 {
-    public class ActivarInactivarNotaAclaratoriaModel
-    {
-        public int ID {get; set;}
-        public string estado {get; set;}
-    }
+    public int ID {get; set;}
+    public string estado {get; set;}
 }

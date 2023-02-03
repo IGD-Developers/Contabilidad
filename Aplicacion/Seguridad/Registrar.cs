@@ -10,92 +10,91 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Persistencia;
 
-namespace Aplicacion.Seguridad
+namespace Aplicacion.Seguridad;
+
+public class Registrar
 {
-    public class Registrar
+    public class Ejecuta: IRequest<UsuarioData>
     {
-        public class Ejecuta: IRequest<UsuarioData>
+        public string Nombre { get; set; }
+        public string Apellidos { get; set; }
+        public string Email { get; set; }
+        public string Password { get; set; }
+        public string Username { get; set; }
+        public int id_tercero { get; set; }
+    
+    }
+
+
+    public class EjecutaValidador : AbstractValidator<Ejecuta>
+    {
+        public EjecutaValidador()
         {
-            public string Nombre { get; set; }
-            public string Apellidos { get; set; }
-            public string Email { get; set; }
-            public string Password { get; set; }
-            public string Username { get; set; }
-            public int id_tercero { get; set; }
-        
+            RuleFor(x=>x.Nombre).NotEmpty();
+            RuleFor(x=>x.Apellidos).NotEmpty();
+            RuleFor(x=>x.Email).NotEmpty();
+            RuleFor(x=>x.Password).NotEmpty();
+            RuleFor(x=>x.Username).NotEmpty();
+        }
+    }
+
+    public class Manejador : IRequestHandler<Ejecuta, UsuarioData>
+    {
+
+        private readonly CntContext _context;
+        private readonly UserManager<CnfUsuario> _userManager;
+        private readonly IJwtGenerador _jwtGenerador;
+
+        //UserManager<CnfUsuario> para poder aplicar  la seguridad Identity
+        //IJwtGenerador para poder trabajar con los Tokens 
+        public Manejador(CntContext context, UserManager<CnfUsuario> userManager, IJwtGenerador jwtGenerador)
+        {
+            _context = context;
+            _userManager = userManager;
+            _jwtGenerador = jwtGenerador;
         }
 
-
-        public class EjecutaValidador : AbstractValidator<Ejecuta>
+        public async Task<UsuarioData> Handle(Ejecuta request, CancellationToken cancellationToken)
         {
-            public EjecutaValidador()
+            
+            //x representa los registros dentro de la tabla users. Existe tiene un valor booleano
+            var existe = await _context.Users.Where( x=> x.Email == request.Email).AnyAsync();
+            if(existe)
             {
-                RuleFor(x=>x.Nombre).NotEmpty();
-                RuleFor(x=>x.Apellidos).NotEmpty();
-                RuleFor(x=>x.Email).NotEmpty();
-                RuleFor(x=>x.Password).NotEmpty();
-                RuleFor(x=>x.Username).NotEmpty();
+                 throw new Exception("Ya existe el Email1");
             }
-        }
-
-        public class Manejador : IRequestHandler<Ejecuta, UsuarioData>
-        {
-
-            private readonly CntContext _context;
-            private readonly UserManager<CnfUsuario> _userManager;
-            private readonly IJwtGenerador _jwtGenerador;
-
-            //UserManager<CnfUsuario> para poder aplicar  la seguridad Identity
-            //IJwtGenerador para poder trabajar con los Tokens 
-            public Manejador(CntContext context, UserManager<CnfUsuario> userManager, IJwtGenerador jwtGenerador)
+            
+            var existeUserName = await _context.Users.Where( x=> x.UserName == request.Username).AnyAsync();
+            if(existeUserName)
             {
-                _context = context;
-                _userManager = userManager;
-                _jwtGenerador = jwtGenerador;
+                 throw new Exception("Nombre de Usurio no disponible");
+
             }
+            
+            var usuario = new CnfUsuario {
+               id_tercero= request.id_tercero,
+               usu_estado =true,
+               usu_supervisor =false,
+               Email = request.Email,
+               UserName=request.Username
 
-            public async Task<UsuarioData> Handle(Ejecuta request, CancellationToken cancellationToken)
+            };
+
+            var resultado= await _userManager.CreateAsync(usuario, request.Password);
+
+            if (resultado.Succeeded)
             {
-                
-                //x representa los registros dentro de la tabla users. Existe tiene un valor booleano
-                var existe = await _context.Users.Where( x=> x.Email == request.Email).AnyAsync();
-                if(existe)
-                {
-                     throw new Exception("Ya existe el Email1");
-                }
-                
-                var existeUserName = await _context.Users.Where( x=> x.UserName == request.Username).AnyAsync();
-                if(existeUserName)
-                {
-                     throw new Exception("Nombre de Usurio no disponible");
-
-                }
-                
-                var usuario = new CnfUsuario {
-                   id_tercero= request.id_tercero,
-                   usu_estado =true,
-                   usu_supervisor =false,
-                   Email = request.Email,
-                   UserName=request.Username
+                return new UsuarioData {
+                    id_tercero = usuario.id_tercero,
+                    Token =_jwtGenerador.CrearToken(usuario),
+                    UserName= usuario.UserName,
+                    Email=usuario.Email
 
                 };
+            }
 
-                var resultado= await _userManager.CreateAsync(usuario, request.Password);
+            throw new Exception("Ya existe el Email");
 
-                if (resultado.Succeeded)
-                {
-                    return new UsuarioData {
-                        id_tercero = usuario.id_tercero,
-                        Token =_jwtGenerador.CrearToken(usuario),
-                        UserName= usuario.UserName,
-                        Email=usuario.Email
-
-                    };
-                }
-
-                throw new Exception("Ya existe el Email");
-
-             }
-        }
+         }
     }
 }

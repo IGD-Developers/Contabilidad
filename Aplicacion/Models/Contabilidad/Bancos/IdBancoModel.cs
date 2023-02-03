@@ -1,7 +1,6 @@
-namespace Aplicacion.Models.Contabilidad.Bancos
+namespace Aplicacion.Models.Contabilidad.Bancos;
+
+public class IdBancoModel
 {
-    public class IdBancoModel
-    {
-        public int Id { get; set; }
-    }
+    public int Id { get; set; }
 }

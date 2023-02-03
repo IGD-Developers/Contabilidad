@@ -1,9 +1,8 @@
-namespace Aplicacion.Models.Contabilidad.Departamentos
+namespace Aplicacion.Models.Contabilidad.Departamentos;
+
+public class DepartamentosModel
 {
-    public class DepartamentosModel
-    {
-        public int id { get; set; }
-        public string codigo { get; set; }
-        public string nombre { get; set; }
-    }
+    public int id { get; set; }
+    public string codigo { get; set; }
+    public string nombre { get; set; }
 }

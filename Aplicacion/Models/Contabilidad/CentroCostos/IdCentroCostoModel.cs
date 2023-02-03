@@ -1,7 +1,6 @@
-namespace Aplicacion.Models.Contabilidad.CentroCostos
+namespace Aplicacion.Models.Contabilidad.CentroCostos;
+
+public class IdCentroCostoModel
 {
-    public class IdCentroCostoModel
-    {
-        public int Id { get; set; }
-    }
+    public int Id { get; set; }
 }

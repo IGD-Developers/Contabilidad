@@ -8,30 +8,29 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Persistencia;
 
-namespace Aplicacion.Contabilidad.Departamentos
+namespace Aplicacion.Contabilidad.Departamentos;
+
+public class Consulta
 {
-    public class Consulta
+    public class ListaDepartamentos : IRequest<List<DepartamentosModel>>{}
+
+    public class Manejador : IRequestHandler<ListaDepartamentos, List<DepartamentosModel>>
     {
-        public class ListaDepartamentos : IRequest<List<DepartamentosModel>>{}
-
-        public class Manejador : IRequestHandler<ListaDepartamentos, List<DepartamentosModel>>
+        public readonly CntContext _context;
+        public readonly IMapper _mapper;
+        public Manejador(CntContext context, IMapper mapper)
         {
-            public readonly CntContext _context;
-            public readonly IMapper _mapper;
-            public Manejador(CntContext context, IMapper mapper)
-            {
-                _context = context;
-                _mapper = mapper;
+            _context = context;
+            _mapper = mapper;
 
 
-            }
+        }
 
-            public async Task<List<DepartamentosModel>> Handle(ListaDepartamentos request, CancellationToken cancellationToken)
-            {
-                var departamentos = await _context.CntDepartamentos.ToListAsync();
-                var departamentosModel = _mapper.Map<List<CntDepartamento>, List<DepartamentosModel>>(departamentos);
-                return departamentosModel;
-            }
+        public async Task<List<DepartamentosModel>> Handle(ListaDepartamentos request, CancellationToken cancellationToken)
+        {
+            var departamentos = await _context.CntDepartamentos.ToListAsync();
+            var departamentosModel = _mapper.Map<List<CntDepartamento>, List<DepartamentosModel>>(departamentos);
+            return departamentosModel;
         }
     }
 }

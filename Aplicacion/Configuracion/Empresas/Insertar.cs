@@ -9,82 +9,81 @@ using AutoMapper;
 using System;
 using MySqlConnector;
 
-namespace Aplicacion.Configuracion.Empresas
+namespace Aplicacion.Configuracion.Empresas;
+
+public class Insertar
 {
-    public class Insertar
+
+    public class Ejecuta : InsertarEmpresasModel, IRequest
+    { }
+
+    public class EjecutaValidacion : AbstractValidator<Ejecuta>
+    {
+        public EjecutaValidacion()
+        {
+            RuleFor(x => x.nit).NotEmpty();
+            RuleFor(x => x.razon_social).NotEmpty();
+        }
+    }
+
+    public class Manejador : IRequestHandler<Ejecuta>
     {
 
-        public class Ejecuta : InsertarEmpresasModel, IRequest
-        { }
 
-        public class EjecutaValidacion : AbstractValidator<Ejecuta>
+        private readonly CntContext _context;
+        private readonly IMapper _mapper;
+
+
+
+        public Manejador(CntContext context, IMapper mapper)
         {
-            public EjecutaValidacion()
-            {
-                RuleFor(x => x.nit).NotEmpty();
-                RuleFor(x => x.razon_social).NotEmpty();
-            }
+            _context = context;
+            _mapper = mapper;
+
         }
 
-        public class Manejador : IRequestHandler<Ejecuta>
+        public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
         {
 
-
-            private readonly CntContext _context;
-            private readonly IMapper _mapper;
-
+            //Como vamos a grabar primero el modelo y luego la entidad:
+            var empresaDto = _mapper.Map<InsertarEmpresasModel, CnfEmpresa>(request);
 
 
-            public Manejador(CntContext context, IMapper mapper)
+            //El mapeo va asi en el mappingprofile: CreateMap<InsertarEmpresasModel,CnfEmpresa>();
+
+            try
             {
-                _context = context;
-                _mapper = mapper;
-
-            }
-
-            public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
-            {
-
-                //Como vamos a grabar primero el modelo y luego la entidad:
-                var empresaDto = _mapper.Map<InsertarEmpresasModel, CnfEmpresa>(request);
-
-
-                //El mapeo va asi en el mappingprofile: CreateMap<InsertarEmpresasModel,CnfEmpresa>();
-
-                try
+                await _context.cnfEmpresas.AddAsync(empresaDto);
+                var respuesta = await _context.SaveChangesAsync();
+                if (respuesta > 0)
                 {
-                    await _context.cnfEmpresas.AddAsync(empresaDto);
-                    var respuesta = await _context.SaveChangesAsync();
-                    if (respuesta > 0)
-                    {
-                        return Unit.Value;
-                    }
-                    throw new System.Exception("No se ha realizado modificaciones a la base de datos");
+                    return Unit.Value;
                 }
-                catch (Exception ex)
+                throw new System.Exception("No se ha realizado modificaciones a la base de datos");
+            }
+            catch (Exception ex)
+            {
+
+                //TODO Maria: LLave duplicada implementar validacion
+                var sqlException = ex.InnerException;
+                System.Console.WriteLine(sqlException);
+
+                if (ex.GetBaseException().GetType() == typeof(MySqlException))
                 {
 
-                    //TODO Maria: LLave duplicada implementar validacion
-                    var sqlException = ex.InnerException;
-                    System.Console.WriteLine(sqlException);
-
-                    if (ex.GetBaseException().GetType() == typeof(MySqlException))
+                    var sqlException1 = ex.InnerException as MySqlException;
+                    if (sqlException1.Number == 1062)
                     {
-
-                        var sqlException1 = ex.InnerException as MySqlException;
-                        if (sqlException1.Number == 1062)
-                        {
-                            System.Console.WriteLine("***************Llave duplicada *****************");
-
-                        }
+                        System.Console.WriteLine("***************Llave duplicada *****************");
 
                     }
-                    //System.Console.WriteLine("***************Error de Grabación - Servidor No Disponible *****************");
-                    throw new Exception("Error al Insertar registro catch " + ex.Message);
+
                 }
-
-
+                //System.Console.WriteLine("***************Error de Grabación - Servidor No Disponible *****************");
+                throw new Exception("Error al Insertar registro catch " + ex.Message);
             }
+
+
         }
     }
 }
