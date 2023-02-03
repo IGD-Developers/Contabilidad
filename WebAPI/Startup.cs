@@ -38,6 +38,7 @@ using Persistencia.DapperConexion.Contabilidad.Pucs;
 using Aplicacion.Contabilidad.Consecutivos;
 using Aplicacion.Contabilidad.Terceros;
 using Aplicacion.Contabilidad.Comprobantes;
+using FluentValidation;
 
 namespace WebAPI;
 
@@ -80,14 +81,22 @@ public class Startup
 
 
         // services.AddControllers().AddFluentValidation( cfg => cfg.RegisterValidatorsFromAssemblyContaining<Login>());
-        services.AddControllers( opt => {
+ 
+        services.AddControllers( opt => 
+        {
             var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
             opt.Filters.Add(new AuthorizeFilter(policy));
-        })
-        .AddFluentValidation( cfg => cfg.RegisterValidatorsFromAssemblyContaining<Login>());
+        });
+
+        // Se agrega la validación:
+
+        services.AddFluentValidationAutoValidation()
+                .AddFluentValidationClientsideAdapters()
+                .AddValidatorsFromAssemblyContaining<Login>();
+
         // services.AddControllers().AddJsonOptions(x =>
         // x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve);
-    
+
 
 
 
