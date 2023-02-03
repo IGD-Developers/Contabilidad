@@ -12,9 +12,9 @@ namespace Aplicacion.Contabilidad.ExogenaConceptos
     {
         public class Ejecuta: IRequest
         {
-        public string codigo { get; set; }
-        public string nombre { get; set; }
-        public string estado { get; set; }
+            public string Codigo { get; set; }
+            public string Nombre { get; set; }
+            public string Estado { get; set; }
         }
 
 
@@ -22,9 +22,9 @@ namespace Aplicacion.Contabilidad.ExogenaConceptos
         {
             public EjecutaValidador()
             {
-                RuleFor(x=>x.codigo).NotEmpty();
-                RuleFor(x=>x.nombre).NotEmpty();
-                RuleFor(x=>x.estado).NotEmpty();
+                RuleFor(x=>x.Codigo).NotEmpty();
+                RuleFor(x=>x.Nombre).NotEmpty();
+                RuleFor(x=>x.Estado).NotEmpty();
         
         
             }
@@ -44,9 +44,9 @@ namespace Aplicacion.Contabilidad.ExogenaConceptos
 
                 var exogenaConcepto = new CntExogenaConcepto
                 {
-                    Codigo = request.codigo,
-                    Nombre = request.nombre,
-                    Estado = request.estado
+                    Codigo = request.Codigo,
+                    Nombre = request.Nombre,
+                    Estado = request.Estado
 
                 };
                 context.cntExogenaConceptos.Add(exogenaConcepto);

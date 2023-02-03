@@ -21,12 +21,12 @@ namespace WebAPI.Controllers.Contabilidad
             return await Mediator.Send(new Consulta.ListaCntComprobantes());
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{Id}")]
 
-        public async Task<ActionResult<ListarComprobantesModel>> GetId(int id)
+        public async Task<ActionResult<ListarComprobantesModel>> GetId(int Id)
         {
 
-            return await Mediator.Send(new ConsultaId.ConsultarId { Id = id });
+            return await Mediator.Send(new ConsultaId.ConsultarId { Id = Id });
 
 
         }
@@ -35,7 +35,7 @@ namespace WebAPI.Controllers.Contabilidad
 
         public async Task<ActionResult<Unit>> Insertar(Insertar.Ejecuta data)
         {
-            data.id_modulo=1;
+            data.IdModulo=1;
             return await Mediator.Send(data);
         }
  
@@ -45,47 +45,47 @@ namespace WebAPI.Controllers.Contabilidad
 
         public async Task<ActionResult<Unit>> LiquidaImpuesto(Insertar.Ejecuta data)
         {
-            data.id_modulo=2;
+            data.IdModulo=2;
             return await Mediator.Send(data);
         }
 
 
 
-        [HttpPut("{id}")]
+        [HttpPut("{Id}")]
 
-        public async Task<ActionResult<Unit>>  Editar(int id, Editar.Ejecuta data) 
+        public async Task<ActionResult<Unit>>  Editar(int Id, Editar.Ejecuta data) 
         
         {
-            data.Id = id;
+            data.Id = Id;
             return await Mediator.Send(data);
         }
 
-         [HttpPut("anular/{id}")]
+         [HttpPut("anular/{Id}")]
 
-        public async Task<ActionResult<Unit>>  Anular(int id, Anular.Ejecuta data) 
+        public async Task<ActionResult<Unit>>  Anular(int Id, Anular.Ejecuta data) 
         
         {
-            data.Id = id;
+            data.Id = Id;
             return await Mediator.Send(data);
         }
 
-        [HttpDelete("eliminar/{id}")]
+        [HttpDelete("eliminar/{Id}")]
 
-        public async Task<ActionResult<Unit>>  Eliminar(int id, Eliminar.Ejecuta data) 
+        public async Task<ActionResult<Unit>>  Eliminar(int Id, Eliminar.Ejecuta data) 
         
         {
-            data.Id = id;
+            data.Id = Id;
             return await Mediator.Send(data);
         }
 
 
 
-        [HttpPut("revertir/{id}")]
+        [HttpPut("revertir/{Id}")]
 
-        public async Task<ActionResult<Unit>>  Revertir(int id, Revertir.Ejecuta data) 
+        public async Task<ActionResult<Unit>>  Revertir(int Id, Revertir.Ejecuta data) 
         
         {
-            data.Id = id;
+            data.Id = Id;
             return await Mediator.Send(data);
             
         }

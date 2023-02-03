@@ -36,12 +36,12 @@ namespace WebAPI.Controllers.Contabilidad
         //     return await Mediator.Send(data);
         // }
 
-        [HttpPut("{id}")]
+        [HttpPut("{Id}")]
 
-        public async Task<ActionResult<Unit>>  Editar(int id, Editar.Ejecuta data) 
+        public async Task<ActionResult<Unit>>  Editar(int Id, Editar.Ejecuta data) 
         
         {
-            data.Id = id;
+            data.Id = Id;
             return await Mediator.Send(data);
         }
 

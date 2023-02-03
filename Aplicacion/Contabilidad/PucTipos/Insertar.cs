@@ -12,8 +12,8 @@ namespace Aplicacion.Contabilidad.PucTipos
     {
 
         public class Ejecuta: IRequest {
-            public string codigo { get; set; }
-            public string nombre { get; set; }
+            public string Codigo { get; set; }
+            public string Nombre { get; set; }
 
         }
 
@@ -21,8 +21,8 @@ namespace Aplicacion.Contabilidad.PucTipos
         {
             public EjecutaValidador()
             {
-                RuleFor(x=>x.codigo).NotEmpty();
-                RuleFor(x=>x.nombre).NotEmpty();
+                RuleFor(x=>x.Codigo).NotEmpty();
+                RuleFor(x=>x.Nombre).NotEmpty();
         
             }
         }    
@@ -38,19 +38,19 @@ namespace Aplicacion.Contabilidad.PucTipos
 
             public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
             {
-                var pucTipo = new CntPucTipo
+                var PucTipo = new CntPucTipo
                 {
-                    Codigo = request.codigo,
-                    Nombre =request.nombre
+                    Codigo = request.Codigo,
+                    Nombre =request.Nombre
                 };
-                context.cntPucTipos.Add(pucTipo);
+                context.cntPucTipos.Add(PucTipo);
                 var respuesta = await context.SaveChangesAsync();
                 if (respuesta>0)
                     {
                         return Unit.Value;
                     }
                     
-                throw new Exception("Error 107 al insertar en pucTipo");
+                throw new Exception("Error 107 al insertar en PucTipo");
             }
         }
 

@@ -22,13 +22,13 @@ namespace WebAPI.Controllers
             return await Mediator.Send(new Consulta.ListarTerceros());
         }
 
-        [HttpGet("{id}")]
-        public async Task<ActionResult<ListarTerceroModel>>Detalle(int id){
-            return await Mediator.Send(new ConsultaId.TerceroId{Id = id});
+        [HttpGet("{Id}")]
+        public async Task<ActionResult<ListarTerceroModel>>Detalle(int Id){
+            return await Mediator.Send(new ConsultaId.TerceroId{Id = Id});
         }
 
         [HttpPost]
-        //[Route("tercero")]
+        //[Route("Tercero")]
         public async Task<ActionResult<Unit>>Insertar(Insertar.Ejecuta data){
             return await Mediator.Send(data);
         }
@@ -39,25 +39,25 @@ namespace WebAPI.Controllers
             return await Mediator.Send(data);
         }
 
-        [HttpPut("editar/{id}")]
-        public async Task<ActionResult<Unit>>Editar(int id, Editar.Ejecuta data){
+        [HttpPut("editar/{Id}")]
+        public async Task<ActionResult<Unit>>Editar(int Id, Editar.Ejecuta data){
             
-            data.Id = id;
+            data.Id = Id;
             return await Mediator.Send(data);
         }
 
         [HttpPut]
-        [Route("editarJuridico/{id}")]
-        public async Task<ActionResult<Unit>>EditarJuridico(int id,EditarJuridico.Ejecuta data){
-            data.Id = id;
+        [Route("editarJuridico/{Id}")]
+        public async Task<ActionResult<Unit>>EditarJuridico(int Id,EditarJuridico.Ejecuta data){
+            data.Id = Id;
             return await Mediator.Send(data);
         }
 
 
-        [HttpDelete("eliminar/{id}")]
-        public async Task<ActionResult<Unit>>  Eliminar(int id, Eliminar.Ejecuta data) 
+        [HttpDelete("eliminar/{Id}")]
+        public async Task<ActionResult<Unit>>  Eliminar(int Id, Eliminar.Ejecuta data) 
         {
-            data.Id = id;
+            data.Id = Id;
             return await Mediator.Send(data);
         }
 

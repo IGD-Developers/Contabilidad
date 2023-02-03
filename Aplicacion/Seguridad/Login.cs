@@ -13,9 +13,9 @@ namespace Aplicacion.Seguridad
     public class Login
 
     {
-         /// <summary>Class <c>Ejecuta</c> Esta clase devuelve
+         /// <summary>Class <c>Ejecuta</c> Esta Clase devuelve
         /// la Entidad UsuarioData.</summary>
-        //clase cabecera de tipo <UsuarioData> que se va a llamar desde el webAPI
+        //Clase cabecera de tipo <UsuarioData> que se va a llamar desde el webAPI
 
         public class Ejecuta: IRequest<UsuarioData> {
 
@@ -60,19 +60,19 @@ namespace Aplicacion.Seguridad
         public async Task<UsuarioData> Handle(Ejecuta request, CancellationToken cancellationToken)
             {
 
-                var usuario= await _userManager.FindByEmailAsync(request.Email);
-                if (usuario==null){
+                var Usuario= await _userManager.FindByEmailAsync(request.Email);
+                if (Usuario==null){
                     throw new Exception("Error  Login");
 
                 }
 
-                var resultado=await _signInManager.CheckPasswordSignInAsync(usuario,request.Password,false);
+                var resultado=await _signInManager.CheckPasswordSignInAsync(Usuario,request.Password,false);
                 if (resultado.Succeeded){
                     return new UsuarioData{
-                        IdTercero =usuario.IdTercero,
-                        Token= _jwtGenerador.CrearToken(usuario),
-                        Email= usuario.Email ,
-                        UserName = usuario.UserName
+                        IdTercero =Usuario.IdTercero,
+                        Token= _jwtGenerador.CrearToken(Usuario),
+                        Email= Usuario.Email ,
+                        UserName = Usuario.UserName
                     };
                 }
                 throw new Exception("Error Login Usuario");

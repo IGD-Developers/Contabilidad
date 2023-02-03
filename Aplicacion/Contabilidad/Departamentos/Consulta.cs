@@ -29,8 +29,8 @@ namespace Aplicacion.Contabilidad.Departamentos
             public async Task<List<DepartamentosModel>> Handle(ListaDepartamentos request, CancellationToken cancellationToken)
             {
                 var departamentos = await _context.CntDepartamentos.ToListAsync();
-                var departamentosModel = _mapper.Map<List<CntDepartamento>, List<DepartamentosModel>>(departamentos);
-                return departamentosModel;
+                var DepartamentosModel = _mapper.Map<List<CntDepartamento>, List<DepartamentosModel>>(departamentos);
+                return DepartamentosModel;
             }
         }
     }

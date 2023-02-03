@@ -12,8 +12,8 @@ namespace Aplicacion.Contabilidad.TipoCuentas
     {
         public class Ejecuta: IRequest {
 
-            public string codigo { get; set; }
-            public string nombre { get; set; }
+            public string Codigo { get; set; }
+            public string Nombre { get; set; }
 
         }
 
@@ -21,8 +21,8 @@ namespace Aplicacion.Contabilidad.TipoCuentas
         {
             public EjecutaValidador()
             {
-                RuleFor(x=>x.codigo).NotEmpty();
-                RuleFor(x=>x.nombre).NotEmpty();
+                RuleFor(x=>x.Codigo).NotEmpty();
+                RuleFor(x=>x.Nombre).NotEmpty();
         
             }
         }    
@@ -39,13 +39,13 @@ namespace Aplicacion.Contabilidad.TipoCuentas
 
             public async  Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
             {
-                var tipoCuenta = new CntTipoCuenta 
+                var TipoCuenta = new CntTipoCuenta 
                 {
-                    Codigo = request.codigo,
-                    Nombre = request.nombre
+                    Codigo = request.Codigo,
+                    Nombre = request.Nombre
                 };
 
-                context.cntTipoCuentas.Add(tipoCuenta);
+                context.cntTipoCuentas.Add(TipoCuenta);
                 var respuesta=await context.SaveChangesAsync();
                 if (respuesta>0)
                 {

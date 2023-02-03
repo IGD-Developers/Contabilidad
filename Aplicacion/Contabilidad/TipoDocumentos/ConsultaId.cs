@@ -33,8 +33,8 @@ namespace Aplicacion.Contabilidad.TipoDocumentos
                 if(tipoDocumento==null)
                     throw new Exception("Tipo Documento Consultado no Existe");
 
-                var tipoDocumentoModel = _mapper.Map<CntTipoDocumento, TipoDocumentoModel>(tipoDocumento);
-                return tipoDocumentoModel;
+                var TipoDocumentoModel = _mapper.Map<CntTipoDocumento, TipoDocumentoModel>(tipoDocumento);
+                return TipoDocumentoModel;
             }
         }
     }

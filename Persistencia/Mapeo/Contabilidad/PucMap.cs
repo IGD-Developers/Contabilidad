@@ -31,7 +31,7 @@ namespace Persistencia.Mapeo.Contabilidad
                 .HasForeignKey(p => p.IdUsuario);
 
             // builder
-            //     .Property(b => b.id_tipoimpuesto)
+            //     .Property(b => b.IdTipoimpuesto)
             //     .HasDefaultValueSql(0);
             
             builder

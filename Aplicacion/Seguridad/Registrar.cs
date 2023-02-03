@@ -71,7 +71,7 @@ namespace Aplicacion.Seguridad
 
                 }
                 
-                var usuario = new CnfUsuario {
+                var Usuario = new CnfUsuario {
                    IdTercero = request.IdTercero,
                    UsuEstado =true,
                    UsuSupervisor =false,
@@ -80,15 +80,15 @@ namespace Aplicacion.Seguridad
 
                 };
 
-                var resultado= await _userManager.CreateAsync(usuario, request.Password);
+                var resultado= await _userManager.CreateAsync(Usuario, request.Password);
 
                 if (resultado.Succeeded)
                 {
                     return new UsuarioData {
-                        IdTercero = usuario.IdTercero,
-                        Token =_jwtGenerador.CrearToken(usuario),
-                        UserName= usuario.UserName,
-                        Email=usuario.Email
+                        IdTercero = Usuario.IdTercero,
+                        Token =_jwtGenerador.CrearToken(Usuario),
+                        UserName= Usuario.UserName,
+                        Email=Usuario.Email
 
                     };
                 }

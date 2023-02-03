@@ -13,9 +13,9 @@ namespace Aplicacion.Models.Contabilidad.Comprobantes
 
 
        
-        // public  TipoComprobanteModel tipoComprobante{ get; set; }
-        // public SucursalModel sucursal{get;set;}
-        // public UsuarioModel usuario{get;set;}
+        // public  TipoComprobanteModel TipoComprobante{ get; set; }
+        // public SucursalModel Sucursal{get;set;}
+        // public UsuarioModel Usuario{get;set;}
         
     }
 }

@@ -14,7 +14,7 @@ namespace Dominio.Contabilidad
         public int IdRegimen { get; set; }
         public int IdCiiu { get; set; }
         public string IdUsuario { get; set; }
-        //TODO:Pendiente para agregar usuario que edita el tercero
+        //TODO:Pendiente para agregar Usuario que edita el Tercero
 
         public string TerDocumento { get; set; }
         public string TerDigitoverificacion { get; set; }

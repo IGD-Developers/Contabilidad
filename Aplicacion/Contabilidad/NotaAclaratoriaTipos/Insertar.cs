@@ -14,8 +14,8 @@ namespace Aplicacion.Contabilidad.NotaAclaratoriaTipos
         public class Ejecuta : IRequest{
 
             [StringLength(3, MinimumLength =3, ErrorMessage ="Debe ingresar solo 3 caracteres")]
-            public string codigo { get; set; }
-            public string nombre { get; set; }
+            public string Codigo { get; set; }
+            public string Nombre { get; set; }
             
         }
 
@@ -23,8 +23,8 @@ namespace Aplicacion.Contabilidad.NotaAclaratoriaTipos
         {
             public EjecutaValidador()
             {
-                RuleFor(x=>x.codigo).NotEmpty();
-                RuleFor(x=>x.nombre).NotEmpty();
+                RuleFor(x=>x.Codigo).NotEmpty();
+                RuleFor(x=>x.Nombre).NotEmpty();
 
             }
         }
@@ -41,8 +41,8 @@ namespace Aplicacion.Contabilidad.NotaAclaratoriaTipos
             public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
             {
                 var nota = new CntNotaAclaratoriaTipo{
-                    Codigo = request.codigo,
-                    Nombre = request.nombre
+                    Codigo = request.Codigo,
+                    Nombre = request.Nombre
                 };
 
                 _context.cntNotaAclaratoriaTipos.Add(nota);

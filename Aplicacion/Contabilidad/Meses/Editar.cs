@@ -14,7 +14,7 @@ namespace Aplicacion.Contabilidad.Meses
             public int? mes_ano { get; set; }
             public int? mes_mes { get; set; }
             public bool? mes_cerrado { get; set; }
-            public string id_usuario { get; set; }
+            public string IdUsuario { get; set; }
             
         }
 
@@ -26,7 +26,7 @@ namespace Aplicacion.Contabilidad.Meses
                 RuleFor(x=>x.mes_ano).NotEmpty();
                 RuleFor(x=>x.mes_mes).NotEmpty();
                 RuleFor(x=>x.mes_cerrado).NotEmpty();
-                RuleFor(x=>x.id_usuario).NotEmpty();
+                RuleFor(x=>x.IdUsuario).NotEmpty();
                 
             }
         }
@@ -51,11 +51,11 @@ namespace Aplicacion.Contabilidad.Meses
                 cierre.MesMes = request.mes_mes ?? cierre.MesMes;
                 cierre.MesAno = request.mes_ano ?? cierre.MesAno;
                 cierre.MesCerrado = request.mes_cerrado ?? cierre.MesCerrado;
-                // if (request.id_usuario!=null){
-                //     cierre.id_usuario = request.id_usuario;
+                // if (request.IdUsuario!=null){
+                //     cierre.IdUsuario = request.IdUsuario;
                 // };
-                //cierre.id_usuario = request.id_usuario ?? cierre.id_usuario;
-                cierre.IdUsuario = request.id_usuario;
+                //cierre.IdUsuario = request.IdUsuario ?? cierre.IdUsuario;
+                cierre.IdUsuario = request.IdUsuario;
 
                // _context.Add(cierre);
                 var resultado = await _context.SaveChangesAsync();

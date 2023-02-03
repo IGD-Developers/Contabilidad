@@ -15,10 +15,10 @@ namespace Dominio.Configuracion
         // public string nombregerente { get{
         //     if(this.IdTerceroGerente!=null)
         //     {
-        //         string pa = terceroEmpresa.ter_priapellido ?? "c";
-        //         string sa = terceroEmpresa.ter_segapellido ?? "c";
-        //         string pn = terceroEmpresa.ter_prinombre ?? "c";
-        //         string sn = terceroEmpresa.ter_segnombre ?? "c";
+        //         string pa = terceroEmpresa.TerPriapellido ?? "c";
+        //         string sa = terceroEmpresa.TerSegapellido ?? "c";
+        //         string pn = terceroEmpresa.TerPrinombre ?? "c";
+        //         string sn = terceroEmpresa.TerSegnombre ?? "c";
 
         //        return (pa + " " + sa + " "+ pn + " " + sn);
 

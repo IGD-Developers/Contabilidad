@@ -17,7 +17,7 @@ namespace Persistencia.DapperConexion.Contabilidad.Pucs
          Task<PucRepositorioModel> ObtenerId(int Id);
          Task<int> Insertar(PucRepositorioModel data);
          Task<int> Actualiza(PucRepositorioModel data);
-         Task<int> Elimina(int id);
+         Task<int> Elimina(int Id);
 
 
     }

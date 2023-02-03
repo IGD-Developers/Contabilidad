@@ -22,8 +22,8 @@ namespace Aplicacion.Contabilidad.Terceros
 
             public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
             {
-                var tercero = await _context.CntTerceros.FindAsync(request.Id);
-                if(tercero==null){
+                var Tercero = await _context.CntTerceros.FindAsync(request.Id);
+                if(Tercero==null){
                     throw new Exception("Tercero no existe");
                 }
 
@@ -38,7 +38,7 @@ namespace Aplicacion.Contabilidad.Terceros
                         _context.RemoveRange(responsabilidades);
                     }
 
-                    _context.Remove(tercero);                   
+                    _context.Remove(Tercero);                   
     
                     var resultado = await _context.SaveChangesAsync();
     
@@ -47,11 +47,11 @@ namespace Aplicacion.Contabilidad.Terceros
                         return Unit.Value;
                     }
     
-                    throw new Exception("Error al Eliminar tercero");
+                    throw new Exception("Error al Eliminar Tercero");
 
                 } catch (Exception ex) {
 
-                    throw new Exception("Error al Eliminar tercero catch " + ex.Message);
+                    throw new Exception("Error al Eliminar Tercero catch " + ex.Message);
                      
                 }
             }

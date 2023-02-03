@@ -15,8 +15,8 @@ namespace Aplicacion.Contabilidad.TipoOperaciones
         public class Ejecuta: IRequest
         {
 
-            public string codigo { get; set; }
-            public string nombre { get; set; }
+            public string Codigo { get; set; }
+            public string Nombre { get; set; }
             public string formula { get; set; }
 
         }
@@ -25,8 +25,8 @@ namespace Aplicacion.Contabilidad.TipoOperaciones
         {
             public EjecutaValidador()
             {
-                RuleFor(x=>x.codigo).NotEmpty();
-                RuleFor(x=>x.nombre).NotEmpty();
+                RuleFor(x=>x.Codigo).NotEmpty();
+                RuleFor(x=>x.Nombre).NotEmpty();
         
             }
         }    
@@ -46,8 +46,8 @@ namespace Aplicacion.Contabilidad.TipoOperaciones
         {
             public EjecutaValidador()
             {
-                RuleFor(x=>x.codigo).NotEmpty();
-                RuleFor(x=>x.nombre).NotEmpty();
+                RuleFor(x=>x.Codigo).NotEmpty();
+                RuleFor(x=>x.Nombre).NotEmpty();
         
             }
         }    
@@ -58,8 +58,8 @@ namespace Aplicacion.Contabilidad.TipoOperaciones
 
                 var tipoOperacion = new CntTipoOperacion
                 {
-                    Codigo = request.codigo,
-                    Nombre = request.nombre,
+                    Codigo = request.Codigo,
+                    Nombre = request.Nombre,
                     Formula = request.formula ?? ""
 
                 };

@@ -12,16 +12,16 @@ namespace Aplicacion.Contabilidad.ExogenaFormatos
     {
         public class Ejecuta:IRequest
         {
-            public string codigo { get; set; }
-            public string nombre { get; set; }
+            public string Codigo { get; set; }
+            public string Nombre { get; set; }
         }
 
         public class EjecutaValidador : AbstractValidator<Ejecuta>
         {
             public EjecutaValidador()
             {
-                RuleFor(x=>x.codigo).NotEmpty();
-                RuleFor(x=>x.nombre).NotEmpty();
+                RuleFor(x=>x.Codigo).NotEmpty();
+                RuleFor(x=>x.Nombre).NotEmpty();
         
             }
         }    
@@ -41,8 +41,8 @@ namespace Aplicacion.Contabilidad.ExogenaFormatos
 
                 var exogenaFormato= new CntExogenaFormato()
                 {
-                    Codigo = request.nombre,
-                    Nombre= request.nombre
+                    Codigo = request.Nombre,
+                    Nombre= request.Nombre
                 };
 
                 context.cntExogenaFormatos.Add(exogenaFormato);

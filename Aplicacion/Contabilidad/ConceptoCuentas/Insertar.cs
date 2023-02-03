@@ -13,10 +13,10 @@ namespace Aplicacion.Contabilidad.ConceptoCuentas
         {
 
             public int id_exogenaconcepto { get; set; }
-            public int id_puc { get; set; }
+            public int IdPuc { get; set; }
             public int id_formatocolumna { get; set; }
             public int id_tipooperacion { get; set; }
-            public string estado { get; set; }
+            public string Estado { get; set; }
         }
 
         public class Manejador:IRequestHandler<Ejecuta>
@@ -33,10 +33,10 @@ namespace Aplicacion.Contabilidad.ConceptoCuentas
                 var conceptoCuenta=new CntConceptoCuenta
                 {
                     IdExogenaconcepto =request.id_exogenaconcepto,
-                    IdPuc =request.id_puc,
+                    IdPuc =request.IdPuc,
                     IdFormatocolumna=request.id_formatocolumna,
                     IdTipooperacion =request.id_tipooperacion,
-                    Estado=request.estado
+                    Estado=request.Estado
                 };
                 context.cntConceptoCuentas.Add(conceptoCuenta);
                 var respuesta= await context.SaveChangesAsync();

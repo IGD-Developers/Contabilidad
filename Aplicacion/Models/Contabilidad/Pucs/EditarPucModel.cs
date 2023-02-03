@@ -3,14 +3,14 @@ namespace Aplicacion.Models.Contabilidad.Pucs
     public class EditarPucModel
     {
         public int Id { get; set; }
-        //public string codigo { get; set; }
-        public string nombre { get; set; }
-        public int? id_puctipo { get; set; }
-        public int? id_tipocuenta { get; set; }
-        public int? id_tipoimpuesto { get; set; }
-        public bool pac_activa { get; set; }
-        public bool pac_base { get; set; }
-        public bool pac_ajusteniif { get; set; }
-        //public string id_usuario { get; set; }
+        //public string Codigo { get; set; }
+        public string Nombre { get; set; }
+        public int? IdPuctipo { get; set; }
+        public int? IdTipocuenta { get; set; }
+        public int? IdTipoimpuesto { get; set; }
+        public bool PacActiva { get; set; }
+        public bool PacBase { get; set; }
+        public bool PacAjusteniif { get; set; }
+        //public string IdUsuario { get; set; }
     }
 }

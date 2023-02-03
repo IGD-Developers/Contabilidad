@@ -25,12 +25,12 @@ namespace WebAPI.Controllers.Configuracion
             return await mediator.Send(new Consulta.ListaCnfUsuarios());
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{Id}")]
 
-        public async Task<ActionResult<CnfUsuario>> GetId(int id)
+        public async Task<ActionResult<CnfUsuario>> GetId(int Id)
         {
 
-            return await mediator.Send(new ConsultaId.ConsultarId { Id = id });
+            return await mediator.Send(new ConsultaId.ConsultarId { Id = Id });
 
         }
 

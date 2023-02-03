@@ -4,12 +4,12 @@ namespace Aplicacion.Contabilidad.Terceros
     {    
         /// <summary>
         /// <c>CalcularDigitoVerificacion</c>
-        /// Recibe como parametro el documento del tercero
+        /// Recibe como parametro el documento del Tercero
         /// </summary>
         /// <returns> 
         /// Retorna el digito de verificaciín
         ///</returns>
-        /// <param name="Nit">Documento del tercero
+        /// <param name="Nit">Documento del Tercero
         ///</param>
         string CalcularDigitoVerificacion(string Nit);
     

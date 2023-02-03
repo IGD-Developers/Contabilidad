@@ -12,28 +12,28 @@ namespace Aplicacion.Contabilidad.DetalleComprobantes
     {
         public class Ejecuta : IRequest {
 
-            public int id_comprobante { get; set; }
-            public int id_centrocosto { get; set; }
-            public int id_puc { get; set; }
+            public int IdComprobante { get; set; }
+            public int IdCentrocosto { get; set; }
+            public int IdPuc { get; set; }
             public int IdTercero { get; set; }
-            public double dco_base { get; set; }
-            public double dco_tarifa { get; set; }
-            public double dco_debito { get; set; }
-            public double dco_credito { get; set; }
-            public string dco_detalle { get; set; }
+            public double DcoBase { get; set; }
+            public double DcoTarifa { get; set; }
+            public double DcoDebito { get; set; }
+            public double DcoCredito { get; set; }
+            public string DcoDetalle { get; set; }
         }
 public class EjecutaValidador : AbstractValidator<Ejecuta>
         {
             public EjecutaValidador()
             {
-                RuleFor(x=>x.id_comprobante).NotEmpty();
-                RuleFor(x=>x.id_centrocosto).NotEmpty();
-                RuleFor(x=>x.id_puc).NotEmpty();
+                RuleFor(x=>x.IdComprobante).NotEmpty();
+                RuleFor(x=>x.IdCentrocosto).NotEmpty();
+                RuleFor(x=>x.IdPuc).NotEmpty();
                 RuleFor(x=>x.IdTercero).NotEmpty();
-                RuleFor(x=>x.dco_tarifa).NotEmpty();
-                RuleFor(x=>x.dco_debito).NotEmpty();
-                RuleFor(x=>x.dco_credito).NotEmpty();
-                RuleFor(x=>x.dco_detalle).NotEmpty();
+                RuleFor(x=>x.DcoTarifa).NotEmpty();
+                RuleFor(x=>x.DcoDebito).NotEmpty();
+                RuleFor(x=>x.DcoCredito).NotEmpty();
+                RuleFor(x=>x.DcoDetalle).NotEmpty();
             }
         }  
         public class Manejador: IRequestHandler<Ejecuta> {
@@ -51,15 +51,15 @@ public class EjecutaValidador : AbstractValidator<Ejecuta>
                 var detalleComprobante = new CntDetalleComprobante
                 {
 
-                    IdComprobante = request.id_comprobante,
-                    IdCentrocosto= request.id_centrocosto,
-                    IdPuc  = request.id_puc,
+                    IdComprobante = request.IdComprobante,
+                    IdCentrocosto= request.IdCentrocosto,
+                    IdPuc  = request.IdPuc,
                     IdTercero  =request.IdTercero,
-                    DcoBase =request.dco_base,
-                    DcoTarifa = request.dco_tarifa,
-                    DcoDebito = request.dco_tarifa,
-                    DcoCredito = request.dco_credito,
-                    DcoDetalle= request.dco_detalle
+                    DcoBase =request.DcoBase,
+                    DcoTarifa = request.DcoTarifa,
+                    DcoDebito = request.DcoTarifa,
+                    DcoCredito = request.DcoCredito,
+                    DcoDetalle= request.DcoDetalle
                 };
                 
                 context.cntDetalleComprobantes.Add(detalleComprobante);

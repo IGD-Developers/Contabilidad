@@ -26,17 +26,17 @@ namespace Aplicacion.Contabilidad.NotaAclaratorias
 
             public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
             {
-                var nota = await _context.cntNotaAclaratorias.FindAsync(request.ID);
+                var nota = await _context.cntNotaAclaratorias.FindAsync(request.Id);
 
                 if(nota == null){
                     throw new Exception("Nota Consultada no existe");
                 }
 
                 if(nota.Estado == "A"){
-                    request.estado = "I";
+                    request.Estado = "I";
 
                 }else if(nota.Estado == "I"){
-                    request.estado = "A";
+                    request.Estado = "A";
                 }
 
                 try {
@@ -48,10 +48,10 @@ namespace Aplicacion.Contabilidad.NotaAclaratorias
                         return Unit.Value;
                     }
     
-                    throw new Exception("No se pudo Cambiar estado a la nota aclaratoria");
+                    throw new Exception("No se pudo Cambiar Estado a la nota aclaratoria");
 
                 } catch (SystemException e) {
-                    throw new Exception("Ocurrio un error inesperado al cambiar estado", e);
+                    throw new Exception("Ocurrio un error inesperado al cambiar Estado", e);
                     
                 }
 

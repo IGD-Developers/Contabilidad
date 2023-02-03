@@ -25,7 +25,7 @@ namespace Aplicacion.Contabilidad.Entidades
             {
                 //RuleFor(x=>x.Id).NotEmpty();
                 RuleFor(x => x.IdTercero).NotEmpty();
-                RuleFor(x => x.id_tipoimpuesto).NotEmpty();
+                RuleFor(x => x.IdTipoimpuesto).NotEmpty();
 
             }
         }

@@ -31,7 +31,7 @@ namespace Aplicacion.Contabilidad.Entidades
 
             public async Task<List<ListarEntidadesModel>> Handle(ListaCntEntidades request, CancellationToken cancellationToken)
             {
-                //TODO: MARIA- Validar existe tercero, existe tipoimpuesto
+                //TODO: MARIA- Validar existe Tercero, existe tipoimpuesto
                 var entidades = await _context.cntEntidades
                 .Include(t=>t.Tercero)
                 .Include(i=>i.TipoImpuesto)

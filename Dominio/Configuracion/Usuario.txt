@@ -11,7 +11,7 @@ namespace Dominio.Configuracion
         public int IdTercero { get; set; }
         public bool usu_estado { get; set; }
         public bool usu_supervisor { get; set; }
-        public DateTime? created_at { get; set; }
+        public DateTime? CreatedAt { get; set; }
         public DateTime? update_at { get; set; }
 
 

@@ -22,12 +22,12 @@ namespace Aplicacion.Contabilidad.Pucs
             public EjecutaValidador()
             {
                 
-                RuleFor(x => x.nombre).NotEmpty();
-                RuleFor(x => x.id_puctipo).NotEmpty();
-                RuleFor(x => x.id_tipocuenta).NotEmpty();
-                RuleFor(x=>x.pac_activa).Must(x => x == false || x == true);
-                RuleFor(x=>x.pac_base).Must(x => x == false || x == true);
-                RuleFor(x=>x.pac_ajusteniif).Must(x => x == false || x == true);
+                RuleFor(x => x.Nombre).NotEmpty();
+                RuleFor(x => x.IdPuctipo).NotEmpty();
+                RuleFor(x => x.IdTipocuenta).NotEmpty();
+                RuleFor(x=>x.PacActiva).Must(x => x == false || x == true);
+                RuleFor(x=>x.PacBase).Must(x => x == false || x == true);
+                RuleFor(x=>x.PacAjusteniif).Must(x => x == false || x == true);
 
 
             }
@@ -80,12 +80,12 @@ namespace Aplicacion.Contabilidad.Pucs
             }
         }
     }
-                // puc.nombre = request.nombre;
-                // puc.id_puctipo= request.id_puctipo;
-                // puc.id_tipocuenta = request.id_tipocuenta;
-                // puc.codigo = request.codigo;
-                // puc.pac_activa =request.pac_activa;
-                // puc.pac_base =request.pac_base;
-                // puc.pac_ajusteniif = request.pac_ajusteniif;
-                // puc.id_usuario = request.id_usuario;
+                // puc.Nombre = request.Nombre;
+                // puc.IdPuctipo= request.IdPuctipo;
+                // puc.IdTipocuenta = request.IdTipocuenta;
+                // puc.Codigo = request.Codigo;
+                // puc.PacActiva =request.PacActiva;
+                // puc.PacBase =request.PacBase;
+                // puc.PacAjusteniif = request.PacAjusteniif;
+                // puc.IdUsuario = request.IdUsuario;
 }

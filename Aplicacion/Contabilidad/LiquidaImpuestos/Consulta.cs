@@ -40,9 +40,9 @@ namespace Aplicacion.Contabilidad.LiquidaImpuestos
             {
 
                 // var idTipoComprobante = await _context.cntTipoComprobantes
-                //                     .Where(t => t.codigo == "LIM")
+                //                     .Where(t => t.Codigo == "LIM")
                 //                     .Select(t => new IdLiquidaImpuestoModel()
-                //                     { Id = t.id })
+                //                     { Id = t.Id })
                 //                     .SingleOrDefaultAsync();
                 // if (idTipoComprobante == null)
                 // {
@@ -50,8 +50,8 @@ namespace Aplicacion.Contabilidad.LiquidaImpuestos
                 // };
 
 
-                //  request.fechainicial = (request.fechainicial == null) ? DateTime.Now : request.fechainicial;
-                //  request.fechafinal = (request.fechafinal == null) ? DateTime.Now : request.fechafinal;
+                //  request.FechaInicial = (request.FechaInicial == null) ? DateTime.Now : request.FechaInicial;
+                //  request.FechaFinal = (request.FechaFinal == null) ? DateTime.Now : request.FechaFinal;
 
 
                 var entidadesDto = await _context.cntLiquidaImpuestos
@@ -65,9 +65,9 @@ namespace Aplicacion.Contabilidad.LiquidaImpuestos
                 .Include(co=>co.Comprobante)
                 .ThenInclude(t=>t.Usuario)
                 .ThenInclude(tu=>tu.Tercero)
-                .Where(li=>li.Comprobante.CcoFecha>= request.fechainicial
-                        &&li.Comprobante.CcoFecha <= request.fechafinal
-                        && li.Comprobante.IdSucursal == request.id_sucursal
+                .Where(li=>li.Comprobante.CcoFecha>= request.FechaInicial
+                        &&li.Comprobante.CcoFecha <= request.FechaFinal
+                        && li.Comprobante.IdSucursal == request.IdSucursal
                         && li.Estado == "A")
                 .Select(p => _mapper.Map<CntLiquidaImpuesto, ListarLiquidaImpuestosModel>(p))
                 .ToListAsync();

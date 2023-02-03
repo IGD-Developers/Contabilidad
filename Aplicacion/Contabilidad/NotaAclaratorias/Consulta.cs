@@ -17,7 +17,7 @@ namespace Aplicacion.Contabilidad.NotaAclaratorias
     //DESDE IMediaTr
     // Necesita dos clases 
     //UNA que herede de IRequest y  
-    //OTRA como manejador de la clase que HEREDE DE IRequestHandler 
+    //OTRA como manejador de la Clase que HEREDE DE IRequestHandler 
     //que maneja la LOGICA DE NEGOCIOS 
     {
         public class ListaCntNotaAclaratorias : IRequest<List<ListarNotaAclaratoriaModel>>
@@ -27,7 +27,7 @@ namespace Aplicacion.Contabilidad.NotaAclaratorias
         }
 
         //El manejador necesita dos parametros:
-        //la primera clase de lista:  Formato en que lo vamos a devolver, tipo de dato
+        //la primera Clase de lista:  Formato en que lo vamos a devolver, tipo de dato
         public class Manejador : IRequestHandler<ListaCntNotaAclaratorias, List<ListarNotaAclaratoriaModel>>
         {
 

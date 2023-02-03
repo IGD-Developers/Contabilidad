@@ -25,8 +25,8 @@ namespace Aplicacion.Seguridad
 
             public async Task<CnfUsuario> Handle(ConsultarId request, CancellationToken cancellationToken)
             {
-                var usuario = await context.cnfUsuarios.FindAsync(request.Id);
-                return usuario;
+                var Usuario = await context.cnfUsuarios.FindAsync(request.Id);
+                return Usuario;
             }
         }
 

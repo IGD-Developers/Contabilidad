@@ -21,17 +21,17 @@ namespace Aplicacion.Contabilidad.Terceros
         {
             public EjecutaValidador()
                 {
-                    RuleFor(x => x.id_tipodocumento).NotEmpty();
-                    RuleFor(x => x.ter_documento).NotEmpty();
-                    /* RuleFor(x => x.id_usuario).NotEmpty(); */
-                    RuleFor(x => x.id_tippersona).NotEmpty();
-                    RuleFor(x => x.id_municipio).NotEmpty();
-                    RuleFor(x => x.id_regimen).NotEmpty();
-                    RuleFor(x => x.id_regimen).NotEmpty();
-                    RuleFor(x => x.ter_razonsocial).NotEmpty();
-                    //RuleFor(x => x.id_genero).Matches("^[A,U,M]+");
-                    //RuleFor(x=>x.pac_base).Must(x => x == false || x == true);
-                    RuleFor(x => x.responsabilidadTerceroJuridicoModel).NotEmpty();
+                    RuleFor(x => x.IdTipodocumento).NotEmpty();
+                    RuleFor(x => x.TerDocumento).NotEmpty();
+                    /* RuleFor(x => x.IdUsuario).NotEmpty(); */
+                    RuleFor(x => x.IdTippersona).NotEmpty();
+                    RuleFor(x => x.IdMunicipio).NotEmpty();
+                    RuleFor(x => x.IdRegimen).NotEmpty();
+                    RuleFor(x => x.IdRegimen).NotEmpty();
+                    RuleFor(x => x.TerRazonsocial).NotEmpty();
+                    //RuleFor(x => x.IdGenero).Matches("^[A,U,M]+");
+                    //RuleFor(x=>x.PacBase).Must(x => x == false || x == true);
+                    RuleFor(x => x.ResponsabilidadTerceroJuridicoModel).NotEmpty();
                   
                 }
         }
@@ -51,9 +51,9 @@ namespace Aplicacion.Contabilidad.Terceros
             public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
             {
 
-                var tercero = await _context.CntTerceros.FindAsync(request.Id);
-                if(tercero == null){
-                    throw new Exception("No se encontro tercero");
+                var Tercero = await _context.CntTerceros.FindAsync(request.Id);
+                if(Tercero == null){
+                    throw new Exception("No se encontro Tercero");
                 }   
                 
                 var tipoPersona = await _context.CntTipoPersonas.Where(p => p.Codigo == "J")
@@ -68,16 +68,16 @@ namespace Aplicacion.Contabilidad.Terceros
                     throw new Exception("No se encontro genero");
                 }
                 
-                request.id_tippersona = tipoPersona.Id;
-                request.id_genero = genero.Id;
-                request.ter_digitoverificacion = _funciones.CalcularDigitoVerificacion(tercero.TerDocumento);
-                request.id_tipodocumento = request.id_tipodocumento ?? tercero.IdTipodocumento;
-                request.id_municipio = request.id_municipio ?? tercero.IdMunicipio;
-                request.id_regimen = request.id_regimen ?? tercero.IdRegimen;
-                request.id_ciiu = request.id_ciiu ?? tercero.IdCiiu;
-                //request.id_usuario = request.id_usuario;
-                request.ter_documento = request.ter_documento ?? tercero.TerDocumento;
-                request.ter_razonsocial = request.ter_razonsocial ?? tercero.TerRazonsocial;
+                request.IdTippersona = tipoPersona.Id;
+                request.IdGenero = genero.Id;
+                request.TerDigitoverificacion = _funciones.CalcularDigitoVerificacion(Tercero.TerDocumento);
+                request.IdTipodocumento = request.IdTipodocumento ?? Tercero.IdTipodocumento;
+                request.IdMunicipio = request.IdMunicipio ?? Tercero.IdMunicipio;
+                request.IdRegimen = request.IdRegimen ?? Tercero.IdRegimen;
+                request.IdCiiu = request.IdCiiu ?? Tercero.IdCiiu;
+                //request.IdUsuario = request.IdUsuario;
+                request.TerDocumento = request.TerDocumento ?? Tercero.TerDocumento;
+                request.TerRazonsocial = request.TerRazonsocial ?? Tercero.TerRazonsocial;
                                 
                 var responsabilidades = _context.cntResponsabilidadTerceros
                     .Where(z => z.IdTercero == request.Id)
@@ -87,23 +87,23 @@ namespace Aplicacion.Contabilidad.Terceros
                     var transaction = _context.Database.BeginTransaction();
                 try {
 
-                    var entidadDto = _mapper.Map<EditarJuridicoModel, CntTercero>(request, tercero);
+                    var entidadDto = _mapper.Map<EditarJuridicoModel, CntTercero>(request, Tercero);
                                         
                     _context.RemoveRange(responsabilidades);
 
-                    if(request.responsabilidadTerceroJuridicoModel != null){
+                    if(request.ResponsabilidadTerceroJuridicoModel != null){
                         
-                       var idResponsabilidades = (from num in request.responsabilidadTerceroJuridicoModel select num.id_responsabilidad).Distinct().ToList();
+                       var idResponsabilidades = (from num in request.ResponsabilidadTerceroJuridicoModel select num.IdResponsabilidad).Distinct().ToList();
 
                         EditarResponsabilidadTerceroJuridicoModel registro = new EditarResponsabilidadTerceroJuridicoModel();
 
                         // Agregar los registros que vienen del request 
                         foreach (int idResponsabilidad in idResponsabilidades)
                         {
-                            registro.id_responsabilidad = idResponsabilidad;
+                            registro.IdResponsabilidad = idResponsabilidad;
                             registro.IdTercero = request.Id;                       
                             
-                            var responsabilidad = await _context.cntResponsabilidades.FindAsync(registro.id_responsabilidad);
+                            var responsabilidad = await _context.cntResponsabilidades.FindAsync(registro.IdResponsabilidad);
                             if(responsabilidad == null){
                                 throw new Exception("No se encontro Responsabilidad, error al insertar ResponsabilidadTercero");
                             }
@@ -122,7 +122,7 @@ namespace Aplicacion.Contabilidad.Terceros
                     } 
 
             
-                    throw new Exception("No se modificó el tercero juridico");
+                    throw new Exception("No se modificó el Tercero juridico");
 
                 } catch (SystemException e) {
 

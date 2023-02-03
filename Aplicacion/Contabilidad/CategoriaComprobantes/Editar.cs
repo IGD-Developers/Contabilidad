@@ -20,8 +20,8 @@ namespace Aplicacion.Contabilidad.CategoriaComprobantes
         {
             public EjecutaValidador()
             {
-                RuleFor(x => x.codigo).NotEmpty();
-                RuleFor(x => x.nombre).NotEmpty();
+                RuleFor(x => x.Codigo).NotEmpty();
+                RuleFor(x => x.Nombre).NotEmpty();
 
             }
         }

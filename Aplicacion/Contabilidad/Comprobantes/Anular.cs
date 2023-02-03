@@ -33,21 +33,21 @@ namespace Aplicacion.Contabilidad.Comprobantes
 
             public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
             {
-                var comprobante = await context.cntComprobantes
+                var Comprobante = await context.cntComprobantes
                 .Include(t => t.TipoComprobante)
                 .FirstOrDefaultAsync(cmp => cmp.Id == request.Id);
 
-                if (comprobante == null)
+                if (Comprobante == null)
                 {
                     throw new Exception("Comprobante no encontrado");
                 }
 
-                if (comprobante.TipoComprobante.Anulable == "F")
+                if (Comprobante.TipoComprobante.Anulable == "F")
                 {
                     throw new Exception("El Tipo de Comprobante no permite Anulacion");
                 }
                 
-                DateTime fechaGrabada= comprobante.CcoFecha ?? DateTime.Now ;
+                DateTime fechaGrabada= Comprobante.CcoFecha ?? DateTime.Now ;
 
                 if (fechaGrabada.Month != DateTime.Now.Month  
                     || fechaGrabada.Year != DateTime.Now.Year)
@@ -58,7 +58,7 @@ namespace Aplicacion.Contabilidad.Comprobantes
 
                 try
                 {
-                    comprobante.Estado = "N";
+                    Comprobante.Estado = "N";
                     var resultado = await context.SaveChangesAsync();
                     if (resultado > 0)
                     {

@@ -7,8 +7,6 @@ namespace Aplicacion.Models.Contabilidad.Comprobantes
 {
     public class EliminarComprobantesModel
     {
-        public int Id { get; set; }
-      
-        
+        public int Id { get; set; } 
     }
 }

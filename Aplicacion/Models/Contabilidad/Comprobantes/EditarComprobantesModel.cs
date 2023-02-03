@@ -11,23 +11,21 @@ namespace Aplicacion.Models.Contabilidad.Comprobantes
     public class EditarComprobantesModel
     {
         public int Id { get; set; }
-        //public int? id_sucursal { get; set; }
-        public int? id_modulo { get; set; }
+        //public int? IdSucursal { get; set; }
+        public int? IdModulo { get; set; }
         public int? IdTercero { get; set; }
-        //public int? id_reversion { get; set; }
-        public DateTime? cco_fecha { get; set; }
-        public string cco_documento { get; set; }
-        public string cco_detalle { get; set; }
+        //public int? IdReversion { get; set; }
+        public DateTime? CcoFecha { get; set; }
+        public string CcoDocumento { get; set; }
+        public string CcoDetalle { get; set; }
   
-        public ICollection<EditarDetalleComprobantesModel> comprobanteDetalleComprobantes { get; set; }
+        public ICollection<EditarDetalleComprobantesModel> ComprobanteDetalleComprobantes { get; set; }
 
-        public TipoComprobanteModel tipoComprobante { get; set; }
-        public SucursalModel sucursal { get; set; }
-        public UsuarioModel usuario { get; set; }
+        public TipoComprobanteModel TipoComprobante { get; set; }
+        public SucursalModel Sucursal { get; set; }
+        public UsuarioModel Usuario { get; set; }
 
 
         //public ICollection<InsertarDetalleComprobanteModel> detalleComprobante { get; set; }
-
-
     }
 }

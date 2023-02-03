@@ -42,18 +42,18 @@ namespace Aplicacion.Seguridad
 
                 //Automaticamente busca el email dentro de la bd
 
-                var usuario= await _userManager.FindByEmailAsync(request.Email);
-                if (usuario==null){
+                var Usuario= await _userManager.FindByEmailAsync(request.Email);
+                if (Usuario==null){
                     throw new Exception("Error 103 al insertar Usuario");
 
                 }
-                var resultado=await _signInManager.CheckPasswordSignInAsync(usuario,request.Password,false);
+                var resultado=await _signInManager.CheckPasswordSignInAsync(Usuario,request.Password,false);
                 if (resultado.Succeeded){
-                    return usuario;
+                    return Usuario;
                 }
                  throw new Exception("Error 103 al insertar Usuario");
 
-                // var usuario = new CnfUsuario() 
+                // var Usuario = new CnfUsuario() 
                 //     {
                 //     IdTercero=request.IdTercero,
                 //     UserName=request.UserName, 
@@ -62,7 +62,7 @@ namespace Aplicacion.Seguridad
                 //     usu_supervisor=request.usu_supervisor
                 //     };
 
-                // context.cnfUsuarios.Add(usuario);
+                // context.cnfUsuarios.Add(Usuario);
                 // var respuesta= await context.SaveChangesAsync();
                 // if (respuesta>0) {
                 //     return Unit.Value;

@@ -9,7 +9,7 @@ namespace Aplicacion.Contabilidad.Comprobantes
         /// <para >Recibe: data con la estructura InsertarComprobanteModel
         ///</para>
         /// </summary>
-        /// <returns> IdComprobanteModel: El IdComprobanteModel.id insertado en la tabla cnt_comprobantes
+        /// <returns> IdComprobanteModel: El IdComprobanteModel.Id insertado en la tabla cnt_comprobantes
         ///</returns>
     
     public interface IInsertarComprobante
@@ -20,7 +20,7 @@ namespace Aplicacion.Contabilidad.Comprobantes
         /// <para >Recibe: data con la estructura InsertarComprobanteModel
         ///</para>
         /// </summary>
-        /// <returns> IdComprobanteModel: El IdComprobanteModel.id insertado en la tabla cnt_comprobantes
+        /// <returns> IdComprobanteModel: El IdComprobanteModel.Id insertado en la tabla cnt_comprobantes
         ///</returns>
 
         Task<IdComprobanteModel> Insertar(InsertarComprobantesModel model);

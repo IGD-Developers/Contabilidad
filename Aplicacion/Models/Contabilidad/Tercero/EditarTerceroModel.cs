@@ -6,30 +6,27 @@ namespace Aplicacion.Models.Contabilidad.Tercero
     public class EditarTerceroModel
     {
         public int Id { get; set; }
-        public int? id_tippersona { get; set; }
-        public int? id_genero { get; set; }
-        public int? id_tipodocumento { get; set; }
-        public int? id_municipio { get; set; }
-        public int? id_regimen { get; set; }
-        public int? id_ciiu { get; set; }
-        public string id_usuario { get; set; } 
-        public string ter_documento { get; set; }
-        public string ter_digitoverificacion {get; set;}
-        public string ter_prinombre { get; set; }
-        public string ter_segnombre { get; set; }
-        public string ter_priapellido { get; set; }
-        public string ter_segapellido { get; set; }
-        public string ter_razonsocial { get; set; }
-        public string ter_direccion { get; set; }
-        public string ter_barrio { get; set; }
-        public string ter_telfijo { get; set; }
-        public string ter_telcelular { get; set; }
-        public string ter_email { get; set; }
-        public string ter_email_fe { get; set; }
-        public string ter_contacto_fe { get; set; }
-        public ICollection<EditarResponsabilidadTerceroModel> responsabilidadTerceroModel { get; set; }
-
-        
-
+        public int? IdTippersona { get; set; }
+        public int? IdGenero { get; set; }
+        public int? IdTipodocumento { get; set; }
+        public int? IdMunicipio { get; set; }
+        public int? IdRegimen { get; set; }
+        public int? IdCiiu { get; set; }
+        public string IdUsuario { get; set; } 
+        public string TerDocumento { get; set; }
+        public string TerDigitoverificacion { get; set; }
+        public string TerPrinombre { get; set; }
+        public string TerSegnombre { get; set; }
+        public string TerPriapellido { get; set; }
+        public string TerSegapellido { get; set; }
+        public string TerRazonsocial { get; set; }
+        public string TerDireccion { get; set; }
+        public string TerBarrio { get; set; }
+        public string TerTelfijo { get; set; }
+        public string TerTelcelular { get; set; }
+        public string TerEmail { get; set; }
+        public string TerEmailFe { get; set; }
+        public string TerContactoFe { get; set; }
+        public ICollection<EditarResponsabilidadTerceroModel> ResponsabilidadTerceroModel { get; set; }
     }
 }

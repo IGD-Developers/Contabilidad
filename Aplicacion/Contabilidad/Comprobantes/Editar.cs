@@ -24,16 +24,16 @@ namespace Aplicacion.Contabilidad.Comprobantes
         {
             public EjecutaValidador()
             {
-                // RuleFor(x => x.id_sucursal).NotEmpty();
-                // RuleFor(x => x.id_tipocomprobante).NotEmpty();
+                // RuleFor(x => x.IdSucursal).NotEmpty();
+                // RuleFor(x => x.IdTipocomprobante).NotEmpty();
                 RuleFor(x => x.IdTercero).NotEmpty();
-                // RuleFor(x => x.cco_ano).NotEmpty();
-                // RuleFor(x => x.cco_mes).NotEmpty();
-                // RuleFor(x => x.cco_consecutivo).NotEmpty();
-                // RuleFor(x => x.cco_fecha).NotEmpty();
-                RuleFor(x => x.cco_documento).NotEmpty();
-                RuleFor(x => x.cco_detalle).NotEmpty();
-                // RuleFor(x => x.id_usuario).NotEmpty();
+                // RuleFor(x => x.CcoAno).NotEmpty();
+                // RuleFor(x => x.CcoMes).NotEmpty();
+                // RuleFor(x => x.CcoConsecutivo).NotEmpty();
+                // RuleFor(x => x.CcoFecha).NotEmpty();
+                RuleFor(x => x.CcoDocumento).NotEmpty();
+                RuleFor(x => x.CcoDetalle).NotEmpty();
+                // RuleFor(x => x.IdUsuario).NotEmpty();
 
 
             }
@@ -55,28 +55,28 @@ namespace Aplicacion.Contabilidad.Comprobantes
             public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
             {
                 
-                if (request.cco_fecha == null)
+                if (request.CcoFecha == null)
                 {
                     throw new Exception("Fecha no válida");
                 }
 
-                var comprobante = await context.cntComprobantes
+                var Comprobante = await context.cntComprobantes
                 .Include(t => t.TipoComprobante)
                 .Include(d => d.ComprobanteDetalleComprobantes)
                 .FirstOrDefaultAsync(cmp => cmp.Id == request.Id);
 
 
-                if (comprobante == null)
+                if (Comprobante == null)
                 {
                     throw new Exception("Comprobante no encontrado");
                 }
 
-                if (comprobante.TipoComprobante.Editable == "F")
+                if (Comprobante.TipoComprobante.Editable == "F")
                 {
                     throw new Exception("Comprobante no permite Edición");
                 }
 
-                if (comprobante.Estado != "A" )
+                if (Comprobante.Estado != "A" )
                 {
                     throw new Exception("El Comprobante no está disponible para Edición porque ha sido sometido algún proceso que cambió su Estado ");
                 }
@@ -97,24 +97,24 @@ namespace Aplicacion.Contabilidad.Comprobantes
 
                 try
                 {
-                    comprobante.IdModulo = request.id_modulo ?? comprobante.IdModulo;
-                    comprobante.IdTercero = request.IdTercero ?? comprobante.IdTercero;
-                    comprobante.CcoDocumento = request.cco_documento ?? comprobante.CcoDocumento;
-                    comprobante.CcoDetalle = request.cco_detalle ?? comprobante.CcoDetalle;
-                    comprobante.CcoFecha = request.cco_fecha ?? comprobante.CcoFecha;
+                    Comprobante.IdModulo = request.IdModulo ?? Comprobante.IdModulo;
+                    Comprobante.IdTercero = request.IdTercero ?? Comprobante.IdTercero;
+                    Comprobante.CcoDocumento = request.CcoDocumento ?? Comprobante.CcoDocumento;
+                    Comprobante.CcoDetalle = request.CcoDetalle ?? Comprobante.CcoDetalle;
+                    Comprobante.CcoFecha = request.CcoFecha ?? Comprobante.CcoFecha;
 
 
 
-                    if (request.comprobanteDetalleComprobantes != null)
+                    if (request.ComprobanteDetalleComprobantes != null)
                     {
-                        if (request.comprobanteDetalleComprobantes.Count > 0)
+                        if (request.ComprobanteDetalleComprobantes.Count > 0)
                         {
-                            /*Eliminar detalles de comprobante*/
+                            /*Eliminar detalles de Comprobante*/
                             var detalles =  await context.cntDetalleComprobantes
                                 .Where(x => x.IdComprobante == request.Id)
                                 .ToListAsync();
 
-                            //var detalles = comprobante.comprobanteDetalleComprobantes;
+                            //var detalles = Comprobante.ComprobanteDetalleComprobantes;
                             
                             //context.Cities.RemoveRange(cities);
                            context.RemoveRange(detalles);
@@ -127,20 +127,20 @@ namespace Aplicacion.Contabilidad.Comprobantes
 
 
 
-                            foreach (var detalle in request.comprobanteDetalleComprobantes)
+                            foreach (var detalle in request.ComprobanteDetalleComprobantes)
                             {
                                 var nuevoDetalle = new CntDetalleComprobante
                                 {
 
                                     IdComprobante = request.Id,
-                                    IdCentrocosto = detalle.id_centrocosto,
-                                    IdPuc = detalle.id_puc,
+                                    IdCentrocosto = detalle.IdCentrocosto,
+                                    IdPuc = detalle.IdPuc,
                                     IdTercero = detalle.IdTercero,
-                                    DcoBase = detalle.dco_base,
-                                    DcoTarifa = detalle.dco_tarifa,
-                                    DcoDebito = detalle.dco_debito,
-                                    DcoCredito = detalle.dco_credito,
-                                    DcoDetalle = detalle.dco_detalle
+                                    DcoBase = detalle.DcoBase,
+                                    DcoTarifa = detalle.DcoTarifa,
+                                    DcoDebito = detalle.DcoDebito,
+                                    DcoCredito = detalle.DcoCredito,
+                                    DcoDetalle = detalle.DcoDetalle
                                 };
                                 await context.cntDetalleComprobantes.AddAsync(nuevoDetalle);
                             }

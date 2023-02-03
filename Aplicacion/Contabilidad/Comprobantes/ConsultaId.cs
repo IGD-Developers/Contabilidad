@@ -33,25 +33,25 @@ namespace Aplicacion.Contabilidad.Comprobantes
 
             public async Task<ListarComprobantesModel> Handle(ConsultarId request, CancellationToken cancellationToken)
             {
-                // var comprobante = await context.cntComprobantes.FindAsync(request.Id);
-                // if (comprobante == null) {
+                // var Comprobante = await context.cntComprobantes.FindAsync(request.Id);
+                // if (Comprobante == null) {
                 //     throw new Exception("Registro no encontrado");
                 // };              
-                // return comprobante;
+                // return Comprobante;
 
-                var comprobante = await context.cntComprobantes
+                var Comprobante = await context.cntComprobantes
                 .Include(t => t.TipoComprobante)
                 .ThenInclude(ctg => ctg.Categoria)
                 .Include(s => s.Sucursal)
                 .Include(u => u.Usuario)
                 .Include(d => d.ComprobanteDetalleComprobantes)
                 .FirstOrDefaultAsync(cmp => cmp.Id == request.Id);
-                // Nota:la condicion del FirstOrDefaultAsync puede ir en un Where(cmp => cmp.id == request.Id) 
+                // Nota:la condicion del FirstOrDefaultAsync puede ir en un Where(cmp => cmp.Id == request.Id) 
 
-                if (comprobante == null) {
+                if (Comprobante == null) {
                     throw new Exception("Registro no encontrado");
                 };     
-                var comprobanteDto = _mapper.Map<CntComprobante,ListarComprobantesModel>(comprobante);         
+                var comprobanteDto = _mapper.Map<CntComprobante,ListarComprobantesModel>(Comprobante);         
                 return comprobanteDto;
 
             }

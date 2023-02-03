@@ -36,7 +36,7 @@ namespace Persistencia.Mapeo.Contabilidad
             .HasDefaultValueSql("A");  
 
             // builder
-            // .Property(e => e.id_modulo)
+            // .Property(e => e.IdModulo)
             // .HasDefaultValueSql("1");  
         }           
 

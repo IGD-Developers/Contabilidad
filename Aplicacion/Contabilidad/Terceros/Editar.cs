@@ -21,14 +21,14 @@ namespace Aplicacion.Contabilidad.Terceros
         {
             public EjecutaValidador()
             {
-                RuleFor(x=>x.id_tipodocumento).NotEmpty();
-                RuleFor(x=>x.ter_documento).NotEmpty();
-                /* RuleFor(x=>x.id_usuario).NotEmpty(); */
-                RuleFor(x=>x.id_tippersona).NotEmpty();
-                RuleFor(x=>x.id_genero).NotEmpty();
-                RuleFor(x=>x.id_municipio).NotEmpty();
-                RuleFor(x => x.ter_priapellido).NotEmpty();
-                RuleFor(x => x.ter_prinombre).NotEmpty();
+                RuleFor(x=>x.IdTipodocumento).NotEmpty();
+                RuleFor(x=>x.TerDocumento).NotEmpty();
+                /* RuleFor(x=>x.IdUsuario).NotEmpty(); */
+                RuleFor(x=>x.IdTippersona).NotEmpty();
+                RuleFor(x=>x.IdGenero).NotEmpty();
+                RuleFor(x=>x.IdMunicipio).NotEmpty();
+                RuleFor(x => x.TerPriapellido).NotEmpty();
+                RuleFor(x => x.TerPrinombre).NotEmpty();
             }
         }
 
@@ -48,9 +48,9 @@ namespace Aplicacion.Contabilidad.Terceros
 
             public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
             {
-                var tercero = await _context.CntTerceros.FindAsync(request.Id);               
-                if(tercero == null){
-                    throw new Exception("No se encontro tercero");
+                var Tercero = await _context.CntTerceros.FindAsync(request.Id);               
+                if(Tercero == null){
+                    throw new Exception("No se encontro Tercero");
                 } 
 
                 var tipoPersona = await _context.CntTipoPersonas.Where(p => p.Codigo == "N")
@@ -64,43 +64,43 @@ namespace Aplicacion.Contabilidad.Terceros
                     .ToList();
 
                 
-                var segundoApellido = request.ter_segapellido.Trim() ?? "";
-                var segundoNombre = request.ter_segnombre.Trim() ?? "";                
-                request.ter_razonsocial = request.ter_priapellido.Trim() + " " + segundoApellido + " " + request.ter_prinombre.Trim() + " " + segundoNombre.Trim();
+                var segundoApellido = request.TerSegapellido.Trim() ?? "";
+                var segundoNombre = request.TerSegnombre.Trim() ?? "";                
+                request.TerRazonsocial = request.TerPriapellido.Trim() + " " + segundoApellido + " " + request.TerPrinombre.Trim() + " " + segundoNombre.Trim();
                 
-                request.ter_digitoverificacion = _funciones.CalcularDigitoVerificacion(tercero.TerDocumento);
+                request.TerDigitoverificacion = _funciones.CalcularDigitoVerificacion(Tercero.TerDocumento);
                 
-                request.id_tippersona = tipoPersona.Id;
-                request.id_genero = request.id_genero ?? tercero.IdGenero;
-                request.id_tipodocumento = request.id_tipodocumento ?? tercero.IdTipodocumento;
-                request.id_municipio = request.id_municipio ?? tercero.IdMunicipio;
-                request.id_regimen = request.id_regimen ?? tercero.IdRegimen;
-                request.id_ciiu = request.id_ciiu ?? tercero.IdCiiu;
-                //request.id_usuario = request.id_usuario;
-                request.ter_documento = request.ter_documento ?? tercero.TerDocumento;
-                request.ter_prinombre = request.ter_prinombre ?? tercero.TerPrinombre;               
-                request.ter_priapellido = request.ter_priapellido ?? tercero.TerPriapellido;
+                request.IdTippersona = tipoPersona.Id;
+                request.IdGenero = request.IdGenero ?? Tercero.IdGenero;
+                request.IdTipodocumento = request.IdTipodocumento ?? Tercero.IdTipodocumento;
+                request.IdMunicipio = request.IdMunicipio ?? Tercero.IdMunicipio;
+                request.IdRegimen = request.IdRegimen ?? Tercero.IdRegimen;
+                request.IdCiiu = request.IdCiiu ?? Tercero.IdCiiu;
+                //request.IdUsuario = request.IdUsuario;
+                request.TerDocumento = request.TerDocumento ?? Tercero.TerDocumento;
+                request.TerPrinombre = request.TerPrinombre ?? Tercero.TerPrinombre;               
+                request.TerPriapellido = request.TerPriapellido ?? Tercero.TerPriapellido;
                                
 
                 var transaction = _context.Database.BeginTransaction();
                 try {
 
-                    var entidadDto = _mapper.Map<EditarTerceroModel, CntTercero>(request, tercero);
+                    var entidadDto = _mapper.Map<EditarTerceroModel, CntTercero>(request, Tercero);
                     
                     _context.RemoveRange(responsabilidades);
-                    if(request.responsabilidadTerceroModel != null){
+                    if(request.ResponsabilidadTerceroModel != null){
                        
-                        var idResponsabilidades = (from num in request.responsabilidadTerceroModel select num.id_responsabilidad).Distinct().ToList();
+                        var idResponsabilidades = (from num in request.ResponsabilidadTerceroModel select num.IdResponsabilidad).Distinct().ToList();
 
                         EditarResponsabilidadTerceroModel registro = new EditarResponsabilidadTerceroModel();
 
                         // Agregar los registros que vienen del request 
                         foreach (int idResponsabilidad in idResponsabilidades)
                         {
-                            registro.id_responsabilidad = idResponsabilidad;
+                            registro.IdResponsabilidad = idResponsabilidad;
                             registro.IdTercero = request.Id;    
 
-                            var responsabilidad = await _context.cntResponsabilidades.FindAsync(registro.id_responsabilidad);
+                            var responsabilidad = await _context.cntResponsabilidades.FindAsync(registro.IdResponsabilidad);
                             if(responsabilidad == null){
                                 throw new Exception("No se encontro Responsabilidad, error al insertar ResponsabilidadTercero");
                             }                            
@@ -124,10 +124,10 @@ namespace Aplicacion.Contabilidad.Terceros
                     //var resultado = await _context.SaveChangesAsync();
                    
                     //TODO: VALIDACION DE MSJ ERROR
-                    throw new Exception("No se realizaron modificaciones el tercero");
+                    throw new Exception("No se realizaron modificaciones el Tercero");
                 } catch (Exception ex) {
 
-                    throw new Exception("Error al Editar tercero catch " + ex.Message);
+                    throw new Exception("Error al Editar Tercero catch " + ex.Message);
                 }
             }
         }

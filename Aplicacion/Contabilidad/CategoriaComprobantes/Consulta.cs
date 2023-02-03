@@ -20,7 +20,7 @@ namespace Aplicacion.Contabilidad.CategoriaComprobantes
         }
 
 
-        //Parametros: tipo de dato a devolver que es objeto IRequest ListaCntTipoComprobantes primera clase declarada,
+        //Parametros: tipo de dato a devolver que es objeto IRequest ListaCntTipoComprobantes primera Clase declarada,
         //el segundo pmt es el formato en que se devuelve que es un  List<CntTipoComprobante>
         //Obliga a implementar  Interfaz.
         // Requiere Constructor

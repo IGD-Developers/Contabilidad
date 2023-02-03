@@ -84,10 +84,10 @@ namespace Aplicacion.Configuracion.Sucursales
 
                 }
 
-                // var sucursal = new CnfSucursal()
+                // var Sucursal = new CnfSucursal()
                 // {
-                //     codigo = request.codigo,
-                //     nombre = request.nombre,
+                //     Codigo = request.Codigo,
+                //     Nombre = request.Nombre,
                 //     id_empresa = request.id_empresa
                 // };
 

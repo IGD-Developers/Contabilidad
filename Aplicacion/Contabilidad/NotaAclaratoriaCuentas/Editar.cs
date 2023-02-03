@@ -10,18 +10,18 @@ namespace Aplicacion.Contabilidad.NotaAclaratoriaCuentas
     public class Editar
     {
         public class Ejecuta : IRequest {
-            public int id { get; set; }
+            public int Id { get; set; }
             public int? id_notaaclaratoria { get; set; }
-            public int? id_puc { get; set; }
+            public int? IdPuc { get; set; }
         }
 
          public class EjecutaValidador : AbstractValidator<Ejecuta>
         {
             public EjecutaValidador()
             {
-                RuleFor(x=>x.id).NotEmpty();
+                RuleFor(x=>x.Id).NotEmpty();
                 RuleFor(x=>x.id_notaaclaratoria).NotEmpty();
-                RuleFor(x=>x.id_puc).NotEmpty();
+                RuleFor(x=>x.IdPuc).NotEmpty();
 
             }
         }
@@ -37,14 +37,14 @@ namespace Aplicacion.Contabilidad.NotaAclaratoriaCuentas
 
             public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
             {
-                var nota = await _context.cntNotaAclaratoriaCuentas.FindAsync(request.id);
+                var nota = await _context.cntNotaAclaratoriaCuentas.FindAsync(request.Id);
 
                 if(nota == null){
                     throw new Exception("No se encontro nota");
                 }
 
                 nota.IdNotaaclaratoria = request.id_notaaclaratoria ?? nota.IdNotaaclaratoria;
-                nota.IdPuc = request.id_puc ?? nota.IdPuc;
+                nota.IdPuc = request.IdPuc ?? nota.IdPuc;
 
                 var resultado = await _context.SaveChangesAsync();
 

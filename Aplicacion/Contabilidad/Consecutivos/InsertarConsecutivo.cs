@@ -17,7 +17,7 @@ namespace Aplicacion.Contabilidad.Consecutivos
         private readonly CntContext context;
         
 
-        /// <summary>Class <c>InsertarConsecutivo</c> Esta clase devuelve
+        /// <summary>Class <c>InsertarConsecutivo</c> Esta Clase devuelve
         /// El Consecutivo generado a partir del tipo de Incremento de cntTipoComprobante.</summary>
         public InsertarConsecutivo(CntContext context)
         {
@@ -29,24 +29,24 @@ namespace Aplicacion.Contabilidad.Consecutivos
             try
             {
                 var tipo = await context.cntTipoComprobantes
-                .FirstOrDefaultAsync(t => t.Id == model.id_tipocomprobante);
+                .FirstOrDefaultAsync(t => t.Id == model.IdTipocomprobante);
                 if (tipo == null)
                 {
-                    throw new Exception("Tipo de comprobante no encontrado");
+                    throw new Exception("Tipo de Comprobante no encontrado");
                 };
 
 
 
                 var consecutivo = new CntConsecutivo
                 {
-                    IdTipocomprobante = model.id_tipocomprobante,
+                    IdTipocomprobante = model.IdTipocomprobante,
                     CoAno = "0000",
                     CoMes = "00",
                     CoConsecutivo = 0,
-                    IdSucursal =model.id_sucursal
+                    IdSucursal =model.IdSucursal
                 };
-                string ano = model.fecha.Year.ToString();
-                string mes = model.fecha.Month.ToString();
+                string ano = model.Fecha.Year.ToString();
+                string mes = model.Fecha.Month.ToString();
                 if (mes.Length ==1)  mes="0"+mes;
                 
 
@@ -70,7 +70,7 @@ namespace Aplicacion.Contabilidad.Consecutivos
                 }
 
                 var consecutivoActual = await context.cntConsecutivos
-                .FirstOrDefaultAsync(t => (t.IdTipocomprobante == model.id_tipocomprobante)
+                .FirstOrDefaultAsync(t => (t.IdTipocomprobante == model.IdTipocomprobante)
                                        && (t.CoAno == consecutivo.CoAno)
                                        && (t.CoMes == consecutivo.CoMes)
                                        && (t.IdSucursal == consecutivo.IdSucursal)

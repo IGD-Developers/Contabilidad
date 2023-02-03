@@ -24,16 +24,16 @@ namespace Aplicacion.Contabilidad.Comprobantes
         {
             public EjecutaValidador()
             {
-                //RuleFor(x => x.id_sucursal).NotEmpty();
-                //RuleFor(x => x.id_tipocomprobante).NotEmpty();
+                //RuleFor(x => x.IdSucursal).NotEmpty();
+                //RuleFor(x => x.IdTipocomprobante).NotEmpty();
                 RuleFor(x => x.IdTercero).NotEmpty();
-               // RuleFor(x => x.cco_ano).NotEmpty();
-               // RuleFor(x => x.cco_mes).NotEmpty();
-               // RuleFor(x => x.cco_consecutivo).NotEmpty();
-                RuleFor(x => x.cco_fecha).NotEmpty();
-                RuleFor(x => x.cco_documento).NotEmpty();
-                RuleFor(x => x.cco_detalle).NotEmpty();
-                //RuleFor(x => x.id_usuario).NotEmpty();
+               // RuleFor(x => x.CcoAno).NotEmpty();
+               // RuleFor(x => x.CcoMes).NotEmpty();
+               // RuleFor(x => x.CcoConsecutivo).NotEmpty();
+                RuleFor(x => x.CcoFecha).NotEmpty();
+                RuleFor(x => x.CcoDocumento).NotEmpty();
+                RuleFor(x => x.CcoDetalle).NotEmpty();
+                //RuleFor(x => x.IdUsuario).NotEmpty();
             }
         }
 
@@ -52,22 +52,22 @@ namespace Aplicacion.Contabilidad.Comprobantes
 
             public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
             {
-                var comprobante = await context.cntComprobantes
-                .Include(t => t.tipoComprobante)
-                .FirstOrDefaultAsync(cmp => cmp.id == request.Id);
+                var Comprobante = await context.cntComprobantes
+                .Include(t => t.TipoComprobante)
+                .FirstOrDefaultAsync(cmp => cmp.Id == request.Id);
 
 
-                if (comprobante == null)
+                if (Comprobante == null)
                 {
                     throw new Exception("Comprobante no encontrado");
                 }
 
-                if (comprobante.tipoComprobante.editable == "F")
+                if (Comprobante.TipoComprobante.Editable == "F")
                 {
                     throw new Exception("Comprobante no permite Edición");
                 }
 
-                if ((comprobante.cco_estado == "R") || (comprobante.cco_estado == "A") )
+                if ((Comprobante.cco_estado == "R") || (Comprobante.cco_estado == "A") )
                 {
                     throw new Exception("El Comprobante fue Anulado o Revertido ");
                 }
@@ -85,9 +85,9 @@ namespace Aplicacion.Contabilidad.Comprobantes
                     {
                         if (request.detalleComprobantes.Count > 0)
                         {
-                            /*Eliminar detalles de comprobante*/
+                            /*Eliminar detalles de Comprobante*/
                             var detalles = context.cntDetalleComprobantes
-                                .Where(x => x.id_comprobante == request.Id);
+                                .Where(x => x.IdComprobante == request.Id);
 
                             foreach (var registro in detalles)
                             {
@@ -97,7 +97,7 @@ namespace Aplicacion.Contabilidad.Comprobantes
 
                             foreach (var registro in request.detalleComprobantes)
                             {
-                                registro.id_comprobante=request.Id;
+                                registro.IdComprobante=request.Id;
                                 var detalleDto = _mapper.Map<EditarDetalleComprobantesModel, CntDetalleComprobante>(registro);
                                 await context.cntDetalleComprobantes.AddAsync(detalleDto);
                             }
@@ -105,7 +105,7 @@ namespace Aplicacion.Contabilidad.Comprobantes
                             /*Fin del procedimiento*/
                         }
                     }
-                    var comprobantesDto = _mapper.Map<EditarComprobantesModel,CntComprobante>(request,comprobante);
+                    var comprobantesDto = _mapper.Map<EditarComprobantesModel,CntComprobante>(request,Comprobante);
                     //var resultado1 = await context.SaveChangesAsync();
                     var resultado = await context.SaveChangesAsync();
 

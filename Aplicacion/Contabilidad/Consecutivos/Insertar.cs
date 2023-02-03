@@ -15,9 +15,9 @@ namespace Aplicacion.Contabilidad.Consecutivos
         public class Ejecuta : IRequest<CntConsecutivo> 
         {
 
-            public int id_tipocomprobante { get; set; }
+            public int IdTipocomprobante { get; set; }
 
-            public DateTime fecha { get; set; }
+            public DateTime Fecha { get; set; }
 
         }
 
@@ -39,21 +39,21 @@ namespace Aplicacion.Contabilidad.Consecutivos
             public async Task<CntConsecutivo> Handle(Ejecuta request, CancellationToken cancellationToken)
             {
                 var tipo = await context.cntTipoComprobantes
-                .FirstOrDefaultAsync(t => t.Id == request.id_tipocomprobante);
+                .FirstOrDefaultAsync(t => t.Id == request.IdTipocomprobante);
                 if (tipo == null)
                 {
-                    throw new Exception("Tipo de comprobante no encontrado");
+                    throw new Exception("Tipo de Comprobante no encontrado");
                 };
 
                 var consecutivo = new CntConsecutivo
                 {
-                    IdTipocomprobante = request.id_tipocomprobante,
+                    IdTipocomprobante = request.IdTipocomprobante,
                     CoAno = "0000",
                     CoMes = "00",
                     CoConsecutivo = 0
                 };
-                string ano = request.fecha.Year.ToString();
-                string mes = request.fecha.Month.ToString();
+                string ano = request.Fecha.Year.ToString();
+                string mes = request.Fecha.Month.ToString();
 
                 if (tipo.TcoIncremento == "A")
                 {
@@ -71,7 +71,7 @@ namespace Aplicacion.Contabilidad.Consecutivos
 
 
                 var consecutivoActual = await context.cntConsecutivos
-                .FirstOrDefaultAsync(t => (t.Id == request.id_tipocomprobante)
+                .FirstOrDefaultAsync(t => (t.Id == request.IdTipocomprobante)
                                        && (t.CoAno == consecutivo.CoAno)
                                        && (t.CoMes == consecutivo.CoMes));
 

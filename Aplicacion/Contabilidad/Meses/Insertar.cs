@@ -14,7 +14,7 @@ namespace Aplicacion.Contabilidad.Meses
             public int mes_ano { get; set; }
             public int mes_mes { get; set; }
             public bool mes_cerrado { get; set; }
-            public string id_usuario { get; set; }
+            public string IdUsuario { get; set; }
             
         }
 
@@ -25,7 +25,7 @@ namespace Aplicacion.Contabilidad.Meses
                 RuleFor(x=>x.mes_ano).NotEmpty();
                 RuleFor(x=>x.mes_mes).NotEmpty();
                 RuleFor(x=>x.mes_cerrado).NotEmpty();
-                RuleFor(x=>x.id_usuario).NotEmpty();
+                RuleFor(x=>x.IdUsuario).NotEmpty();
                 
             }
         }
@@ -45,7 +45,7 @@ namespace Aplicacion.Contabilidad.Meses
                     MesAno = request.mes_ano,
                     MesMes = request.mes_mes,
                     MesCerrado = request.mes_cerrado,
-                    IdUsuario = request.id_usuario
+                    IdUsuario = request.IdUsuario
 
                 };
 

@@ -7,7 +7,7 @@ namespace Dominio.Configuracion
 {
     public class CnfUsuario:IdentityUser
     {
-        //TODO:ID:85 COD:96	Otras actividades de servicios personales
+        //TODO:Id:85 COD:96	Otras actividades de servicios personales
         public int IdTercero { get; set; }
         public bool UsuEstado { get; set; }
         public bool UsuSupervisor { get; set; }

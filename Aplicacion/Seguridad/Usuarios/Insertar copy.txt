@@ -31,7 +31,7 @@ namespace Aplicacion.Configuracion.Usuarios
 
             public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
             {
-                var usuario = new CnfUsuario() 
+                var Usuario = new CnfUsuario() 
                     {
                     IdTercero=request.IdTercero,
                     UserName=request.UserName, 
@@ -40,7 +40,7 @@ namespace Aplicacion.Configuracion.Usuarios
                     usu_supervisor=request.usu_supervisor
                     };
 
-                context.cnfUsuarios.Add(usuario);
+                context.cnfUsuarios.Add(Usuario);
                 var respuesta= await context.SaveChangesAsync();
                 if (respuesta>0) {
                     return Unit.Value;

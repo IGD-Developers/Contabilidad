@@ -20,8 +20,8 @@ namespace Aplicacion.Contabilidad.CategoriaComprobantes
         {
             public EjecutaValidador()
             {
-                RuleFor(x => x.codigo).NotEmpty();
-                RuleFor(x => x.nombre).NotEmpty();
+                RuleFor(x => x.Codigo).NotEmpty();
+                RuleFor(x => x.Nombre).NotEmpty();
 
             }
         }
@@ -44,7 +44,7 @@ namespace Aplicacion.Contabilidad.CategoriaComprobantes
 
                 var entidadDto = _mapper.Map<InsertarCategoriaComprobantesModel, CntCategoriaComprobante>(request);
 
-                //TODO: MARIA Llave duplicada codigo 
+                //TODO: MARIA Llave duplicada Codigo 
                 try
                 {
                     _context.cntCategoriaComprobantes.Add(entidadDto);

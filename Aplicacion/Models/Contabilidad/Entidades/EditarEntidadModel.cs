@@ -4,6 +4,6 @@ namespace Aplicacion.Models.Contabilidad.Entidades
     {
         public int Id { get; set; }
         public int IdTercero { get; set; }
-        public int id_tipoimpuesto { get; set; }
+        public int IdTipoimpuesto { get; set; }
     }
 }

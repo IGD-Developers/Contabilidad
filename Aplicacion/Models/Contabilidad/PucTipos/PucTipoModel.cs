@@ -2,8 +2,7 @@ namespace Aplicacion.Models.Contabilidad.PucTipos
 {
     public class PucTipoModel
     {
-        public int id { get; set; }
-        public string codigo { get; set; }
-
+        public int Id { get; set; }
+        public string Codigo { get; set; }
     }
 }

@@ -44,23 +44,23 @@ namespace Aplicacion.Contabilidad.Comprobantes
             public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
             {
 
-                var comprobante = await context.cntComprobantes
+                var Comprobante = await context.cntComprobantes
                 .Include(t => t.TipoComprobante)
                 .Include(d => d.ComprobanteDetalleComprobantes)
                 .FirstOrDefaultAsync(cmp => cmp.Id == request.Id);
 
 
-                if (comprobante == null)
+                if (Comprobante == null)
                 {
                     throw new Exception("Registro no encontrado");
                 };
 
-                if (comprobante.TipoComprobante.Anulable == "F")
+                if (Comprobante.TipoComprobante.Anulable == "F")
                 {
                     throw new Exception("El Tipo de Comprobante no permite Reversión ni Anulación");
                 }
 
-                 if (comprobante.Estado != "A" )
+                 if (Comprobante.Estado != "A" )
                 {
                     throw new Exception("El Comprobante no está disponible para Revertir porque ha sido sometido algún proceso que cambió su Estado ");
                 }
@@ -73,9 +73,9 @@ namespace Aplicacion.Contabilidad.Comprobantes
 
                 try
                 {
-                    //Insertar comprobante revertido cr
+                    //Insertar Comprobante revertido cr
 
-                    //TODO: MARIA Parametrizar tipo de comprobante RVD para reversion en la data de cnt_tipocomprobante. Por ahora lo identificamos con su codigo :
+                    //TODO: MARIA Parametrizar tipo de Comprobante RVD para reversion en la data de cnt_tipocomprobante. Por ahora lo identificamos con su Codigo :
                     var tipoRever = await context.cntTipoComprobantes
                     .Where(t=>t.Codigo=="RVD")
                     .Select(t=> new CntTipoComprobante(){Id=t.Id})
@@ -85,50 +85,50 @@ namespace Aplicacion.Contabilidad.Comprobantes
 
                   //   .Select(p =>new  ListarCuentaImpuestosModel()
                 //                     {
-                //                         pucnombre =p.puc.nombre,
-                //                         puccodigo =p.puc.codigo,
-                //                         tipoimpuestonombre=p.tipoImpuesto.nombre,
-                //                         tipoimpuestocodigo=p.tipoImpuesto.codigo
+                //                         PucNombre =p.puc.Nombre,
+                //                         PucCodigo =p.puc.Codigo,
+                //                         TipoImpuestoNombre=p.TipoImpuesto.Nombre,
+                //                         TipoImpuestoCodigo=p.TipoImpuesto.Codigo
                 //                     })
                     
 
 
                     // var tipoRever = await context.cntTipoComprobantes
-                    // .FirstOrDefaultAsync(t => t.codigo == "RVD");
+                    // .FirstOrDefaultAsync(t => t.Codigo == "RVD");
 
                    
 
 
                     ConsecutivoComprobanteModel cns = new ConsecutivoComprobanteModel
                     {
-                        id_tipocomprobante = tipoRever.Id,
-                        fecha = Convert.ToDateTime(comprobante.CcoFecha),
-                        id_sucursal = comprobante.IdSucursal
+                        IdTipocomprobante = tipoRever.Id,
+                        Fecha = Convert.ToDateTime(Comprobante.CcoFecha),
+                        IdSucursal = Comprobante.IdSucursal
                     };
                     var resu = await insertarConsecutivo.Insertar(cns);
                     System.Console.WriteLine(resu);
 
-                    request.id_tipocomprobante=tipoRever.Id;
-                    request.cco_ano = resu.CoAno;
-                    request.cco_mes = resu.CoMes;
-                    request.cco_consecutivo = resu.CoConsecutivo;
+                    request.IdTipocomprobante=tipoRever.Id;
+                    request.CcoAno = resu.CoAno;
+                    request.CcoMes = resu.CoMes;
+                    request.CcoConsecutivo = resu.CoConsecutivo;
 
                     
                     var revertido = new CntComprobante
                     {
-                        IdSucursal = comprobante.IdSucursal,
+                        IdSucursal = Comprobante.IdSucursal,
                         IdTipocomprobante = tipoRever.Id,
-                        IdModulo = comprobante.IdModulo,
-                        IdTercero = comprobante.IdTercero,
+                        IdModulo = Comprobante.IdModulo,
+                        IdTercero = Comprobante.IdTercero,
                         IdReversion = null,
                         CcoAno = resu.CoAno,
                         CcoMes = resu.CoMes,
                         CcoConsecutivo = resu.CoConsecutivo,
-                        CcoFecha = comprobante.CcoFecha,
-                        CcoDocumento = comprobante.CcoDocumento,
-                        CcoDetalle = comprobante.CcoDetalle,
+                        CcoFecha = Comprobante.CcoFecha,
+                        CcoDocumento = Comprobante.CcoDocumento,
+                        CcoDetalle = Comprobante.CcoDetalle,
                         Estado = "R",
-                        IdUsuario = comprobante.IdUsuario
+                        IdUsuario = Comprobante.IdUsuario
                     };
 
 
@@ -136,11 +136,11 @@ namespace Aplicacion.Contabilidad.Comprobantes
                     await context.cntComprobantes.AddAsync(revertido);
                     var respuesta = await context.SaveChangesAsync();
                     int nuevoid = revertido.Id;
-                    comprobante.IdReversion = nuevoid;
-                    comprobante.Estado = "R";
+                    Comprobante.IdReversion = nuevoid;
+                    Comprobante.Estado = "R";
 
                     Console.WriteLine(nuevoid);
-                    foreach (var registro in comprobante.ComprobanteDetalleComprobantes)
+                    foreach (var registro in Comprobante.ComprobanteDetalleComprobantes)
                     {
 
                         var detalles = new CntDetalleComprobante

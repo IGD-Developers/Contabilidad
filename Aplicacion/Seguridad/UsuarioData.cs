@@ -1,7 +1,7 @@
 namespace Aplicacion.Seguridad
 {
 
-    /// <summary>Class <c>UsuarioData</c> Esta clase representa 
+    /// <summary>Class <c>UsuarioData</c> Esta Clase representa 
     /// la data que quiero devolver al cliente.</summary>
     public class UsuarioData
     {

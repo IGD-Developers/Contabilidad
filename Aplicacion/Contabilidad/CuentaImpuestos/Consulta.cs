@@ -45,20 +45,20 @@ namespace Aplicacion.Contabilidad.CuentaImpuestos
                 
                 // var entidades = await _context.cntCuentaImpuestos
                 //                     .Include(p => p.puc)
-                //                     .Include(ti => ti.tipoImpuesto)
+                //                     .Include(ti => ti.TipoImpuesto)
                 //                     .ToListAsync();
                 // //var entidadesDto = _mapper.Map<List<CntCuentaImpuesto>, List<ListarCuentaImpuestosModel>>(entidades);
 
 
                 // var entidades1 = await _context.cntCuentaImpuestos
                 //                     .Include(p => p.puc)
-                //                     .Include(p => p.tipoImpuesto)
+                //                     .Include(p => p.TipoImpuesto)
                 //                     .Select(p =>new  ListarCuentaImpuestosModel()
                 //                     {
-                //                         pucnombre =p.puc.nombre,
-                //                         puccodigo =p.puc.codigo,
-                //                         tipoimpuestonombre=p.tipoImpuesto.nombre,
-                //                         tipoimpuestocodigo=p.tipoImpuesto.codigo
+                //                         PucNombre =p.puc.Nombre,
+                //                         PucCodigo =p.puc.Codigo,
+                //                         TipoImpuestoNombre=p.TipoImpuesto.Nombre,
+                //                         TipoImpuestoCodigo=p.TipoImpuesto.Codigo
                 //                     })
                 //                     .ToListAsync();
                 
