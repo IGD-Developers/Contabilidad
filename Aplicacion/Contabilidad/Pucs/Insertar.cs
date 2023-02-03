@@ -22,17 +22,17 @@ namespace Aplicacion.Contabilidad.Pucs
         {
             public EjecutaValidador()
             {
-                RuleFor(x => x.codigo).NotEmpty();
-                RuleFor(x => x.nombre).NotEmpty();
-                RuleFor(x => x.id_puctipo).NotEmpty();
-                //RuleFor(x => x.id_tipocuenta).NotEmpty();
-                RuleFor(x => x.pac_activa).Must(x => x == false || x == true);
-                RuleFor(x => x.pac_base).Must(x => x == false || x == true);
-                RuleFor(x => x.pac_ajusteniif).Must(x => x == false || x == true);
-                //RuleFor(x => x.pac_activa).NotEmpty();
-                //RuleFor(x => x.pac_base).NotEmpty();
-                //RuleFor(x => x.pac_ajusteniif).NotEmpty();
-                //RuleFor(x => x.id_usuario).NotEmpty();
+                RuleFor(x => x.Codigo).NotEmpty();
+                RuleFor(x => x.Nombre).NotEmpty();
+                RuleFor(x => x.IdPuctipo).NotEmpty();
+                //RuleFor(x => x.IdTipocuenta).NotEmpty();
+                RuleFor(x => x.PacActiva).Must(x => x == false || x == true);
+                RuleFor(x => x.PacBase).Must(x => x == false || x == true);
+                RuleFor(x => x.PacAjusteniif).Must(x => x == false || x == true);
+                //RuleFor(x => x.PacActiva).NotEmpty();
+                //RuleFor(x => x.PacBase).NotEmpty();
+                //RuleFor(x => x.PacAjusteniif).NotEmpty();
+                //RuleFor(x => x.IdUsuario).NotEmpty();
 
 
             }
@@ -54,57 +54,57 @@ namespace Aplicacion.Contabilidad.Pucs
 
             public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
             {
-                //clase : primer digito
-                //grupo: dos digitos
-                //cuenta: cuatro digitos
-                //subcuenta: seis digitos 
+                //Clase : primer digito
+                //Grupo: dos digitos
+                //Cuenta: cuatro digitos
+                //SubCuenta: seis digitos 
                 //auxiliar: ocho digitos 
 
 
                 var tipoCuentas = await _context.cntTipoCuentas.ToListAsync();
-                int longitud = request.codigo.Length;
+                int longitud = request.Codigo.Length;
                 if (longitud == 1)
                 {
                      var idClase= tipoCuentas
-                        .Where(t => t.codigo == "CLA")
-                        .Select(t=>new IdPucModel(){Id=t.id}).SingleOrDefault();
-                    request.id_tipocuenta=idClase.Id;    
+                        .Where(t => t.Codigo == "CLA")
+                        .Select(t=>new IdPucModel(){Id=t.Id}).SingleOrDefault();
+                    request.IdTipocuenta=idClase.Id;    
                 
                 }
                 else if (longitud == 2)
                 {
                      var idClase= tipoCuentas
-                        .Where(t => t.codigo == "GRU")
-                        .Select(t=>new IdPucModel(){Id=t.id}).SingleOrDefault();
-                    request.id_tipocuenta=idClase.Id;    
+                        .Where(t => t.Codigo == "GRU")
+                        .Select(t=>new IdPucModel(){Id=t.Id}).SingleOrDefault();
+                    request.IdTipocuenta=idClase.Id;    
                 }
                 else if (longitud == 4)
                 {
                      var idClase= tipoCuentas
-                        .Where(t => t.codigo == "CUE")
-                        .Select(t=>new IdPucModel(){Id=t.id}).SingleOrDefault();
-                    request.id_tipocuenta=idClase.Id;    
+                        .Where(t => t.Codigo == "CUE")
+                        .Select(t=>new IdPucModel(){Id=t.Id}).SingleOrDefault();
+                    request.IdTipocuenta=idClase.Id;    
 
                 }
 
                 else if (longitud == 6)
                 {
                      var idClase= tipoCuentas
-                        .Where(t => t.codigo == "SUB")
-                        .Select(t=>new IdPucModel(){Id=t.id}).SingleOrDefault();
-                    request.id_tipocuenta=idClase.Id;    
+                        .Where(t => t.Codigo == "SUB")
+                        .Select(t=>new IdPucModel(){Id=t.Id}).SingleOrDefault();
+                    request.IdTipocuenta=idClase.Id;    
 
                 }
                 else if (longitud == 8)
                 {
                      var idClase= tipoCuentas
-                        .Where(t => t.codigo == "AUX")
-                        .Select(t=>new IdPucModel(){Id=t.id}).SingleOrDefault();
-                    request.id_tipocuenta=idClase.Id;    
+                        .Where(t => t.Codigo == "AUX")
+                        .Select(t=>new IdPucModel(){Id=t.Id}).SingleOrDefault();
+                    request.IdTipocuenta=idClase.Id;    
 
                 }
                 else
-                { throw new Exception("Error: Longitud de cuenta incorrecta"); }
+                { throw new Exception("Error: Longitud de Cuenta incorrecta"); }
 
 
 

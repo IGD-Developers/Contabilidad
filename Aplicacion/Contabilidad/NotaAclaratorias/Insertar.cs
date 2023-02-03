@@ -21,11 +21,11 @@ namespace Aplicacion.Contabilidad.NotaAclaratorias
         {
             public EjecutaValidador()
             {
-                RuleFor(x=>x.nac_fecha).NotEmpty();
-                RuleFor(x=>x.id_notaaclaratoriatipo).NotEmpty();
-                RuleFor(x=>x.nac_titulo).NotEmpty();
-                RuleFor(x=>x.nac_detalle).NotEmpty();
-                RuleFor(x=>x.id_usuario).NotEmpty();
+                RuleFor(x=>x.NacFecha).NotEmpty();
+                RuleFor(x=>x.IdNotaaclaratoriatipo).NotEmpty();
+                RuleFor(x=>x.NacTitulo).NotEmpty();
+                RuleFor(x=>x.NacDetalle).NotEmpty();
+                RuleFor(x=>x.IdUsuario).NotEmpty();
             }
         }
 
@@ -45,23 +45,23 @@ namespace Aplicacion.Contabilidad.NotaAclaratorias
                 //TODO: NO USAR LAS ENTIDADES DE DOMINIO EN LO POSIBLE
                 try {
                     var notaTipo = await _context.cntNotaAclaratoriaTipos
-                        .Where(t => t.id == request.id_notaaclaratoriatipo)
-                        .Select(x => new CntNotaAclaratoriaTipo() {codigo = x.codigo, nombre=x.nombre})
+                        .Where(t => t.Id == request.IdNotaaclaratoriatipo)
+                        .Select(x => new CntNotaAclaratoriaTipo() {Codigo = x.Codigo, Nombre=x.Nombre})
                         .SingleOrDefaultAsync();
 
                     if(notaTipo == null){
                         throw new Exception("Tipo de nota Aclaratoria no existe");
                     }
                     
-                    if(notaTipo.codigo == "CUE"){
+                    if(notaTipo.Codigo == "CUE"){
 
-                        var codCuenta = await _context.cntPucs.FindAsync(request.id_puc);
+                        var codCuenta = await _context.cntPucs.FindAsync(request.IdPuc);
                         if(codCuenta == null){
-                            throw new Exception("Codigo de cuenta no existe en el puc");
+                            throw new Exception("Codigo de Cuenta no existe en el puc");
                         }
 
                     }else{
-                        request.id_puc = null;
+                        request.IdPuc = null;
                     }
                     
                     

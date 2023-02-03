@@ -15,15 +15,15 @@ namespace Aplicacion.Contabilidad.DetalleComprobantes
 
             
             public int Id { get; set; }
-            public int id_comprobante { get; set; }
-            public int id_centrocosto { get; set; }
-            public int id_puc { get; set; }
-            public int id_tercero { get; set; }
-            public double dco_base { get; set; }
-            public double dco_tarifa { get; set; }
-            public double dco_debito { get; set; }
-            public double dco_credito { get; set; }
-            public string dco_detalle { get; set; }
+            public int IdComprobante { get; set; }
+            public int IdCentrocosto { get; set; }
+            public int IdPuc { get; set; }
+            public int IdTercero { get; set; }
+            public double DcoBase { get; set; }
+            public double DcoTarifa { get; set; }
+            public double DcoDebito { get; set; }
+            public double DcoCredito { get; set; }
+            public string DcoDetalle { get; set; }
         }
 
 
@@ -33,14 +33,14 @@ public class EjecutaValidador : AbstractValidator<Ejecuta>
             public EjecutaValidador()
             {
                 RuleFor(x=>x.Id).NotEmpty();
-                RuleFor(x=>x.id_comprobante).NotEmpty();
-                RuleFor(x=>x.id_centrocosto).NotEmpty();
-                RuleFor(x=>x.id_puc).NotEmpty();
-                RuleFor(x=>x.id_tercero).NotEmpty();
-                RuleFor(x=>x.dco_tarifa).NotEmpty();
-                RuleFor(x=>x.dco_debito).NotEmpty();
-                RuleFor(x=>x.dco_credito).NotEmpty();
-                RuleFor(x=>x.dco_detalle).NotEmpty();
+                RuleFor(x=>x.IdComprobante).NotEmpty();
+                RuleFor(x=>x.IdCentrocosto).NotEmpty();
+                RuleFor(x=>x.IdPuc).NotEmpty();
+                RuleFor(x=>x.IdTercero).NotEmpty();
+                RuleFor(x=>x.DcoTarifa).NotEmpty();
+                RuleFor(x=>x.DcoDebito).NotEmpty();
+                RuleFor(x=>x.DcoCredito).NotEmpty();
+                RuleFor(x=>x.DcoDetalle).NotEmpty();
             }
         }  
             public class Manejador: IRequestHandler<Ejecuta>
@@ -60,15 +60,15 @@ public class EjecutaValidador : AbstractValidator<Ejecuta>
                     throw new Exception("Registro no encontrado");
                 };
 
-                    detalleComprobante.id_comprobante = request.id_comprobante;
-                    detalleComprobante.id_centrocosto= request.id_centrocosto;
-                    detalleComprobante.id_puc  = request.id_puc;
-                    detalleComprobante.id_tercero  =request.id_tercero;
-                    detalleComprobante.dco_base =request.dco_base;
-                    detalleComprobante.dco_tarifa = request.dco_tarifa;
-                    detalleComprobante.dco_debito = request.dco_tarifa;
-                    detalleComprobante.dco_credito = request.dco_credito;
-                    detalleComprobante.dco_detalle= request.dco_detalle;
+                    detalleComprobante.IdComprobante = request.IdComprobante;
+                    detalleComprobante.IdCentrocosto= request.IdCentrocosto;
+                    detalleComprobante.IdPuc  = request.IdPuc;
+                    detalleComprobante.IdTercero  =request.IdTercero;
+                    detalleComprobante.DcoBase =request.DcoBase;
+                    detalleComprobante.DcoTarifa = request.DcoTarifa;
+                    detalleComprobante.DcoDebito = request.DcoTarifa;
+                    detalleComprobante.DcoCredito = request.DcoCredito;
+                    detalleComprobante.DcoDetalle= request.DcoDetalle;
 
 
                 var resultado=  await context.SaveChangesAsync();

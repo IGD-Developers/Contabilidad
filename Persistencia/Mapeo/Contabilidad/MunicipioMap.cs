@@ -9,11 +9,11 @@ namespace Persistencia.Mapeo.Contabilidad
         public void Configure(EntityTypeBuilder<CntMunicipio> builder)
         {
             builder.ToTable("cnt_municipio")
-                .HasKey( pk => pk.id);
+                .HasKey( pk => pk.Id);
 
-            builder.HasOne<CntDepartamento>(mun => mun.departamento)
-                    .WithMany(dep => dep.departamentoMunicipios)
-                    .HasForeignKey(mun => mun.id_departamento);
+            builder.HasOne<CntDepartamento>(mun => mun.Departamento)
+                    .WithMany(dep => dep.DepartamentoMunicipios)
+                    .HasForeignKey(mun => mun.IdDepartamento);
 
             
         }

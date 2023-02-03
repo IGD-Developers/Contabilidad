@@ -25,15 +25,15 @@ namespace Aplicacion.Contabilidad.Terceros
         {
             public EjecutaValidador()
             {
-                RuleFor(x => x.id_tipodocumento).NotEmpty();
-                RuleFor(x => x.ter_documento).NotEmpty();
-                RuleFor(x => x.id_usuario).NotEmpty();
-                RuleFor(x => x.id_tippersona).NotEmpty();
-                RuleFor(x => x.id_genero).NotEmpty();
-                RuleFor(x => x.id_municipio).NotEmpty();
-                RuleFor(x => x.ter_priapellido).NotEmpty();
-                RuleFor(x => x.ter_prinombre).NotEmpty();
-                RuleFor(x => x.responsabilidadTerceroModel).NotEmpty();
+                RuleFor(x => x.IdTipodocumento).NotEmpty();
+                RuleFor(x => x.TerDocumento).NotEmpty();
+                RuleFor(x => x.IdUsuario).NotEmpty();
+                RuleFor(x => x.IdTippersona).NotEmpty();
+                RuleFor(x => x.IdGenero).NotEmpty();
+                RuleFor(x => x.IdMunicipio).NotEmpty();
+                RuleFor(x => x.TerPriapellido).NotEmpty();
+                RuleFor(x => x.TerPrinombre).NotEmpty();
+                RuleFor(x => x.ResponsabilidadTerceroModel).NotEmpty();
             }
         }
 
@@ -54,13 +54,13 @@ namespace Aplicacion.Contabilidad.Terceros
             //List<int> distinct = list.Distinct().ToList();     
 
             
-            //TODO:AGGD - VALLIDAR QUE NO RECIBIR EL MISMO ID RESPONSABILIDAD VARIAS VECES
+            //TODO:AGGD - VALLIDAR QUE NO RECIBIR EL MISMO Id RESPONSABILIDAD VARIAS VECES
             public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
             {
-                var segundoApellido = request.ter_segapellido.Trim() ?? "";
-                var segundoNombre = request.ter_segnombre.Trim() ?? "";
-                request.ter_digitoverificacion = _funciones.CalcularDigitoVerificacion(request.ter_documento);
-                request.ter_razonsocial = request.ter_priapellido.Trim() + " " + segundoApellido + " " + request.ter_prinombre.Trim() + " " + segundoNombre.Trim();
+                var segundoApellido = request.TerSegapellido.Trim() ?? "";
+                var segundoNombre = request.TerSegnombre.Trim() ?? "";
+                request.TerDigitoverificacion = _funciones.CalcularDigitoVerificacion(request.TerDocumento);
+                request.TerRazonsocial = request.TerPriapellido.Trim() + " " + segundoApellido + " " + request.TerPrinombre.Trim() + " " + segundoNombre.Trim();
 
                 var transaction = _context.Database.BeginTransaction();
                 try
@@ -68,28 +68,28 @@ namespace Aplicacion.Contabilidad.Terceros
                     var terceroDto = _mapper.Map<InsertarTerceroModel, CntTercero>(request);
                     await _context.CntTerceros.AddAsync(terceroDto);
                     var valor = await _context.SaveChangesAsync();
-                    var idTercero = terceroDto.id;
+                    var idTercero = terceroDto.Id;
                     
-                    if(request.responsabilidadTerceroModel == null){
+                    if(request.ResponsabilidadTerceroModel == null){
                         //TODO:AGGD - VALIDAR QUE ENVIE MINIMO NO RESPONSABLE
                     }
 
 
-                    if (request.responsabilidadTerceroModel != null)
+                    if (request.ResponsabilidadTerceroModel != null)
                     {
 
-                        var idResponsabilidades = (from num in request.responsabilidadTerceroModel select num.id_responsabilidad).Distinct().ToList();
+                        var idResponsabilidades = (from num in request.ResponsabilidadTerceroModel select num.IdResponsabilidad).Distinct().ToList();
 
                         InsertarResponsabilidadTerceroModel registro = new InsertarResponsabilidadTerceroModel();
 
                         // Agregar los registros que vienen del request 
-                        //foreach (InsertarResponsabilidadTerceroModel registro in request.responsabilidadTerceroModel)
+                        //foreach (InsertarResponsabilidadTerceroModel registro in request.ResponsabilidadTerceroModel)
                         foreach (int idResponsabilidad in idResponsabilidades)
                         {
-                            registro.id_responsabilidad = idResponsabilidad;
-                            registro.id_tercero = idTercero;
+                            registro.IdResponsabilidad = idResponsabilidad;
+                            registro.IdTercero = idTercero;
 
-                            var responsabilidad = await _context.cntResponsabilidades.FindAsync(registro.id_responsabilidad);
+                            var responsabilidad = await _context.cntResponsabilidades.FindAsync(registro.IdResponsabilidad);
                             if (responsabilidad == null)
                             {
                                 throw new Exception("No se encontro Responsabilidad, error al insertar ResponsabilidadTercero");

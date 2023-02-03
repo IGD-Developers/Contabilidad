@@ -17,7 +17,7 @@ namespace Aplicacion.Contabilidad.Consecutivos
         private readonly CntContext context;
         
 
-        /// <summary>Class <c>InsertarConsecutivo</c> Esta clase devuelve
+        /// <summary>Class <c>InsertarConsecutivo</c> Esta Clase devuelve
         /// El Consecutivo generado a partir del tipo de Incremento de cntTipoComprobante.</summary>
         public InsertarConsecutivo(CntContext context)
         {
@@ -29,40 +29,40 @@ namespace Aplicacion.Contabilidad.Consecutivos
             try
             {
                 var tipo = await context.cntTipoComprobantes
-                .FirstOrDefaultAsync(t => t.id == model.id_tipocomprobante);
+                .FirstOrDefaultAsync(t => t.Id == model.IdTipocomprobante);
                 if (tipo == null)
                 {
-                    throw new Exception("Tipo de comprobante no encontrado");
+                    throw new Exception("Tipo de Comprobante no encontrado");
                 };
 
 
 
                 var consecutivo = new CntConsecutivo
                 {
-                    id_tipocomprobante = model.id_tipocomprobante,
-                    co_ano = "0000",
-                    co_mes = "00",
-                    co_consecutivo = 0,
-                    id_sucursal =model.id_sucursal
+                    IdTipocomprobante = model.IdTipocomprobante,
+                    CoAno = "0000",
+                    CoMes = "00",
+                    CoConsecutivo = 0,
+                    IdSucursal =model.IdSucursal
                 };
-                string ano = model.fecha.Year.ToString();
-                string mes = model.fecha.Month.ToString();
+                string ano = model.Fecha.Year.ToString();
+                string mes = model.Fecha.Month.ToString();
                 if (mes.Length ==1)  mes="0"+mes;
                 
 
-                if (tipo.tco_incremento == "A")
+                if (tipo.TcoIncremento == "A")
                 {
-                    consecutivo.co_ano = ano;
+                    consecutivo.CoAno = ano;
                 }
-                else if (tipo.tco_incremento == "M")
+                else if (tipo.TcoIncremento == "M")
                 {
-                    consecutivo.co_ano = ano;
-                    consecutivo.co_mes = mes;
+                    consecutivo.CoAno = ano;
+                    consecutivo.CoMes = mes;
                 }
-                else if (tipo.tco_incremento == "C")
+                else if (tipo.TcoIncremento == "C")
                 {
-                    consecutivo.co_ano = ano;
-                    consecutivo.co_mes = "13";
+                    consecutivo.CoAno = ano;
+                    consecutivo.CoMes = "13";
                 }
                 else
                 {
@@ -70,16 +70,16 @@ namespace Aplicacion.Contabilidad.Consecutivos
                 }
 
                 var consecutivoActual = await context.cntConsecutivos
-                .FirstOrDefaultAsync(t => (t.id_tipocomprobante == model.id_tipocomprobante)
-                                       && (t.co_ano == consecutivo.co_ano)
-                                       && (t.co_mes == consecutivo.co_mes)
-                                       && (t.id_sucursal == consecutivo.id_sucursal)
+                .FirstOrDefaultAsync(t => (t.IdTipocomprobante == model.IdTipocomprobante)
+                                       && (t.CoAno == consecutivo.CoAno)
+                                       && (t.CoMes == consecutivo.CoMes)
+                                       && (t.IdSucursal == consecutivo.IdSucursal)
                                        );
 
                 if (consecutivoActual == null)
                 {
                     //  Insertamos un registro nuevo;
-                    consecutivo.co_consecutivo = 1;
+                    consecutivo.CoConsecutivo = 1;
                     await context.cntConsecutivos.AddAsync(consecutivo);
 
 
@@ -89,9 +89,9 @@ namespace Aplicacion.Contabilidad.Consecutivos
                 else
                 {
                     //Sobreescribimos registro
-                    int nuevoid = consecutivoActual.co_consecutivo + 1;
-                    consecutivoActual.co_consecutivo = nuevoid;
-                    consecutivo.co_consecutivo = nuevoid;
+                    int nuevoid = consecutivoActual.CoConsecutivo + 1;
+                    consecutivoActual.CoConsecutivo = nuevoid;
+                    consecutivo.CoConsecutivo = nuevoid;
 
 
                 };

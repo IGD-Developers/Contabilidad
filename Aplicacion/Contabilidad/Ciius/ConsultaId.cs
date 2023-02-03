@@ -30,9 +30,9 @@ namespace Aplicacion.Contabilidad.Ciius
             public async Task<CiiuModel> Handle(ConsultarId request, CancellationToken cancellationToken)
             {
                 var ciiusId = await _cntContext.CntCiius
-                .Include(x=>x.ciiuSeccionCiiu)
-                .Include(x=>x.ciiuTipoCiiu)
-                .FirstOrDefaultAsync(x=>x.id == request.Id);
+                .Include(x=>x.CiiuSeccionCiiu)
+                .Include(x=>x.CiiuTipoCiiu)
+                .FirstOrDefaultAsync(x=>x.Id == request.Id);
 
                 if(ciiusId==null){
                     throw new Exception("CIIUS Consultado no Existe");

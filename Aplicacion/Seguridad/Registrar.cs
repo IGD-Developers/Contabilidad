@@ -21,7 +21,7 @@ namespace Aplicacion.Seguridad
             public string Email { get; set; }
             public string Password { get; set; }
             public string Username { get; set; }
-            public int id_tercero { get; set; }
+            public int IdTercero { get; set; }
         
         }
 
@@ -71,24 +71,24 @@ namespace Aplicacion.Seguridad
 
                 }
                 
-                var usuario = new CnfUsuario {
-                   id_tercero= request.id_tercero,
-                   usu_estado =true,
-                   usu_supervisor =false,
+                var Usuario = new CnfUsuario {
+                   IdTercero = request.IdTercero,
+                   UsuEstado =true,
+                   UsuSupervisor =false,
                    Email = request.Email,
                    UserName=request.Username
 
                 };
 
-                var resultado= await _userManager.CreateAsync(usuario, request.Password);
+                var resultado= await _userManager.CreateAsync(Usuario, request.Password);
 
                 if (resultado.Succeeded)
                 {
                     return new UsuarioData {
-                        id_tercero = usuario.id_tercero,
-                        Token =_jwtGenerador.CrearToken(usuario),
-                        UserName= usuario.UserName,
-                        Email=usuario.Email
+                        IdTercero = Usuario.IdTercero,
+                        Token =_jwtGenerador.CrearToken(Usuario),
+                        UserName= Usuario.UserName,
+                        Email=Usuario.Email
 
                     };
                 }

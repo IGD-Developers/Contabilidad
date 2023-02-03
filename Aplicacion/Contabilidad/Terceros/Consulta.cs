@@ -28,15 +28,15 @@ namespace Aplicacion.Contabilidad.Terceros
             public async Task<List<ListarTerceroModel>> Handle(ListarTerceros request, CancellationToken cancellationToken)
             {
                var terceros = await _context.CntTerceros
-               .Include(g => g.genero)
-               .Include(d => d.documentos)
-               .Include(m => m.municipio).ThenInclude(z=>z.departamento)
-               .Include(r => r.regimen)
-               .Include(p => p.tipoPersona)
-               .Include(c => c.ciiu).ThenInclude(z=>z.ciiuSeccionCiiu)
-               .Include(c => c.ciiu).ThenInclude(z=>z.ciiuTipoCiiu)
-               .Include(r => r.responsabilidadTerceros).ThenInclude(z=>z.Responsabilidad)
-               .Include(e => e.entidadTerceros).ThenInclude(z=>z.tipoImpuesto)
+               .Include(g => g.Genero)
+               .Include(d => d.Documentos)
+               .Include(m => m.Municipio).ThenInclude(z=>z.Departamento)
+               .Include(r => r.Regimen)
+               .Include(p => p.TipoPersona)
+               .Include(c => c.Ciiu).ThenInclude(z=>z.CiiuSeccionCiiu)
+               .Include(c => c.Ciiu).ThenInclude(z=>z.CiiuTipoCiiu)
+               .Include(r => r.ResponsabilidadTerceros).ThenInclude(z=>z.Responsabilidad)
+               .Include(e => e.EntidadTerceros).ThenInclude(z=>z.TipoImpuesto)
                .ToListAsync();
 
                var tercerosModel = _mapper.Map<List<CntTercero>, List<ListarTerceroModel>>(terceros);

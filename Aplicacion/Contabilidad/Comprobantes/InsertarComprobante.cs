@@ -31,22 +31,22 @@ namespace Aplicacion.Contabilidad.Comprobantes
 
             ConsecutivoComprobanteModel cns = new ConsecutivoComprobanteModel
             {
-                id_tipocomprobante = model.id_tipocomprobante,
-                fecha = model.cco_fecha,
-                id_sucursal = model.id_sucursal
+                IdTipocomprobante = model.IdTipocomprobante,
+                Fecha = model.CcoFecha,
+                IdSucursal = model.IdSucursal
             };
 
 
 
             var resu = await _insertarConsecutivo.Insertar(cns);
             System.Console.WriteLine(resu);
-            model.cco_ano = resu.co_ano;
-            model.cco_mes = resu.co_mes;
-            model.cco_consecutivo = resu.co_consecutivo;
+            model.CcoAno = resu.CoAno;
+            model.CcoMes = resu.CoMes;
+            model.CcoConsecutivo = resu.CoConsecutivo;
 
             IdComprobanteModel idComprobante = new IdComprobanteModel{Id = -1};
             var entidadDto = _mapper.Map<InsertarComprobantesModel, CntComprobante>(model);
-            if(entidadDto.tcredito!=entidadDto.tdebito)
+            if(entidadDto.Tcredito!=entidadDto.Tdebito)
             {
                 
                  throw new Exception("Los Débitos y Créditos no son iguales" );
@@ -61,15 +61,15 @@ namespace Aplicacion.Contabilidad.Comprobantes
 
             await _context.cntComprobantes.AddAsync(entidadDto);
             var respuesta1 = await _context.SaveChangesAsync();
-            int nuevoid = entidadDto.id;
+            int nuevoid = entidadDto.Id;
             idComprobante.Id = nuevoid;
             Console.WriteLine(nuevoid);
 
-                if (model.comprobanteDetalleComprobantes != null)
+                if (model.ComprobanteDetalleComprobantes != null)
                 {
-                    foreach (InsertarDetalleComprobanteModel registro in model.comprobanteDetalleComprobantes)
+                    foreach (InsertarDetalleComprobanteModel registro in model.ComprobanteDetalleComprobantes)
                     {
-                        registro.id_comprobante = nuevoid;
+                        registro.IdComprobante = nuevoid;
                         var detalleDto = _mapper.Map<InsertarDetalleComprobanteModel, CntDetalleComprobante>(registro);
 
                         _context.cntDetalleComprobantes.Add(detalleDto);
@@ -94,7 +94,7 @@ namespace Aplicacion.Contabilidad.Comprobantes
              catch (Exception ex)
                 {
 
-                    throw new Exception("Error al insertar comprobante catch " + ex.Message);
+                    throw new Exception("Error al insertar Comprobante catch " + ex.Message);
                 }
 
         }
@@ -103,9 +103,9 @@ namespace Aplicacion.Contabilidad.Comprobantes
 }
 //          ConsecutivoComprobanteModel cns = new ConsecutivoComprobanteModel
 //                 {
-//                     id_tipocomprobante = request.id_tipocomprobante,
-//                     fecha = request.cco_fecha,
-//                     id_sucursal = request.id_sucursal
+//                     IdTipocomprobante = request.IdTipocomprobante,
+//                     Fecha = request.CcoFecha,
+//                     IdSucursal = request.IdSucursal
 //                 };
 //                 var transaction = context.Database.BeginTransaction();
 //                 try
@@ -113,22 +113,22 @@ namespace Aplicacion.Contabilidad.Comprobantes
 
 //                     var resu = await insertarConsecutivo.Insertar(cns);
 //                     System.Console.WriteLine(resu);
-//                     request.cco_ano = resu.co_ano;
-//                     request.cco_mes = resu.co_mes;
-//                     request.cco_consecutivo = resu.co_consecutivo;
+//                     request.CcoAno = resu.CoAno;
+//                     request.CcoMes = resu.CoMes;
+//                     request.CcoConsecutivo = resu.CoConsecutivo;
 
 //                     var entidadDto = _mapper.Map<InsertarComprobantesModel, CntComprobante>(request);
 
 //                     await context.cntComprobantes.AddAsync(entidadDto);
 //                     var respuesta1 = await context.SaveChangesAsync();
-//                     int nuevoid = entidadDto.id;
+//                     int nuevoid = entidadDto.Id;
 //                     Console.WriteLine(nuevoid);
 
 //                     if (request.detalleComprobante != null)
 //                     {
 //                         foreach (InsertarDetalleComprobanteModel registro in request.detalleComprobante)
 //                         {
-//                             registro.id_comprobante = nuevoid;
+//                             registro.IdComprobante = nuevoid;
 //                             var detalleDto = _mapper.Map<InsertarDetalleComprobanteModel, CntDetalleComprobante>(registro);
 
 //                             context.cntDetalleComprobantes.Add(detalleDto);
@@ -145,15 +145,15 @@ namespace Aplicacion.Contabilidad.Comprobantes
 
 //                     }
 
-//                     throw new Exception("Error al insertar comprobante");
+//                     throw new Exception("Error al insertar Comprobante");
 //                 }
 //                 catch (Exception ex)
 //                 {
 
-//                     throw new Exception("Error al insertar comprobante catch " + ex.Message);
+//                     throw new Exception("Error al insertar Comprobante catch " + ex.Message);
 //                 }
 
-//                 // throw new Exception("Error al insertar comprobante");
+//                 // throw new Exception("Error al insertar Comprobante");
 //             }
 //     }
 // }

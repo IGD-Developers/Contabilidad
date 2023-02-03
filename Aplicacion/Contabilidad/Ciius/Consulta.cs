@@ -28,8 +28,8 @@ namespace Aplicacion.Contabilidad.Ciius
             public async Task<List<CiiuModel>> Handle(ListaCiius request, CancellationToken cancellationToken)
             {
                 var listarCiius = await _cntContext.CntCiius
-                .Include(x=>x.ciiuSeccionCiiu)
-                .Include(x=>x.ciiuTipoCiiu)
+                .Include(x=>x.CiiuSeccionCiiu)
+                .Include(x=>x.CiiuTipoCiiu)
                 .ToListAsync();
                 var listarciiusModel = _mapper.Map<List<CntCiiu>, List<CiiuModel>>(listarCiius); 
                 return listarciiusModel;                

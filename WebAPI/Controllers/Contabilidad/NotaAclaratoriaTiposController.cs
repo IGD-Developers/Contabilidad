@@ -23,7 +23,7 @@ namespace WebAPI.Controllers.Contabilidad
             return await Mediator.Send(new Consulta.ListaCntNotaAclaratoriaTipos());
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{Id}")]
         public async Task<ActionResult<CntNotaAclaratoriaTipo>> GetId(int Id)
         {
             return await Mediator.Send(new ConsultaId.ConsultarId { Id = Id });

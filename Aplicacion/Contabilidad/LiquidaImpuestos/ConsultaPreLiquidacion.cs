@@ -31,51 +31,51 @@ namespace Aplicacion.Contabilidad.LiquidaImpuestos
 
             /// <summary>
             /// Task Handle: Implementacion de ConsultarPreLiquidacion.Manejador -IRequestHandler<para></para>
-            /// Recibe un json FiltroGeneraImpuestosModel con:  id_tipoimpuesto,id_sucursal, id_entidad, fechainicial,fechafinal             /// </summary>
+            /// Recibe un json FiltroGeneraImpuestosModel con:  IdTipoimpuesto,IdSucursal, IdEntidad, FechaInicial,FechaFinal             /// </summary>
             /// <returns> Un objeto ListarDetallesPreLiquidacionImpuestoModel con los registros de detalleComprobante que se cerrarán
             ///</returns>
             public async Task<List<ListarDetallesPreLiquidacionImpuestoModel>> Handle(ConsultarPreLiquidacion request, CancellationToken cancellationToken)
             {
 
                 var entidad =  await _context.cntEntidades
-                    .Where(e => e.id ==request.id_entidad && e.id_tipoimpuesto == request.id_tipoimpuesto)
-                    .Select(e=> new IdLiquidaImpuestoModel(){Id = e.id})
+                    .Where(e => e.Id ==request.IdEntidad && e.IdTipoimpuesto == request.IdTipoimpuesto)
+                    .Select(e=> new IdLiquidaImpuestoModel(){Id = e.Id})
                     .FirstOrDefaultAsync();
 
                 if (entidad ==null)
                     { throw new Exception("No se ha configurado correctamente la Entidad con su tipo de impuesto");}
 
                 var cuentaCierre =  await _context.cntCuentaImpuestos
-                    .Where(ci => ci.id_tipoimpuesto == request.id_tipoimpuesto)
-                    .Select(ci=> new IdLiquidaImpuestoModel(){Id = ci.id_puc})
+                    .Where(ci => ci.IdTipoimpuesto == request.IdTipoimpuesto)
+                    .Select(ci=> new IdLiquidaImpuestoModel(){Id = ci.IdPuc})
                     .FirstOrDefaultAsync();
 
                 if (cuentaCierre ==null)
                 { throw new Exception("No se ha configurado la contrapartida para el tipo de Impuesto");}
 
-                // request.fechainicial = (request.fechainicial == null) ? DateTime.Now : request.fechainicial;
-                // request.fechafinal = (request.fechafinal == null) ? DateTime.Now : request.fechafinal;
+                // request.FechaInicial = (request.FechaInicial == null) ? DateTime.Now : request.FechaInicial;
+                // request.FechaFinal = (request.FechaFinal == null) ? DateTime.Now : request.FechaFinal;
 
                 //===============================================
                 //Revisar en el rango de fechas los comprobantes que no sean tipo LIM en Comprobante  
                 //y con la relación de detalle extraer los registros marcados como "A"ctivos
                 //de aquellos comprobantes que tienen cuentas con este tipo de impuesto. 
-                //Revisar en cntPuc las cuentas que tienen el tipo de impuesto request.id_tipoimpuesto
+                //Revisar en cntPuc las cuentas que tienen el tipo de impuesto request.IdTipoimpuesto
                 //Revisar los movimientos en detallecomprobante y extraer los movimientos que tienen incluidas esas cuentas
                 //===============================================
 
                 var entidadesDto = await _context.cntDetalleComprobantes
-                .Include(d => d.tercero)
-                .Include(d => d.puc)
-                .Where(p=>p.puc.id_tipoimpuesto==request.id_tipoimpuesto)
-                .Include(c=>c.comprobante)
-                .Where(co=>co.comprobante.cco_fecha>= request.fechainicial
-                            && co.comprobante.cco_fecha<= request.fechafinal
-                            && co.comprobante.id_sucursal == request.id_sucursal
-                            && co.comprobante.estado == "A")
-                .Include(co=>co.comprobante)
-                .ThenInclude(t=>t.usuario)
-                .ThenInclude(tu=>tu.tercero)
+                .Include(d => d.Tercero)
+                .Include(d => d.Puc)
+                .Where(p=>p.Puc.IdTipoimpuesto==request.IdTipoimpuesto)
+                .Include(c=>c.Comprobante)
+                .Where(co=>co.Comprobante.CcoFecha>= request.FechaInicial
+                            && co.Comprobante.CcoFecha<= request.FechaFinal
+                            && co.Comprobante.IdSucursal == request.IdSucursal
+                            && co.Comprobante.Estado == "A")
+                .Include(co=>co.Comprobante)
+                .ThenInclude(t=>t.Usuario)
+                .ThenInclude(tu=>tu.Tercero)
                 .Select(p => _mapper.Map<CntDetalleComprobante, ListarDetallesPreLiquidacionImpuestoModel>(p))
                 .ToListAsync();
               

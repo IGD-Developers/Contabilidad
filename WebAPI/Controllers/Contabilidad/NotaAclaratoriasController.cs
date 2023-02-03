@@ -22,7 +22,7 @@ namespace WebAPI.Controllers.Contabilidad
 
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{Id}")]
         public async Task<ActionResult<ListarNotaAclaratoriaModel>> GetId(int Id)
         {
             return await Mediator.Send(new ConsultaId.ConsultarId { Id = Id });
@@ -33,22 +33,22 @@ namespace WebAPI.Controllers.Contabilidad
             return await Mediator.Send(data);
         }
 
-        [HttpPut("editar/{id}")]
-        public async Task<ActionResult<Unit>>Editar(int id, Editar.Ejecuta data){
-            data.ID = id;
+        [HttpPut("editar/{Id}")]
+        public async Task<ActionResult<Unit>>Editar(int Id, Editar.Ejecuta data){
+            data.Id = Id;
             return await Mediator.Send(data);
         }
 
-        [HttpDelete("eliminar/{id}")]
-        public async Task<ActionResult<Unit>>Eliminar(int id, Eliminar.Ejecuta data){
-            data.ID = id;
+        [HttpDelete("eliminar/{Id}")]
+        public async Task<ActionResult<Unit>>Eliminar(int Id, Eliminar.Ejecuta data){
+            data.Id = Id;
             return await Mediator.Send(data);
 
         }
 
-        [HttpPut("cambiarestado/{id}")]
-        public async Task<ActionResult<Unit>>CambiarEstado(int id, ActivarInactivar.Ejecuta data){
-            data.ID = id;
+        [HttpPut("cambiarestado/{Id}")]
+        public async Task<ActionResult<Unit>>CambiarEstado(int Id, ActivarInactivar.Ejecuta data){
+            data.Id = Id;
             return await Mediator.Send(data);
         }
 

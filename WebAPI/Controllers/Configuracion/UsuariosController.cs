@@ -14,15 +14,15 @@ namespace WebAPI.Controllers.Configuracion
     [Route("api/[controller]")]
     public class UsuariosController : MiControllerBase
     {
-         //extender nombre del endpoint con "login"
+         //extender Nombre del endpoint con "login"
         // http://localhost:5000/api/Usuarios/login
 
         [HttpPost("login")]
 
         public async Task<ActionResult<UsuarioData>> Login(Login.Ejecuta parametros) {
 
-            //Ahora invocamos directamente al manejador  de la clase Login (que esta en Aplicacion.Seguridad) su public async Task<>
-            // que nos returna el objeto UsuarioData dependiendo de si existe el usuario:
+            //Ahora invocamos directamente al manejador  de la Clase Login (que esta en Aplicacion.Seguridad) su public async Task<>
+            // que nos returna el objeto UsuarioData dependiendo de si existe el Usuario:
             
             return await Mediator.Send(parametros);
 
@@ -34,7 +34,7 @@ namespace WebAPI.Controllers.Configuracion
 
         public async Task<ActionResult<UsuarioData>> Registrar(Registrar.Ejecuta parametros) {
 
-            //Ahora invocamos directamente al manejador  de la clase Ejecuta (que esta en Aplicacion.Seguridad) su public async Task<>
+            //Ahora invocamos directamente al manejador  de la Clase Ejecuta (que esta en Aplicacion.Seguridad) su public async Task<>
             // que nos returna el objeto UsuarioData :
             
             return await Mediator.Send(parametros);

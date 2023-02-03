@@ -59,7 +59,7 @@ namespace Aplicacion
             CreateMap<InsertarPucModel, CntPuc>();
             CreateMap<InsertarTipoImpuestosModel, CntTipoImpuesto>();
             CreateMap< InsertarComprobantesModel,CntComprobante>()
-            .ForMember(x => x.tdebito, y => y.MapFrom(z => z.tdebito));
+            .ForMember(x => x.Tdebito, y => y.MapFrom(z => z.Tdebito));
 ;
             CreateMap< InsertarDetalleComprobanteModel,CntDetalleComprobante>();
             CreateMap< InsertarLiquidaImpuestosModel,CntLiquidaImpuesto>();
@@ -90,10 +90,10 @@ namespace Aplicacion
             CreateMap<CntTipoImpuesto, ListarTipoImpuestosModel>();
             
             CreateMap<CntCuentaImpuesto, ListarCuentaImpuestosModel>()
-            .ForMember(x=> x.puccodigo, y => y.MapFrom(z=> z.puc.codigo))
-            .ForMember(x=> x.pucnombre, y => y.MapFrom(z=> z.puc.nombre))
-            .ForMember(x=> x.tipoimpuestocodigo, y => y.MapFrom(z=> z.tipoImpuesto.codigo))
-            .ForMember(x=> x.tipoimpuestonombre, y => y.MapFrom(z=> z.tipoImpuesto.nombre));
+            .ForMember(x=> x.PucCodigo, y => y.MapFrom(z=> z.Puc.Codigo))
+            .ForMember(x=> x.PucNombre, y => y.MapFrom(z=> z.Puc.Nombre))
+            .ForMember(x=> x.TipoImpuestoCodigo, y => y.MapFrom(z=> z.TipoImpuesto.Codigo))
+            .ForMember(x=> x.TipoImpuestoNombre, y => y.MapFrom(z=> z.TipoImpuesto.Nombre));
 
 
            
@@ -109,18 +109,18 @@ namespace Aplicacion
 
            
             CreateMap<CntComprobante, ListarComprobantesModel>()
-            .ForMember(x => x.tipoComprobante, y => y.MapFrom(z => z.tipoComprobante))
-            .ForMember(x => x.sucursal, y => y.MapFrom(z => z.sucursal))
-            .ForMember(x => x.usuario, y => y.MapFrom(z => z.usuario))
-            .ForMember(x => x.comprobanteDetalleComprobantes, y => y.MapFrom(z => z.comprobanteDetalleComprobantes));
+            .ForMember(x => x.TipoComprobante, y => y.MapFrom(z => z.TipoComprobante))
+            .ForMember(x => x.Sucursal, y => y.MapFrom(z => z.Sucursal))
+            .ForMember(x => x.Usuario, y => y.MapFrom(z => z.Usuario))
+            .ForMember(x => x.ComprobanteDetalleComprobantes, y => y.MapFrom(z => z.ComprobanteDetalleComprobantes));
 
             CreateMap<CnfEmpresa, ListarEmpresasModel>()
-            .ForMember(x => x.nombregerente, y => y.MapFrom(z => z.terceroEmpresa));
+            .ForMember(x => x.NombreGerente, y => y.MapFrom(z => z.TerceroEmpresa));
 
-            CreateMap<CntTercero, gerenteEmpresaModel>();
+            CreateMap<CntTercero, GerenteEmpresaModel>();
 
             CreateMap<CntLiquidaImpuesto, ListarLiquidaImpuestosModel>()
-            .ForMember(u => u.nombreUsuario, y => y.MapFrom(z => z.comprobante.usuario.tercero.ter_razonsocial));
+            .ForMember(u => u.NombreUsuario, y => y.MapFrom(z => z.Comprobante.Usuario.Tercero.TerRazonsocial));
 
             CreateMap<CntTercero, LiquidaImpuestoTerceroModel>();
             CreateMap<CntTipoImpuesto, LiquidaTipoImpuestoModel>();
@@ -130,82 +130,19 @@ namespace Aplicacion
 
 
             //Lo siguiente sobra porque relaciona los nombres de campo iguales
-            //.ForMember(x=>x.ter_razonsocial,y=>y.MapFrom(z=>z.ter_razonsocial));
+            //.ForMember(x=>x.TerRazonsocial,y=>y.MapFrom(z=>z.TerRazonsocial));
 
             CreateMap<CntDetalleComprobante, ListarDetallesPreLiquidacionImpuestoModel>();
-
-
-
-           
-           
-           
-           
-           
-           
-           
-           
-           
-           
-           
-           
-           
-           
-           
-           
-           
-           
-           
-           
-           
-           
-           
-           
-           
-           
-           
-           
-           
-           
-           
-           
-           
-           
-           
-           
-           
-           
-           
-           
-           
-           
-           
-           
-           
-           
-           
-           
-           
-           
-           
-           
-           
-           
-           
-           
-           
-           
-           
-           
-           
+     
            //***************************************************
             CreateMap<CntTercero, ListarTerceroModel>()
-            .ForMember(x=>x.generoModel, y => y.MapFrom(z=>z.genero))
-            .ForMember(x=>x.tipoDocumentoModel, y => y.MapFrom(z => z.documentos))
-            .ForMember(x=>x.municipioModel, y=>y.MapFrom(z=>z.municipio))
-            .ForMember(x=>x.regimenModel, y=>y.MapFrom(z=>z.regimen))
-            .ForMember(x=>x.tipoPersonaModel, y=>y.MapFrom(z=>z.tipoPersona))
-            .ForMember(x=>x.ciiusModel, y=>y.MapFrom(z=>z.ciiu))
-            .ForMember(x=>x.responsabilidadTerceroModels, y=>y.MapFrom(z=>z.responsabilidadTerceros));
+            .ForMember(x=>x.GeneroModel, y => y.MapFrom(z=>z.Genero))
+            .ForMember(x=>x.TipoDocumentoModel, y => y.MapFrom(z => z.Documentos))
+            .ForMember(x=>x.MunicipioModel, y=>y.MapFrom(z=>z.Municipio))
+            .ForMember(x=>x.RegimenModel, y=>y.MapFrom(z=>z.Regimen))
+            .ForMember(x=>x.TipoPersonaModel, y=>y.MapFrom(z=>z.TipoPersona))
+            .ForMember(x=>x.CiiusModel, y=>y.MapFrom(z=>z.Ciiu))
+            .ForMember(x=>x.ResponsabilidadTerceroModels, y=>y.MapFrom(z=>z.ResponsabilidadTerceros));
                         
             CreateMap<CntGenero, GeneroModel>();
             
@@ -214,15 +151,15 @@ namespace Aplicacion
             CreateMap<CntDepartamento, DepartamentosModel>();
 
             CreateMap<CntMunicipio, MunicipioModel>()
-            .ForMember(x=>x.departamentosModel, y=>y.MapFrom(z=>z.departamento));
+            .ForMember(x=>x.DepartamentosModel, y=>y.MapFrom(z=>z.Departamento));
             
             CreateMap<CntRegimen, RegimenModel>();
             
             CreateMap<CntTipoPersona, TipoPersonaModel>();
 
             CreateMap<CntCiiu, CiiuModel>()
-            .ForMember(x=>x.seccionCiiusModel, y=>y.MapFrom(z=>z.ciiuSeccionCiiu))
-            .ForMember(x=>x.tipoCiiusModel, y=>y.MapFrom(z=>z.ciiuTipoCiiu));            
+            .ForMember(x=>x.SeccionCiiusModel, y=>y.MapFrom(z=>z.CiiuSeccionCiiu))
+            .ForMember(x=>x.TipoCiiusModel, y=>y.MapFrom(z=>z.CiiuTipoCiiu));            
 
             CreateMap<CntSeccionCiiu, SeccionCiiusModel>();
 
@@ -244,8 +181,8 @@ namespace Aplicacion
             CreateMap<EditarResponsabilidadTerceroJuridicoModel, CntResponsabilidadTer>();
 
             CreateMap<CntNotaAclaratoria, ListarNotaAclaratoriaModel>()
-            .ForMember(x=>x.notaAclaratoriaTipoModel, y=>y.MapFrom(z=>z.notaAclaratoriaTipo))
-            .ForMember(x=>x.pucModel, y=>y.MapFrom(z=>z.cntPuct)) ;
+            .ForMember(x=>x.NotaAclaratoriaTipoModel, y=>y.MapFrom(z=>z.NotaAclaratoriaTipo))
+            .ForMember(x=>x.PucModel, y=>y.MapFrom(z=>z.CntPuct)) ;
 
             CreateMap<CntNotaAclaratoriaTipo, NotaAclaratoriaTipoModel>();
             CreateMap<CntPuc, ListarPucNotaAclaratoriaModel>();

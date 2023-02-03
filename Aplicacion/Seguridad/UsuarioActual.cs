@@ -35,13 +35,13 @@ namespace Aplicacion.Seguridad
 
             public async Task<UsuarioData> Handle(Ejecuta request, CancellationToken cancellationToken)
             {
-                //El userManager busca a un usuario en la base de datos con ese userName y lo va a devolver 
-                var usuario =  await _userManager.FindByNameAsync(_usuarioSesion.ObtenerUsuarioSesion());
+                //El userManager busca a un Usuario en la base de datos con ese userName y lo va a devolver 
+                var Usuario =  await _userManager.FindByNameAsync(_usuarioSesion.ObtenerUsuarioSesion());
                 return new UsuarioData{
-                    id_tercero=usuario.id_tercero,
-                    Token= _jwtGenerador.CrearToken(usuario),
-                    Email = usuario.Email,
-                    UserName= usuario.UserName  
+                    IdTercero=Usuario.IdTercero,
+                    Token= _jwtGenerador.CrearToken(Usuario),
+                    Email = Usuario.Email,
+                    UserName= Usuario.UserName  
                 };
             }
         }

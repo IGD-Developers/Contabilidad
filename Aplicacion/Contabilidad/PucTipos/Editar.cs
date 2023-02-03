@@ -12,8 +12,8 @@ namespace Aplicacion.Contabilidad.PucTipos
     {
         public class Ejecuta: IRequest {
             public int Id { get; set; }
-            public string codigo { get; set; }
-            public string nombre { get; set; }
+            public string Codigo { get; set; }
+            public string Nombre { get; set; }
 
         }
         public class EjecutaValidador : AbstractValidator<Ejecuta>
@@ -21,8 +21,8 @@ namespace Aplicacion.Contabilidad.PucTipos
             public EjecutaValidador()
             {
                 RuleFor(x=>x.Id).NotEmpty();
-                RuleFor(x=>x.codigo).NotEmpty();
-                RuleFor(x=>x.nombre).NotEmpty();
+                RuleFor(x=>x.Codigo).NotEmpty();
+                RuleFor(x=>x.Nombre).NotEmpty();
         
             }
         }    
@@ -40,13 +40,13 @@ namespace Aplicacion.Contabilidad.PucTipos
             public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
             {
 
-               var pucTipo = await context.cntPucTipos.FindAsync(request.Id);
-               if (pucTipo == null) {  
+               var PucTipo = await context.cntPucTipos.FindAsync(request.Id);
+               if (PucTipo == null) {  
                     throw new Exception("Registro no encontrado");
                };
 
-                pucTipo.codigo = request.codigo;
-                pucTipo.nombre =request.nombre;
+                PucTipo.Codigo = request.Codigo;
+                PucTipo.Nombre =request.Nombre;
 
                 var resultado=  await context.SaveChangesAsync();
                 if (resultado>0)

@@ -11,12 +11,12 @@ namespace Persistencia.Mapeo.Configuracion
         {
             builder
                 .ToTable("cnf_empresa")
-                .HasKey(entity => entity.id);
+                .HasKey(entity => entity.Id);
 
                 builder
-                .HasOne<CntTercero>(e=> e.terceroEmpresa)
-                .WithOne(t=> t.empresaTercero)
-                .HasForeignKey<CnfEmpresa>(e => e.id_tercero_gerente);    
+                .HasOne<CntTercero>(e=> e.TerceroEmpresa)
+                .WithOne(t=> t.EmpresaTercero)
+                .HasForeignKey<CnfEmpresa>(e => e.IdTerceroGerente);    
     
              }
 

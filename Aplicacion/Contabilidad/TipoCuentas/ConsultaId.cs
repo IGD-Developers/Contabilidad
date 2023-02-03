@@ -28,12 +28,12 @@ namespace Aplicacion.Contabilidad.TipoCuentas
             public async Task<CntTipoCuenta> Handle(ConsultarId request, CancellationToken cancellationToken)
             {
 
-                var tipoCuenta = await context.cntTipoCuentas.FindAsync(request.Id);
-                if (tipoCuenta == null) {  
+                var TipoCuenta = await context.cntTipoCuentas.FindAsync(request.Id);
+                if (TipoCuenta == null) {  
                         throw new Exception("Registro no encontrado");
                 };                   
 
-                return tipoCuenta;
+                return TipoCuenta;
             }
         }
 

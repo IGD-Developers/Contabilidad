@@ -30,16 +30,16 @@ namespace Aplicacion.Contabilidad.Terceros
             public async Task<ListarTerceroModel> Handle(TerceroId request, CancellationToken cancellationToken)
             {
                var terceroId = await _context.CntTerceros
-               .Include(g => g.genero)
-               .Include(d => d.documentos)
-               .Include(m => m.municipio).ThenInclude(z=>z.departamento)
-               .Include(r => r.regimen)
-               .Include(p => p.tipoPersona)
-               .Include(c => c.ciiu).ThenInclude(z=>z.ciiuSeccionCiiu)
-               .Include(c => c.ciiu).ThenInclude(z=>z.ciiuTipoCiiu)
-               .Include(r => r.responsabilidadTerceros).ThenInclude(z=>z.Responsabilidad)
-               .Include(e => e.entidadTerceros).ThenInclude(z=>z.tipoImpuesto)
-               .FirstOrDefaultAsync(q => q.id == request.Id);
+               .Include(g => g.Genero)
+               .Include(d => d.Documentos)
+               .Include(m => m.Municipio).ThenInclude(z=>z.Departamento)
+               .Include(r => r.Regimen)
+               .Include(p => p.TipoPersona)
+               .Include(c => c.Ciiu).ThenInclude(z=>z.CiiuSeccionCiiu)
+               .Include(c => c.Ciiu).ThenInclude(z=>z.CiiuTipoCiiu)
+               .Include(r => r.ResponsabilidadTerceros).ThenInclude(z=>z.Responsabilidad)
+               .Include(e => e.EntidadTerceros).ThenInclude(z=>z.TipoImpuesto)
+               .FirstOrDefaultAsync(q => q.Id == request.Id);
 
                 if(terceroId==null){
                     throw new Exception("TERCERO CONSULTADO NO EXISTE");

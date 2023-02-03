@@ -38,14 +38,14 @@ namespace WebAPI.Controllers.Contabilidad
 
         }
 
-        [HttpGet("{id}")]
-        //https://localhost:5000/api/CntCategoriaComprobantes/{id}
+        [HttpGet("{Id}")]
+        //https://localhost:5000/api/CntCategoriaComprobantes/{Id}
         //https://localhost:5000/api/CntCategoriaComprobantes/1
 
-        public async Task<ActionResult<ListarCategoriaComprobantesModel>> GetId(int id)
+        public async Task<ActionResult<ListarCategoriaComprobantesModel>> GetId(int Id)
         {
 
-            return await Mediator.Send(new ConsultaId.ConsultarId { Id = id });
+            return await Mediator.Send(new ConsultaId.ConsultarId { Id = Id });
 
         }
 
@@ -59,12 +59,12 @@ namespace WebAPI.Controllers.Contabilidad
 
         }
 
-        [HttpPut("{id}")]
+        [HttpPut("{Id}")]
 
-        public async Task<ActionResult<Unit>>  Editar(int id, Editar.Ejecuta data) 
+        public async Task<ActionResult<Unit>>  Editar(int Id, Editar.Ejecuta data) 
         
         {
-            data.Id = id;
+            data.Id = Id;
             return await Mediator.Send(data);
         }
 

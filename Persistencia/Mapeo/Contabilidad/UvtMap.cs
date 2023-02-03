@@ -10,10 +10,10 @@ namespace Persistencia.Mapeo.Contabilidad
         public void Configure(EntityTypeBuilder<CntUvt> builder)
         {
             builder.ToTable("cnt_uvt")
-                .HasKey(e=>e.id);
+                .HasKey(e=>e.Id);
                 
             builder
-            .Property(b => b.created_at)
+            .Property(b => b.CreatedAt)
             .HasDefaultValueSql("DateTime.Now");  
 
 

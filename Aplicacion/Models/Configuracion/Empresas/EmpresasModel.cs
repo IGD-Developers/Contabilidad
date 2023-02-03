@@ -4,9 +4,7 @@ namespace Aplicacion.Models.Configuracion.Empresas
 {
     public class EmpresasModel
     {
-        public string nit { get; set; }
-        public string razon_social { get; set; }
-       
-
+        public string Nit { get; set; }
+        public string RazonSocial { get; set; }
     }
 }

@@ -21,12 +21,12 @@ namespace WebAPI.Controllers.Contabilidad
             return await Mediator.Send(new Consulta.ListaCntEntidades());
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{Id}")]
 
-        public async Task<ActionResult<ListarEntidadesModel>> GetId(int id)
+        public async Task<ActionResult<ListarEntidadesModel>> GetId(int Id)
         {
 
-            return await Mediator.Send(new ConsultaId.ConsultarId { Id = id });
+            return await Mediator.Send(new ConsultaId.ConsultarId { Id = Id });
 
         }
 
@@ -34,7 +34,7 @@ namespace WebAPI.Controllers.Contabilidad
 [HttpGet("getfiltrotipo")]
         public async Task<ActionResult<List<ListarEntidadesModel>>>  GetFiltroTipo(ConsultaEntidadTipoImpuesto.ConsultarEntidadTipoImpuesto data)
         {
-            //var filtrado = new FiltroLiquidaImpuestosModel{id_sucursal=filtro.id_sucursal,fechafinal=filtro.fechafinal};
+            //var filtrado = new FiltroLiquidaImpuestosModel{IdSucursal=filtro.IdSucursal,FechaFinal=filtro.FechaFinal};
            
             return await Mediator.Send(data);
 
@@ -47,12 +47,12 @@ namespace WebAPI.Controllers.Contabilidad
 
             return await Mediator.Send(data);
         }
-        [HttpPut("{id}")]
+        [HttpPut("{Id}")]
 
-        public async Task<ActionResult<Unit>> Editar(int id, Editar.Ejecuta data)
+        public async Task<ActionResult<Unit>> Editar(int Id, Editar.Ejecuta data)
 
         {
-            data.Id = id;
+            data.Id = Id;
             return await Mediator.Send(data);
         }
 

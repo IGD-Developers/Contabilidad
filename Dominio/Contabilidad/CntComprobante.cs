@@ -8,34 +8,38 @@ namespace Dominio.Contabilidad
 {
     public class CntComprobante
     {
-        public int id { get; set; }
-        public int id_sucursal { get; set; }
-        public int id_tipocomprobante { get; set; }
-        public int id_modulo { get; set; }
-        public int id_tercero { get; set; }
-        public int? id_reversion { get; set; }
-        public string cco_ano { get; set; }
-        public string cco_mes { get; set; }
-        public int cco_consecutivo { get; set; }
-        public DateTime? cco_fecha { get; set; }
-        public string cco_documento { get; set; }
-        public string cco_detalle { get; set; }
-        public DateTime? created_at { get; set; }
-        public DateTime? updated_at { get; set; }
-        public string estado { get; set; }
-        public string id_usuario { get; set; }
-        public double tdebito { get{
-            if(comprobanteDetalleComprobantes!=null)
+        public int Id { get; set; }
+        public int IdSucursal { get; set; }
+        public int IdTipocomprobante { get; set; }
+        public int IdModulo { get; set; }
+        public int IdTercero { get; set; }
+        public int? IdReversion { get; set; }
+        public string CcoAno { get; set; }
+        public string CcoMes { get; set; }
+        public int CcoConsecutivo { get; set; }
+        public DateTime? CcoFecha { get; set; }
+        public string CcoDocumento { get; set; }
+        public string CcoDetalle { get; set; }
+        public DateTime? CreatedAt { get; set; }
+        public DateTime? UpdatedAt { get; set; }
+        public string Estado { get; set; }
+        public string IdUsuario { get; set; }
+        public double Tdebito 
+        { 
+            get
             {
-                return comprobanteDetalleComprobantes.Sum(d => d.dco_debito);
-            }
-            return 0;
-        }  }    
+                if(ComprobanteDetalleComprobantes != null)
+                {
+                    return ComprobanteDetalleComprobantes.Sum(d => d.DcoDebito);
+                }
+                return 0;
+            }  
+        }    
 
-        public double tcredito { get{
-            if(comprobanteDetalleComprobantes!=null)
+        public double Tcredito { get{
+            if(ComprobanteDetalleComprobantes!=null)
             {
-                return comprobanteDetalleComprobantes.Sum(d => d.dco_credito);
+                return ComprobanteDetalleComprobantes.Sum(d => d.DcoCredito);
             }
             return 0;
         }  }    
@@ -43,12 +47,12 @@ namespace Dominio.Contabilidad
 
            
 
-        public CnfUsuario usuario { get; set; }
-        public CntTipoComprobante tipoComprobante { get; set; }
-        public CnfSucursal sucursal { get; set; }
-        public ICollection<CntDetalleComprobante> comprobanteDetalleComprobantes { get; set; }
-        public ICollection<CntAno> comprobanteAnos { get; set; }
-        public ICollection<CntLiquidaImpuesto> comprobanteLiquidaImpuestos { get; set; }
+        public CnfUsuario Usuario { get; set; }
+        public CntTipoComprobante TipoComprobante { get; set; }
+        public CnfSucursal Sucursal { get; set; }
+        public ICollection<CntDetalleComprobante> ComprobanteDetalleComprobantes { get; set; }
+        public ICollection<CntAno> ComprobanteAnos { get; set; }
+        public ICollection<CntLiquidaImpuesto> ComprobanteLiquidaImpuestos { get; set; }
 
 
 

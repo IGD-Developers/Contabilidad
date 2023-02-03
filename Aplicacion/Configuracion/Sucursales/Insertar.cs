@@ -20,8 +20,8 @@ namespace Aplicacion.Configuracion.Sucursales
         {
             public EjecutaValidador()
             {
-                RuleFor(x => x.codigo).NotEmpty();
-                RuleFor(x => x.nombre).NotEmpty();
+                RuleFor(x => x.Codigo).NotEmpty();
+                RuleFor(x => x.Nombre).NotEmpty();
             }
         }
 
@@ -84,10 +84,10 @@ namespace Aplicacion.Configuracion.Sucursales
 
                 }
 
-                // var sucursal = new CnfSucursal()
+                // var Sucursal = new CnfSucursal()
                 // {
-                //     codigo = request.codigo,
-                //     nombre = request.nombre,
+                //     Codigo = request.Codigo,
+                //     Nombre = request.Nombre,
                 //     id_empresa = request.id_empresa
                 // };
 

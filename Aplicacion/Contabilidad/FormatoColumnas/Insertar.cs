@@ -46,10 +46,10 @@ namespace Aplicacion.Contabilidad.FormatoColumnas
             {
                 var formatoColumna=new CntFormatoColumna
                 {
-                        id_exogenaformato =request.id_exogenaformato,
-                        fco_columna =request.fco_columna,
-                        fco_campo =request.fco_campo,
-                        fco_tipo =request.fco_tipo
+                        IdExogenaformato =request.id_exogenaformato,
+                        FcoColumna =request.fco_columna,
+                        FcoCampo =request.fco_campo,
+                        FcoTipo =request.fco_tipo
                 };
                 context.cntFormatoColumnas.Add(formatoColumna);
                 var respuesta = await context.SaveChangesAsync();

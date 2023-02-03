@@ -34,9 +34,9 @@ namespace Aplicacion.Contabilidad.NotaAclaratorias
             public async Task<ListarNotaAclaratoriaModel> Handle(ConsultarId request, CancellationToken cancellationToken)
             {
                 var notaAclaratoria = await _context.cntNotaAclaratorias
-                .Include(t => t.notaAclaratoriaTipo)
-                .Include(c => c.cntPuct)
-                .FirstOrDefaultAsync(x => x.id == request.Id);               
+                .Include(t => t.NotaAclaratoriaTipo)
+                .Include(c => c.CntPuct)
+                .FirstOrDefaultAsync(x => x.Id == request.Id);               
                                             
                 if(notaAclaratoria == null){
                     throw new Exception("NOTA ACLARATORIA NO EXISTE");

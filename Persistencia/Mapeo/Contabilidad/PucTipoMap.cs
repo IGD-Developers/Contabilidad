@@ -9,10 +9,10 @@ namespace Persistencia.Mapeo.Contabilidad
         public void Configure(EntityTypeBuilder<CntPucTipo> builder)
         {
             builder.ToTable("cnt_puctipo")
-                .HasKey(entity => entity.id);
+                .HasKey(entity => entity.Id);
 
             builder
-                .Property(b => b.created_at);      
+                .Property(b => b.CreatedAt);      
 
         }
 

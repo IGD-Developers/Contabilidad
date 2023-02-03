@@ -2,12 +2,12 @@ namespace Dominio.Contabilidad
 {
     public class CntCuentaImpuesto
     {
-        public int id { get; set; }
-        public int id_puc { get; set; }
-        public int id_tipoimpuesto { get; set; }
+        public int Id { get; set; }
+        public int IdPuc { get; set; }
+        public int IdTipoimpuesto { get; set; }
 
 
-        public CntPuc puc { get; set; }
-        public CntTipoImpuesto tipoImpuesto { get; set; }
+        public CntPuc Puc { get; set; }
+        public CntTipoImpuesto TipoImpuesto { get; set; }
     }
 }

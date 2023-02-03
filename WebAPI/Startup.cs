@@ -67,7 +67,7 @@ namespace WebAPI
 
             //Configuracion Dapper: indicamos la cadena de conexion de la BD  
             //Debemos referirnos al objeto padre donde tenemos la conexion 
-            //pero en la clase que modela la conexion-Persistencia-ConexionConfiguracion si debemos indicar el nombre del objeto que tiene directamente la conexion   
+            //pero en la Clase que modela la conexion-Persistencia-ConexionConfiguracion si debemos indicar el Nombre del objeto que tiene directamente la conexion   
             services.AddOptions();
             services.Configure<ConexionConfiguracion>(Configuration.GetSection("ConnectionStrings"));
 
@@ -130,7 +130,7 @@ namespace WebAPI
                 });
                 c.CustomSchemaIds(c=>c.FullName);
             });
-            // FullName Para que trabaje con nombre completo incluido namesapce de las clases 
+            // FullName Para que trabaje con Nombre completo incluido namesapce de las clases 
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

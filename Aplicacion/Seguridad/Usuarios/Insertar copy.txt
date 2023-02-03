@@ -10,7 +10,7 @@ namespace Aplicacion.Configuracion.Usuarios
     public class Insertar
     {
         public class Ejecuta: IRequest {
-            public int id_tercero { get; set; }
+            public int IdTercero { get; set; }
             public string UserName { get; set; }
             public string PasswordHash { get; set; }
             public string Email { get; set; }
@@ -31,16 +31,16 @@ namespace Aplicacion.Configuracion.Usuarios
 
             public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
             {
-                var usuario = new CnfUsuario() 
+                var Usuario = new CnfUsuario() 
                     {
-                    id_tercero=request.id_tercero,
+                    IdTercero=request.IdTercero,
                     UserName=request.UserName, 
                    PasswordHash=request.PasswordHash,
                     usu_estado=request.usu_estado,
                     usu_supervisor=request.usu_supervisor
                     };
 
-                context.cnfUsuarios.Add(usuario);
+                context.cnfUsuarios.Add(Usuario);
                 var respuesta= await context.SaveChangesAsync();
                 if (respuesta>0) {
                     return Unit.Value;

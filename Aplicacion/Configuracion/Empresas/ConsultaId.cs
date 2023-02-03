@@ -34,8 +34,8 @@ namespace Aplicacion.Configuracion.Empresas
 
 
                  var entidad = await _context.cnfEmpresas
-                 .Include(t=> t.terceroEmpresa)
-                 .SingleOrDefaultAsync(i => i.id == request.Id);
+                 .Include(t=> t.TerceroEmpresa)
+                 .SingleOrDefaultAsync(i => i.Id == request.Id);
                
                  //.FindAsync(request.Id);
                
@@ -46,7 +46,7 @@ namespace Aplicacion.Configuracion.Empresas
                  return entidadDto;
 
 
-                // return empresa;
+                // return Empresa;
 
             }
         }

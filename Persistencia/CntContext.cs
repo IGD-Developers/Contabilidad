@@ -10,12 +10,17 @@ namespace Persistencia
 {
     public class CntContext : IdentityDbContext<CnfUsuario>
     {
-        public CntContext(DbContextOptions options) : base(options){
+        public CntContext(DbContextOptions options) : base(options)
+        {
 
         }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+            => optionsBuilder.UseSnakeCaseNamingConvention();
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder); //enviamos a la clase padre el modelBuilder como parametro
+            base.OnModelCreating(modelBuilder); //enviamos a la Clase padre el modelBuilder como parametro
            
             modelBuilder.ApplyConfiguration(new ComprobanteMap());
             modelBuilder.ApplyConfiguration(new TipoComprobanteMap());

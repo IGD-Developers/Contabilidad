@@ -4,6 +4,6 @@ namespace Aplicacion.Interfaces
 {
     public interface IJwtGenerador
     {
-        string CrearToken(CnfUsuario usuario) ;
+        string CrearToken(CnfUsuario Usuario) ;
     }
 }

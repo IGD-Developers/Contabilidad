@@ -12,8 +12,8 @@ namespace Aplicacion.Contabilidad.TipoOperaciones
          public class Ejecuta: IRequest
         {
             public int Id { get; set; }
-            public string codigo { get; set; }
-            public string nombre { get; set; }
+            public string Codigo { get; set; }
+            public string Nombre { get; set; }
             public string formula { get; set; }
 
         }
@@ -23,8 +23,8 @@ namespace Aplicacion.Contabilidad.TipoOperaciones
             public EjecutaValidador()
             {
                 RuleFor(x=>x.Id).NotEmpty();
-                RuleFor(x=>x.codigo).NotEmpty();
-                RuleFor(x=>x.nombre).NotEmpty();
+                RuleFor(x=>x.Codigo).NotEmpty();
+                RuleFor(x=>x.Nombre).NotEmpty();
         
             }
         }    
@@ -47,9 +47,9 @@ namespace Aplicacion.Contabilidad.TipoOperaciones
                         throw new Exception("Registro no encontrado");
                 };     
 
-                tipoOperacion.codigo = request.codigo;
-                tipoOperacion.nombre = request.nombre ;
-                tipoOperacion.formula = request.formula ?? tipoOperacion.formula;
+                tipoOperacion.Codigo = request.Codigo;
+                tipoOperacion.Nombre = request.Nombre ;
+                tipoOperacion.Formula = request.formula ?? tipoOperacion.Formula;
                 var resultado=  await context.SaveChangesAsync();
                 if (resultado>0)
                 {

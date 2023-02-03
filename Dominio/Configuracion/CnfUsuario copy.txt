@@ -6,14 +6,14 @@ namespace Dominio.Configuracion
 {
     public class CnfUsuario
     {
-        public int id { get; set; }
-        public int id_tercero { get; set; }
+        public int Id { get; set; }
+        public int IdTercero { get; set; }
         public string usu_usuario { get; set; }
         public string usu_password { get; set; }
         public DateTime usu_fecha_nacimiento { get; set; }
         public bool usu_estado { get; set; }
         public bool usu_supervisor { get; set; }
-        public DateTime? created_at { get; set; }
+        public DateTime? CreatedAt { get; set; }
         public DateTime? update_at { get; set; }
 
         public ICollection<CntComprobante> usuarioComprobantes { get; set; }

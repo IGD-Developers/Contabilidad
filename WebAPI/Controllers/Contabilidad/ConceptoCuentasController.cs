@@ -23,11 +23,11 @@ namespace WebAPI.Controllers.Contabilidad
 
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{Id}")]
 
-        public async Task<ActionResult<CntConceptoCuenta>> GetId(int id)
+        public async Task<ActionResult<CntConceptoCuenta>> GetId(int Id)
         {
-            return await Mediator.Send(new ConsultaId.ConsultarId { Id = id });
+            return await Mediator.Send(new ConsultaId.ConsultarId { Id = Id });
 
         }
 
@@ -39,12 +39,12 @@ namespace WebAPI.Controllers.Contabilidad
             return await Mediator.Send(data);
         }
 
-        [HttpPut("{id}")]
+        [HttpPut("{Id}")]
 
-        public async Task<ActionResult<Unit>>  Editar(int id, Editar.Ejecuta data) 
+        public async Task<ActionResult<Unit>>  Editar(int Id, Editar.Ejecuta data) 
         
         {
-            data.Id = id;
+            data.Id = Id;
             return await Mediator.Send(data);
         }
 

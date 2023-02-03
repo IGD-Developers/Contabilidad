@@ -10,16 +10,16 @@ namespace Persistencia.Mapeo.Contabilidad
         {
             builder
                 .ToTable("cnt_cuentaimpuesto")
-                .HasKey(entity => entity.id);
+                .HasKey(entity => entity.Id);
 
                 builder
-                    .HasOne<CntPuc>(c => c.puc)
-                    .WithMany(p=>p.pucCuentaImpuestos)
-                    .HasForeignKey(p => p.id_puc);    
+                    .HasOne<CntPuc>(c => c.Puc)
+                    .WithMany(p=>p.PucCuentaImpuestos)
+                    .HasForeignKey(p => p.IdPuc);    
 
-                builder.HasOne<CntTipoImpuesto>(c => c.tipoImpuesto)
-                    .WithMany(t=>t.cntTipoImpuestoCntCuentaImpuestos)
-                    .HasForeignKey(c => c.id_tipoimpuesto);    
+                builder.HasOne<CntTipoImpuesto>(c => c.TipoImpuesto)
+                    .WithMany(t=>t.CntTipoImpuestoCntCuentaImpuestos)
+                    .HasForeignKey(c => c.IdTipoimpuesto);    
             }
     }
 }

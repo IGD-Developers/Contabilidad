@@ -28,11 +28,11 @@ namespace Aplicacion.Contabilidad.PucTipos
             public async Task<CntPucTipo> Handle(ConsultarId request, CancellationToken cancellationToken)
             {
 
-                var pucTipo = await context.cntPucTipos.FindAsync(request.Id);
-               if (pucTipo == null) {  
+                var PucTipo = await context.cntPucTipos.FindAsync(request.Id);
+               if (PucTipo == null) {  
                     throw new Exception("Registro no encontrado");
                 };                    
-                return pucTipo;
+                return PucTipo;
 
             }
 

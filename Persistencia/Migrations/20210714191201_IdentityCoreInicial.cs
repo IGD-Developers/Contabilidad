@@ -36,10 +36,10 @@ namespace Persistencia.Migrations
                 {
                     Id = table.Column<string>(type: "varchar(255)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    id_tercero = table.Column<int>(type: "int", nullable: false),
+                    IdTercero = table.Column<int>(type: "int", nullable: false),
                     usu_estado = table.Column<bool>(type: "tinyint(1)", nullable: false),
                     usu_supervisor = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    created_at = table.Column<DateTime>(type: "datetime(6)", nullable: true),
+                    CreatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: true),
                     update_at = table.Column<DateTime>(type: "datetime(6)", nullable: true),
                     UserName = table.Column<string>(type: "varchar(256)", maxLength: 256, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
@@ -74,17 +74,17 @@ namespace Persistencia.Migrations
                 name: "cnf_empresa",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     nit = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     razon_social = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    id_tercero_gerente = table.Column<int>(type: "int", nullable: false)
+                    IdTerceroGerente = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_cnf_empresa", x => x.id);
+                    table.PrimaryKey("PK_cnf_empresa", x => x.Id);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -92,9 +92,9 @@ namespace Persistencia.Migrations
                 name: "cnf_usuario",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    id_tercero = table.Column<int>(type: "int", nullable: false),
+                    IdTercero = table.Column<int>(type: "int", nullable: false),
                     usu_usuario = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     usu_password = table.Column<string>(type: "longtext", nullable: true)
@@ -102,12 +102,12 @@ namespace Persistencia.Migrations
                     usu_fecha_nacimiento = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     usu_estado = table.Column<bool>(type: "tinyint(1)", nullable: false),
                     usu_supervisor = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    created_at = table.Column<DateTime>(type: "datetime(6)", nullable: true),
+                    CreatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: true),
                     update_at = table.Column<DateTime>(type: "datetime(6)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_cnf_usuario", x => x.id);
+                    table.PrimaryKey("PK_cnf_usuario", x => x.Id);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -115,16 +115,16 @@ namespace Persistencia.Migrations
                 name: "cnt_banco",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    codigo = table.Column<string>(type: "longtext", nullable: true)
+                    Codigo = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    nombre = table.Column<string>(type: "longtext", nullable: true)
+                    Nombre = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_cnt_banco", x => x.id);
+                    table.PrimaryKey("PK_cnt_banco", x => x.Id);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -132,16 +132,16 @@ namespace Persistencia.Migrations
                 name: "cnt_categoriacomprobante",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    codigo = table.Column<string>(type: "longtext", nullable: true)
+                    Codigo = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    nombre = table.Column<string>(type: "longtext", nullable: true)
+                    Nombre = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_cnt_categoriacomprobante", x => x.id);
+                    table.PrimaryKey("PK_cnt_categoriacomprobante", x => x.Id);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -149,19 +149,19 @@ namespace Persistencia.Migrations
                 name: "cnt_centrocosto",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    codigo = table.Column<string>(type: "longtext", nullable: true)
+                    Codigo = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    nombre = table.Column<string>(type: "longtext", nullable: true)
+                    Nombre = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     cco_estado = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    created_at = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    updated_at = table.Column<DateTime>(type: "datetime(6)", nullable: true)
+                    CreatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: true),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_cnt_centrocosto", x => x.id);
+                    table.PrimaryKey("PK_cnt_centrocosto", x => x.Id);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -169,18 +169,18 @@ namespace Persistencia.Migrations
                 name: "cnt_conceptocuenta",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     id_exogenaconcepto = table.Column<int>(type: "int", nullable: false),
-                    id_puc = table.Column<int>(type: "int", nullable: false),
+                    IdPuc = table.Column<int>(type: "int", nullable: false),
                     id_formatocolumna = table.Column<int>(type: "int", nullable: false),
                     id_tipooperacion = table.Column<int>(type: "int", nullable: false),
-                    estado = table.Column<string>(type: "longtext", nullable: true)
+                    Estado = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_cnt_conceptocuenta", x => x.id);
+                    table.PrimaryKey("PK_cnt_conceptocuenta", x => x.Id);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -188,16 +188,16 @@ namespace Persistencia.Migrations
                 name: "cnt_departamento",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    codigo = table.Column<string>(type: "longtext", nullable: true)
+                    Codigo = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    nombre = table.Column<string>(type: "longtext", nullable: true)
+                    Nombre = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_cnt_departamento", x => x.id);
+                    table.PrimaryKey("PK_cnt_departamento", x => x.Id);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -205,18 +205,18 @@ namespace Persistencia.Migrations
                 name: "cnt_exogenaconcepto",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    codigo = table.Column<string>(type: "longtext", nullable: true)
+                    Codigo = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    nombre = table.Column<string>(type: "longtext", nullable: true)
+                    Nombre = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    estado = table.Column<string>(type: "longtext", nullable: true)
+                    Estado = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_cnt_exogenaconcepto", x => x.id);
+                    table.PrimaryKey("PK_cnt_exogenaconcepto", x => x.Id);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -224,16 +224,16 @@ namespace Persistencia.Migrations
                 name: "cnt_exogenaformato",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    codigo = table.Column<string>(type: "longtext", nullable: true)
+                    Codigo = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    nombre = table.Column<string>(type: "longtext", nullable: true)
+                    Nombre = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_cnt_exogenaformato", x => x.id);
+                    table.PrimaryKey("PK_cnt_exogenaformato", x => x.Id);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -241,16 +241,16 @@ namespace Persistencia.Migrations
                 name: "cnt_genero",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    codigo = table.Column<string>(type: "longtext", nullable: true)
+                    Codigo = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    nombre = table.Column<string>(type: "longtext", nullable: true)
+                    Nombre = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_cnt_genero", x => x.id);
+                    table.PrimaryKey("PK_cnt_genero", x => x.Id);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -258,16 +258,16 @@ namespace Persistencia.Migrations
                 name: "cnt_notaaclaratoriatipo",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    codigo = table.Column<string>(type: "longtext", nullable: true)
+                    Codigo = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    nombre = table.Column<string>(type: "longtext", nullable: true)
+                    Nombre = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_cnt_notaaclaratoriatipo", x => x.id);
+                    table.PrimaryKey("PK_cnt_notaaclaratoriatipo", x => x.Id);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -275,18 +275,18 @@ namespace Persistencia.Migrations
                 name: "cnt_puctipo",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    codigo = table.Column<string>(type: "longtext", nullable: true)
+                    Codigo = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    nombre = table.Column<string>(type: "longtext", nullable: true)
+                    Nombre = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    created_at = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    updated_at = table.Column<DateTime>(type: "datetime(6)", nullable: true)
+                    CreatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: true),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_cnt_puctipo", x => x.id);
+                    table.PrimaryKey("PK_cnt_puctipo", x => x.Id);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -294,16 +294,16 @@ namespace Persistencia.Migrations
                 name: "cnt_regimen",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    codigo = table.Column<string>(type: "longtext", nullable: true)
+                    Codigo = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    nombre = table.Column<string>(type: "longtext", nullable: true)
+                    Nombre = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_cnt_regimen", x => x.id);
+                    table.PrimaryKey("PK_cnt_regimen", x => x.Id);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -311,16 +311,16 @@ namespace Persistencia.Migrations
                 name: "cnt_responsabilidad",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    codigo = table.Column<string>(type: "longtext", nullable: true)
+                    Codigo = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    nombre = table.Column<string>(type: "longtext", nullable: true)
+                    Nombre = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_cnt_responsabilidad", x => x.id);
+                    table.PrimaryKey("PK_cnt_responsabilidad", x => x.Id);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -328,16 +328,16 @@ namespace Persistencia.Migrations
                 name: "cnt_seccionciiu",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    codigo = table.Column<string>(type: "longtext", nullable: true)
+                    Codigo = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    nombre = table.Column<string>(type: "longtext", nullable: true)
+                    Nombre = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_cnt_seccionciiu", x => x.id);
+                    table.PrimaryKey("PK_cnt_seccionciiu", x => x.Id);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -345,16 +345,16 @@ namespace Persistencia.Migrations
                 name: "cnt_tipociiu",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    codigo = table.Column<string>(type: "longtext", nullable: true)
+                    Codigo = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    nombre = table.Column<string>(type: "longtext", nullable: true)
+                    Nombre = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_cnt_tipociiu", x => x.id);
+                    table.PrimaryKey("PK_cnt_tipociiu", x => x.Id);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -362,16 +362,16 @@ namespace Persistencia.Migrations
                 name: "cnt_tipocuenta",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    codigo = table.Column<string>(type: "longtext", nullable: true)
+                    Codigo = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    nombre = table.Column<string>(type: "longtext", nullable: true)
+                    Nombre = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_cnt_tipocuenta", x => x.id);
+                    table.PrimaryKey("PK_cnt_tipocuenta", x => x.Id);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -379,17 +379,17 @@ namespace Persistencia.Migrations
                 name: "cnt_tipodocumento",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    codigo = table.Column<int>(type: "int", nullable: false),
-                    nombre = table.Column<string>(type: "longtext", nullable: true)
+                    Codigo = table.Column<int>(type: "int", nullable: false),
+                    Nombre = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    created_at = table.Column<DateTime>(type: "datetime(6)", nullable: true),
+                    CreatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: true),
                     update_at = table.Column<DateTime>(type: "datetime(6)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_cnt_tipodocumento", x => x.id);
+                    table.PrimaryKey("PK_cnt_tipodocumento", x => x.Id);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -397,16 +397,16 @@ namespace Persistencia.Migrations
                 name: "cnt_tipoimpuesto",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    codigo = table.Column<string>(type: "longtext", nullable: true)
+                    Codigo = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    nombre = table.Column<string>(type: "longtext", nullable: true)
+                    Nombre = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_cnt_tipoimpuesto", x => x.id);
+                    table.PrimaryKey("PK_cnt_tipoimpuesto", x => x.Id);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -414,18 +414,18 @@ namespace Persistencia.Migrations
                 name: "cnt_tipooperacion",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    codigo = table.Column<string>(type: "longtext", nullable: true)
+                    Codigo = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    nombre = table.Column<string>(type: "longtext", nullable: true)
+                    Nombre = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     formula = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_cnt_tipooperacion", x => x.id);
+                    table.PrimaryKey("PK_cnt_tipooperacion", x => x.Id);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -433,16 +433,16 @@ namespace Persistencia.Migrations
                 name: "cnt_tipopersona",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    codigo = table.Column<string>(type: "longtext", nullable: true)
+                    Codigo = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    nombre = table.Column<string>(type: "longtext", nullable: true)
+                    Nombre = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_cnt_tipopersona", x => x.id);
+                    table.PrimaryKey("PK_cnt_tipopersona", x => x.Id);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -450,16 +450,16 @@ namespace Persistencia.Migrations
                 name: "cnt_uvt",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     uvt_ano = table.Column<int>(type: "int", nullable: false),
                     uvt_valor = table.Column<double>(type: "double", nullable: false),
-                    created_at = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    updated_at = table.Column<DateTime>(type: "datetime(6)", nullable: true)
+                    CreatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_cnt_uvt", x => x.id);
+                    table.PrimaryKey("PK_cnt_uvt", x => x.Id);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -594,22 +594,22 @@ namespace Persistencia.Migrations
                 name: "cnf_sucursal",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    codigo = table.Column<string>(type: "longtext", nullable: true)
+                    Codigo = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    nombre = table.Column<string>(type: "longtext", nullable: true)
+                    Nombre = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     id_empresa = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_cnf_sucursal", x => x.id);
+                    table.PrimaryKey("PK_cnf_sucursal", x => x.Id);
                     table.ForeignKey(
                         name: "FK_cnf_sucursal_cnf_empresa_id_empresa",
                         column: x => x.id_empresa,
                         principalTable: "cnf_empresa",
-                        principalColumn: "id",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
@@ -618,23 +618,23 @@ namespace Persistencia.Migrations
                 name: "cnt_mes",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     mes_ano = table.Column<int>(type: "int", nullable: false),
                     mes_mes = table.Column<int>(type: "int", nullable: false),
                     mes_cerrado = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    created_at = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    updated_at = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    id_usuario = table.Column<int>(type: "int", nullable: false)
+                    CreatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: true),
+                    IdUsuario = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_cnt_mes", x => x.id);
+                    table.PrimaryKey("PK_cnt_mes", x => x.Id);
                     table.ForeignKey(
                         name: "FK_cnt_mes_cnf_usuario_id_usuario",
-                        column: x => x.id_usuario,
+                        column: x => x.IdUsuario,
                         principalTable: "cnf_usuario",
-                        principalColumn: "id",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
@@ -643,37 +643,37 @@ namespace Persistencia.Migrations
                 name: "cnt_tipocomprobante",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    id_categoriacomprobante = table.Column<int>(type: "int", nullable: false),
-                    codigo = table.Column<string>(type: "longtext", nullable: true)
+                    IdCategoriacomprobante = table.Column<int>(type: "int", nullable: false),
+                    Codigo = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    nombre = table.Column<string>(type: "longtext", nullable: true)
+                    Nombre = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    tco_incremento = table.Column<string>(type: "longtext", nullable: true)
+                    TcoIncremento = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    created_at = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    updated_at = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    editable = table.Column<string>(type: "longtext", nullable: true)
+                    CreatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: true),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: true),
+                    Editable = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    anulable = table.Column<string>(type: "longtext", nullable: true)
+                    Anulable = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    id_usuario = table.Column<int>(type: "int", nullable: false)
+                    IdUsuario = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_cnt_tipocomprobante", x => x.id);
+                    table.PrimaryKey("PK_cnt_tipocomprobante", x => x.Id);
                     table.ForeignKey(
                         name: "FK_cnt_tipocomprobante_cnf_usuario_id_usuario",
-                        column: x => x.id_usuario,
+                        column: x => x.IdUsuario,
                         principalTable: "cnf_usuario",
-                        principalColumn: "id",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_cnt_tipocomprobante_cnt_categoriacomprobante_id_categoriacom~",
-                        column: x => x.id_categoriacomprobante,
+                        column: x => x.IdCategoriacomprobante,
                         principalTable: "cnt_categoriacomprobante",
-                        principalColumn: "id",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
@@ -682,22 +682,22 @@ namespace Persistencia.Migrations
                 name: "cnt_municipio",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    id_departamento = table.Column<int>(type: "int", nullable: false),
-                    codigo = table.Column<string>(type: "longtext", nullable: true)
+                    IdDepartamento = table.Column<int>(type: "int", nullable: false),
+                    Codigo = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    nombre = table.Column<string>(type: "longtext", nullable: true)
+                    Nombre = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_cnt_municipio", x => x.id);
+                    table.PrimaryKey("PK_cnt_municipio", x => x.Id);
                     table.ForeignKey(
                         name: "FK_cnt_municipio_cnt_departamento_id_departamento",
-                        column: x => x.id_departamento,
+                        column: x => x.IdDepartamento,
                         principalTable: "cnt_departamento",
-                        principalColumn: "id",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
@@ -706,7 +706,7 @@ namespace Persistencia.Migrations
                 name: "cnt_formatocolumna",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     id_exogenaformato = table.Column<int>(type: "int", nullable: false),
                     fco_columna = table.Column<string>(type: "longtext", nullable: true)
@@ -718,12 +718,12 @@ namespace Persistencia.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_cnt_formatocolumna", x => x.id);
+                    table.PrimaryKey("PK_cnt_formatocolumna", x => x.Id);
                     table.ForeignKey(
                         name: "FK_cnt_formatocolumna_cnt_exogenaformato_id_exogenaformato",
                         column: x => x.id_exogenaformato,
                         principalTable: "cnt_exogenaformato",
-                        principalColumn: "id",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
@@ -732,25 +732,25 @@ namespace Persistencia.Migrations
                 name: "cnt_formatoconcepto",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     id_exogenaformato = table.Column<int>(type: "int", nullable: false),
                     id_exogenaconcepto = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_cnt_formatoconcepto", x => x.id);
+                    table.PrimaryKey("PK_cnt_formatoconcepto", x => x.Id);
                     table.ForeignKey(
                         name: "FK_cnt_formatoconcepto_cnt_exogenaconcepto_id_exogenaconcepto",
                         column: x => x.id_exogenaconcepto,
                         principalTable: "cnt_exogenaconcepto",
-                        principalColumn: "id",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_cnt_formatoconcepto_cnt_exogenaformato_id_exogenaformato",
                         column: x => x.id_exogenaformato,
                         principalTable: "cnt_exogenaformato",
-                        principalColumn: "id",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
@@ -759,27 +759,27 @@ namespace Persistencia.Migrations
                 name: "cnt_notaaclaratoria",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    nac_consecutivo = table.Column<int>(type: "int", nullable: false),
-                    nac_fecha = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    id_notaaclaratoriatipo = table.Column<int>(type: "int", nullable: false),
-                    nac_titulo = table.Column<string>(type: "longtext", nullable: true)
+                    NacConsecutivo = table.Column<int>(type: "int", nullable: false),
+                    NacFecha = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    IdNotaaclaratoriatipo = table.Column<int>(type: "int", nullable: false),
+                    NacTitulo = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    nac_detalle = table.Column<string>(type: "longtext", nullable: true)
+                    NacDetalle = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    created_at = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    updated_at = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    id_usuario = table.Column<int>(type: "int", nullable: false)
+                    CreatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: true),
+                    IdUsuario = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_cnt_notaaclaratoria", x => x.id);
+                    table.PrimaryKey("PK_cnt_notaaclaratoria", x => x.Id);
                     table.ForeignKey(
                         name: "FK_cnt_notaaclaratoria_cnt_notaaclaratoriatipo_id_notaaclarator~",
-                        column: x => x.id_notaaclaratoriatipo,
+                        column: x => x.IdNotaaclaratoriatipo,
                         principalTable: "cnt_notaaclaratoriatipo",
-                        principalColumn: "id",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
@@ -788,29 +788,29 @@ namespace Persistencia.Migrations
                 name: "cnt_ciiu",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    codigo = table.Column<string>(type: "longtext", nullable: true)
+                    Codigo = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    nombre = table.Column<string>(type: "longtext", nullable: true)
+                    Nombre = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    id_tipociuu = table.Column<int>(type: "int", nullable: false),
-                    id_seccionciiu = table.Column<int>(type: "int", nullable: false)
+                    IdTipociuu = table.Column<int>(type: "int", nullable: false),
+                    IdSeccionciiu = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_cnt_ciiu", x => x.id);
+                    table.PrimaryKey("PK_cnt_ciiu", x => x.Id);
                     table.ForeignKey(
                         name: "FK_cnt_ciiu_cnt_seccionciiu_id_seccionciiu",
-                        column: x => x.id_seccionciiu,
+                        column: x => x.IdSeccionciiu,
                         principalTable: "cnt_seccionciiu",
-                        principalColumn: "id",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_cnt_ciiu_cnt_tipociiu_id_tipociuu",
-                        column: x => x.id_tipociuu,
+                        column: x => x.IdTipociuu,
                         principalTable: "cnt_tipociiu",
-                        principalColumn: "id",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
@@ -819,41 +819,41 @@ namespace Persistencia.Migrations
                 name: "cnt_puc",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    codigo = table.Column<string>(type: "longtext", nullable: true)
+                    Codigo = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    nombre = table.Column<string>(type: "longtext", nullable: true)
+                    Nombre = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    id_puctipo = table.Column<int>(type: "int", nullable: true),
-                    id_tipocuenta = table.Column<int>(type: "int", nullable: true),
-                    pac_activa = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    pac_base = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    pac_ajusteniif = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    created_at = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    updated_at = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    id_usuario = table.Column<int>(type: "int", nullable: false)
+                    IdPuctipo = table.Column<int>(type: "int", nullable: true),
+                    IdTipocuenta = table.Column<int>(type: "int", nullable: true),
+                    PacActiva = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    PacBase = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    PacAjusteniif = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: true),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: true),
+                    IdUsuario = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_cnt_puc", x => x.id);
+                    table.PrimaryKey("PK_cnt_puc", x => x.Id);
                     table.ForeignKey(
                         name: "FK_cnt_puc_cnf_usuario_id_usuario",
-                        column: x => x.id_usuario,
+                        column: x => x.IdUsuario,
                         principalTable: "cnf_usuario",
-                        principalColumn: "id",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_cnt_puc_cnt_puctipo_id_puctipo",
-                        column: x => x.id_puctipo,
+                        column: x => x.IdPuctipo,
                         principalTable: "cnt_puctipo",
-                        principalColumn: "id",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_cnt_puc_cnt_tipocuenta_id_tipocuenta",
-                        column: x => x.id_tipocuenta,
+                        column: x => x.IdTipocuenta,
                         principalTable: "cnt_tipocuenta",
-                        principalColumn: "id",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
@@ -862,47 +862,47 @@ namespace Persistencia.Migrations
                 name: "cnt_comprobante",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    id_sucursal = table.Column<int>(type: "int", nullable: false),
-                    id_tipocomprobante = table.Column<int>(type: "int", nullable: false),
-                    id_modulo = table.Column<int>(type: "int", nullable: false),
-                    id_tercero = table.Column<int>(type: "int", nullable: false),
-                    id_reversion = table.Column<int>(type: "int", nullable: true),
-                    cco_ano = table.Column<string>(type: "longtext", nullable: true)
+                    IdSucursal = table.Column<int>(type: "int", nullable: false),
+                    IdTipocomprobante = table.Column<int>(type: "int", nullable: false),
+                    IdModulo = table.Column<int>(type: "int", nullable: false),
+                    IdTercero = table.Column<int>(type: "int", nullable: false),
+                    IdReversion = table.Column<int>(type: "int", nullable: true),
+                    CcoAno = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    cco_mes = table.Column<string>(type: "longtext", nullable: true)
+                    CcoMes = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    cco_consecutivo = table.Column<int>(type: "int", nullable: false),
-                    cco_fecha = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    cco_documento = table.Column<string>(type: "longtext", nullable: true)
+                    CcoConsecutivo = table.Column<int>(type: "int", nullable: false),
+                    CcoFecha = table.Column<DateTime>(type: "datetime(6)", nullable: true),
+                    CcoDocumento = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    cco_detalle = table.Column<string>(type: "longtext", nullable: true)
+                    CcoDetalle = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    created_at = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    updated_at = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    id_usuario = table.Column<int>(type: "int", nullable: false)
+                    CreatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: true),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: true),
+                    IdUsuario = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_cnt_comprobante", x => x.id);
+                    table.PrimaryKey("PK_cnt_comprobante", x => x.Id);
                     table.ForeignKey(
                         name: "FK_cnt_comprobante_cnf_sucursal_id_sucursal",
-                        column: x => x.id_sucursal,
+                        column: x => x.IdSucursal,
                         principalTable: "cnf_sucursal",
-                        principalColumn: "id",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_cnt_comprobante_cnf_usuario_id_usuario",
-                        column: x => x.id_usuario,
+                        column: x => x.IdUsuario,
                         principalTable: "cnf_usuario",
-                        principalColumn: "id",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_cnt_comprobante_cnt_tipocomprobante_id_tipocomprobante",
-                        column: x => x.id_tipocomprobante,
+                        column: x => x.IdTipocomprobante,
                         principalTable: "cnt_tipocomprobante",
-                        principalColumn: "id",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
@@ -911,23 +911,23 @@ namespace Persistencia.Migrations
                 name: "cnt_consecutivo",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    id_tipocomprobante = table.Column<int>(type: "int", nullable: false),
-                    co_ano = table.Column<string>(type: "longtext", nullable: true)
+                    IdTipocomprobante = table.Column<int>(type: "int", nullable: false),
+                    CoAno = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    co_mes = table.Column<string>(type: "longtext", nullable: true)
+                    CoMes = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    co_consecutivo = table.Column<int>(type: "int", nullable: false)
+                    CoConsecutivo = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_cnt_consecutivo", x => x.id);
+                    table.PrimaryKey("PK_cnt_consecutivo", x => x.Id);
                     table.ForeignKey(
                         name: "FK_cnt_consecutivo_cnt_tipocomprobante_id_tipocomprobante",
-                        column: x => x.id_tipocomprobante,
+                        column: x => x.IdTipocomprobante,
                         principalTable: "cnt_tipocomprobante",
-                        principalColumn: "id",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
@@ -936,84 +936,84 @@ namespace Persistencia.Migrations
                 name: "cnt_tercero",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    id_tippersona = table.Column<int>(type: "int", nullable: false),
-                    id_genero = table.Column<int>(type: "int", nullable: false),
-                    id_tipodocumento = table.Column<int>(type: "int", nullable: false),
-                    id_municipio = table.Column<int>(type: "int", nullable: false),
-                    id_regimen = table.Column<int>(type: "int", nullable: false),
-                    id_ciiu = table.Column<int>(type: "int", nullable: false),
-                    id_usuario = table.Column<int>(type: "int", nullable: false),
-                    ter_documento = table.Column<string>(type: "longtext", nullable: true)
+                    IdTippersona = table.Column<int>(type: "int", nullable: false),
+                    IdGenero = table.Column<int>(type: "int", nullable: false),
+                    IdTipodocumento = table.Column<int>(type: "int", nullable: false),
+                    IdMunicipio = table.Column<int>(type: "int", nullable: false),
+                    IdRegimen = table.Column<int>(type: "int", nullable: false),
+                    IdCiiu = table.Column<int>(type: "int", nullable: false),
+                    IdUsuario = table.Column<int>(type: "int", nullable: false),
+                    TerDocumento = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    ter_digitoverificacion = table.Column<string>(type: "longtext", nullable: true)
+                    TerDigitoverificacion = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    ter_prinombre = table.Column<string>(type: "longtext", nullable: true)
+                    TerPrinombre = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    ter_segnombre = table.Column<string>(type: "longtext", nullable: true)
+                    TerSegnombre = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    ter_priapellido = table.Column<string>(type: "longtext", nullable: true)
+                    TerPriapellido = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    ter_segapellido = table.Column<string>(type: "longtext", nullable: true)
+                    TerSegapellido = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    ter_razonsocial = table.Column<string>(type: "longtext", nullable: true)
+                    TerRazonsocial = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    ter_direccion = table.Column<string>(type: "longtext", nullable: true)
+                    TerDireccion = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    ter_barrio = table.Column<string>(type: "longtext", nullable: true)
+                    TerBarrio = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    ter_telfijo = table.Column<string>(type: "longtext", nullable: true)
+                    TerTelfijo = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    ter_telcelular = table.Column<string>(type: "longtext", nullable: true)
+                    TerTelcelular = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    ter_email = table.Column<string>(type: "longtext", nullable: true)
+                    TerEmail = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    ter_email_fe = table.Column<string>(type: "longtext", nullable: true)
+                    TerEmailFe = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    ter_contacto_fe = table.Column<string>(type: "longtext", nullable: true)
+                    TerContactoFe = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    created_at = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    updated_at = table.Column<DateTime>(type: "datetime(6)", nullable: true)
+                    CreatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_cnt_tercero", x => x.id);
+                    table.PrimaryKey("PK_cnt_tercero", x => x.Id);
                     table.ForeignKey(
                         name: "FK_cnt_tercero_cnt_ciiu_id_ciiu",
-                        column: x => x.id_ciiu,
+                        column: x => x.IdCiiu,
                         principalTable: "cnt_ciiu",
-                        principalColumn: "id",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_cnt_tercero_cnt_genero_id_genero",
-                        column: x => x.id_genero,
+                        column: x => x.IdGenero,
                         principalTable: "cnt_genero",
-                        principalColumn: "id",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_cnt_tercero_cnt_municipio_id_municipio",
-                        column: x => x.id_municipio,
+                        column: x => x.IdMunicipio,
                         principalTable: "cnt_municipio",
-                        principalColumn: "id",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_cnt_tercero_cnt_regimen_id_regimen",
-                        column: x => x.id_regimen,
+                        column: x => x.IdRegimen,
                         principalTable: "cnt_regimen",
-                        principalColumn: "id",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_cnt_tercero_cnt_tipodocumento_id_tipodocumento",
-                        column: x => x.id_tipodocumento,
+                        column: x => x.IdTipodocumento,
                         principalTable: "cnt_tipodocumento",
-                        principalColumn: "id",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_cnt_tercero_cnt_tipopersona_id_tippersona",
-                        column: x => x.id_tippersona,
+                        column: x => x.IdTippersona,
                         principalTable: "cnt_tipopersona",
-                        principalColumn: "id",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
@@ -1022,25 +1022,25 @@ namespace Persistencia.Migrations
                 name: "cnt_cuentaimpuesto",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    id_puc = table.Column<int>(type: "int", nullable: false),
-                    id_tipoimpuesto = table.Column<int>(type: "int", nullable: false)
+                    IdPuc = table.Column<int>(type: "int", nullable: false),
+                    IdTipoimpuesto = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_cnt_cuentaimpuesto", x => x.id);
+                    table.PrimaryKey("PK_cnt_cuentaimpuesto", x => x.Id);
                     table.ForeignKey(
                         name: "FK_cnt_cuentaimpuesto_cnt_puc_id_puc",
-                        column: x => x.id_puc,
+                        column: x => x.IdPuc,
                         principalTable: "cnt_puc",
-                        principalColumn: "id",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_cnt_cuentaimpuesto_cnt_tipoimpuesto_id_tipoimpuesto",
-                        column: x => x.id_tipoimpuesto,
+                        column: x => x.IdTipoimpuesto,
                         principalTable: "cnt_tipoimpuesto",
-                        principalColumn: "id",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
@@ -1049,25 +1049,25 @@ namespace Persistencia.Migrations
                 name: "cnt_notaaclaratoriacuenta",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     id_notaaclaratoria = table.Column<int>(type: "int", nullable: false),
-                    id_puc = table.Column<int>(type: "int", nullable: false)
+                    IdPuc = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_cnt_notaaclaratoriacuenta", x => x.id);
+                    table.PrimaryKey("PK_cnt_notaaclaratoriacuenta", x => x.Id);
                     table.ForeignKey(
                         name: "FK_cnt_notaaclaratoriacuenta_cnt_notaaclaratoria_id_notaaclarat~",
                         column: x => x.id_notaaclaratoria,
                         principalTable: "cnt_notaaclaratoria",
-                        principalColumn: "id",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_cnt_notaaclaratoriacuenta_cnt_puc_id_puc",
-                        column: x => x.id_puc,
+                        column: x => x.IdPuc,
                         principalTable: "cnt_puc",
-                        principalColumn: "id",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
@@ -1076,31 +1076,31 @@ namespace Persistencia.Migrations
                 name: "cnt_ano",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    id_comprobante = table.Column<int>(type: "int", nullable: false),
-                    ano_ano = table.Column<int>(type: "int", nullable: false),
-                    ano_cerrado = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    IdComprobante = table.Column<int>(type: "int", nullable: false),
+                    AnoAno = table.Column<int>(type: "int", nullable: false),
+                    AnoCerrado = table.Column<bool>(type: "tinyint(1)", nullable: false),
                     ano_estado = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    created_at = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    updated_at = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    id_usuario = table.Column<int>(type: "int", nullable: false)
+                    CreatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: true),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: true),
+                    IdUsuario = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_cnt_ano", x => x.id);
+                    table.PrimaryKey("PK_cnt_ano", x => x.Id);
                     table.ForeignKey(
                         name: "FK_cnt_ano_cnf_usuario_id_usuario",
-                        column: x => x.id_usuario,
+                        column: x => x.IdUsuario,
                         principalTable: "cnf_usuario",
-                        principalColumn: "id",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_cnt_ano_cnt_comprobante_id_comprobante",
-                        column: x => x.id_comprobante,
+                        column: x => x.IdComprobante,
                         principalTable: "cnt_comprobante",
-                        principalColumn: "id",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
@@ -1109,39 +1109,39 @@ namespace Persistencia.Migrations
                 name: "cnt_detallecomprobante",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    id_comprobante = table.Column<int>(type: "int", nullable: false),
-                    id_centrocosto = table.Column<int>(type: "int", nullable: false),
-                    id_puc = table.Column<int>(type: "int", nullable: false),
-                    id_tercero = table.Column<int>(type: "int", nullable: false),
-                    dco_base = table.Column<double>(type: "double", nullable: false),
-                    dco_tarifa = table.Column<double>(type: "double", nullable: false),
-                    dco_debito = table.Column<double>(type: "double", nullable: false),
-                    dco_credito = table.Column<double>(type: "double", nullable: false),
-                    dco_detalle = table.Column<string>(type: "longtext", nullable: true)
+                    IdComprobante = table.Column<int>(type: "int", nullable: false),
+                    IdCentrocosto = table.Column<int>(type: "int", nullable: false),
+                    IdPuc = table.Column<int>(type: "int", nullable: false),
+                    IdTercero = table.Column<int>(type: "int", nullable: false),
+                    DcoBase = table.Column<double>(type: "double", nullable: false),
+                    DcoTarifa = table.Column<double>(type: "double", nullable: false),
+                    DcoDebito = table.Column<double>(type: "double", nullable: false),
+                    DcoCredito = table.Column<double>(type: "double", nullable: false),
+                    DcoDetalle = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_cnt_detallecomprobante", x => x.id);
+                    table.PrimaryKey("PK_cnt_detallecomprobante", x => x.Id);
                     table.ForeignKey(
                         name: "FK_cnt_detallecomprobante_cnt_centrocosto_id_centrocosto",
-                        column: x => x.id_centrocosto,
+                        column: x => x.IdCentrocosto,
                         principalTable: "cnt_centrocosto",
-                        principalColumn: "id",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_cnt_detallecomprobante_cnt_comprobante_id_comprobante",
-                        column: x => x.id_comprobante,
+                        column: x => x.IdComprobante,
                         principalTable: "cnt_comprobante",
-                        principalColumn: "id",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_cnt_detallecomprobante_cnt_puc_id_puc",
-                        column: x => x.id_puc,
+                        column: x => x.IdPuc,
                         principalTable: "cnt_puc",
-                        principalColumn: "id",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
@@ -1150,29 +1150,29 @@ namespace Persistencia.Migrations
                 name: "cnt_entidad",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    codigo = table.Column<string>(type: "longtext", nullable: true)
+                    Codigo = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    nombre = table.Column<string>(type: "longtext", nullable: true)
+                    Nombre = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    id_tercero = table.Column<int>(type: "int", nullable: false),
-                    id_tipoimpuesto = table.Column<int>(type: "int", nullable: false)
+                    IdTercero = table.Column<int>(type: "int", nullable: false),
+                    IdTipoimpuesto = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_cnt_entidad", x => x.id);
+                    table.PrimaryKey("PK_cnt_entidad", x => x.Id);
                     table.ForeignKey(
                         name: "FK_cnt_entidad_cnt_tercero_id_tercero",
-                        column: x => x.id_tercero,
+                        column: x => x.IdTercero,
                         principalTable: "cnt_tercero",
-                        principalColumn: "id",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_cnt_entidad_cnt_tipoimpuesto_id_tipoimpuesto",
-                        column: x => x.id_tipoimpuesto,
+                        column: x => x.IdTipoimpuesto,
                         principalTable: "cnt_tipoimpuesto",
-                        principalColumn: "id",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
@@ -1181,51 +1181,51 @@ namespace Persistencia.Migrations
                 name: "cnt_liquidaimpuesto",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    id_tipoimpuesto = table.Column<int>(type: "int", nullable: false),
-                    id_comprobante = table.Column<int>(type: "int", nullable: false),
-                    id_puc = table.Column<int>(type: "int", nullable: false),
-                    id_tercero = table.Column<int>(type: "int", nullable: false),
-                    lim_fecha = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    lim_fechainicial = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    lim_fechafinal = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    created_at = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    updated_at = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    id_usuario = table.Column<int>(type: "int", nullable: false)
+                    IdTipoimpuesto = table.Column<int>(type: "int", nullable: false),
+                    IdComprobante = table.Column<int>(type: "int", nullable: false),
+                    IdPuc = table.Column<int>(type: "int", nullable: false),
+                    IdTercero = table.Column<int>(type: "int", nullable: false),
+                    LimFecha = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    LimFechainicial = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    LimFechafinal = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: true),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: true),
+                    IdUsuario = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_cnt_liquidaimpuesto", x => x.id);
+                    table.PrimaryKey("PK_cnt_liquidaimpuesto", x => x.Id);
                     table.ForeignKey(
                         name: "FK_cnt_liquidaimpuesto_cnf_usuario_id_usuario",
-                        column: x => x.id_usuario,
+                        column: x => x.IdUsuario,
                         principalTable: "cnf_usuario",
-                        principalColumn: "id",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_cnt_liquidaimpuesto_cnt_comprobante_id_comprobante",
-                        column: x => x.id_comprobante,
+                        column: x => x.IdComprobante,
                         principalTable: "cnt_comprobante",
-                        principalColumn: "id",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_cnt_liquidaimpuesto_cnt_puc_id_puc",
-                        column: x => x.id_puc,
+                        column: x => x.IdPuc,
                         principalTable: "cnt_puc",
-                        principalColumn: "id",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_cnt_liquidaimpuesto_cnt_tercero_id_tercero",
-                        column: x => x.id_tercero,
+                        column: x => x.IdTercero,
                         principalTable: "cnt_tercero",
-                        principalColumn: "id",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_cnt_liquidaimpuesto_cnt_tipoimpuesto_id_tipoimpuesto",
-                        column: x => x.id_tipoimpuesto,
+                        column: x => x.IdTipoimpuesto,
                         principalTable: "cnt_tipoimpuesto",
-                        principalColumn: "id",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
@@ -1234,25 +1234,25 @@ namespace Persistencia.Migrations
                 name: "cnt_responsabilidad_ter",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    id_tercero = table.Column<int>(type: "int", nullable: false),
-                    id_responsabilidad = table.Column<int>(type: "int", nullable: false)
+                    IdTercero = table.Column<int>(type: "int", nullable: false),
+                    IdResponsabilidad = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_cnt_responsabilidad_ter", x => x.id);
+                    table.PrimaryKey("PK_cnt_responsabilidad_ter", x => x.Id);
                     table.ForeignKey(
                         name: "FK_cnt_responsabilidad_ter_cnt_responsabilidad_id_responsabilid~",
-                        column: x => x.id_responsabilidad,
+                        column: x => x.IdResponsabilidad,
                         principalTable: "cnt_responsabilidad",
-                        principalColumn: "id",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_cnt_responsabilidad_ter_cnt_tercero_id_tercero",
-                        column: x => x.id_tercero,
+                        column: x => x.IdTercero,
                         principalTable: "cnt_tercero",
-                        principalColumn: "id",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
@@ -1302,77 +1302,77 @@ namespace Persistencia.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_cnt_ano_id_comprobante",
                 table: "cnt_ano",
-                column: "id_comprobante");
+                column: "IdComprobante");
 
             migrationBuilder.CreateIndex(
                 name: "IX_cnt_ano_id_usuario",
                 table: "cnt_ano",
-                column: "id_usuario");
+                column: "IdUsuario");
 
             migrationBuilder.CreateIndex(
                 name: "IX_cnt_ciiu_id_seccionciiu",
                 table: "cnt_ciiu",
-                column: "id_seccionciiu");
+                column: "IdSeccionciiu");
 
             migrationBuilder.CreateIndex(
                 name: "IX_cnt_ciiu_id_tipociuu",
                 table: "cnt_ciiu",
-                column: "id_tipociuu");
+                column: "IdTipociuu");
 
             migrationBuilder.CreateIndex(
                 name: "IX_cnt_comprobante_id_sucursal",
                 table: "cnt_comprobante",
-                column: "id_sucursal");
+                column: "IdSucursal");
 
             migrationBuilder.CreateIndex(
                 name: "IX_cnt_comprobante_id_tipocomprobante",
                 table: "cnt_comprobante",
-                column: "id_tipocomprobante");
+                column: "IdTipocomprobante");
 
             migrationBuilder.CreateIndex(
                 name: "IX_cnt_comprobante_id_usuario",
                 table: "cnt_comprobante",
-                column: "id_usuario");
+                column: "IdUsuario");
 
             migrationBuilder.CreateIndex(
                 name: "IX_cnt_consecutivo_id_tipocomprobante",
                 table: "cnt_consecutivo",
-                column: "id_tipocomprobante");
+                column: "IdTipocomprobante");
 
             migrationBuilder.CreateIndex(
                 name: "IX_cnt_cuentaimpuesto_id_puc",
                 table: "cnt_cuentaimpuesto",
-                column: "id_puc");
+                column: "IdPuc");
 
             migrationBuilder.CreateIndex(
                 name: "IX_cnt_cuentaimpuesto_id_tipoimpuesto",
                 table: "cnt_cuentaimpuesto",
-                column: "id_tipoimpuesto");
+                column: "IdTipoimpuesto");
 
             migrationBuilder.CreateIndex(
                 name: "IX_cnt_detallecomprobante_id_centrocosto",
                 table: "cnt_detallecomprobante",
-                column: "id_centrocosto");
+                column: "IdCentrocosto");
 
             migrationBuilder.CreateIndex(
                 name: "IX_cnt_detallecomprobante_id_comprobante",
                 table: "cnt_detallecomprobante",
-                column: "id_comprobante");
+                column: "IdComprobante");
 
             migrationBuilder.CreateIndex(
                 name: "IX_cnt_detallecomprobante_id_puc",
                 table: "cnt_detallecomprobante",
-                column: "id_puc");
+                column: "IdPuc");
 
             migrationBuilder.CreateIndex(
                 name: "IX_cnt_entidad_id_tercero",
                 table: "cnt_entidad",
-                column: "id_tercero");
+                column: "IdTercero");
 
             migrationBuilder.CreateIndex(
                 name: "IX_cnt_entidad_id_tipoimpuesto",
                 table: "cnt_entidad",
-                column: "id_tipoimpuesto");
+                column: "IdTipoimpuesto");
 
             migrationBuilder.CreateIndex(
                 name: "IX_cnt_formatocolumna_id_exogenaformato",
@@ -1392,42 +1392,42 @@ namespace Persistencia.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_cnt_liquidaimpuesto_id_comprobante",
                 table: "cnt_liquidaimpuesto",
-                column: "id_comprobante");
+                column: "IdComprobante");
 
             migrationBuilder.CreateIndex(
                 name: "IX_cnt_liquidaimpuesto_id_puc",
                 table: "cnt_liquidaimpuesto",
-                column: "id_puc");
+                column: "IdPuc");
 
             migrationBuilder.CreateIndex(
                 name: "IX_cnt_liquidaimpuesto_id_tercero",
                 table: "cnt_liquidaimpuesto",
-                column: "id_tercero");
+                column: "IdTercero");
 
             migrationBuilder.CreateIndex(
                 name: "IX_cnt_liquidaimpuesto_id_tipoimpuesto",
                 table: "cnt_liquidaimpuesto",
-                column: "id_tipoimpuesto");
+                column: "IdTipoimpuesto");
 
             migrationBuilder.CreateIndex(
                 name: "IX_cnt_liquidaimpuesto_id_usuario",
                 table: "cnt_liquidaimpuesto",
-                column: "id_usuario");
+                column: "IdUsuario");
 
             migrationBuilder.CreateIndex(
                 name: "IX_cnt_mes_id_usuario",
                 table: "cnt_mes",
-                column: "id_usuario");
+                column: "IdUsuario");
 
             migrationBuilder.CreateIndex(
                 name: "IX_cnt_municipio_id_departamento",
                 table: "cnt_municipio",
-                column: "id_departamento");
+                column: "IdDepartamento");
 
             migrationBuilder.CreateIndex(
                 name: "IX_cnt_notaaclaratoria_id_notaaclaratoriatipo",
                 table: "cnt_notaaclaratoria",
-                column: "id_notaaclaratoriatipo");
+                column: "IdNotaaclaratoriatipo");
 
             migrationBuilder.CreateIndex(
                 name: "IX_cnt_notaaclaratoriacuenta_id_notaaclaratoria",
@@ -1437,72 +1437,72 @@ namespace Persistencia.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_cnt_notaaclaratoriacuenta_id_puc",
                 table: "cnt_notaaclaratoriacuenta",
-                column: "id_puc");
+                column: "IdPuc");
 
             migrationBuilder.CreateIndex(
                 name: "IX_cnt_puc_id_puctipo",
                 table: "cnt_puc",
-                column: "id_puctipo");
+                column: "IdPuctipo");
 
             migrationBuilder.CreateIndex(
                 name: "IX_cnt_puc_id_tipocuenta",
                 table: "cnt_puc",
-                column: "id_tipocuenta");
+                column: "IdTipocuenta");
 
             migrationBuilder.CreateIndex(
                 name: "IX_cnt_puc_id_usuario",
                 table: "cnt_puc",
-                column: "id_usuario");
+                column: "IdUsuario");
 
             migrationBuilder.CreateIndex(
                 name: "IX_cnt_responsabilidad_ter_id_responsabilidad",
                 table: "cnt_responsabilidad_ter",
-                column: "id_responsabilidad");
+                column: "IdResponsabilidad");
 
             migrationBuilder.CreateIndex(
                 name: "IX_cnt_responsabilidad_ter_id_tercero",
                 table: "cnt_responsabilidad_ter",
-                column: "id_tercero");
+                column: "IdTercero");
 
             migrationBuilder.CreateIndex(
                 name: "IX_cnt_tercero_id_ciiu",
                 table: "cnt_tercero",
-                column: "id_ciiu");
+                column: "IdCiiu");
 
             migrationBuilder.CreateIndex(
                 name: "IX_cnt_tercero_id_genero",
                 table: "cnt_tercero",
-                column: "id_genero");
+                column: "IdGenero");
 
             migrationBuilder.CreateIndex(
                 name: "IX_cnt_tercero_id_municipio",
                 table: "cnt_tercero",
-                column: "id_municipio");
+                column: "IdMunicipio");
 
             migrationBuilder.CreateIndex(
                 name: "IX_cnt_tercero_id_regimen",
                 table: "cnt_tercero",
-                column: "id_regimen");
+                column: "IdRegimen");
 
             migrationBuilder.CreateIndex(
                 name: "IX_cnt_tercero_id_tipodocumento",
                 table: "cnt_tercero",
-                column: "id_tipodocumento");
+                column: "IdTipodocumento");
 
             migrationBuilder.CreateIndex(
                 name: "IX_cnt_tercero_id_tippersona",
                 table: "cnt_tercero",
-                column: "id_tippersona");
+                column: "IdTippersona");
 
             migrationBuilder.CreateIndex(
                 name: "IX_cnt_tipocomprobante_id_categoriacomprobante",
                 table: "cnt_tipocomprobante",
-                column: "id_categoriacomprobante");
+                column: "IdCategoriacomprobante");
 
             migrationBuilder.CreateIndex(
                 name: "IX_cnt_tipocomprobante_id_usuario",
                 table: "cnt_tipocomprobante",
-                column: "id_usuario");
+                column: "IdUsuario");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

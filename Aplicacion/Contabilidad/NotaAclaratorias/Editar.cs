@@ -21,13 +21,13 @@ namespace Aplicacion.Contabilidad.NotaAclaratorias
         {
             public EjecutaValidador()
             {
-               /*  RuleFor(x=>x.ID).NotEmpty(); */
-                RuleFor(x=>x.nac_fecha).NotEmpty();
-                RuleFor(x=>x.id_notaaclaratoriatipo).NotEmpty();
-                RuleFor(x=>x.id_puc).NotEmpty();
-                RuleFor(x=>x.nac_titulo).NotEmpty();
-                RuleFor(x=>x.nac_detalle).NotEmpty();
-                RuleFor(x=>x.id_usuario).NotEmpty();
+               /*  RuleFor(x=>x.Id).NotEmpty(); */
+                RuleFor(x=>x.NacFecha).NotEmpty();
+                RuleFor(x=>x.IdNotaaclaratoriatipo).NotEmpty();
+                RuleFor(x=>x.IdPuc).NotEmpty();
+                RuleFor(x=>x.NacTitulo).NotEmpty();
+                RuleFor(x=>x.NacDetalle).NotEmpty();
+                RuleFor(x=>x.IdUsuario).NotEmpty();
 
             }
         }
@@ -46,28 +46,28 @@ namespace Aplicacion.Contabilidad.NotaAclaratorias
             public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
             {
                 var nota = await _context.cntNotaAclaratorias
-                .Where(y => y.estado == "A")
-                .SingleOrDefaultAsync(y => y.id == request.ID);
+                .Where(y => y.Estado == "A")
+                .SingleOrDefaultAsync(y => y.Id == request.Id);
 
                 if(nota==null){
-                    throw new Exception("No se encontro nota Aclaratoria o su estado no es activo");
+                    throw new Exception("No se encontro nota Aclaratoria o su Estado no es activo");
                 }
 
-                var notaTipo = await _context.cntNotaAclaratoriaTipos.FindAsync(request.id_notaaclaratoriatipo);
+                var notaTipo = await _context.cntNotaAclaratoriaTipos.FindAsync(request.IdNotaaclaratoriatipo);
                 if(notaTipo == null){
                     throw new Exception("Tipo de nota Aclaratoria no existe");
                 }
 
-                var codCuenta = await _context.cntPucs.FindAsync(request.id_puc);
+                var codCuenta = await _context.cntPucs.FindAsync(request.IdPuc);
                 if(codCuenta == null){
-                    throw new Exception("Codigo de cuenta no existe en el puc");
+                    throw new Exception("Codigo de Cuenta no existe en el puc");
                 }
 
-                request.nac_fecha = request.nac_fecha ?? nota.nac_fecha;
-                request.id_notaaclaratoriatipo = request.id_notaaclaratoriatipo ?? nota.id_notaaclaratoriatipo;
-                request.nac_titulo = request.nac_titulo ?? nota.nac_titulo;
-                request.nac_detalle = request.nac_detalle ?? nota.nac_detalle;
-                request.id_usuario = request.id_usuario;
+                request.NacFecha = request.NacFecha ?? nota.NacFecha;
+                request.IdNotaaclaratoriatipo = request.IdNotaaclaratoriatipo ?? nota.IdNotaaclaratoriatipo;
+                request.NacTitulo = request.NacTitulo ?? nota.NacTitulo;
+                request.NacDetalle = request.NacDetalle ?? nota.NacDetalle;
+                request.IdUsuario = request.IdUsuario;
 
                 var notaModel = _mapper.Map<EditarNotaAclaratoriaModel, CntNotaAclaratoria>(request, nota);
 

@@ -6,28 +6,23 @@ namespace Dominio.Contabilidad
 {
     public class CntTipoComprobante
     {
-        public int id { get; set; }
-        public int id_categoriacomprobante { get; set; }
-        public string codigo { get; set; }
-        public string nombre { get; set; }
-        public string tco_incremento { get; set; }
-        public DateTime? created_at { get; set; }
-        public DateTime? updated_at { get; set; }
-        public string editable { get; set; }
-        public string anulable { get; set; }
-        public string borrable { get; set; }
-        public string id_usuario { get; set; }
+        public int Id { get; set; }
+        public int IdCategoriacomprobante { get; set; }
+        public string Codigo { get; set; }
+        public string Nombre { get; set; }
+        public string TcoIncremento { get; set; }
+        public DateTime? CreatedAt { get; set; }
+        public DateTime? UpdatedAt { get; set; }
+        public string Editable { get; set; }
+        public string Anulable { get; set; }
+        public string Borrable { get; set; }
+        public string IdUsuario { get; set; }
 
         public ICollection<CntComprobante> ComprobantesTipoComprobante { get; set; }
 
-        public CnfUsuario usuario { get; set; }
+        public CnfUsuario Usuario { get; set; }
 
-        public CntCategoriaComprobante categoria { get; set; }
-        public ICollection<CntConsecutivo> tipoComprobanteConsecutivos { get; set; }
-
-
-
-
-
+        public CntCategoriaComprobante Categoria { get; set; }
+        public ICollection<CntConsecutivo> TipoComprobanteConsecutivos { get; set; }
     }
 }

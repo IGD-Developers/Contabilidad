@@ -14,11 +14,11 @@ namespace Persistencia.Mapeo.Configuracion
                 .ToTable("aspnetusers")
                 .HasKey(entity => entity.Id);
 
-                builder.HasOne<CntTercero>(t => t.tercero)
-                .WithMany(ter => ter.usuarioTerceros)
-                .HasForeignKey(rter => rter.id_tercero);
+                builder.HasOne<CntTercero>(t => t.Tercero)
+                .WithMany(ter => ter.UsuarioTerceros)
+                .HasForeignKey(rter => rter.IdTercero);
             builder
-                .Property(b => b.created_at)     
+                .Property(b => b.CreatedAt)     
                 .HasDefaultValueSql("DateTime.Now");     
             
         }

@@ -41,11 +41,11 @@ namespace Aplicacion.Contabilidad.Comprobantes
                 // El contexto devuelve el dbset
 
             var comprobantes = await _context.cntComprobantes
-            .Include(t => t.tipoComprobante)
-            .ThenInclude(ctg => ctg.categoria)
-            .Include(s => s.sucursal)
-            .Include(u => u.usuario)
-            .Include(d => d.comprobanteDetalleComprobantes)
+            .Include(t => t.TipoComprobante)
+            .ThenInclude(ctg => ctg.Categoria)
+            .Include(s => s.Sucursal)
+            .Include(u => u.Usuario)
+            .Include(d => d.ComprobanteDetalleComprobantes)
             .ToListAsync();
           
             var comprobantesDto = _mapper.Map<List<CntComprobante>,List<ListarComprobantesModel>>(comprobantes);

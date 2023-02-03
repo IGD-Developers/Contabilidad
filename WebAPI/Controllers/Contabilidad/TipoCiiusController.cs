@@ -21,9 +21,9 @@ namespace WebAPI.Controllers
             return await Mediator.Send(new Consulta.ListarTipoCiius());
         }
 
-        [HttpGet("{id}")]
-        public async Task<ActionResult<TipoCiiusModel>> Detalle(int id){
-            return await Mediator.Send(new ConsultaId.ConsultarId{Id = id});
+        [HttpGet("{Id}")]
+        public async Task<ActionResult<TipoCiiusModel>> Detalle(int Id){
+            return await Mediator.Send(new ConsultaId.ConsultarId{Id = Id});
         }
     }
 }

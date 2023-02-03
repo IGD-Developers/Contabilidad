@@ -25,15 +25,15 @@ namespace Aplicacion.Contabilidad.TipoComprobantes
             public EjecutaValidador()
             {
 
-                RuleFor(x => x.id_categoriacomprobante).NotEmpty();
-                RuleFor(x => x.codigo).NotEmpty();
-                RuleFor(x => x.nombre).NotEmpty();
-                RuleFor(x => x.tco_incremento).NotEmpty();
-                RuleFor(x => x.tco_incremento).Matches("^[A,U,M]+");
+                RuleFor(x => x.IdCategoriacomprobante).NotEmpty();
+                RuleFor(x => x.Codigo).NotEmpty();
+                RuleFor(x => x.Nombre).NotEmpty();
+                RuleFor(x => x.TcoIncremento).NotEmpty();
+                RuleFor(x => x.TcoIncremento).Matches("^[A,U,M]+");
 
-                // RuleFor(x=>x.editable).NotEmpty();
-                // RuleFor(x=>x.anulable).NotEmpty();
-                RuleFor(x => x.id_usuario).NotEmpty();
+                // RuleFor(x=>x.Editable).NotEmpty();
+                // RuleFor(x=>x.Anulable).NotEmpty();
+                RuleFor(x => x.IdUsuario).NotEmpty();
 
             }
         }

@@ -10,18 +10,18 @@ namespace Seguridad.TokenSeguridad
 {
     public class JwtGenerador : IJwtGenerador
     {
-        public string CrearToken(CnfUsuario usuario)
+        public string CrearToken(CnfUsuario Usuario)
         {
-        //1-Lista de claims=data de usuario a compartir con el cliente
+        //1-Lista de claims=data de Usuario a compartir con el cliente
         //2. paquete nuget System.Identity.Model.Token.jwt ultima version en royectoi seguridad
-        //3-(Lista de claims registrados, lo que envie sea el usuario.name)
+        //3-(Lista de claims registrados, lo que envie sea el Usuario.name)
         //4-crear las credenciales de acceso key=new SymetricSecurity
         //5-crear token
         //6-crear manejador del token
         //7-Devolver el token en string
 
          var claims= new List<Claim> {
-             new Claim(JwtRegisteredClaimNames.NameId,usuario.UserName)
+             new Claim(JwtRegisteredClaimNames.NameId,Usuario.UserName)
          };
 
          var key= new SymmetricSecurityKey(Encoding.UTF8.GetBytes("Mi palabra secreto"));

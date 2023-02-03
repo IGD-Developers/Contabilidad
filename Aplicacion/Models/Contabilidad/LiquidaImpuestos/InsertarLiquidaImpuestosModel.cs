@@ -7,18 +7,18 @@ namespace Aplicacion.Models.Contabilidad.LiquidaImpuestos
 {
     public class InsertarLiquidaImpuestosModel
     {
-       public int id_tipoimpuesto { get; set; }
-        public int id_sucursal { get; set; }
-        public int id_entidad  { get; set; }
-        public string cco_documento { get; set; }
-        //public DateTime cco_fecha { get; set; }
-        public DateTime fechainicial { get; set; }
-        public DateTime fechafinal { get; set; }
-        //public string id_usuario { get; set; } 
+       public int IdTipoimpuesto { get; set; }
+        public int IdSucursal { get; set; }
+        public int IdEntidad  { get; set; }
+        public string CcoDocumento { get; set; }
+        //public DateTime CcoFecha { get; set; }
+        public DateTime FechaInicial { get; set; }
+        public DateTime FechaFinal { get; set; }
+        //public string IdUsuario { get; set; } 
 
-        public InsertarComprobantesModel comprobante { get; set; } 
+        public InsertarComprobantesModel Comprobante { get; set; } 
 
-        //public ICollection<InsertarDetalleComprobanteModel> comprobanteDetalleComprobantes { get; set; }
+        //public ICollection<InsertarDetalleComprobanteModel> ComprobanteDetalleComprobantes { get; set; }
       
 
     }

@@ -13,11 +13,11 @@ public class Editar
     public class Ejecuta: IRequest 
     {
         public int Id { get; set; }
-        public int id_exogenaconcepto { get; set; }
-        public int id_puc { get; set; }
-        public int id_formatocolumna { get; set; }
-        public int id_tipooperacion { get; set; }
-        public string estado { get; set; }
+        public int IdExogenaconcepto { get; set; }
+        public int IdPuc { get; set; }
+        public int IdFormatocolumna { get; set; }
+        public int IdTipooperacion { get; set; }
+        public string Estado { get; set; }
     }
 
 public class EjecutaValidador : AbstractValidator<Ejecuta>
@@ -25,11 +25,11 @@ public class EjecutaValidador : AbstractValidator<Ejecuta>
             public EjecutaValidador()
             {
                 RuleFor(x=>x.Id).NotEmpty();
-                RuleFor(x=>x.id_exogenaconcepto).NotEmpty();
-                RuleFor(x=>x.id_puc).NotEmpty();
-                RuleFor(x=>x.id_formatocolumna).NotEmpty();
-                RuleFor(x=>x.id_tipooperacion).NotEmpty();
-                RuleFor(x=>x.estado).NotEmpty();
+                RuleFor(x=>x.IdExogenaconcepto).NotEmpty();
+                RuleFor(x=>x.IdPuc).NotEmpty();
+                RuleFor(x=>x.IdFormatocolumna).NotEmpty();
+                RuleFor(x=>x.IdTipooperacion).NotEmpty();
+                RuleFor(x=>x.Estado).NotEmpty();
         
             }
         }    
@@ -51,11 +51,11 @@ public class EjecutaValidador : AbstractValidator<Ejecuta>
                     throw new Exception("Concepto no encontrado");
                 };
 
-                    conceptoCuenta.id_exogenaconcepto =request.id_exogenaconcepto;
-                    conceptoCuenta.id_puc =request.id_puc;
-                    conceptoCuenta.id_formatocolumna=request.id_formatocolumna;
-                    conceptoCuenta.id_tipooperacion =request.id_tipooperacion;
-                    conceptoCuenta.estado=request.estado;
+                    conceptoCuenta.IdExogenaconcepto =request.IdExogenaconcepto;
+                    conceptoCuenta.IdPuc =request.IdPuc;
+                    conceptoCuenta.IdFormatocolumna=request.IdFormatocolumna;
+                    conceptoCuenta.IdTipooperacion =request.IdTipooperacion;
+                    conceptoCuenta.Estado=request.Estado;
 
             var resultado=  await context.SaveChangesAsync();
                 if (resultado>0)

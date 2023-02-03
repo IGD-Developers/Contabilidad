@@ -20,15 +20,15 @@ namespace Aplicacion.Contabilidad.TipoComprobantes
         {
             public EjecutaValidador()
             {
-                RuleFor(x => x.id_categoriacomprobante).NotEmpty();
-                RuleFor(x => x.codigo).NotEmpty();
-                RuleFor(x => x.nombre).NotEmpty();
-                RuleFor(x => x.tco_incremento).NotEmpty();
-                RuleFor(x => x.tco_incremento).Matches("^[A,U,M]+");
+                RuleFor(x => x.IdCategoriacomprobante).NotEmpty();
+                RuleFor(x => x.Codigo).NotEmpty();
+                RuleFor(x => x.Nombre).NotEmpty();
+                RuleFor(x => x.TcoIncremento).NotEmpty();
+                RuleFor(x => x.TcoIncremento).Matches("^[A,U,M]+");
 
-                // RuleFor(x=>x.editable).NotEmpty();
-                // RuleFor(x=>x.anulable).NotEmpty();
-                RuleFor(x => x.id_usuario).NotEmpty();
+                // RuleFor(x=>x.Editable).NotEmpty();
+                // RuleFor(x=>x.Anulable).NotEmpty();
+                RuleFor(x => x.IdUsuario).NotEmpty();
 
             }
         }
@@ -51,9 +51,9 @@ namespace Aplicacion.Contabilidad.TipoComprobantes
             public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
             {
 
-                //TODO: MARIA Validaciones id_usuario 
-                //TODO: MARIA Liberar de memoria para volver a utilizar entidad No me permite usar el mismo nombre 
-                using (var entidad = await _context.cntCategoriaComprobantes.SingleOrDefaultAsync(t => t.id == request.id_categoriacomprobante))
+                //TODO: MARIA Validaciones IdUsuario 
+                //TODO: MARIA Liberar de memoria para volver a utilizar entidad No me permite usar el mismo Nombre 
+                using (var entidad = await _context.cntCategoriaComprobantes.SingleOrDefaultAsync(t => t.Id == request.IdCategoriacomprobante))
                 {
                     if (entidad == null)
                     {
@@ -64,7 +64,7 @@ namespace Aplicacion.Contabilidad.TipoComprobantes
                 try
                 {
                     var entidad2 = await _context.cntCategoriaComprobantes
-                   .SingleOrDefaultAsync(t => t.id == request.id_categoriacomprobante);
+                   .SingleOrDefaultAsync(t => t.Id == request.IdCategoriacomprobante);
 
                     if (entidad2 == null)
                     {
@@ -77,7 +77,7 @@ namespace Aplicacion.Contabilidad.TipoComprobantes
 
                     _context.cntTipoComprobantes.Add(entidadDto);
                     var respuesta = await _context.SaveChangesAsync();
-                    //TODO: MARIA LLave Duplicada codigo tipocomprobante Implementar
+                    //TODO: MARIA LLave Duplicada Codigo tipocomprobante Implementar
 
                     if (respuesta > 0)
                     {
@@ -93,14 +93,14 @@ namespace Aplicacion.Contabilidad.TipoComprobantes
         }
 
     }
-    // var tipoComprobante = new CntTipoComprobante {
-    //     id_categoriacomprobante = request.id_categoriacomprobante,
-    //     codigo = request.codigo,
-    //     nombre = request.nombre,  
-    //     tco_incremento  = request.tco_incremento,
-    //     editable = request.editable,  
-    //     anulable = request.anulable,  
-    //     id_usuario = request.id_usuario 
+    // var TipoComprobante = new CntTipoComprobante {
+    //     IdCategoriacomprobante = request.IdCategoriacomprobante,
+    //     Codigo = request.Codigo,
+    //     Nombre = request.Nombre,  
+    //     TcoIncremento  = request.TcoIncremento,
+    //     Editable = request.Editable,  
+    //     Anulable = request.Anulable,  
+    //     IdUsuario = request.IdUsuario 
     // };
 
 }

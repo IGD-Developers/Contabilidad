@@ -22,7 +22,7 @@ namespace Aplicacion.Contabilidad.TipoComprobantes
 
         //Clase Manejador que hereda de IRequestHandler. Obliga a implementar  Interfaz.
         // Requiere Constructor
-        //Parametros: tipo de dato a devolver que es objeto IRequest ListaCntTipoComprobantes primera clase declarada,
+        //Parametros: tipo de dato a devolver que es objeto IRequest ListaCntTipoComprobantes primera Clase declarada,
         //el segundo pmt es el formato en que se devuelve que es un  List<CntTipoComprobante> 
         public class Manejador : IRequestHandler<ListaCntTipoComprobantes, List<ListarTipoComprobanteModel>>
         {
@@ -46,7 +46,7 @@ namespace Aplicacion.Contabilidad.TipoComprobantes
             {
                 // El contexto devuelve desde el dbset
                 var entidades = await _context.cntTipoComprobantes
-                .Include(t => t.categoria)
+                .Include(t => t.Categoria)
                 .ToListAsync();
 
                 var entidadesDto = _mapper.Map<List<CntTipoComprobante>, List<ListarTipoComprobanteModel>>(entidades);

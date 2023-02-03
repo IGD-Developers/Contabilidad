@@ -11,7 +11,7 @@ namespace Aplicacion.Contabilidad.NotaAclaratoriaCuentas
     {
         public class Ejecuta : IRequest{
             public int id_notaaclaratoria { get; set; }
-            public int id_puc { get; set; }
+            public int IdPuc { get; set; }
         }
 
          public class EjecutaValidador : AbstractValidator<Ejecuta>
@@ -19,7 +19,7 @@ namespace Aplicacion.Contabilidad.NotaAclaratoriaCuentas
             public EjecutaValidador()
             {
                 RuleFor(x=>x.id_notaaclaratoria).NotEmpty();
-                RuleFor(x=>x.id_puc).NotEmpty();
+                RuleFor(x=>x.IdPuc).NotEmpty();
 
             }
         }
@@ -37,8 +37,8 @@ namespace Aplicacion.Contabilidad.NotaAclaratoriaCuentas
             {
                 var nota = new CntNotaAclaratoriaCuenta{
                     
-                    id_notaaclaratoria = request.id_notaaclaratoria,
-                    id_puc = request.id_puc                    
+                    IdNotaaclaratoria = request.id_notaaclaratoria,
+                    IdPuc = request.IdPuc                    
                 };
 
                 _context.cntNotaAclaratoriaCuentas.Add(nota);
@@ -48,7 +48,7 @@ namespace Aplicacion.Contabilidad.NotaAclaratoriaCuentas
                     return Unit.Value;
                 }
 
-                throw new System.Exception("No se pudo insertar la nota aclarotia cuenta");
+                throw new System.Exception("No se pudo insertar la nota aclarotia Cuenta");
             }
         }
     }

@@ -2,11 +2,8 @@ namespace Aplicacion.Models.Contabilidad.Entidades
 {
     public class EntidadTerceroModel
     {
-        public string ter_documento { get; set; }
-        public string ter_digitoverificacion {get; set;}
-        public string ter_razonsocial { get; set; }
-        
-
-        
+        public string TerDocumento { get; set; }
+        public string TerDigitoverificacion {get; set;}
+        public string TerRazonsocial { get; set; }        
     }
 }

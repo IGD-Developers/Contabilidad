@@ -20,9 +20,9 @@ namespace WebAPI.Controllers
             return await Mediator.Send(new Consulta.ListaDepartamentos());
         }
 
-        [HttpGet("{id}")]
-        public async Task<ActionResult<DepartamentosModel>>Detalle(int id){
-            return await Mediator.Send(new ConsultaId.ConsultarId{Id = id});
+        [HttpGet("{Id}")]
+        public async Task<ActionResult<DepartamentosModel>>Detalle(int Id){
+            return await Mediator.Send(new ConsultaId.ConsultarId{Id = Id});
         }
 
 

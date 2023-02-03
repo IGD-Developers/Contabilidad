@@ -6,36 +6,31 @@ namespace Dominio.Contabilidad
 {
     public class CntPuc
     {
-        public int id { get; set; }
-        public string codigo { get; set; }
-        public string nombre { get; set; }
-        public int? id_puctipo { get; set; }
-        public int? id_tipocuenta { get; set; }
-        public int? id_tipoimpuesto { get; set; }
-        public bool pac_activa { get; set; }
-        public bool pac_base { get; set; }
-        public bool pac_ajusteniif { get; set; }
-        public DateTime? created_at { get; set; }
-        public DateTime? updated_at { get; set; }
-        public string id_usuario { get; set; }
+        public int Id { get; set; }
+        public string Codigo { get; set; }
+        public string Nombre { get; set; }
+        public int? IdPuctipo { get; set; }
+        public int? IdTipocuenta { get; set; }
+        public int? IdTipoimpuesto { get; set; }
+        public bool PacActiva { get; set; }
+        public bool PacBase { get; set; }
+        public bool PacAjusteniif { get; set; }
+        public DateTime? CreatedAt { get; set; }
+        public DateTime? UpdatedAt { get; set; }
+        public string IdUsuario { get; set; }
 
+        public CntPucTipo PucTipo { get; set; }
+        public CntTipoCuenta TipoCuenta { get; set; }
+        public CntTipoImpuesto TipoImpuesto { get; set; }
+        public CnfUsuario Usuario { get; set; }
 
-        
+        public ICollection<CntCuentaImpuesto> PucCuentaImpuestos { get; set; }
 
+        public ICollection<CntDetalleComprobante> PucDetalleComprobantes { get; set; }
+        public ICollection<CntNotaAclaratoriaCuenta> PucNotaAclaratoriaCuentas { get; set; }
 
-        public CntPucTipo pucTipo { get; set; }
-        public CntTipoCuenta tipoCuenta { get; set; }
-        public CntTipoImpuesto tipoImpuesto { get; set; }
-        public CnfUsuario usuario { get; set; }
-
-        public ICollection<CntCuentaImpuesto> pucCuentaImpuestos { get; set; }
-
-        public ICollection<CntDetalleComprobante> pucDetalleComprobantes { get; set; }
-        public ICollection<CntNotaAclaratoriaCuenta> pucNotaAclaratoriaCuentas { get; set; }
-
-        public ICollection<CntLiquidaImpuesto> pucLiquidaImpuestos { get; set; }
-        public ICollection<CntNotaAclaratoria> pucNotaAclaratoria { get; set; }
-
+        public ICollection<CntLiquidaImpuesto> PucLiquidaImpuestos { get; set; }
+        public ICollection<CntNotaAclaratoria> PucNotaAclaratoria { get; set; }
     }
 
 }

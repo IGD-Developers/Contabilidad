@@ -9,7 +9,7 @@ namespace Persistencia.Mapeo.Contabilidad
         public void Configure(EntityTypeBuilder<CntGenero> builder)
         {
             builder.ToTable("cnt_genero")
-                .HasKey( pk => pk.id);
+                .HasKey( pk => pk.Id);
             
         }
     }

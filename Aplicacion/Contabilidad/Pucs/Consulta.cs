@@ -34,8 +34,8 @@ namespace Aplicacion.Contabilidad.Pucs
                 // var cntPucs = await _context.cntPucs
                 // .ToListAsync();
                 var entidadesDto = await _context.cntPucs
-                .Include(x=>x.pucTipo)
-                .Include(x=>x.tipoCuenta)
+                .Include(x=>x.PucTipo)
+                .Include(x=>x.TipoCuenta)
                 .Select(p =>  mapper.Map<CntPuc,ListarPucModel>(p))
                 .ToListAsync();
 
@@ -43,47 +43,47 @@ namespace Aplicacion.Contabilidad.Pucs
                 
 
                  
-                //var pucModel = mapper.Map<List<CntPuc>,List<ListarPucModel>>(pucs);
-                //clase : primer digito
-                //grupo: dos digitos
-                //cuenta: cuatro digitos
-                //subcuenta: seis digitos 
+                //var PucModel = mapper.Map<List<CntPuc>,List<ListarPucModel>>(pucs);
+                //Clase : primer digito
+                //Grupo: dos digitos
+                //Cuenta: cuatro digitos
+                //SubCuenta: seis digitos 
 
                 foreach(var registro in entidadesDto)
                 {
-                        int longitud = registro.codigo.Length;
-                        var codigoclase= registro.codigo.Substring(0, 1);
-                        var clase = from regi  in entidadesDto
-                                    where regi.codigo == codigoclase
-                                    select new {nombre = regi.nombre};
-                        registro.clase = clase.First().nombre;
+                        int longitud = registro.Codigo.Length;
+                        var codigoclase= registro.Codigo.Substring(0, 1);
+                        var Clase = from regi  in entidadesDto
+                                    where regi.Codigo == codigoclase
+                                    select new {Nombre = regi.Nombre};
+                        registro.Clase = Clase.First().Nombre;
 
 
-                        var codigogrupo=    (longitud>1) ? registro.codigo.Substring(0, 2) : "";
+                        var codigogrupo=    (longitud>1) ? registro.Codigo.Substring(0, 2) : "";
                         if (longitud>1)
                         {
-                            var grupo = from regi  in entidadesDto
-                            where regi.codigo == codigogrupo
-                            select new {nombre = regi.nombre};
-                            registro.grupo = grupo.First().nombre;
-                        } else {registro.grupo="";}
+                            var Grupo = from regi  in entidadesDto
+                            where regi.Codigo == codigogrupo
+                            select new {Nombre = regi.Nombre};
+                            registro.Grupo = Grupo.First().Nombre;
+                        } else {registro.Grupo="";}
                             
-                        var codigocuenta=   (longitud>3) ? registro.codigo.Substring(0, 4) : "";
+                        var codigocuenta=   (longitud>3) ? registro.Codigo.Substring(0, 4) : "";
                         if (longitud>3)
-                        {   var cuenta = from regi  in entidadesDto
-                            where regi.codigo == codigocuenta
-                            select new {nombre = regi.nombre};
-                            registro.cuenta = cuenta.First().nombre;
-                        } else {registro.cuenta="";}
+                        {   var Cuenta = from regi  in entidadesDto
+                            where regi.Codigo == codigocuenta
+                            select new {Nombre = regi.Nombre};
+                            registro.Cuenta = Cuenta.First().Nombre;
+                        } else {registro.Cuenta="";}
                         
-                        var codigosubcuenta=(longitud>5) ? registro.codigo.Substring(0, 6) : "";
+                        var codigosubcuenta=(longitud>5) ? registro.Codigo.Substring(0, 6) : "";
                         if (longitud>5)
                         {    
-                            var subcuenta = from regi  in entidadesDto
-                            where regi.codigo == codigosubcuenta
-                            select new {nombre = regi.nombre};
-                            registro.subcuenta = subcuenta.First().nombre;
-                        } else {registro.subcuenta="";}
+                            var SubCuenta = from regi  in entidadesDto
+                            where regi.Codigo == codigosubcuenta
+                            select new {Nombre = regi.Nombre};
+                            registro.SubCuenta = SubCuenta.First().Nombre;
+                        } else {registro.SubCuenta="";}
                         
                 }
              

@@ -10,18 +10,18 @@ namespace Aplicacion.Contabilidad.NotaAclaratoriaTipos
     public class Editar
     {
         public class Ejecuta : IRequest{
-            public int id { get; set; }
-            public string codigo { get; set; }
-            public string nombre { get; set; }
+            public int Id { get; set; }
+            public string Codigo { get; set; }
+            public string Nombre { get; set; }
         }
 
         public class EjecutaValidador : AbstractValidator<Ejecuta>
         {
             public EjecutaValidador()
             {
-                RuleFor(x=>x.id).NotEmpty();
-                RuleFor(x=>x.codigo).NotEmpty();
-                RuleFor(x=>x.nombre).NotEmpty();
+                RuleFor(x=>x.Id).NotEmpty();
+                RuleFor(x=>x.Codigo).NotEmpty();
+                RuleFor(x=>x.Nombre).NotEmpty();
 
             }
         }
@@ -37,14 +37,14 @@ namespace Aplicacion.Contabilidad.NotaAclaratoriaTipos
 
             public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
             {
-                var nota = await _context.cntNotaAclaratoriaTipos.FindAsync(request.id);
+                var nota = await _context.cntNotaAclaratoriaTipos.FindAsync(request.Id);
 
                 if(nota == null){
                     throw new Exception("No se encontro nota aclaratoria tipo");
                 }
 
-                nota.nombre = request.nombre ?? nota.nombre;
-                nota.codigo = request.codigo ?? nota.codigo;
+                nota.Nombre = request.Nombre ?? nota.Nombre;
+                nota.Codigo = request.Codigo ?? nota.Codigo;
 
                 var resultado = await _context.SaveChangesAsync();
 

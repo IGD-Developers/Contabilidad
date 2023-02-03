@@ -10,22 +10,22 @@ namespace Persistencia.Mapeo.Contabilidad
         {
             builder
                 .ToTable("cnt_notaaclaratoria")  
-                .HasKey(entity => entity.id);
+                .HasKey(entity => entity.Id);
 
-            builder.HasOne<CntNotaAclaratoriaTipo>(na => na.notaAclaratoriaTipo)
-                    .WithMany(nat=>nat.notaAclaratoriaTipoNotaAclaratorias)
-                    .HasForeignKey(na => na.id_notaaclaratoriatipo);
+            builder.HasOne<CntNotaAclaratoriaTipo>(na => na.NotaAclaratoriaTipo)
+                    .WithMany(nat=>nat.NotaAclaratoriaTipoNotaAclaratorias)
+                    .HasForeignKey(na => na.IdNotaaclaratoriatipo);
 
-            builder.HasOne<CntPuc>(na => na.cntPuct)
-                    .WithMany(nat=>nat.pucNotaAclaratoria)
-                    .HasForeignKey(na => na.id_puc);
+            builder.HasOne<CntPuc>(na => na.CntPuct)
+                    .WithMany(nat=>nat.PucNotaAclaratoria)
+                    .HasForeignKey(na => na.IdPuc);
 
             builder
-                .Property(b => b.created_at)
+                .Property(b => b.CreatedAt)
                 .HasDefaultValueSql("DateTime.Now");     
 
             builder
-                .Property(b => b.estado)
+                .Property(b => b.Estado)
                 .HasDefaultValueSql("A");
                    
 

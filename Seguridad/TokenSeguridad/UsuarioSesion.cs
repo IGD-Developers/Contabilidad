@@ -17,14 +17,14 @@ namespace Seguridad
         }
 
         /// <summary>  
-        ///   Mediante Linq, httpContextAccesor extrae el userName del usuario en sesión. 
+        ///   Mediante Linq, httpContextAccesor extrae el userName del Usuario en sesión. 
         ///</summary>
         ///<returns> Usuario en sesión </returns>
 
 
         public string ObtenerUsuarioSesion()
         {
-            //Los claims son por ejemplo el nombre, el rol, userName
+            //Los claims son por ejemplo el Nombre, el rol, userName
             var userName = _httpContextAccesor.HttpContext.User?.Claims?.FirstOrDefault(x => x.Type==ClaimTypes.NameIdentifier)?.Value;
             return userName;
         }

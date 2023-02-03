@@ -21,9 +21,9 @@ namespace Aplicacion.Configuracion.Empresas
         {
             public EjecutaValidador()
             {
-                RuleFor(x=>x.nit).NotEmpty();
-                RuleFor(x=>x.razon_social).NotEmpty();
-                //RuleFor(x=>x.id_tercero_gerente).NotEmpty();
+                RuleFor(x=>x.Nit).NotEmpty();
+                RuleFor(x=>x.RazonSocial).NotEmpty();
+                //RuleFor(x=>x.IdTerceroGerente).NotEmpty();
 
             }
         }
@@ -49,15 +49,15 @@ namespace Aplicacion.Configuracion.Empresas
             {
                 
                 try {
-                    var empresa = await _context.cnfEmpresas.FindAsync(request.Id);
-                    if (empresa == null) {
+                    var Empresa = await _context.cnfEmpresas.FindAsync(request.Id);
+                    if (Empresa == null) {
                         throw new Exception("Empresa no encontrada");
                     };
-    
-                    request.id_tercero_gerente= request.id_tercero_gerente ?? empresa.id_tercero_gerente;
+
+                    request.IdTerceroGerente ??= Empresa.IdTerceroGerente;
                     
                     //Como vamos a grabar primero el modelo y luego la entidad:
-                    var empresasDto = _mapper.Map<EditarEmpresasModel,CnfEmpresa>(request,empresa);
+                    var empresasDto = _mapper.Map<EditarEmpresasModel,CnfEmpresa>(request,Empresa);
 
                     //El mapeo va asi en el mappingprofile: CreateMap<EditarEmpresasModel,CnfEmpresa>();
   

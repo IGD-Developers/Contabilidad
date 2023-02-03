@@ -10,11 +10,11 @@ namespace Persistencia.Mapeo.Contabilidad
         {
             builder
             .ToTable("cnt_formatocolumna")  
-            .HasKey(entity => entity.id);
+            .HasKey(entity => entity.Id);
 
-            builder.HasOne<CntExogenaFormato>(fc => fc.exogenaFormato)
-                .WithMany(ef=>ef.exogenaFormatoFormatoColumnas)
-                .HasForeignKey(fc => fc.id_exogenaformato);
+            builder.HasOne<CntExogenaFormato>(fc => fc.ExogenaFormato)
+                .WithMany(ef=>ef.ExogenaFormatoFormatoColumnas)
+                .HasForeignKey(fc => fc.IdExogenaformato);
         }
     }
 }

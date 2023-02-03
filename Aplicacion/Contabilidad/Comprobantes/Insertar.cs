@@ -26,13 +26,13 @@ namespace Aplicacion.Contabilidad.Comprobantes
         {
             public EjecutaValidador()
             {
-                RuleFor(x => x.id_sucursal).NotEmpty();
-                RuleFor(x => x.id_tipocomprobante).NotEmpty();
-                RuleFor(x => x.id_tercero).NotEmpty();
-                RuleFor(x => x.cco_fecha).NotEmpty();
-                RuleFor(x => x.cco_documento).NotEmpty();
-                RuleFor(x => x.cco_detalle).NotEmpty();
-                RuleFor(x => x.id_usuario).NotEmpty();
+                RuleFor(x => x.IdSucursal).NotEmpty();
+                RuleFor(x => x.IdTipocomprobante).NotEmpty();
+                RuleFor(x => x.IdTercero).NotEmpty();
+                RuleFor(x => x.CcoFecha).NotEmpty();
+                RuleFor(x => x.CcoDocumento).NotEmpty();
+                RuleFor(x => x.CcoDetalle).NotEmpty();
+                RuleFor(x => x.IdUsuario).NotEmpty();
 
             }
         }
@@ -58,8 +58,8 @@ namespace Aplicacion.Contabilidad.Comprobantes
             public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
             {
 
-                //TODO:  MARIA Validar "id_sucursal", "id_tipocomprobante",  "id_tercero","id_usuario", "id_centrocosto", "id_puc" "id_tercero" 
-                //TODO: MARIA Asignar "id_modulo" según  el modulo
+                //TODO:  MARIA Validar "IdSucursal", "IdTipocomprobante",  "IdTercero","IdUsuario", "IdCentrocosto", "IdPuc" "IdTercero" 
+                //TODO: MARIA Asignar "IdModulo" según  el modulo
 
                 var transaction = _context.Database.BeginTransaction();
 
@@ -75,7 +75,7 @@ namespace Aplicacion.Contabilidad.Comprobantes
                 }
                 catch (Exception ex)
                 {
-                    throw new Exception("Error al insertar comprobante catch " + ex.Message);
+                    throw new Exception("Error al insertar Comprobante catch " + ex.Message);
 
                 }
 

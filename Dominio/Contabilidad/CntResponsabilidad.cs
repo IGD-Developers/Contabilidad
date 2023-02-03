@@ -4,9 +4,9 @@ namespace Dominio.Contabilidad
 {
     public class CntResponsabilidad
     {
-        public int id { get; set; }
-        public string codigo { get; set; }
-        public string nombre { get; set; }
-        public ICollection<CntResponsabilidadTer> reponsabilidadResponsabilidadTerceros {get; set;}
+        public int Id { get; set; }
+        public string Codigo { get; set; }
+        public string Nombre { get; set; }
+        public ICollection<CntResponsabilidadTer> ReponsabilidadResponsabilidadTerceros { get; set; }
     }
 }

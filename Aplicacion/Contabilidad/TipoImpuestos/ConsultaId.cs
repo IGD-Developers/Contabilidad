@@ -34,7 +34,7 @@ namespace Aplicacion.Contabilidad.TipoImpuestos
 
 
                 var entidad = await _context.cntTipoImpuestos
-                .SingleOrDefaultAsync(i => i.id == request.Id);
+                .SingleOrDefaultAsync(i => i.Id == request.Id);
 
                 if (entidad == null)
                 {

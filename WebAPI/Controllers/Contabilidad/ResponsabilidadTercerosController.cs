@@ -18,9 +18,9 @@ namespace WebAPI.Controllers
             return await Mediator.Send(new Consulta.ListarResponsabilidades());
         }
 
-        [HttpGet("{id}")]
-        public async Task<ActionResult<ResponsabilidadTerceroModel>>GetId(int id){
-            return await Mediator.Send(new ConsultaId.ConsultarId{Id = id});
+        [HttpGet("{Id}")]
+        public async Task<ActionResult<ResponsabilidadTerceroModel>>GetId(int Id){
+            return await Mediator.Send(new ConsultaId.ConsultarId{Id = Id});
         }
 
         /* [HttpPost]
@@ -33,9 +33,9 @@ namespace WebAPI.Controllers
             return await Mediator.Send(data);
         } */
 
-        /* [HttpDelete("eliminar/{id}")]
-        public async Task<ActionResult<Unit>>Eliminar(int id,Eliminar.Ejecuta data){
-            data.Id = id;
+        /* [HttpDelete("eliminar/{Id}")]
+        public async Task<ActionResult<Unit>>Eliminar(int Id,Eliminar.Ejecuta data){
+            data.Id = Id;
             return await Mediator.Send(data);
         } */
     }

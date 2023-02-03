@@ -10,15 +10,15 @@ namespace Persistencia.Mapeo.Contabilidad
         {
             builder
                 .ToTable("cnt_formatoconcepto")
-                .HasKey(entity => entity.id);
+                .HasKey(entity => entity.Id);
 
-            builder.HasOne<CntExogenaFormato>(fc => fc.exogenaFormato)
-                .WithMany(ef=>ef.exogenaFormatoFormatoConceptos)
-                .HasForeignKey(fc => fc.id_exogenaformato);
+            builder.HasOne<CntExogenaFormato>(fc => fc.ExogenaFormato)
+                .WithMany(ef=>ef.ExogenaFormatoFormatoConceptos)
+                .HasForeignKey(fc => fc.IdExogenaformato);
 
-            builder.HasOne<CntExogenaConcepto>(fc => fc.exogenaConcepto)
-                .WithMany(ec=>ec.exogenaConceptoFormatoConceptos)
-                .HasForeignKey(fc => fc.id_exogenaconcepto);
+            builder.HasOne<CntExogenaConcepto>(fc => fc.ExogenaConcepto)
+                .WithMany(ec=>ec.ExogenaConceptoFormatoConceptos)
+                .HasForeignKey(fc => fc.IdExogenaconcepto);
         }
     }
 }

@@ -4,9 +4,9 @@ namespace Aplicacion.Models.Contabilidad.Consecutivos
 {
     public class ConsecutivoComprobanteModel
     {
-        public int id_tipocomprobante { get; set; }
-        public int id_sucursal { get; set; }
+        public int IdTipocomprobante { get; set; }
+        public int IdSucursal { get; set; }
 
-        public DateTime fecha {get;set;}
+        public DateTime Fecha {get;set;}
     }
 }

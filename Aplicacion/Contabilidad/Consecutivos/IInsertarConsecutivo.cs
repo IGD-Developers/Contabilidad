@@ -10,11 +10,11 @@ namespace Aplicacion.Contabilidad.Consecutivos
 
         /// <summary>
         /// Class <c>InsertarConsecutivo</c>
-        /// <para >Recibe: ConsecutivoComprobanteModel={id_tipocomprobante,fecha,id_sucursal}
+        /// <para >Recibe: ConsecutivoComprobanteModel={IdTipocomprobante,Fecha,IdSucursal}
         ///</para>
         /// </summary>
         /// <returns> CntConsecutivo: El Consecutivo generado a partir del tipo de Incremento de cntTipoComprobante.
-        /// En formato {id_tipocomprobante, co_ano,co_mes,co_consecutivo,id_sucursal}
+        /// En formato {IdTipocomprobante, CoAno,CoMes,CoConsecutivo,IdSucursal}
         ///</returns>
         Task<CntConsecutivo> Insertar(ConsecutivoComprobanteModel model);
 ///TODO: MARIA No me funciona param

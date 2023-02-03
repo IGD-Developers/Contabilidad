@@ -10,17 +10,17 @@ namespace Persistencia.Mapeo.Contabilidad
         {
             builder
                 .ToTable("cnt_consecutivo")
-                .HasKey(entity => entity.id);
+                .HasKey(entity => entity.Id);
                 
             builder
                 .HasOne(cs => cs.TipoComprobante )
-                .WithMany(tc => tc.tipoComprobanteConsecutivos)
-                .HasForeignKey(cs=> cs.id_tipocomprobante);
+                .WithMany(tc => tc.TipoComprobanteConsecutivos)
+                .HasForeignKey(cs=> cs.IdTipocomprobante);
             
             builder
                 .HasOne(cs => cs.Sucursal )
-                .WithMany(tc => tc.sucursalConsecutivo)
-                .HasForeignKey(cs=> cs.id_sucursal);
+                .WithMany(tc => tc.SucursalConsecutivo)
+                .HasForeignKey(cs=> cs.IdSucursal);
         }
     }
 }

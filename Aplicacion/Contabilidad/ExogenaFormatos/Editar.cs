@@ -14,8 +14,8 @@ namespace Aplicacion.Contabilidad.ExogenaFormatos
          public class Ejecuta:IRequest
         {
             public int Id { get; set; }
-            public string codigo { get; set; }
-            public string nombre { get; set; }
+            public string Codigo { get; set; }
+            public string Nombre { get; set; }
         }
 
         public class EjecutaValidador : AbstractValidator<Ejecuta>
@@ -23,8 +23,8 @@ namespace Aplicacion.Contabilidad.ExogenaFormatos
             public EjecutaValidador()
             {
                 RuleFor(x=>x.Id).NotEmpty();
-                RuleFor(x=>x.codigo).NotEmpty();
-                RuleFor(x=>x.nombre).NotEmpty();
+                RuleFor(x=>x.Codigo).NotEmpty();
+                RuleFor(x=>x.Nombre).NotEmpty();
         
             }
         }    
@@ -44,8 +44,8 @@ namespace Aplicacion.Contabilidad.ExogenaFormatos
                 if (exogenaFormato == null) {  
                     throw new Exception("Registro no encontrado");
                 };         
-                exogenaFormato.codigo = request.nombre;
-                exogenaFormato.nombre= request.nombre;              
+                exogenaFormato.Codigo = request.Nombre;
+                exogenaFormato.Nombre= request.Nombre;              
                 var resultado=  await context.SaveChangesAsync();
                 if (resultado>0)
                 {

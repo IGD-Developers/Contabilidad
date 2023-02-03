@@ -31,7 +31,7 @@ namespace Aplicacion.Contabilidad.ResponsabilidadTerceros
                 var consulta = await _context.cntResponsabilidadTerceros.FindAsync(request.Id);
 
                 if(consulta ==null){
-                    throw new Exception("Responsabilidad tercero consultada no se encontro");
+                    throw new Exception("Responsabilidad Tercero consultada no se encontro");
                 }
 
                 var consultaModel = _mapper.Map<CntResponsabilidadTer, ResponsabilidadTerceroModel>(consulta);

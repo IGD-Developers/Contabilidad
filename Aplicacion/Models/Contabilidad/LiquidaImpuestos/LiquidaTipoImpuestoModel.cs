@@ -2,11 +2,11 @@ namespace Aplicacion.Models.Contabilidad.LiquidaImpuestos
 {
 
      /// <summary>LiquidaTipoImpuestoModel: 
-     ///Modelo para obtener codigo y nombre desde CntTipoImpuesto</summary>
+     ///Modelo para obtener Codigo y Nombre desde CntTipoImpuesto</summary>
 
     public class LiquidaTipoImpuestoModel
     {
-        public string codigo { get; set; }
-        public string nombre { get; set; }
+        public string Codigo { get; set; }
+        public string Nombre { get; set; }
     }
 }

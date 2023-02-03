@@ -9,11 +9,11 @@ namespace Persistencia.Mapeo.Configuracion
         public void Configure(EntityTypeBuilder<CnfSucursal> builder)
         {
                 builder.ToTable("cnf_sucursal")
-                    .HasKey(entity => entity.id);
+                    .HasKey(entity => entity.Id);
 
-                builder.HasOne(suc => suc.empresa )
-                    .WithMany(emp => emp.empresaSucursales)
-                    .HasForeignKey(suc=> suc.id_empresa);    
+                builder.HasOne(suc => suc.Empresa )
+                    .WithMany(emp => emp.EmpresaSucursales)
+                    .HasForeignKey(suc=> suc.IdEmpresa);    
            
         }
     }

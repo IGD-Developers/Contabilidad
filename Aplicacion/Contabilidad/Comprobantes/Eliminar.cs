@@ -34,22 +34,22 @@ namespace Aplicacion.Contabilidad.Comprobantes
 
             public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
             {
-               var comprobante = await context.cntComprobantes
-                .Include(t => t.tipoComprobante)
-                .Include(d => d.comprobanteDetalleComprobantes)
-                .FirstOrDefaultAsync(cmp => cmp.id == request.Id);
+               var Comprobante = await context.cntComprobantes
+                .Include(t => t.TipoComprobante)
+                .Include(d => d.ComprobanteDetalleComprobantes)
+                .FirstOrDefaultAsync(cmp => cmp.Id == request.Id);
 
-                if (comprobante == null)
+                if (Comprobante == null)
                 {
                     throw new Exception("Comprobante no encontrado");
                 }
 
-                if (comprobante.tipoComprobante.borrable == "F")
+                if (Comprobante.TipoComprobante.Borrable == "F")
                 {
                     throw new Exception("El Tipo de Comprobante no permite Eliminación");
                 }
 
-                if (comprobante.estado != "A" )
+                if (Comprobante.Estado != "A" )
                 {
                     throw new Exception("El Comprobante no está disponible para Eliminación porque ha sido sometido algún proceso que cambió su Estado ");
                 }
@@ -59,9 +59,9 @@ namespace Aplicacion.Contabilidad.Comprobantes
                 
                 try
                 {
-                    context.cntComprobantes.Remove(comprobante);
+                    context.cntComprobantes.Remove(Comprobante);
                     
-                    foreach (var registro in comprobante.comprobanteDetalleComprobantes)
+                    foreach (var registro in Comprobante.ComprobanteDetalleComprobantes)
                     {
 
                         context.cntDetalleComprobantes.Remove(registro);

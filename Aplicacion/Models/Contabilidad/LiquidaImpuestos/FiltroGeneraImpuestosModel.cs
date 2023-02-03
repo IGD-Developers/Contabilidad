@@ -3,14 +3,11 @@ using System;
 namespace Aplicacion.Models.Contabilidad.LiquidaImpuestos
 {
     public class FiltroGeneraImpuestosModel
-    {
-        
-        public int id_tipoimpuesto { get; set; }
-        public int id_sucursal { get; set; }
-        public int id_entidad  { get; set; }
-
-        public DateTime fechainicial { get; set; }
-        public DateTime fechafinal { get; set; }
-        
+    {    
+        public int IdTipoimpuesto { get; set; }
+        public int IdSucursal { get; set; }
+        public int IdEntidad  { get; set; }
+        public DateTime FechaInicial { get; set; }
+        public DateTime FechaFinal { get; set; }        
     }
 }

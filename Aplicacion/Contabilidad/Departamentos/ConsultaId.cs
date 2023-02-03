@@ -35,8 +35,8 @@ namespace Aplicacion.Contabilidad.Departamentos
                     throw new Exception("Departamento Consultado no Existe");
                 }
 
-                var departamentosModel = _mapper.Map<CntDepartamento, DepartamentosModel>(departamentos);
-                return departamentosModel;
+                var DepartamentosModel = _mapper.Map<CntDepartamento, DepartamentosModel>(departamentos);
+                return DepartamentosModel;
             }
         }
     }

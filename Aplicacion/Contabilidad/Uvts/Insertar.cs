@@ -15,8 +15,8 @@ namespace Aplicacion.Contabilidad.Uvts
 
             public int uvt_ano { get; set; }
             public double uvt_valor { get; set; }
-            public DateTime created_at { get; set; }
-            public DateTime? updated_at { get; set; }
+            public DateTime CreatedAt { get; set; }
+            public DateTime? UpdatedAt { get; set; }
 
         }
 
@@ -45,8 +45,8 @@ namespace Aplicacion.Contabilidad.Uvts
             {
                 var uvt = new CntUvt
                 {
-                    uvt_ano =  request.uvt_ano,
-                    uvt_valor = request.uvt_valor
+                    UvtAno =  request.uvt_ano,
+                    UvtValor = request.uvt_valor
                 };
 
                 context.cntUvts.Add(uvt);

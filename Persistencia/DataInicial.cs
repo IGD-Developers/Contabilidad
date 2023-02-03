@@ -12,8 +12,8 @@ namespace Persistencia
             if (!usuarioManager.Users.Any())
             {
 
-                var usuario=new CnfUsuario{UserName="usuario",Email="usuario@gmail.com"};
-                await usuarioManager.CreateAsync(usuario,"$Martha2014$");
+                var Usuario=new CnfUsuario{UserName="Usuario",Email="Usuario@gmail.com"};
+                await usuarioManager.CreateAsync(Usuario,"$Martha2014$");
             }
         }
     }

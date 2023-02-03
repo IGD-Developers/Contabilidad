@@ -17,8 +17,8 @@ namespace Aplicacion.Contabilidad.Uvts
             public int Id { get; set; }
             public int uvt_ano { get; set; }
             public double uvt_valor { get; set; }
-            public DateTime created_at { get; set; }
-            public DateTime? updated_at { get; set; }
+            public DateTime CreatedAt { get; set; }
+            public DateTime? UpdatedAt { get; set; }
 
         }
 
@@ -50,8 +50,8 @@ namespace Aplicacion.Contabilidad.Uvts
                 if (uvt == null) {  
                         throw new Exception("Registro no encontrado");
                 };   
-                uvt.uvt_ano =  request.uvt_ano;
-                uvt.uvt_valor = request.uvt_valor; 
+                uvt.UvtAno =  request.uvt_ano;
+                uvt.UvtValor = request.uvt_valor; 
 
                 var resultado=  await context.SaveChangesAsync();
                 if (resultado>0)

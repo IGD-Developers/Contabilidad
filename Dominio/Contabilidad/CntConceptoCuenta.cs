@@ -2,12 +2,12 @@ namespace Dominio.Contabilidad
 {
     public class CntConceptoCuenta
     {
-        public int id { get; set; }
-        public int id_exogenaconcepto { get; set; }
-        public int id_puc { get; set; }
-        public int id_formatocolumna { get; set; }
-        public int id_tipooperacion { get; set; }
-        public string estado { get; set; }
+        public int Id { get; set; }
+        public int IdExogenaconcepto { get; set; }
+        public int IdPuc { get; set; }
+        public int IdFormatocolumna { get; set; }
+        public int IdTipooperacion { get; set; }
+        public string Estado { get; set; }
 
     }
 }

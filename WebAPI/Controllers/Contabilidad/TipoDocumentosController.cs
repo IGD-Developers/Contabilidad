@@ -23,9 +23,9 @@ namespace WebAPI.Controllers
         }
 
         //http://localhost:5000/api/CntTipoDocumentos/1
-        [HttpGet("{id}")]
-        public async Task<ActionResult<TipoDocumentoModel>> Get(int id){
-            return await Mediator.Send(new ConsultaId.ConsultarTipoDocumentoId{Id = id});
+        [HttpGet("{Id}")]
+        public async Task<ActionResult<TipoDocumentoModel>> Get(int Id){
+            return await Mediator.Send(new ConsultaId.ConsultarTipoDocumentoId{Id = Id});
         }
     }
 }

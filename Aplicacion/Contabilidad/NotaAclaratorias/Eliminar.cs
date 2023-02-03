@@ -23,7 +23,7 @@ namespace Aplicacion.Contabilidad.NotaAclaratorias
             public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
             {
                 //TODO: Traer solo un campo 
-                var nota = await _context.cntNotaAclaratorias.FindAsync(request.ID);
+                var nota = await _context.cntNotaAclaratorias.FindAsync(request.Id);
                 if(nota == null){
                     throw new Exception("Nota Aclaratoria a Eliminar no existe");
                 }

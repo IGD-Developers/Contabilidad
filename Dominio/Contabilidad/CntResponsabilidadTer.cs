@@ -4,12 +4,11 @@ namespace Dominio.Contabilidad
 {
     public class CntResponsabilidadTer
     {
-        public int id { get; set; }
-        public int id_tercero {get; set;}
-        public int id_responsabilidad {get; set;}
-        
-        public CntResponsabilidad Responsabilidad {get; set;}
-        public CntTercero Tercero {get;set;}
+        public int Id { get; set; }
+        public int IdTercero { get; set; }
+        public int IdResponsabilidad { get; set; }
 
+        public CntResponsabilidad Responsabilidad { get; set; }
+        public CntTercero Tercero { get; set; }
     }
 }

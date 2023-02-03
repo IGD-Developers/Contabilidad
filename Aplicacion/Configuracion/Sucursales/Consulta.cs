@@ -19,7 +19,7 @@ namespace Aplicacion.Configuracion.Sucursales
         public class ListaCnfSucursales : IRequest<List<ListarSucursalModel>>
         {  }
 
-        //Parametros: tipo de dato a devolver que es objeto IRequest ListaCntTipoComprobantes primera clase declarada,
+        //Parametros: tipo de dato a devolver que es objeto IRequest ListaCntTipoComprobantes primera Clase declarada,
         //el segundo pmt es el formato en que se devuelve que es un  List<CntTipoComprobante>
 
         public class Manejador : IRequestHandler<ListaCnfSucursales, List<ListarSucursalModel>>
@@ -44,7 +44,7 @@ namespace Aplicacion.Configuracion.Sucursales
                 // El contexto devuelve desde el dbset
 
                 var entidades = await _context.cnfSucursales
-                .Include(e=>e.empresa)
+                .Include(e=>e.Empresa)
                 .ToListAsync();
 
                 var entidadesDto = _mapper.Map<List<CnfSucursal>,List<ListarSucursalModel>>(entidades);

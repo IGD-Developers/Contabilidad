@@ -24,11 +24,11 @@ namespace Aplicacion.Contabilidad.Anos
         {
             public EjecutaValidador()
             {
-                RuleFor(x=>x.id_comprobante).NotEmpty();
-                RuleFor(x=>x.ano_ano).NotEmpty();
-                RuleFor(x=>x.ano_cerrado).NotEmpty();
-                RuleFor(x=>x.estado).NotEmpty();
-                RuleFor(x=>x.id_usuario).NotEmpty();
+                RuleFor(x=>x.IdComprobante).NotEmpty();
+                RuleFor(x=>x.AnoAno).NotEmpty();
+                RuleFor(x=>x.AnoCerrado).NotEmpty();
+                RuleFor(x=>x.Estado).NotEmpty();
+                RuleFor(x=>x.IdUsuario).NotEmpty();
             }
         }
 
@@ -85,11 +85,11 @@ private readonly IMapper _mapper;
 
                 // var ano = new CntAno
                 // {
-                //     id_comprobante = request.id_comprobante,
-                //     ano_ano = request.ano_ano,
-                //     ano_cerrado = request.ano_cerrado,
+                //     IdComprobante = request.IdComprobante,
+                //     AnoAno = request.AnoAno,
+                //     AnoCerrado = request.AnoCerrado,
                 //     ano_estado = request.ano_estado,
-                //     id_usuario = request.id_usuario
+                //     IdUsuario = request.IdUsuario
 
                 // };
 

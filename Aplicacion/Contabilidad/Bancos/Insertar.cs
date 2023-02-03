@@ -24,8 +24,8 @@ namespace Aplicacion.Contabilidad.Bancos
         {
             public EjecutaValidador()
             {
-                RuleFor(x => x.codigo).NotEmpty();
-                RuleFor(x => x.nombre).NotEmpty();
+                RuleFor(x => x.Codigo).NotEmpty();
+                RuleFor(x => x.Nombre).NotEmpty();
             }
         }
 
@@ -85,8 +85,8 @@ namespace Aplicacion.Contabilidad.Bancos
 
                     // var banco = new CntBanco 
                     // {
-                    //     codigo =request.codigo,
-                    //     nombre=request.nombre
+                    //     Codigo =request.Codigo,
+                    //     Nombre=request.Nombre
                     // };
                     // _context.cntBancos.Add(banco);
                     // var respuesta= await _context.SaveChangesAsync();

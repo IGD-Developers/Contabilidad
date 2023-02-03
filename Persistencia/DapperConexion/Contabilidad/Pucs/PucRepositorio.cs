@@ -25,7 +25,7 @@ namespace Persistencia.DapperConexion.Contabilidad.Pucs
             throw new System.NotImplementedException();
         }
 
-        public Task<int> Elimina(int id)
+        public Task<int> Elimina(int Id)
         {
             throw new System.NotImplementedException();
         }
@@ -40,14 +40,14 @@ namespace Persistencia.DapperConexion.Contabilidad.Pucs
                     storeProcedure,
                     new
                     {
-                        _codigo = data.codigo,
-                        _nombre = data.nombre,
-                        _id_puctipo = data.id_puctipo,
-                        _id_tipocuenta = data.id_tipocuenta,
-                        _pac_activa = data.pac_activa,
-                        _pac_base = data.pac_base,
-                        _pac_ajusteniif = data.pac_ajusteniif,
-                        _id_usuario = data.id_usuario
+                        _codigo = data.Codigo,
+                        _nombre = data.Nombre,
+                        _id_puctipo = data.IdPuctipo,
+                        _id_tipocuenta = data.IdTipocuenta,
+                        _pac_activa = data.PacActiva,
+                        _pac_base = data.PacBase,
+                        _pac_ajusteniif = data.PacAjusteniif,
+                        _id_usuario = data.IdUsuario
                     },
                     commandType: CommandType.StoredProcedure);
                 _factoryConnection.CloseConnection();

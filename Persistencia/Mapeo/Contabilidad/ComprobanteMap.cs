@@ -13,30 +13,30 @@ namespace Persistencia.Mapeo.Contabilidad
         {
             builder
                 .ToTable("cnt_comprobante")
-                .HasKey(e => e.id);     
+                .HasKey(e => e.Id);     
 
             builder
-                .HasOne<CnfUsuario>(c =>c.usuario)
-                .WithMany(u=>u.usuarioComprobantes)
-                .HasForeignKey(c => c.id_usuario);
+                .HasOne<CnfUsuario>(c =>c.Usuario)
+                .WithMany(u=>u.UsuarioComprobantes)
+                .HasForeignKey(c => c.IdUsuario);
             builder
-                .HasOne<CntTipoComprobante>(c => c.tipoComprobante)
+                .HasOne<CntTipoComprobante>(c => c.TipoComprobante)
                     .WithMany(t=>t.ComprobantesTipoComprobante)
-                    .HasForeignKey(c => c.id_tipocomprobante);
+                    .HasForeignKey(c => c.IdTipocomprobante);
             builder
-               .HasOne(c => c.sucursal)
-                    .WithMany(s=>s.sucursalComprobantes)
-                    .HasForeignKey(c => c.id_sucursal);
+               .HasOne(c => c.Sucursal)
+                    .WithMany(s=>s.SucursalComprobantes)
+                    .HasForeignKey(c => c.IdSucursal);
             builder
-            .Property(b => b.created_at)
+            .Property(b => b.CreatedAt)
             .HasDefaultValueSql("DateTime.Now");  
             
             builder
-            .Property(e => e.estado)
+            .Property(e => e.Estado)
             .HasDefaultValueSql("A");  
 
             // builder
-            // .Property(e => e.id_modulo)
+            // .Property(e => e.IdModulo)
             // .HasDefaultValueSql("1");  
         }           
 

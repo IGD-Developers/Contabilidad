@@ -35,9 +35,9 @@ namespace Aplicacion.Contabilidad.Pucs
             {
 
                 var entidadDto = await context.cntPucs
-                .Include(x=>x.pucTipo)
-                .Include(x=>x.tipoCuenta)
-                .Where(p=>p.id == request.Id)
+                .Include(x=>x.PucTipo)
+                .Include(x=>x.TipoCuenta)
+                .Where(p=>p.Id == request.Id)
                 .Select(p =>  mapper.Map<CntPuc, ListarPucModel>(p))
                 .SingleOrDefaultAsync();
 
@@ -49,49 +49,49 @@ namespace Aplicacion.Contabilidad.Pucs
                     throw new Exception("Registro no encontrado");
                 };     
                 
-                //var pucModel =  mapper.Map<CntPuc, ListarPucModel>(puc);
+                //var PucModel =  mapper.Map<CntPuc, ListarPucModel>(puc);
 
-                var longitud    = entidadDto.codigo.Length;
-                var codigoclase = entidadDto.codigo.Substring(0, 1);
-                var codigogrupo = (longitud>1) ? entidadDto.codigo.Substring(0, 2) : "";
-                var codigocuenta= (longitud>3) ? entidadDto.codigo.Substring(0, 4) : "";
-                var codigosubcuenta=(longitud>5) ? entidadDto.codigo.Substring(0, 6) : "";
+                var longitud    = entidadDto.Codigo.Length;
+                var codigoclase = entidadDto.Codigo.Substring(0, 1);
+                var codigogrupo = (longitud>1) ? entidadDto.Codigo.Substring(0, 2) : "";
+                var codigocuenta= (longitud>3) ? entidadDto.Codigo.Substring(0, 4) : "";
+                var codigosubcuenta=(longitud>5) ? entidadDto.Codigo.Substring(0, 6) : "";
 
 
-                var clase = await context.cntPucs
-                                    .Where(p=>p.codigo == codigoclase)
-                                    .Select(c=> new nombreModel{nombre=c.nombre})
+                var Clase = await context.cntPucs
+                                    .Where(p=>p.Codigo == codigoclase)
+                                    .Select(c=> new NombreModel{Nombre=c.Nombre})
                                     .SingleOrDefaultAsync(); 
-                entidadDto.clase = clase.nombre;    
+                entidadDto.Clase = Clase.Nombre;    
 
                 if (longitud>1)
                 {
-                    var grupo = await context.cntPucs
-                        .Where(p=>p.codigo == codigogrupo)
-                        .Select(c=> new nombreModel{nombre=c.nombre})
+                    var Grupo = await context.cntPucs
+                        .Where(p=>p.Codigo == codigogrupo)
+                        .Select(c=> new NombreModel{Nombre=c.Nombre})
                         .SingleOrDefaultAsync(); 
-                        entidadDto.grupo = grupo.nombre;    
-                } else {entidadDto.grupo ="";}
+                        entidadDto.Grupo = Grupo.Nombre;    
+                } else {entidadDto.Grupo ="";}
                             
                         
                 if (longitud>3)
                 {
-                    var cuenta = await context.cntPucs
-                        .Where(p=>p.codigo == codigocuenta)
-                        .Select(c=> new nombreModel{nombre=c.nombre})
+                    var Cuenta = await context.cntPucs
+                        .Where(p=>p.Codigo == codigocuenta)
+                        .Select(c=> new NombreModel{Nombre=c.Nombre})
                         .SingleOrDefaultAsync(); 
-                    entidadDto.cuenta = cuenta.nombre;   
-                } else {entidadDto.cuenta="";}
+                    entidadDto.Cuenta = Cuenta.Nombre;   
+                } else {entidadDto.Cuenta="";}
             
             
                 if (longitud>5)
                 {    
-                    var subcuenta = await context.cntPucs
-                        .Where(p=>p.codigo == codigosubcuenta)
-                        .Select(c=> new {nombre=c.nombre})
+                    var SubCuenta = await context.cntPucs
+                        .Where(p=>p.Codigo == codigosubcuenta)
+                        .Select(c=> new {Nombre=c.Nombre})
                         .SingleOrDefaultAsync(); 
-                    entidadDto.subcuenta = subcuenta.nombre;   
-                } else {entidadDto.subcuenta="";}     
+                    entidadDto.SubCuenta = SubCuenta.Nombre;   
+                } else {entidadDto.SubCuenta="";}     
 
               return entidadDto;
             }

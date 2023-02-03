@@ -19,11 +19,11 @@ namespace Persistencia.Migrations
 
             modelBuilder.Entity("Dominio.Configuracion.CnfEmpresa", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int>("id_tercero_gerente")
+                    b.Property<int>("IdTerceroGerente")
                         .HasColumnType("int");
 
                     b.Property<string>("nit")
@@ -32,27 +32,27 @@ namespace Persistencia.Migrations
                     b.Property<string>("razon_social")
                         .HasColumnType("longtext");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
                     b.ToTable("cnf_empresa");
                 });
 
             modelBuilder.Entity("Dominio.Configuracion.CnfSucursal", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("codigo")
+                    b.Property<string>("Codigo")
                         .HasColumnType("longtext");
 
                     b.Property<int>("id_empresa")
                         .HasColumnType("int");
 
-                    b.Property<string>("nombre")
+                    b.Property<string>("Nombre")
                         .HasColumnType("longtext");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
                     b.HasIndex("id_empresa");
 
@@ -61,14 +61,14 @@ namespace Persistencia.Migrations
 
             modelBuilder.Entity("Dominio.Configuracion.CnfUsuario", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<DateTime?>("created_at")
+                    b.Property<DateTime?>("CreatedAt")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<int>("id_tercero")
+                    b.Property<int>("IdTercero")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("update_at")
@@ -89,7 +89,7 @@ namespace Persistencia.Migrations
                     b.Property<string>("usu_usuario")
                         .HasColumnType("longtext");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
                     b.ToTable("cnf_usuario");
                 });
@@ -146,10 +146,10 @@ namespace Persistencia.Migrations
                         .HasMaxLength(256)
                         .HasColumnType("varchar(256)");
 
-                    b.Property<DateTime?>("created_at")
+                    b.Property<DateTime?>("CreatedAt")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<int>("id_tercero")
+                    b.Property<int>("IdTercero")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("update_at")
@@ -175,194 +175,194 @@ namespace Persistencia.Migrations
 
             modelBuilder.Entity("Dominio.Contabilidad.CntAno", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int>("ano_ano")
+                    b.Property<int>("AnoAno")
                         .HasColumnType("int");
 
-                    b.Property<bool>("ano_cerrado")
+                    b.Property<bool>("AnoCerrado")
                         .HasColumnType("tinyint(1)");
 
                     b.Property<string>("ano_estado")
                         .HasColumnType("longtext");
 
-                    b.Property<DateTime?>("created_at")
+                    b.Property<DateTime?>("CreatedAt")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<int>("id_comprobante")
+                    b.Property<int>("IdComprobante")
                         .HasColumnType("int");
 
-                    b.Property<int>("id_usuario")
+                    b.Property<int>("IdUsuario")
                         .HasColumnType("int");
 
-                    b.Property<DateTime?>("updated_at")
+                    b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime(6)");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
-                    b.HasIndex("id_comprobante");
+                    b.HasIndex("IdComprobante");
 
-                    b.HasIndex("id_usuario");
+                    b.HasIndex("IdUsuario");
 
                     b.ToTable("cnt_ano");
                 });
 
             modelBuilder.Entity("Dominio.Contabilidad.CntBanco", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("codigo")
+                    b.Property<string>("Codigo")
                         .HasColumnType("longtext");
 
-                    b.Property<string>("nombre")
+                    b.Property<string>("Nombre")
                         .HasColumnType("longtext");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
                     b.ToTable("cnt_banco");
                 });
 
             modelBuilder.Entity("Dominio.Contabilidad.CntCategoriaComprobante", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("codigo")
+                    b.Property<string>("Codigo")
                         .HasColumnType("longtext");
 
-                    b.Property<string>("nombre")
+                    b.Property<string>("Nombre")
                         .HasColumnType("longtext");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
                     b.ToTable("cnt_categoriacomprobante");
                 });
 
             modelBuilder.Entity("Dominio.Contabilidad.CntCentroCosto", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
                     b.Property<bool>("cco_estado")
                         .HasColumnType("tinyint(1)");
 
-                    b.Property<string>("codigo")
+                    b.Property<string>("Codigo")
                         .HasColumnType("longtext");
 
-                    b.Property<DateTime?>("created_at")
+                    b.Property<DateTime?>("CreatedAt")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<string>("nombre")
+                    b.Property<string>("Nombre")
                         .HasColumnType("longtext");
 
-                    b.Property<DateTime?>("updated_at")
+                    b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime(6)");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
                     b.ToTable("cnt_centrocosto");
                 });
 
             modelBuilder.Entity("Dominio.Contabilidad.CntCiiu", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("codigo")
+                    b.Property<string>("Codigo")
                         .HasColumnType("longtext");
 
-                    b.Property<int>("id_seccionciiu")
+                    b.Property<int>("IdSeccionciiu")
                         .HasColumnType("int");
 
-                    b.Property<int>("id_tipociuu")
+                    b.Property<int>("IdTipociuu")
                         .HasColumnType("int");
 
-                    b.Property<string>("nombre")
+                    b.Property<string>("Nombre")
                         .HasColumnType("longtext");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
-                    b.HasIndex("id_seccionciiu");
+                    b.HasIndex("IdSeccionciiu");
 
-                    b.HasIndex("id_tipociuu");
+                    b.HasIndex("IdTipociuu");
 
                     b.ToTable("cnt_ciiu");
                 });
 
             modelBuilder.Entity("Dominio.Contabilidad.CntComprobante", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("cco_ano")
+                    b.Property<string>("CcoAno")
                         .HasColumnType("longtext");
 
-                    b.Property<int>("cco_consecutivo")
+                    b.Property<int>("CcoConsecutivo")
                         .HasColumnType("int");
 
-                    b.Property<string>("cco_detalle")
+                    b.Property<string>("CcoDetalle")
                         .HasColumnType("longtext");
 
-                    b.Property<string>("cco_documento")
+                    b.Property<string>("CcoDocumento")
                         .HasColumnType("longtext");
 
-                    b.Property<DateTime?>("cco_fecha")
+                    b.Property<DateTime?>("CcoFecha")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<string>("cco_mes")
+                    b.Property<string>("CcoMes")
                         .HasColumnType("longtext");
 
 
-                    b.Property<DateTime?>("created_at")
+                    b.Property<DateTime?>("CreatedAt")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<int>("id_modulo")
+                    b.Property<int>("IdModulo")
                         .HasColumnType("int");
 
-                    b.Property<int?>("id_reversion")
+                    b.Property<int?>("IdReversion")
                         .HasColumnType("int");
 
-                    b.Property<int>("id_sucursal")
+                    b.Property<int>("IdSucursal")
                         .HasColumnType("int");
 
-                    b.Property<int>("id_tercero")
+                    b.Property<int>("IdTercero")
                         .HasColumnType("int");
 
-                    b.Property<int>("id_tipocomprobante")
+                    b.Property<int>("IdTipocomprobante")
                         .HasColumnType("int");
 
-                    b.Property<int>("id_usuario")
+                    b.Property<int>("IdUsuario")
                         .HasColumnType("int");
 
-                    b.Property<DateTime?>("updated_at")
+                    b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime(6)");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
-                    b.HasIndex("id_sucursal");
+                    b.HasIndex("IdSucursal");
 
-                    b.HasIndex("id_tipocomprobante");
+                    b.HasIndex("IdTipocomprobante");
 
-                    b.HasIndex("id_usuario");
+                    b.HasIndex("IdUsuario");
 
                     b.ToTable("cnt_comprobante");
                 });
 
             modelBuilder.Entity("Dominio.Contabilidad.CntConceptoCuenta", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("estado")
+                    b.Property<string>("Estado")
                         .HasColumnType("longtext");
 
                     b.Property<int>("id_exogenaconcepto")
@@ -371,191 +371,191 @@ namespace Persistencia.Migrations
                     b.Property<int>("id_formatocolumna")
                         .HasColumnType("int");
 
-                    b.Property<int>("id_puc")
+                    b.Property<int>("IdPuc")
                         .HasColumnType("int");
 
                     b.Property<int>("id_tipooperacion")
                         .HasColumnType("int");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
                     b.ToTable("cnt_conceptocuenta");
                 });
 
             modelBuilder.Entity("Dominio.Contabilidad.CntConsecutivo", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("co_ano")
+                    b.Property<string>("CoAno")
                         .HasColumnType("longtext");
 
-                    b.Property<int>("co_consecutivo")
+                    b.Property<int>("CoConsecutivo")
                         .HasColumnType("int");
 
-                    b.Property<string>("co_mes")
+                    b.Property<string>("CoMes")
                         .HasColumnType("longtext");
 
-                    b.Property<int>("id_tipocomprobante")
+                    b.Property<int>("IdTipocomprobante")
                         .HasColumnType("int");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
-                    b.HasIndex("id_tipocomprobante");
+                    b.HasIndex("IdTipocomprobante");
 
                     b.ToTable("cnt_consecutivo");
                 });
 
             modelBuilder.Entity("Dominio.Contabilidad.CntCuentaImpuesto", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int>("id_puc")
+                    b.Property<int>("IdPuc")
                         .HasColumnType("int");
 
-                    b.Property<int>("id_tipoimpuesto")
+                    b.Property<int>("IdTipoimpuesto")
                         .HasColumnType("int");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
-                    b.HasIndex("id_puc");
+                    b.HasIndex("IdPuc");
 
-                    b.HasIndex("id_tipoimpuesto");
+                    b.HasIndex("IdTipoimpuesto");
 
                     b.ToTable("cnt_cuentaimpuesto");
                 });
 
             modelBuilder.Entity("Dominio.Contabilidad.CntDepartamento", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("codigo")
+                    b.Property<string>("Codigo")
                         .HasColumnType("longtext");
 
-                    b.Property<string>("nombre")
+                    b.Property<string>("Nombre")
                         .HasColumnType("longtext");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
                     b.ToTable("cnt_departamento");
                 });
 
             modelBuilder.Entity("Dominio.Contabilidad.CntDetalleComprobante", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<double>("dco_base")
+                    b.Property<double>("DcoBase")
                         .HasColumnType("double");
 
-                    b.Property<double>("dco_credito")
+                    b.Property<double>("DcoCredito")
                         .HasColumnType("double");
 
-                    b.Property<double>("dco_debito")
+                    b.Property<double>("DcoDebito")
                         .HasColumnType("double");
 
-                    b.Property<string>("dco_detalle")
+                    b.Property<string>("DcoDetalle")
                         .HasColumnType("longtext");
 
-                    b.Property<double>("dco_tarifa")
+                    b.Property<double>("DcoTarifa")
                         .HasColumnType("double");
 
-                    b.Property<int>("id_centrocosto")
+                    b.Property<int>("IdCentrocosto")
                         .HasColumnType("int");
 
-                    b.Property<int>("id_comprobante")
+                    b.Property<int>("IdComprobante")
                         .HasColumnType("int");
 
-                    b.Property<int>("id_puc")
+                    b.Property<int>("IdPuc")
                         .HasColumnType("int");
 
-                    b.Property<int>("id_tercero")
+                    b.Property<int>("IdTercero")
                         .HasColumnType("int");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
-                    b.HasIndex("id_centrocosto");
+                    b.HasIndex("IdCentrocosto");
 
-                    b.HasIndex("id_comprobante");
+                    b.HasIndex("IdComprobante");
 
-                    b.HasIndex("id_puc");
+                    b.HasIndex("IdPuc");
 
                     b.ToTable("cnt_detallecomprobante");
                 });
 
             modelBuilder.Entity("Dominio.Contabilidad.CntEntidad", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("codigo")
+                    b.Property<string>("Codigo")
                         .HasColumnType("longtext");
 
-                    b.Property<int>("id_tercero")
+                    b.Property<int>("IdTercero")
                         .HasColumnType("int");
 
-                    b.Property<int>("id_tipoimpuesto")
+                    b.Property<int>("IdTipoimpuesto")
                         .HasColumnType("int");
 
-                    b.Property<string>("nombre")
+                    b.Property<string>("Nombre")
                         .HasColumnType("longtext");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
-                    b.HasIndex("id_tercero");
+                    b.HasIndex("IdTercero");
 
-                    b.HasIndex("id_tipoimpuesto");
+                    b.HasIndex("IdTipoimpuesto");
 
                     b.ToTable("cnt_entidad");
                 });
 
             modelBuilder.Entity("Dominio.Contabilidad.CntExogenaConcepto", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("codigo")
+                    b.Property<string>("Codigo")
                         .HasColumnType("longtext");
 
-                    b.Property<string>("estado")
+                    b.Property<string>("Estado")
                         .HasColumnType("longtext");
 
-                    b.Property<string>("nombre")
+                    b.Property<string>("Nombre")
                         .HasColumnType("longtext");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
                     b.ToTable("cnt_exogenaconcepto");
                 });
 
             modelBuilder.Entity("Dominio.Contabilidad.CntExogenaFormato", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("codigo")
+                    b.Property<string>("Codigo")
                         .HasColumnType("longtext");
 
-                    b.Property<string>("nombre")
+                    b.Property<string>("Nombre")
                         .HasColumnType("longtext");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
                     b.ToTable("cnt_exogenaformato");
                 });
 
             modelBuilder.Entity("Dominio.Contabilidad.CntFormatoColumna", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
@@ -571,7 +571,7 @@ namespace Persistencia.Migrations
                     b.Property<int>("id_exogenaformato")
                         .HasColumnType("int");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
                     b.HasIndex("id_exogenaformato");
 
@@ -580,7 +580,7 @@ namespace Persistencia.Migrations
 
             modelBuilder.Entity("Dominio.Contabilidad.CntFormatoConcepto", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
@@ -590,7 +590,7 @@ namespace Persistencia.Migrations
                     b.Property<int>("id_exogenaformato")
                         .HasColumnType("int");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
                     b.HasIndex("id_exogenaconcepto");
 
@@ -601,82 +601,82 @@ namespace Persistencia.Migrations
 
             modelBuilder.Entity("Dominio.Contabilidad.CntGenero", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("codigo")
+                    b.Property<string>("Codigo")
                         .HasColumnType("longtext");
 
-                    b.Property<string>("nombre")
+                    b.Property<string>("Nombre")
                         .HasColumnType("longtext");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
                     b.ToTable("cnt_genero");
                 });
 
             modelBuilder.Entity("Dominio.Contabilidad.CntLiquidaImpuesto", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<DateTime?>("created_at")
+                    b.Property<DateTime?>("CreatedAt")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<int>("id_comprobante")
+                    b.Property<int>("IdComprobante")
                         .HasColumnType("int");
 
-                    b.Property<int>("id_puc")
+                    b.Property<int>("IdPuc")
                         .HasColumnType("int");
 
-                    b.Property<int>("id_tercero")
+                    b.Property<int>("IdTercero")
                         .HasColumnType("int");
 
-                    b.Property<int>("id_tipoimpuesto")
+                    b.Property<int>("IdTipoimpuesto")
                         .HasColumnType("int");
 
-                    b.Property<int>("id_usuario")
+                    b.Property<int>("IdUsuario")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("lim_fecha")
+                    b.Property<DateTime>("LimFecha")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<DateTime>("lim_fechafinal")
+                    b.Property<DateTime>("LimFechafinal")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<DateTime>("lim_fechainicial")
+                    b.Property<DateTime>("LimFechainicial")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<DateTime?>("updated_at")
+                    b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime(6)");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
-                    b.HasIndex("id_comprobante");
+                    b.HasIndex("IdComprobante");
 
-                    b.HasIndex("id_puc");
+                    b.HasIndex("IdPuc");
 
-                    b.HasIndex("id_tercero");
+                    b.HasIndex("IdTercero");
 
-                    b.HasIndex("id_tipoimpuesto");
+                    b.HasIndex("IdTipoimpuesto");
 
-                    b.HasIndex("id_usuario");
+                    b.HasIndex("IdUsuario");
 
                     b.ToTable("cnt_liquidaimpuesto");
                 });
 
             modelBuilder.Entity("Dominio.Contabilidad.CntMes", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("created_at")
+                    b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<int>("id_usuario")
+                    b.Property<int>("IdUsuario")
                         .HasColumnType("int");
 
                     b.Property<int>("mes_ano")
@@ -688,510 +688,510 @@ namespace Persistencia.Migrations
                     b.Property<int>("mes_mes")
                         .HasColumnType("int");
 
-                    b.Property<DateTime?>("updated_at")
+                    b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime(6)");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
-                    b.HasIndex("id_usuario");
+                    b.HasIndex("IdUsuario");
 
                     b.ToTable("cnt_mes");
                 });
 
             modelBuilder.Entity("Dominio.Contabilidad.CntMunicipio", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("codigo")
+                    b.Property<string>("Codigo")
                         .HasColumnType("longtext");
 
-                    b.Property<int>("id_departamento")
+                    b.Property<int>("IdDepartamento")
                         .HasColumnType("int");
 
-                    b.Property<string>("nombre")
+                    b.Property<string>("Nombre")
                         .HasColumnType("longtext");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
-                    b.HasIndex("id_departamento");
+                    b.HasIndex("IdDepartamento");
 
                     b.ToTable("cnt_municipio");
                 });
 
             modelBuilder.Entity("Dominio.Contabilidad.CntNotaAclaratoria", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("created_at")
+                    b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<int>("id_notaaclaratoriatipo")
+                    b.Property<int>("IdNotaaclaratoriatipo")
                         .HasColumnType("int");
 
-                    b.Property<int>("id_usuario")
+                    b.Property<int>("IdUsuario")
                         .HasColumnType("int");
 
-                    b.Property<int>("nac_consecutivo")
+                    b.Property<int>("NacConsecutivo")
                         .HasColumnType("int");
 
-                    b.Property<string>("nac_detalle")
+                    b.Property<string>("NacDetalle")
                         .HasColumnType("longtext");
 
-                    b.Property<DateTime>("nac_fecha")
+                    b.Property<DateTime>("NacFecha")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<string>("nac_titulo")
+                    b.Property<string>("NacTitulo")
                         .HasColumnType("longtext");
 
-                    b.Property<DateTime?>("updated_at")
+                    b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime(6)");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
-                    b.HasIndex("id_notaaclaratoriatipo");
+                    b.HasIndex("IdNotaaclaratoriatipo");
 
                     b.ToTable("cnt_notaaclaratoria");
                 });
 
             modelBuilder.Entity("Dominio.Contabilidad.CntNotaAclaratoriaCuenta", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
                     b.Property<int>("id_notaaclaratoria")
                         .HasColumnType("int");
 
-                    b.Property<int>("id_puc")
+                    b.Property<int>("IdPuc")
                         .HasColumnType("int");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
                     b.HasIndex("id_notaaclaratoria");
 
-                    b.HasIndex("id_puc");
+                    b.HasIndex("IdPuc");
 
                     b.ToTable("cnt_notaaclaratoriacuenta");
                 });
 
             modelBuilder.Entity("Dominio.Contabilidad.CntNotaAclaratoriaTipo", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("codigo")
+                    b.Property<string>("Codigo")
                         .HasColumnType("longtext");
 
-                    b.Property<string>("nombre")
+                    b.Property<string>("Nombre")
                         .HasColumnType("longtext");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
                     b.ToTable("cnt_notaaclaratoriatipo");
                 });
 
             modelBuilder.Entity("Dominio.Contabilidad.CntPuc", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("codigo")
+                    b.Property<string>("Codigo")
                         .HasColumnType("longtext");
 
-                    b.Property<DateTime?>("created_at")
+                    b.Property<DateTime?>("CreatedAt")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<int?>("id_puctipo")
+                    b.Property<int?>("IdPuctipo")
                         .HasColumnType("int");
 
-                    b.Property<int?>("id_tipocuenta")
+                    b.Property<int?>("IdTipocuenta")
                         .HasColumnType("int");
 
-                    b.Property<int>("id_usuario")
+                    b.Property<int>("IdUsuario")
                         .HasColumnType("int");
 
-                    b.Property<string>("nombre")
+                    b.Property<string>("Nombre")
                         .HasColumnType("longtext");
 
-                    b.Property<bool>("pac_activa")
+                    b.Property<bool>("PacActiva")
                         .HasColumnType("tinyint(1)");
 
-                    b.Property<bool>("pac_ajusteniif")
+                    b.Property<bool>("PacAjusteniif")
                         .HasColumnType("tinyint(1)");
 
-                    b.Property<bool>("pac_base")
+                    b.Property<bool>("PacBase")
                         .HasColumnType("tinyint(1)");
 
-                    b.Property<DateTime?>("updated_at")
+                    b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime(6)");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
-                    b.HasIndex("id_puctipo");
+                    b.HasIndex("IdPuctipo");
 
-                    b.HasIndex("id_tipocuenta");
+                    b.HasIndex("IdTipocuenta");
 
-                    b.HasIndex("id_usuario");
+                    b.HasIndex("IdUsuario");
 
                     b.ToTable("cnt_puc");
                 });
 
             modelBuilder.Entity("Dominio.Contabilidad.CntPucTipo", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("codigo")
+                    b.Property<string>("Codigo")
                         .HasColumnType("longtext");
 
-                    b.Property<DateTime?>("created_at")
+                    b.Property<DateTime?>("CreatedAt")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<string>("nombre")
+                    b.Property<string>("Nombre")
                         .HasColumnType("longtext");
 
-                    b.Property<DateTime?>("updated_at")
+                    b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime(6)");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
                     b.ToTable("cnt_puctipo");
                 });
 
             modelBuilder.Entity("Dominio.Contabilidad.CntRegimen", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("codigo")
+                    b.Property<string>("Codigo")
                         .HasColumnType("longtext");
 
-                    b.Property<string>("nombre")
+                    b.Property<string>("Nombre")
                         .HasColumnType("longtext");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
                     b.ToTable("cnt_regimen");
                 });
 
             modelBuilder.Entity("Dominio.Contabilidad.CntResponsabilidad", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("codigo")
+                    b.Property<string>("Codigo")
                         .HasColumnType("longtext");
 
-                    b.Property<string>("nombre")
+                    b.Property<string>("Nombre")
                         .HasColumnType("longtext");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
                     b.ToTable("cnt_responsabilidad");
                 });
 
             modelBuilder.Entity("Dominio.Contabilidad.CntResponsabilidadTer", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int>("id_responsabilidad")
+                    b.Property<int>("IdResponsabilidad")
                         .HasColumnType("int");
 
-                    b.Property<int>("id_tercero")
+                    b.Property<int>("IdTercero")
                         .HasColumnType("int");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
-                    b.HasIndex("id_responsabilidad");
+                    b.HasIndex("IdResponsabilidad");
 
-                    b.HasIndex("id_tercero");
+                    b.HasIndex("IdTercero");
 
                     b.ToTable("cnt_responsabilidad_ter");
                 });
 
             modelBuilder.Entity("Dominio.Contabilidad.CntSeccionCiiu", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("codigo")
+                    b.Property<string>("Codigo")
                         .HasColumnType("longtext");
 
-                    b.Property<string>("nombre")
+                    b.Property<string>("Nombre")
                         .HasColumnType("longtext");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
                     b.ToTable("cnt_seccionciiu");
                 });
 
             modelBuilder.Entity("Dominio.Contabilidad.CntTercero", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("created_at")
+                    b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<int>("id_ciiu")
+                    b.Property<int>("IdCiiu")
                         .HasColumnType("int");
 
-                    b.Property<int>("id_genero")
+                    b.Property<int>("IdGenero")
                         .HasColumnType("int");
 
-                    b.Property<int>("id_municipio")
+                    b.Property<int>("IdMunicipio")
                         .HasColumnType("int");
 
-                    b.Property<int>("id_regimen")
+                    b.Property<int>("IdRegimen")
                         .HasColumnType("int");
 
-                    b.Property<int>("id_tipodocumento")
+                    b.Property<int>("IdTipodocumento")
                         .HasColumnType("int");
 
-                    b.Property<int>("id_tippersona")
+                    b.Property<int>("IdTippersona")
                         .HasColumnType("int");
 
-                    b.Property<int>("id_usuario")
+                    b.Property<int>("IdUsuario")
                         .HasColumnType("int");
 
-                    b.Property<string>("ter_barrio")
+                    b.Property<string>("TerBarrio")
                         .HasColumnType("longtext");
 
-                    b.Property<string>("ter_contacto_fe")
+                    b.Property<string>("TerContactoFe")
                         .HasColumnType("longtext");
 
-                    b.Property<string>("ter_digitoverificacion")
+                    b.Property<string>("TerDigitoverificacion")
                         .HasColumnType("longtext");
 
-                    b.Property<string>("ter_direccion")
+                    b.Property<string>("TerDireccion")
                         .HasColumnType("longtext");
 
-                    b.Property<string>("ter_documento")
+                    b.Property<string>("TerDocumento")
                         .HasColumnType("longtext");
 
-                    b.Property<string>("ter_email")
+                    b.Property<string>("TerEmail")
                         .HasColumnType("longtext");
 
-                    b.Property<string>("ter_email_fe")
+                    b.Property<string>("TerEmailFe")
                         .HasColumnType("longtext");
 
-                    b.Property<string>("ter_priapellido")
+                    b.Property<string>("TerPriapellido")
                         .HasColumnType("longtext");
 
-                    b.Property<string>("ter_prinombre")
+                    b.Property<string>("TerPrinombre")
                         .HasColumnType("longtext");
 
-                    b.Property<string>("ter_razonsocial")
+                    b.Property<string>("TerRazonsocial")
                         .HasColumnType("longtext");
 
-                    b.Property<string>("ter_segapellido")
+                    b.Property<string>("TerSegapellido")
                         .HasColumnType("longtext");
 
-                    b.Property<string>("ter_segnombre")
+                    b.Property<string>("TerSegnombre")
                         .HasColumnType("longtext");
 
-                    b.Property<string>("ter_telcelular")
+                    b.Property<string>("TerTelcelular")
                         .HasColumnType("longtext");
 
-                    b.Property<string>("ter_telfijo")
+                    b.Property<string>("TerTelfijo")
                         .HasColumnType("longtext");
 
-                    b.Property<DateTime?>("updated_at")
+                    b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime(6)");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
-                    b.HasIndex("id_ciiu");
+                    b.HasIndex("IdCiiu");
 
-                    b.HasIndex("id_genero");
+                    b.HasIndex("IdGenero");
 
-                    b.HasIndex("id_municipio");
+                    b.HasIndex("IdMunicipio");
 
-                    b.HasIndex("id_regimen");
+                    b.HasIndex("IdRegimen");
 
-                    b.HasIndex("id_tipodocumento");
+                    b.HasIndex("IdTipodocumento");
 
-                    b.HasIndex("id_tippersona");
+                    b.HasIndex("IdTippersona");
 
                     b.ToTable("cnt_tercero");
                 });
 
             modelBuilder.Entity("Dominio.Contabilidad.CntTipoCiiu", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("codigo")
+                    b.Property<string>("Codigo")
                         .HasColumnType("longtext");
 
-                    b.Property<string>("nombre")
+                    b.Property<string>("Nombre")
                         .HasColumnType("longtext");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
                     b.ToTable("cnt_tipociiu");
                 });
 
             modelBuilder.Entity("Dominio.Contabilidad.CntTipoComprobante", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("anulable")
+                    b.Property<string>("Anulable")
                         .HasColumnType("longtext");
 
-                    b.Property<string>("codigo")
+                    b.Property<string>("Codigo")
                         .HasColumnType("longtext");
 
-                    b.Property<DateTime?>("created_at")
+                    b.Property<DateTime?>("CreatedAt")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<string>("editable")
+                    b.Property<string>("Editable")
                         .HasColumnType("longtext");
 
-                    b.Property<int>("id_categoriacomprobante")
+                    b.Property<int>("IdCategoriacomprobante")
                         .HasColumnType("int");
 
-                    b.Property<int>("id_usuario")
+                    b.Property<int>("IdUsuario")
                         .HasColumnType("int");
 
-                    b.Property<string>("nombre")
+                    b.Property<string>("Nombre")
                         .HasColumnType("longtext");
 
-                    b.Property<string>("tco_incremento")
+                    b.Property<string>("TcoIncremento")
                         .HasColumnType("longtext");
 
-                    b.Property<DateTime?>("updated_at")
+                    b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime(6)");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
-                    b.HasIndex("id_categoriacomprobante");
+                    b.HasIndex("IdCategoriacomprobante");
 
-                    b.HasIndex("id_usuario");
+                    b.HasIndex("IdUsuario");
 
                     b.ToTable("cnt_tipocomprobante");
                 });
 
             modelBuilder.Entity("Dominio.Contabilidad.CntTipoCuenta", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("codigo")
+                    b.Property<string>("Codigo")
                         .HasColumnType("longtext");
 
-                    b.Property<string>("nombre")
+                    b.Property<string>("Nombre")
                         .HasColumnType("longtext");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
                     b.ToTable("cnt_tipocuenta");
                 });
 
             modelBuilder.Entity("Dominio.Contabilidad.CntTipoDocumento", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int>("codigo")
+                    b.Property<int>("Codigo")
                         .HasColumnType("int");
 
-                    b.Property<DateTime?>("created_at")
+                    b.Property<DateTime?>("CreatedAt")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<string>("nombre")
+                    b.Property<string>("Nombre")
                         .HasColumnType("longtext");
 
                     b.Property<DateTime?>("update_at")
                         .HasColumnType("datetime(6)");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
                     b.ToTable("cnt_tipodocumento");
                 });
 
             modelBuilder.Entity("Dominio.Contabilidad.CntTipoImpuesto", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("codigo")
+                    b.Property<string>("Codigo")
                         .HasColumnType("longtext");
 
-                    b.Property<string>("nombre")
+                    b.Property<string>("Nombre")
                         .HasColumnType("longtext");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
                     b.ToTable("cnt_tipoimpuesto");
                 });
 
             modelBuilder.Entity("Dominio.Contabilidad.CntTipoOperacion", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("codigo")
+                    b.Property<string>("Codigo")
                         .HasColumnType("longtext");
 
                     b.Property<string>("formula")
                         .HasColumnType("longtext");
 
-                    b.Property<string>("nombre")
+                    b.Property<string>("Nombre")
                         .HasColumnType("longtext");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
                     b.ToTable("cnt_tipooperacion");
                 });
 
             modelBuilder.Entity("Dominio.Contabilidad.CntTipoPersona", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("codigo")
+                    b.Property<string>("Codigo")
                         .HasColumnType("longtext");
 
-                    b.Property<string>("nombre")
+                    b.Property<string>("Nombre")
                         .HasColumnType("longtext");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
                     b.ToTable("cnt_tipopersona");
                 });
 
             modelBuilder.Entity("Dominio.Contabilidad.CntUvt", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("created_at")
+                    b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<DateTime?>("updated_at")
+                    b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime(6)");
 
                     b.Property<int>("uvt_ano")
@@ -1200,7 +1200,7 @@ namespace Persistencia.Migrations
                     b.Property<double>("uvt_valor")
                         .HasColumnType("double");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
                     b.ToTable("cnt_uvt");
                 });
@@ -1335,45 +1335,45 @@ namespace Persistencia.Migrations
 
             modelBuilder.Entity("Dominio.Configuracion.CnfSucursal", b =>
                 {
-                    b.HasOne("Dominio.Configuracion.CnfEmpresa", "empresa")
+                    b.HasOne("Dominio.Configuracion.CnfEmpresa", "Empresa")
                         .WithMany("empresaSucursales")
                         .HasForeignKey("id_empresa")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("empresa");
+                    b.Navigation("Empresa");
                 });
 
             modelBuilder.Entity("Dominio.Contabilidad.CntAno", b =>
                 {
-                    b.HasOne("Dominio.Contabilidad.CntComprobante", "comprobante")
+                    b.HasOne("Dominio.Contabilidad.CntComprobante", "Comprobante")
                         .WithMany("comprobanteAnos")
-                        .HasForeignKey("id_comprobante")
+                        .HasForeignKey("IdComprobante")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Dominio.Configuracion.CnfUsuario", "usuario")
+                    b.HasOne("Dominio.Configuracion.CnfUsuario", "Usuario")
                         .WithMany("usuarioAnos")
-                        .HasForeignKey("id_usuario")
+                        .HasForeignKey("IdUsuario")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("comprobante");
+                    b.Navigation("Comprobante");
 
-                    b.Navigation("usuario");
+                    b.Navigation("Usuario");
                 });
 
             modelBuilder.Entity("Dominio.Contabilidad.CntCiiu", b =>
                 {
                     b.HasOne("Dominio.Contabilidad.CntSeccionCiiu", "ciiuSeccionCiiu")
                         .WithMany("seccionCiiuCiiu")
-                        .HasForeignKey("id_seccionciiu")
+                        .HasForeignKey("IdSeccionciiu")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Dominio.Contabilidad.CntTipoCiiu", "ciiuTipoCiiu")
                         .WithMany("tipoCiiuCiiu")
-                        .HasForeignKey("id_tipociuu")
+                        .HasForeignKey("IdTipociuu")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -1384,36 +1384,36 @@ namespace Persistencia.Migrations
 
             modelBuilder.Entity("Dominio.Contabilidad.CntComprobante", b =>
                 {
-                    b.HasOne("Dominio.Configuracion.CnfSucursal", "sucursal")
+                    b.HasOne("Dominio.Configuracion.CnfSucursal", "Sucursal")
                         .WithMany("sucursalComprobantes")
-                        .HasForeignKey("id_sucursal")
+                        .HasForeignKey("IdSucursal")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Dominio.Contabilidad.CntTipoComprobante", "tipoComprobante")
+                    b.HasOne("Dominio.Contabilidad.CntTipoComprobante", "TipoComprobante")
                         .WithMany("ComprobantesTipoComprobante")
-                        .HasForeignKey("id_tipocomprobante")
+                        .HasForeignKey("IdTipocomprobante")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Dominio.Configuracion.CnfUsuario", "usuario")
+                    b.HasOne("Dominio.Configuracion.CnfUsuario", "Usuario")
                         .WithMany("usuarioComprobantes")
-                        .HasForeignKey("id_usuario")
+                        .HasForeignKey("IdUsuario")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("sucursal");
+                    b.Navigation("Sucursal");
 
-                    b.Navigation("tipoComprobante");
+                    b.Navigation("TipoComprobante");
 
-                    b.Navigation("usuario");
+                    b.Navigation("Usuario");
                 });
 
             modelBuilder.Entity("Dominio.Contabilidad.CntConsecutivo", b =>
                 {
                     b.HasOne("Dominio.Contabilidad.CntTipoComprobante", "TipoComprobante")
                         .WithMany("tipoComprobanteConsecutivos")
-                        .HasForeignKey("id_tipocomprobante")
+                        .HasForeignKey("IdTipocomprobante")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -1424,65 +1424,65 @@ namespace Persistencia.Migrations
                 {
                     b.HasOne("Dominio.Contabilidad.CntPuc", "puc")
                         .WithMany("pucCuentaImpuestos")
-                        .HasForeignKey("id_puc")
+                        .HasForeignKey("IdPuc")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Dominio.Contabilidad.CntTipoImpuesto", "tipoImpuesto")
+                    b.HasOne("Dominio.Contabilidad.CntTipoImpuesto", "TipoImpuesto")
                         .WithMany("cntTipoImpuestoCntCuentaImpuestos")
-                        .HasForeignKey("id_tipoimpuesto")
+                        .HasForeignKey("IdTipoimpuesto")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("puc");
 
-                    b.Navigation("tipoImpuesto");
+                    b.Navigation("TipoImpuesto");
                 });
 
             modelBuilder.Entity("Dominio.Contabilidad.CntDetalleComprobante", b =>
                 {
                     b.HasOne("Dominio.Contabilidad.CntCentroCosto", "centroCosto")
                         .WithMany("centroCostoDetalleComprobantes")
-                        .HasForeignKey("id_centrocosto")
+                        .HasForeignKey("IdCentrocosto")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Dominio.Contabilidad.CntComprobante", "comprobante")
-                        .WithMany("comprobanteDetalleComprobantes")
-                        .HasForeignKey("id_comprobante")
+                    b.HasOne("Dominio.Contabilidad.CntComprobante", "Comprobante")
+                        .WithMany("ComprobanteDetalleComprobantes")
+                        .HasForeignKey("IdComprobante")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Dominio.Contabilidad.CntPuc", "puc")
                         .WithMany("pucDetalleComprobantes")
-                        .HasForeignKey("id_puc")
+                        .HasForeignKey("IdPuc")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("centroCosto");
 
-                    b.Navigation("comprobante");
+                    b.Navigation("Comprobante");
 
                     b.Navigation("puc");
                 });
 
             modelBuilder.Entity("Dominio.Contabilidad.CntEntidad", b =>
                 {
-                    b.HasOne("Dominio.Contabilidad.CntTercero", "tercero")
+                    b.HasOne("Dominio.Contabilidad.CntTercero", "Tercero")
                         .WithMany("entidadTerceros")
-                        .HasForeignKey("id_tercero")
+                        .HasForeignKey("IdTercero")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Dominio.Contabilidad.CntTipoImpuesto", "tipoImpuesto")
+                    b.HasOne("Dominio.Contabilidad.CntTipoImpuesto", "TipoImpuesto")
                         .WithMany("tipoImpuestoEntidades")
-                        .HasForeignKey("id_tipoimpuesto")
+                        .HasForeignKey("IdTipoimpuesto")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("tercero");
+                    b.Navigation("Tercero");
 
-                    b.Navigation("tipoImpuesto");
+                    b.Navigation("TipoImpuesto");
                 });
 
             modelBuilder.Entity("Dominio.Contabilidad.CntFormatoColumna", b =>
@@ -1517,63 +1517,63 @@ namespace Persistencia.Migrations
 
             modelBuilder.Entity("Dominio.Contabilidad.CntLiquidaImpuesto", b =>
                 {
-                    b.HasOne("Dominio.Contabilidad.CntComprobante", "comprobante")
+                    b.HasOne("Dominio.Contabilidad.CntComprobante", "Comprobante")
                         .WithMany("comprobanteLiquidaImpuestos")
-                        .HasForeignKey("id_comprobante")
+                        .HasForeignKey("IdComprobante")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Dominio.Contabilidad.CntPuc", "puc")
                         .WithMany("pucLiquidaImpuestos")
-                        .HasForeignKey("id_puc")
+                        .HasForeignKey("IdPuc")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Dominio.Contabilidad.CntTercero", "tercero")
+                    b.HasOne("Dominio.Contabilidad.CntTercero", "Tercero")
                         .WithMany("liquidaImpuestoTerceros")
-                        .HasForeignKey("id_tercero")
+                        .HasForeignKey("IdTercero")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Dominio.Contabilidad.CntTipoImpuesto", "tipoImpuesto")
+                    b.HasOne("Dominio.Contabilidad.CntTipoImpuesto", "TipoImpuesto")
                         .WithMany("tipoImpuestoLiquidaImpuestos")
-                        .HasForeignKey("id_tipoimpuesto")
+                        .HasForeignKey("IdTipoimpuesto")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Dominio.Configuracion.CnfUsuario", "usuario")
+                    b.HasOne("Dominio.Configuracion.CnfUsuario", "Usuario")
                         .WithMany("usuarioLiquidaImpuestos")
-                        .HasForeignKey("id_usuario")
+                        .HasForeignKey("IdUsuario")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("comprobante");
+                    b.Navigation("Comprobante");
 
                     b.Navigation("puc");
 
-                    b.Navigation("tercero");
+                    b.Navigation("Tercero");
 
-                    b.Navigation("tipoImpuesto");
+                    b.Navigation("TipoImpuesto");
 
-                    b.Navigation("usuario");
+                    b.Navigation("Usuario");
                 });
 
             modelBuilder.Entity("Dominio.Contabilidad.CntMes", b =>
                 {
-                    b.HasOne("Dominio.Configuracion.CnfUsuario", "usuario")
+                    b.HasOne("Dominio.Configuracion.CnfUsuario", "Usuario")
                         .WithMany("usuarioMeses")
-                        .HasForeignKey("id_usuario")
+                        .HasForeignKey("IdUsuario")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("usuario");
+                    b.Navigation("Usuario");
                 });
 
             modelBuilder.Entity("Dominio.Contabilidad.CntMunicipio", b =>
                 {
                     b.HasOne("Dominio.Contabilidad.CntDepartamento", "departamento")
                         .WithMany("departamentoMunicipios")
-                        .HasForeignKey("id_departamento")
+                        .HasForeignKey("IdDepartamento")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -1584,7 +1584,7 @@ namespace Persistencia.Migrations
                 {
                     b.HasOne("Dominio.Contabilidad.CntNotaAclaratoriaTipo", "notaAclaratoriaTipo")
                         .WithMany("notaAclaratoriaTipoNotaAclaratorias")
-                        .HasForeignKey("id_notaaclaratoriatipo")
+                        .HasForeignKey("IdNotaaclaratoriatipo")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -1601,7 +1601,7 @@ namespace Persistencia.Migrations
 
                     b.HasOne("Dominio.Contabilidad.CntPuc", "cntPuc")
                         .WithMany("pucNotaAclaratoriaCuentas")
-                        .HasForeignKey("id_puc")
+                        .HasForeignKey("IdPuc")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -1612,38 +1612,38 @@ namespace Persistencia.Migrations
 
             modelBuilder.Entity("Dominio.Contabilidad.CntPuc", b =>
                 {
-                    b.HasOne("Dominio.Contabilidad.CntPucTipo", "pucTipo")
+                    b.HasOne("Dominio.Contabilidad.CntPucTipo", "PucTipo")
                         .WithMany("cntPucTipoPucs")
-                        .HasForeignKey("id_puctipo");
+                        .HasForeignKey("IdPuctipo");
 
-                    b.HasOne("Dominio.Contabilidad.CntTipoCuenta", "tipoCuenta")
+                    b.HasOne("Dominio.Contabilidad.CntTipoCuenta", "TipoCuenta")
                         .WithMany("TipoCuentaPucs")
-                        .HasForeignKey("id_tipocuenta");
+                        .HasForeignKey("IdTipocuenta");
 
-                    b.HasOne("Dominio.Configuracion.CnfUsuario", "usuario")
+                    b.HasOne("Dominio.Configuracion.CnfUsuario", "Usuario")
                         .WithMany("usuarioPucs")
-                        .HasForeignKey("id_usuario")
+                        .HasForeignKey("IdUsuario")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("pucTipo");
+                    b.Navigation("PucTipo");
 
-                    b.Navigation("tipoCuenta");
+                    b.Navigation("TipoCuenta");
 
-                    b.Navigation("usuario");
+                    b.Navigation("Usuario");
                 });
 
             modelBuilder.Entity("Dominio.Contabilidad.CntResponsabilidadTer", b =>
                 {
                     b.HasOne("Dominio.Contabilidad.CntResponsabilidad", "Responsabilidad")
                         .WithMany("reponsabilidadResponsabilidadTerceros")
-                        .HasForeignKey("id_responsabilidad")
+                        .HasForeignKey("IdResponsabilidad")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Dominio.Contabilidad.CntTercero", "Tercero")
                         .WithMany("responsabilidadTerceros")
-                        .HasForeignKey("id_tercero")
+                        .HasForeignKey("IdTercero")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -1656,37 +1656,37 @@ namespace Persistencia.Migrations
                 {
                     b.HasOne("Dominio.Contabilidad.CntCiiu", "ciiu")
                         .WithMany("ciiuTerceros")
-                        .HasForeignKey("id_ciiu")
+                        .HasForeignKey("IdCiiu")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Dominio.Contabilidad.CntGenero", "genero")
                         .WithMany("generoTerceros")
-                        .HasForeignKey("id_genero")
+                        .HasForeignKey("IdGenero")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Dominio.Contabilidad.CntMunicipio", "municipio")
                         .WithMany("municipioTerceros")
-                        .HasForeignKey("id_municipio")
+                        .HasForeignKey("IdMunicipio")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Dominio.Contabilidad.CntRegimen", "regimen")
                         .WithMany("regimenTerceros")
-                        .HasForeignKey("id_regimen")
+                        .HasForeignKey("IdRegimen")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Dominio.Contabilidad.CntTipoDocumento", "documentos")
                         .WithMany("documentoTerceros")
-                        .HasForeignKey("id_tipodocumento")
+                        .HasForeignKey("IdTipodocumento")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Dominio.Contabilidad.CntTipoPersona", "tipoPersona")
                         .WithMany("tipoPersonaTercero")
-                        .HasForeignKey("id_tippersona")
+                        .HasForeignKey("IdTippersona")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -1705,21 +1705,21 @@ namespace Persistencia.Migrations
 
             modelBuilder.Entity("Dominio.Contabilidad.CntTipoComprobante", b =>
                 {
-                    b.HasOne("Dominio.Contabilidad.CntCategoriaComprobante", "categoria")
+                    b.HasOne("Dominio.Contabilidad.CntCategoriaComprobante", "Categoria")
                         .WithMany("categoriaTipoComprobantes")
-                        .HasForeignKey("id_categoriacomprobante")
+                        .HasForeignKey("IdCategoriacomprobante")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Dominio.Configuracion.CnfUsuario", "usuario")
+                    b.HasOne("Dominio.Configuracion.CnfUsuario", "Usuario")
                         .WithMany("usuarioTipoComprobantes")
-                        .HasForeignKey("id_usuario")
+                        .HasForeignKey("IdUsuario")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("categoria");
+                    b.Navigation("Categoria");
 
-                    b.Navigation("usuario");
+                    b.Navigation("Usuario");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -1817,7 +1817,7 @@ namespace Persistencia.Migrations
                 {
                     b.Navigation("comprobanteAnos");
 
-                    b.Navigation("comprobanteDetalleComprobantes");
+                    b.Navigation("ComprobanteDetalleComprobantes");
 
                     b.Navigation("comprobanteLiquidaImpuestos");
                 });

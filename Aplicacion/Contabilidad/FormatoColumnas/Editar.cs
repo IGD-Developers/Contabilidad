@@ -48,10 +48,10 @@ namespace Aplicacion.Contabilidad.FormatoColumnas
             if (formatoColumna == null) {  
                 throw new Exception("Registro no encontrado");
             };   
-            formatoColumna.id_exogenaformato =request.id_exogenaformato;
-            formatoColumna.fco_columna =request.fco_columna;;
-            formatoColumna.fco_campo =request.fco_campo;;
-            formatoColumna.fco_tipo =request.fco_tipo;
+            formatoColumna.IdExogenaformato =request.id_exogenaformato;
+            formatoColumna.FcoColumna =request.fco_columna;;
+            formatoColumna.FcoCampo =request.fco_campo;;
+            formatoColumna.FcoTipo =request.fco_tipo;
 
                 var resultado=  await context.SaveChangesAsync();
                 if (resultado>0)

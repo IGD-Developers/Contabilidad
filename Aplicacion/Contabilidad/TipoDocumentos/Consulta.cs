@@ -12,10 +12,10 @@ namespace Aplicacion.Contabilidad.TipoDocumentos
 {
     public class Consulta
     {
-        //clase que representa lista de elementos a retornar desde la db
+        //Clase que representa lista de elementos a retornar desde la db
         public class ListaTipoDocumentos : IRequest<List<TipoDocumentoModel>>{}
 
-        //clase para manejar la logica de la operacion
+        //Clase para manejar la logica de la operacion
         //(que va a devolver, formato)
         public class Manejador : IRequestHandler<ListaTipoDocumentos, List<TipoDocumentoModel>>
         {

@@ -21,15 +21,15 @@ namespace Aplicacion.Contabilidad.Terceros
         {
             public EjecutaValidador()
             {
-                RuleFor(x => x.id_tipodocumento).NotEmpty();
-                RuleFor(x => x.ter_documento).NotEmpty();
-                RuleFor(x => x.id_usuario).NotEmpty();
-                RuleFor(x => x.id_tippersona).NotEmpty();
-                RuleFor(x => x.id_municipio).NotEmpty();
-                RuleFor(x => x.id_regimen).NotEmpty();
-                RuleFor(x => x.id_regimen).NotEmpty();
-                RuleFor(x => x.ter_razonsocial).NotEmpty();
-                RuleFor(x => x.responsabilidadTerceroJuridicoModel).NotEmpty();
+                RuleFor(x => x.IdTipodocumento).NotEmpty();
+                RuleFor(x => x.TerDocumento).NotEmpty();
+                RuleFor(x => x.IdUsuario).NotEmpty();
+                RuleFor(x => x.IdTippersona).NotEmpty();
+                RuleFor(x => x.IdMunicipio).NotEmpty();
+                RuleFor(x => x.IdRegimen).NotEmpty();
+                RuleFor(x => x.IdRegimen).NotEmpty();
+                RuleFor(x => x.TerRazonsocial).NotEmpty();
+                RuleFor(x => x.ResponsabilidadTerceroJuridicoModel).NotEmpty();
             }
         }
 
@@ -49,20 +49,20 @@ namespace Aplicacion.Contabilidad.Terceros
 
             public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
             {
-               var genero = await _context.CntGeneros.Where(p => p.codigo == "NA")
+               var genero = await _context.CntGeneros.Where(p => p.Codigo == "NA")
                     .SingleOrDefaultAsync();
                 if(genero == null){
                     throw new Exception("No se encontro genero");
                 }
 
-                var tipoPersona = await _context.CntTipoPersonas.Where(p => p.codigo == "J")
+                var tipoPersona = await _context.CntTipoPersonas.Where(p => p.Codigo == "J")
                     .SingleOrDefaultAsync();
 
                 if(tipoPersona == null){
                     throw new Exception("No se encontro tipo persona");
                 }
 
-                request.ter_digitoverificacion =  _funciones.CalcularDigitoVerificacion(request.ter_documento);
+                request.TerDigitoverificacion =  _funciones.CalcularDigitoVerificacion(request.TerDocumento);
                
                 var transaction = _context.Database.BeginTransaction();
                 try
@@ -70,21 +70,21 @@ namespace Aplicacion.Contabilidad.Terceros
                     var entidadDto = _mapper.Map<InsertarJuridicoModel, CntTercero>(request);
                     await _context.CntTerceros.AddAsync(entidadDto);
                     var valor = await _context.SaveChangesAsync();
-                    var idTercero = entidadDto.id;
+                    var idTercero = entidadDto.Id;
 
-                    if(request.responsabilidadTerceroJuridicoModel != null){
+                    if(request.ResponsabilidadTerceroJuridicoModel != null){
                        
-                        var idResponsabilidades = (from num in request.responsabilidadTerceroJuridicoModel select num.id_responsabilidad).Distinct().ToList();
+                        var idResponsabilidades = (from num in request.ResponsabilidadTerceroJuridicoModel select num.IdResponsabilidad).Distinct().ToList();
 
                         InsertarResponsabilidadTerceroModel registro = new InsertarResponsabilidadTerceroModel();
 
                         // Agregar los registros que vienen del request 
                         foreach (int idResponsabilidad in idResponsabilidades)
                         {
-                            registro.id_responsabilidad = idResponsabilidad;
-                            registro.id_tercero = idTercero;
+                            registro.IdResponsabilidad = idResponsabilidad;
+                            registro.IdTercero = idTercero;
                             
-                            var responsabilidad = await _context.cntResponsabilidades.FindAsync(registro.id_responsabilidad);
+                            var responsabilidad = await _context.cntResponsabilidades.FindAsync(registro.IdResponsabilidad);
                             if(responsabilidad == null){
                                 throw new Exception("No se encontro Responsabilidad, error al insertar ResponsabilidadTercero");
                             }

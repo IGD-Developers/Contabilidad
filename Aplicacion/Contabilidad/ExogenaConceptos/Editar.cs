@@ -13,9 +13,9 @@ namespace Aplicacion.Contabilidad.ExogenaConceptos
         public class Ejecuta: IRequest
         {
         public int Id { get; set; }
-        public string codigo { get; set; }
-        public string nombre { get; set; }
-        public string estado { get; set; }
+        public string Codigo { get; set; }
+        public string Nombre { get; set; }
+        public string Estado { get; set; }
         }
 
 
@@ -24,9 +24,9 @@ namespace Aplicacion.Contabilidad.ExogenaConceptos
             public EjecutaValidador()
             {
                 RuleFor(x=>x.Id).NotEmpty();
-                RuleFor(x=>x.codigo).NotEmpty();
-                RuleFor(x=>x.nombre).NotEmpty();
-                RuleFor(x=>x.estado).NotEmpty();
+                RuleFor(x=>x.Codigo).NotEmpty();
+                RuleFor(x=>x.Nombre).NotEmpty();
+                RuleFor(x=>x.Estado).NotEmpty();
         
         
             }
@@ -48,9 +48,9 @@ namespace Aplicacion.Contabilidad.ExogenaConceptos
                 if (exogenaConcepto == null) {  
                     throw new Exception("Registro no encontrado");
                 };     
-                exogenaConcepto.codigo = request.codigo;
-                exogenaConcepto.nombre = request.nombre;
-                exogenaConcepto.estado = request.estado;
+                exogenaConcepto.Codigo = request.Codigo;
+                exogenaConcepto.Nombre = request.Nombre;
+                exogenaConcepto.Estado = request.Estado;
 
                 var resultado=  await context.SaveChangesAsync();
                 if (resultado>0)

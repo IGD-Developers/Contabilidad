@@ -10,18 +10,18 @@ namespace Persistencia.Mapeo.Contabilidad
         {
                 builder
                 .ToTable("cnt_tipocomprobante")
-                 .HasKey(entity => entity.id);
+                 .HasKey(entity => entity.Id);
 
-                builder.HasOne<CntCategoriaComprobante>(t => t.categoria )
-                .WithMany(ct=>ct.categoriaTipoComprobantes)
-                .HasForeignKey(t =>t.id_categoriacomprobante);
+                builder.HasOne<CntCategoriaComprobante>(t => t.Categoria )
+                .WithMany(ct=>ct.CategoriaTipoComprobantes)
+                .HasForeignKey(t =>t.IdCategoriacomprobante);
 
-                builder.HasOne(t => t.usuario )            
-                .WithMany(u=>u.usuarioTipoComprobantes)
-                .HasForeignKey(t =>t.id_usuario);
+                builder.HasOne(t => t.Usuario )            
+                .WithMany(u=>u.UsuarioTipoComprobantes)
+                .HasForeignKey(t =>t.IdUsuario);
 
             builder
-            .Property(b => b.created_at)
+            .Property(b => b.CreatedAt)
             .HasDefaultValueSql("DateTime.Now");          
 
 

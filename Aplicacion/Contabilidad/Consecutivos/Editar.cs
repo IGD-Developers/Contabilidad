@@ -14,11 +14,11 @@ namespace Aplicacion.Contabilidad.Consecutivos
         {
 
             public int Id { get; set; }
-            public int id_tipocomprobante { get; set; }
-            public int id_sucursal { get; set; }
-            public string co_ano { get; set; }
-            public string co_mes { get; set; }
-            public int co_consecutivo { get; set; }
+            public int IdTipocomprobante { get; set; }
+            public int IdSucursal { get; set; }
+            public string CoAno { get; set; }
+            public string CoMes { get; set; }
+            public int CoConsecutivo { get; set; }
         }
 
         public class EjecutaValidador : AbstractValidator<Ejecuta>
@@ -26,10 +26,10 @@ namespace Aplicacion.Contabilidad.Consecutivos
             public EjecutaValidador()
             {
                 RuleFor(x=>x.Id).NotEmpty();
-                RuleFor(x=>x.id_tipocomprobante).NotEmpty();
-                RuleFor(x=>x.co_ano).NotEmpty();
-                RuleFor(x=>x.co_mes).NotEmpty();
-                RuleFor(x=>x.co_consecutivo).NotEmpty();
+                RuleFor(x=>x.IdTipocomprobante).NotEmpty();
+                RuleFor(x=>x.CoAno).NotEmpty();
+                RuleFor(x=>x.CoMes).NotEmpty();
+                RuleFor(x=>x.CoConsecutivo).NotEmpty();
         
             }
         }    
@@ -52,12 +52,12 @@ namespace Aplicacion.Contabilidad.Consecutivos
                 if (consecutivo == null) {
                     throw new Exception("Registro no encontrado");
                 };
-                //Ojo la sucursal no es modificable
-                consecutivo.id_tipocomprobante = request.id_tipocomprobante;
-                //consecutivo.id_sucursal = request.id_sucursal;
-                consecutivo.co_ano = request.co_ano;
-                consecutivo.co_mes = request.co_mes;
-                consecutivo.co_consecutivo = request.co_consecutivo;
+                //Ojo la Sucursal no es modificable
+                consecutivo.IdTipocomprobante = request.IdTipocomprobante;
+                //consecutivo.IdSucursal = request.IdSucursal;
+                consecutivo.CoAno = request.CoAno;
+                consecutivo.CoMes = request.CoMes;
+                consecutivo.CoConsecutivo = request.CoConsecutivo;
                 var resultado=  await context.SaveChangesAsync();
                 if (resultado>0)
                 {

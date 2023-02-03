@@ -26,14 +26,14 @@ namespace Aplicacion.Contabilidad.LiquidaImpuestos
         {
             public EjecutaValidador()
             {
-                RuleFor(x => x.id_tipoimpuesto).NotEmpty();
-                // RuleFor(x => x.id_comprobante).NotEmpty();
-                // RuleFor(x => x.id_puc).NotEmpty();
-                // RuleFor(x => x.id_tercero).NotEmpty();
-                // RuleFor(x => x.id_sucursal).NotEmpty();
-                // RuleFor(x => x.lim_fechainicial).NotEmpty();
-                // RuleFor(x => x.lim_fechafinal).NotEmpty();
-               // RuleFor(x => x.id_usuario).NotEmpty();
+                RuleFor(x => x.IdTipoimpuesto).NotEmpty();
+                // RuleFor(x => x.IdComprobante).NotEmpty();
+                // RuleFor(x => x.IdPuc).NotEmpty();
+                // RuleFor(x => x.IdTercero).NotEmpty();
+                // RuleFor(x => x.IdSucursal).NotEmpty();
+                // RuleFor(x => x.LimFechainicial).NotEmpty();
+                // RuleFor(x => x.LimFechafinal).NotEmpty();
+               // RuleFor(x => x.IdUsuario).NotEmpty();
             }
         }
 
@@ -55,11 +55,11 @@ namespace Aplicacion.Contabilidad.LiquidaImpuestos
             public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
             {
 
-                //Encontrar el id para el tipo de comprobante LIM para generar el comprobante contable
+                //Encontrar el Id para el tipo de Comprobante LIM para generar el Comprobante contable
                 var idTipoComprobante = await _context.cntTipoComprobantes
-                                    .Where(t => t.codigo == "LIM")
+                                    .Where(t => t.Codigo == "LIM")
                                     .Select(t => new IdLiquidaImpuestoModel()
-                                    { Id = t.id })
+                                    { Id = t.Id })
                                     .SingleOrDefaultAsync();
 
                 if (idTipoComprobante == null)
@@ -68,9 +68,9 @@ namespace Aplicacion.Contabilidad.LiquidaImpuestos
                 };
 
                 var idTipoImpuesto = await _context.cntTipoImpuestos
-                                    .Where(t => t.id == request.id_tipoimpuesto)
+                                    .Where(t => t.Id == request.IdTipoimpuesto)
                                     .Select(t => new IdLiquidaImpuestoModel()
-                                    { Id = t.id })
+                                    { Id = t.Id })
                                     .SingleOrDefaultAsync();
 
                 if (idTipoImpuesto == null)
@@ -81,53 +81,53 @@ namespace Aplicacion.Contabilidad.LiquidaImpuestos
 
 
                 var entidad = await _context.cntEntidades
-                     .Where(e => e.id == request.id_entidad && e.id_tipoimpuesto == request.id_tipoimpuesto)
-                     .Select(e => new IdLiquidaImpuestoModel() { Id = e.id_tercero })
+                     .Where(e => e.Id == request.IdEntidad && e.IdTipoimpuesto == request.IdTipoimpuesto)
+                     .Select(e => new IdLiquidaImpuestoModel() { Id = e.IdTercero })
                      .FirstOrDefaultAsync();
 
                 if (entidad == null)
                 { throw new Exception("No se ha configurado correctamente la Entidad con su tipo de impuesto"); }
 
                 var cuentaCierre = await _context.cntCuentaImpuestos
-                    .Where(ci => ci.id_tipoimpuesto == request.id_tipoimpuesto)
-                    .Select(ci => new IdLiquidaImpuestoModel() { Id = ci.id_puc })
+                    .Where(ci => ci.IdTipoimpuesto == request.IdTipoimpuesto)
+                    .Select(ci => new IdLiquidaImpuestoModel() { Id = ci.IdPuc })
                     .FirstOrDefaultAsync();
 
                 if (cuentaCierre == null)
                 { throw new Exception("No se ha configurado la contrapartida para el tipo de Impuesto"); }
 
                
-                //Generar saldos totalizados por tercero por cuenta.
-                //Si el saldo es debito generamos movimiento al crédito a la cuenta recibida en request.id_puc 
-                //y con el tercero request.id_tercero y Viceversa
+                //Generar saldos totalizados por Tercero por Cuenta.
+                //Si el saldo es debito generamos movimiento al crédito a la Cuenta recibida en request.IdPuc 
+                //y con el Tercero request.IdTercero y Viceversa
                 //Iniciar Transacción 
                 //Add a detalleComprobante
                 //Generar Comprobante 
 
                 
                // var entidadComprobante = new InsertarComprobantesModel();
-                //var entidadComprobante = _mapper.Map<InsertarComprobantesModel, CntComprobante>(request.comprobante);
-                var idEntidadComprobante = _insertarComprobante.Insertar(request.comprobante);
+                //var entidadComprobante = _mapper.Map<InsertarComprobantesModel, CntComprobante>(request.Comprobante);
+                var idEntidadComprobante = _insertarComprobante.Insertar(request.Comprobante);
 
                 var entidadDto = _mapper.Map<InsertarLiquidaImpuestosModel, CntLiquidaImpuesto>(request);
-                InsertarComprobantesModel  comprobante = new InsertarComprobantesModel()
+                InsertarComprobantesModel  Comprobante = new InsertarComprobantesModel()
                 {
 
-                    id_sucursal=request.id_sucursal,
-                    id_tipocomprobante= idTipoComprobante.Id,
-                    id_modulo = 2,
-                    id_tercero = entidad.Id,
-                    //cco_fecha=request.cco_fecha,
-                    cco_documento=request.cco_documento,
-                    cco_detalle = "Liquidación Automática de Cuentas por Tercero",
-                    //id_usuario=request.id_usuario
+                    IdSucursal=request.IdSucursal,
+                    IdTipocomprobante= idTipoComprobante.Id,
+                    IdModulo = 2,
+                    IdTercero = entidad.Id,
+                    //CcoFecha=request.CcoFecha,
+                    CcoDocumento=request.CcoDocumento,
+                    CcoDetalle = "Liquidación Automática de Cuentas por Tercero",
+                    //IdUsuario=request.IdUsuario
 
                 };
                 var transaction = _context.Database.BeginTransaction();
 
                 try
                 {
-                    var respuestacc = await _insertarComprobante.Insertar(comprobante);
+                    var respuestacc = await _insertarComprobante.Insertar(Comprobante);
 
                     transaction.Commit();
                     if(respuestacc.Id<0)

@@ -3,23 +3,23 @@ using Dominio.Contabilidad;
 namespace Aplicacion.Models.Contabilidad.LiquidaImpuestos
 {
     /// <summary>ImpuestoComprobanteModel:<para> </para> 
-     ///Modelo para obtener los datos del comprobante y su total debito y credito
+     ///Modelo para obtener los datos del Comprobante y su total debito y credito
      ///que se genera al liquidar Impuesto. <para> </para>
-     ///Data desde CntComprobantes. Incluye la relacion  a tipoComprobante y
+     ///Data desde CntComprobantes. Incluye la relacion  a TipoComprobante y
      ///la Collection detalleComprobante</summary>
     public class ImpuestoComprobanteModel
     {
-     public int id_sucursal { get; set; }
-        public int id_tipocomprobante { get; set; }  
-        public string cco_ano { get; set; }
-        public string cco_mes { get; set; }
-        public int cco_consecutivo { get; set; } 
-        public double tdebito { get; set; }
-        public double tcredito { get; set; }
-        //public string id_usuario { get; set; }
+        public int IdSucursal { get; set; }
+        public int IdTipocomprobante { get; set; }  
+        public string CcoAno { get; set; }
+        public string CcoMes { get; set; }
+        public int CcoConsecutivo { get; set; } 
+        public double Tdebito { get; set; }
+        public double Tcredito { get; set; }
+        //public string IdUsuario { get; set; }
         
-        public ICollection<ImpuestoDetalleComprobantesModel> comprobanteDetalleComprobantes { get; set; }
-        public ImpuestoTipoComprobanteModel tipoComprobante { get; set; }
+        public ICollection<ImpuestoDetalleComprobantesModel> ComprobanteDetalleComprobantes { get; set; }
+        public ImpuestoTipoComprobanteModel TipoComprobante { get; set; }
 
     }
 }

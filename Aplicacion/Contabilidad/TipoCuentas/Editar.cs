@@ -15,8 +15,8 @@ namespace Aplicacion.Contabilidad.TipoCuentas
         public class Ejecuta: IRequest {
 
             public int Id { get; set; }
-            public string codigo { get; set; }
-            public string nombre { get; set; }
+            public string Codigo { get; set; }
+            public string Nombre { get; set; }
 
         }
 
@@ -25,8 +25,8 @@ namespace Aplicacion.Contabilidad.TipoCuentas
             public EjecutaValidador()
             {
                 RuleFor(x=>x.Id).NotEmpty();
-                RuleFor(x=>x.codigo).NotEmpty();
-                RuleFor(x=>x.nombre).NotEmpty();
+                RuleFor(x=>x.Codigo).NotEmpty();
+                RuleFor(x=>x.Nombre).NotEmpty();
         
             }
         }    
@@ -42,13 +42,13 @@ namespace Aplicacion.Contabilidad.TipoCuentas
 
             public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
             {
-                var tipoCuenta = await context.cntTipoCuentas.FindAsync(request.Id);
-                if (tipoCuenta == null) {  
+                var TipoCuenta = await context.cntTipoCuentas.FindAsync(request.Id);
+                if (TipoCuenta == null) {  
                         throw new Exception("Registro no encontrado");
                 };  
 
-                tipoCuenta.codigo = request.codigo;
-                tipoCuenta.nombre = request.nombre; 
+                TipoCuenta.Codigo = request.Codigo;
+                TipoCuenta.Nombre = request.Nombre; 
 
                 var resultado=  await context.SaveChangesAsync();
                 if (resultado>0)
