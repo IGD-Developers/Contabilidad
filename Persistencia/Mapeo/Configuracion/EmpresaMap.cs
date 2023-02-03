@@ -11,7 +11,7 @@ namespace Persistencia.Mapeo.Configuracion
         {
             builder
                 .ToTable("cnf_empresa")
-                .HasKey(entity => entity.id);
+                .HasKey(entity => entity.Id);
 
                 builder
                 .HasOne<CntTercero>(e=> e.terceroEmpresa)

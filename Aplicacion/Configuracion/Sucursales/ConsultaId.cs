@@ -36,8 +36,8 @@ namespace Aplicacion.Configuracion.Sucursales
             {
 
                 var entidad = await _context.cnfSucursales
-                .Include(e => e.empresa)
-                .SingleOrDefaultAsync(i => i.id == request.Id);
+                .Include(e => e.Empresa)
+                .SingleOrDefaultAsync(i => i.Id == request.Id);
 
 
                 if (entidad == null)
