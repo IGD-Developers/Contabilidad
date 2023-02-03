@@ -2,10 +2,8 @@ namespace Aplicacion.Models.Configuracion.Usuarios
 {
     public class UsuarioModel
     {
-        public string id { get; set; }
-
-        public string username {get;set;}
-        public int IdTercero  {get;set;}
-
+        public string Id { get; set; }
+        public string Username { get; set; }
+        public int IdTercero { get; set; }
     }
 }

@@ -21,8 +21,8 @@ namespace Aplicacion.Configuracion.Empresas
         {
             public EjecutaValidador()
             {
-                RuleFor(x=>x.nit).NotEmpty();
-                RuleFor(x=>x.razon_social).NotEmpty();
+                RuleFor(x=>x.Nit).NotEmpty();
+                RuleFor(x=>x.RazonSocial).NotEmpty();
                 //RuleFor(x=>x.IdTerceroGerente).NotEmpty();
 
             }

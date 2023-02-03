@@ -115,9 +115,9 @@ namespace Aplicacion
             .ForMember(x => x.comprobanteDetalleComprobantes, y => y.MapFrom(z => z.ComprobanteDetalleComprobantes));
 
             CreateMap<CnfEmpresa, ListarEmpresasModel>()
-            .ForMember(x => x.nombregerente, y => y.MapFrom(z => z.TerceroEmpresa));
+            .ForMember(x => x.NombreGerente, y => y.MapFrom(z => z.TerceroEmpresa));
 
-            CreateMap<CntTercero, gerenteEmpresaModel>();
+            CreateMap<CntTercero, GerenteEmpresaModel>();
 
             CreateMap<CntLiquidaImpuesto, ListarLiquidaImpuestosModel>()
             .ForMember(u => u.nombreUsuario, y => y.MapFrom(z => z.Comprobante.Usuario.Tercero.TerRazonsocial));

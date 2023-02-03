@@ -24,9 +24,9 @@ namespace Aplicacion.Configuracion.Sucursales
             public EjecutaValidador()
             {
                //RuleFor(x => x.Id).NotEmpty();
-                RuleFor(x => x.codigo).NotEmpty();
-                RuleFor(x => x.nombre).NotEmpty();
-                RuleFor(x => x.id_empresa).NotEmpty();
+                RuleFor(x => x.Codigo).NotEmpty();
+                RuleFor(x => x.Nombre).NotEmpty();
+                RuleFor(x => x.IdEmpresa).NotEmpty();
 
             }
         }
@@ -52,7 +52,7 @@ namespace Aplicacion.Configuracion.Sucursales
             public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
             {
                 {
-                    var consulta = await _context.cnfEmpresas.FindAsync(request.id_empresa);
+                    var consulta = await _context.cnfEmpresas.FindAsync(request.IdEmpresa);
                         if (consulta == null)
                         {
                             throw new Exception("Empresa no encontrada");
