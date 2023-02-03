@@ -88,7 +88,7 @@ public class Startup
             opt.Filters.Add(new AuthorizeFilter(policy));
         });
 
-        // Se agrega la validación:
+        // Se agrega la validación
 
         services.AddFluentValidationAutoValidation()
                 .AddFluentValidationClientsideAdapters()
