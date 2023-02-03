@@ -1,0 +1,133 @@
+using MediatR;
+using Persistencia;
+using Dominio.Contabilidad;
+using System;
+using System.Threading.Tasks;
+using System.Threading;
+using FluentValidation;
+using Aplicacion.Models.Contabilidad.Comprobantes;
+using AutoMapper;
+using System.Linq;
+using Aplicacion.Models.Contabilidad.DetalleComprobantes;
+using Microsoft.EntityFrameworkCore;
+
+namespace Aplicacion.Contabilidad.Comprobantes
+{
+    public class Editar
+    {
+        public class Ejecuta : EditarComprobantesModel, IRequest
+
+        { }
+
+
+        public class EjecutaValidador : AbstractValidator<Ejecuta>
+        {
+            public EjecutaValidador()
+            {
+                //RuleFor(x => x.id_sucursal).NotEmpty();
+                //RuleFor(x => x.id_tipocomprobante).NotEmpty();
+                RuleFor(x => x.id_tercero).NotEmpty();
+               // RuleFor(x => x.cco_ano).NotEmpty();
+               // RuleFor(x => x.cco_mes).NotEmpty();
+               // RuleFor(x => x.cco_consecutivo).NotEmpty();
+                RuleFor(x => x.cco_fecha).NotEmpty();
+                RuleFor(x => x.cco_documento).NotEmpty();
+                RuleFor(x => x.cco_detalle).NotEmpty();
+                //RuleFor(x => x.id_usuario).NotEmpty();
+            }
+        }
+
+        public class Manejador : IRequestHandler<Ejecuta>
+        {
+            private readonly CntContext context;
+            private readonly IMapper _mapper;
+
+
+            public Manejador(CntContext context, IMapper mapper)
+            {
+                this.context = context;
+                _mapper = mapper;
+
+            }
+
+            public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
+            {
+                var comprobante = await context.cntComprobantes
+                .Include(t => t.tipoComprobante)
+                .FirstOrDefaultAsync(cmp => cmp.id == request.Id);
+
+
+                if (comprobante == null)
+                {
+                    throw new Exception("Comprobante no encontrado");
+                }
+
+                if (comprobante.tipoComprobante.editable == "F")
+                {
+                    throw new Exception("Comprobante no permite Edición");
+                }
+
+                if ((comprobante.cco_estado == "R") || (comprobante.cco_estado == "A") )
+                {
+                    throw new Exception("El Comprobante fue Anulado o Revertido ");
+                }
+
+
+                //Inicia Transaccion - Tiene AutoRollback
+                var transaction = context.Database.BeginTransaction();
+
+                try
+                {
+                  
+
+
+                if (request.detalleComprobantes != null)
+                    {
+                        if (request.detalleComprobantes.Count > 0)
+                        {
+                            /*Eliminar detalles de comprobante*/
+                            var detalles = context.cntDetalleComprobantes
+                                .Where(x => x.id_comprobante == request.Id);
+
+                            foreach (var registro in detalles)
+                            {
+                                context.cntDetalleComprobantes.Remove(registro);
+                            }
+                            /*Fin del procedimiento para eliminar detalles*/
+
+                            foreach (var registro in request.detalleComprobantes)
+                            {
+                                registro.id_comprobante=request.Id;
+                                var detalleDto = _mapper.Map<EditarDetalleComprobantesModel, CntDetalleComprobante>(registro);
+                                await context.cntDetalleComprobantes.AddAsync(detalleDto);
+                            }
+
+                            /*Fin del procedimiento*/
+                        }
+                    }
+                    var comprobantesDto = _mapper.Map<EditarComprobantesModel,CntComprobante>(request,comprobante);
+                    //var resultado1 = await context.SaveChangesAsync();
+                    var resultado = await context.SaveChangesAsync();
+
+
+                    if (resultado > 0)
+                    {
+                        transaction.Commit();
+                        return Unit.Value;
+                    }
+                }
+                catch (SystemException)
+                {
+
+                    throw new Exception("Error al Modificar Registro");
+                }
+
+                throw new Exception("Error al Modificar Registro");
+            }
+
+
+        }
+    }
+
+
+}

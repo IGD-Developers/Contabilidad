@@ -1,0 +1,82 @@
+using MediatR;
+using Persistencia;
+using Dominio.Configuracion;
+using System;
+using System.Threading.Tasks;
+using System.Threading;
+using Microsoft.AspNetCore.Identity;
+
+namespace Aplicacion.Seguridad
+{
+    public class Insertar
+    {
+        public class Ejecuta: IRequest {
+            public int id_tercero { get; set; }
+            public string UserName { get; set; }
+            public string Password { get; set; }
+            public string Email { get; set; }
+            //public DateTime usu_fecha_nacimiento { get; set; }
+            public bool usu_estado { get; set; }
+            public bool usu_supervisor { get; set; }
+        }
+
+
+        public class Manejador: IRequestHandler<Ejecuta,CnfUsuario> {
+
+            private readonly UserManager<CnfUsuario> _userManager;
+            private readonly SignInManager<CnfUsuario> _signInManager;
+
+            public Manejador( UserManager<CnfUsuario> userManager, SignInManager<CnfUsuario> signInManager)
+            {
+                _userManager = userManager;
+                _signInManager = signInManager;
+            }
+
+            // Para trabajar la logica de loginDebemos inyectar en el constructor de manejador 
+            //dos objetos:UserManager, SignInManager que vienen de CoreIdentity y referencian 
+            //a la base de datos para hacer la comparacion del Email y password que entran como pmts
+
+
+            public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
+            {
+
+                //Automaticamente busca el email dentro de la bd
+
+                var usuario= await _userManager.FindByEmailAsync(request.Email);
+                if (usuario==null){
+                    throw new Exception("Error 103 al insertar Usuario");
+
+                }
+                var resultado=await _signInManager.CheckPasswordSignInAsync(usuario,request.Password,false);
+                if (resultado.Succeeded){
+                    return usuario;
+                }
+                 throw new Exception("Error 103 al insertar Usuario");
+
+                // var usuario = new CnfUsuario() 
+                //     {
+                //     id_tercero=request.id_tercero,
+                //     UserName=request.UserName, 
+                //    Password=request.Password,
+                //     usu_estado=request.usu_estado,
+                //     usu_supervisor=request.usu_supervisor
+                //     };
+
+                // context.cnfUsuarios.Add(usuario);
+                // var respuesta= await context.SaveChangesAsync();
+                // if (respuesta>0) {
+                //     return Unit.Value;
+                // }
+                //throw new Exception("Error 103 al insertar Usuario");
+
+
+            }    
+        }
+
+
+    
+
+
+
+    }
+}

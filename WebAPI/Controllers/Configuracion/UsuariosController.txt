@@ -1,0 +1,45 @@
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using MediatR;
+using Dominio.Configuracion;
+//using Aplicacion.Configuracion.Usuarios;
+using Aplicacion.Seguridad;
+
+namespace WebAPI.Controllers.Configuracion
+{
+    [ApiController]
+    [Route("api/[controller]")]
+    public class UsuariosController : ControllerBase
+    {
+        private readonly IMediator mediator;
+
+        public UsuariosController(IMediator mediator)
+        {
+            this.mediator = mediator;
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<List<CnfUsuario>>> Get()
+        {
+            return await mediator.Send(new Consulta.ListaCnfUsuarios());
+        }
+
+        [HttpGet("{id}")]
+
+        public async Task<ActionResult<CnfUsuario>> GetId(int id)
+        {
+
+            return await mediator.Send(new ConsultaId.ConsultarId { Id = id });
+
+        }
+
+        [HttpPost]
+
+        public async Task<ActionResult<Unit>> Insertar(Insertar.Ejecuta data) {
+
+            return await mediator.Send(data);
+
+        }
+    }
+}

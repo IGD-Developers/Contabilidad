@@ -1,0 +1,25 @@
+//TODO:ESTADOS[Activo:A, Inactiva:I , nulo:N, Revertido:R]
+
+//TODO: FILTRAR CONSULTA POR CAMPOS
+// Descargado por Alejandro 20220510
+////////////////////////////////////////////////////////////////
+var entidadDto = await _context.cntCuentaImpuestos
+                                    .Include(p => p.puc)
+                                    .Include(p => p.tipoImpuesto)
+                                    .Where(p=>p.id == request.Id)
+                                    .Select(p =>  _mapper.Map<CntCuentaImpuesto,ListarCuentaImpuestosModel>(p))
+                                    .SingleOrDefaultAsync();
+///////////////////////////////////////////////////////////////////
+ var idTipoComprobante = await _context.cntTipoComprobantes
+                                    .Where(t => t.codigo == "LIM")
+                                    .Select(t => new IdLiquidaImpuestoModel()
+                                    { Id = t.id })
+                                    .SingleOrDefaultAsync();
+
+ namespace Aplicacion.Models.Contabilidad.LiquidaImpuestos
+{
+    public class IdLiquidaImpuestoModel
+    {
+          public int Id { get; set; }
+    }
+}

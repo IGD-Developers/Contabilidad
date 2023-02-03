@@ -1,0 +1,60 @@
+using MediatR;
+using Persistencia;
+using Dominio.Configuracion;
+using System;
+using System.Threading.Tasks;
+using System.Threading;
+
+namespace Aplicacion.Configuracion.Usuarios
+{
+    public class Insertar
+    {
+        public class Ejecuta: IRequest {
+            public int id_tercero { get; set; }
+            public string UserName { get; set; }
+            public string PasswordHash { get; set; }
+            public string Email { get; set; }
+            //public DateTime usu_fecha_nacimiento { get; set; }
+            public bool usu_estado { get; set; }
+            public bool usu_supervisor { get; set; }
+        }
+
+
+        public class Manejador: IRequestHandler<Ejecuta> {
+
+            private readonly CntContext context;
+
+            public Manejador(CntContext context)
+            {
+                this.context = context;
+            }
+
+            public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
+            {
+                var usuario = new CnfUsuario() 
+                    {
+                    id_tercero=request.id_tercero,
+                    UserName=request.UserName, 
+                   PasswordHash=request.PasswordHash,
+                    usu_estado=request.usu_estado,
+                    usu_supervisor=request.usu_supervisor
+                    };
+
+                context.cnfUsuarios.Add(usuario);
+                var respuesta= await context.SaveChangesAsync();
+                if (respuesta>0) {
+                    return Unit.Value;
+                }
+                throw new Exception("Error 103 al insertar Usuario");
+
+
+            }    
+        }
+
+
+    
+
+
+
+    }
+}
