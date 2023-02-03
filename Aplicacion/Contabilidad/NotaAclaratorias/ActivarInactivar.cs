@@ -7,57 +7,58 @@ using Dominio.Contabilidad;
 using MediatR;
 using Persistencia;
 
-namespace Aplicacion.Contabilidad.NotaAclaratorias;
-
-public class ActivarInactivar
+namespace Aplicacion.Contabilidad.NotaAclaratorias
 {
-    public class Ejecuta : ActivarInactivarNotaAclaratoriaModel, IRequest{}
-
-    public class Manejador : IRequestHandler<Ejecuta>
+    public class ActivarInactivar
     {
-        public readonly CntContext _context;
-        public readonly IMapper _mapper;
+        public class Ejecuta : ActivarInactivarNotaAclaratoriaModel, IRequest{}
 
-        public Manejador(CntContext context, IMapper mapper)
+        public class Manejador : IRequestHandler<Ejecuta>
         {
-            _context = context;
-            _mapper = mapper;
-        }
+            public readonly CntContext _context;
+            public readonly IMapper _mapper;
 
-        public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
-        {
-            var nota = await _context.cntNotaAclaratorias.FindAsync(request.ID);
-
-            if(nota == null){
-                throw new Exception("Nota Consultada no existe");
+            public Manejador(CntContext context, IMapper mapper)
+            {
+                _context = context;
+                _mapper = mapper;
             }
 
-            if(nota.estado == "A"){
-                request.estado = "I";
+            public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
+            {
+                var nota = await _context.cntNotaAclaratorias.FindAsync(request.ID);
 
-            }else if(nota.estado == "I"){
-                request.estado = "A";
-            }
-
-            try {
-                var notaModel = _mapper.Map<ActivarInactivarNotaAclaratoriaModel, CntNotaAclaratoria>(request, nota);
-
-                var resultado = await _context.SaveChangesAsync();
-
-                if(resultado>0){
-                    return Unit.Value;
+                if(nota == null){
+                    throw new Exception("Nota Consultada no existe");
                 }
 
-                throw new Exception("No se pudo Cambiar estado a la nota aclaratoria");
+                if(nota.estado == "A"){
+                    request.estado = "I";
 
-            } catch (SystemException e) {
-                throw new Exception("Ocurrio un error inesperado al cambiar estado", e);
-                
+                }else if(nota.estado == "I"){
+                    request.estado = "A";
+                }
+
+                try {
+                    var notaModel = _mapper.Map<ActivarInactivarNotaAclaratoriaModel, CntNotaAclaratoria>(request, nota);
+    
+                    var resultado = await _context.SaveChangesAsync();
+    
+                    if(resultado>0){
+                        return Unit.Value;
+                    }
+    
+                    throw new Exception("No se pudo Cambiar estado a la nota aclaratoria");
+
+                } catch (SystemException e) {
+                    throw new Exception("Ocurrio un error inesperado al cambiar estado", e);
+                    
+                }
+
+
+
+
             }
-
-
-
-
         }
     }
 }

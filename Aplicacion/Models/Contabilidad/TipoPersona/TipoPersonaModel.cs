@@ -1,8 +1,9 @@
-namespace Aplicacion.Models.Contabilidad.TipoPersona;
-
-public class TipoPersonaModel
+namespace Aplicacion.Models.Contabilidad.TipoPersona
 {
-    public int id { get; set; }
-    public string codigo { get; set; }
-    public string nombre { get; set; }
+    public class TipoPersonaModel
+    {
+        public int id { get; set; }
+        public string codigo { get; set; }
+        public string nombre { get; set; }
+    }
 }

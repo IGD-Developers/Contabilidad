@@ -8,49 +8,50 @@ using Aplicacion.Models.Configuracion.Empresas;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
-namespace Aplicacion.Configuracion.Empresas;
-
-public class ConsultaId
+namespace Aplicacion.Configuracion.Empresas
 {
-
-    public class ConsultarId : IdEmpresasModel, IRequest<ListarEmpresasModel>
-    {  }
-
-    public class Manejador : IRequestHandler<ConsultarId, ListarEmpresasModel>
+    public class ConsultaId
     {
 
-        private readonly CntContext _context;
-        private readonly IMapper _mapper;
+        public class ConsultarId : IdEmpresasModel, IRequest<ListarEmpresasModel>
+        {  }
 
-
-
-        public Manejador(CntContext context,IMapper mapper)
-        {
-            _context = context;
-            _mapper = mapper;            }
-
-        public async Task<ListarEmpresasModel> Handle(ConsultarId request, CancellationToken cancellationToken)
+        public class Manejador : IRequestHandler<ConsultarId, ListarEmpresasModel>
         {
 
-
-             var entidad = await _context.cnfEmpresas
-             .Include(t=> t.terceroEmpresa)
-             .SingleOrDefaultAsync(i => i.id == request.Id);
-           
-             //.FindAsync(request.Id);
-           
-            if (entidad == null) {
-                 throw new Exception("Registro no encontrado");
-             };
-             var entidadDto = _mapper.Map<CnfEmpresa,ListarEmpresasModel>(entidad);
-             return entidadDto;
+            private readonly CntContext _context;
+            private readonly IMapper _mapper;
 
 
-            // return empresa;
 
+            public Manejador(CntContext context,IMapper mapper)
+            {
+                _context = context;
+                _mapper = mapper;            }
+
+            public async Task<ListarEmpresasModel> Handle(ConsultarId request, CancellationToken cancellationToken)
+            {
+
+
+                 var entidad = await _context.cnfEmpresas
+                 .Include(t=> t.terceroEmpresa)
+                 .SingleOrDefaultAsync(i => i.id == request.Id);
+               
+                 //.FindAsync(request.Id);
+               
+                if (entidad == null) {
+                     throw new Exception("Registro no encontrado");
+                 };
+                 var entidadDto = _mapper.Map<CnfEmpresa,ListarEmpresasModel>(entidad);
+                 return entidadDto;
+
+
+                // return empresa;
+
+            }
         }
+
+
+
     }
-
-
-
 }

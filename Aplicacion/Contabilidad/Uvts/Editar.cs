@@ -6,64 +6,65 @@ using System.Threading;
 using FluentValidation;
 
 
-namespace Aplicacion.Contabilidad.Uvts;
-
-public class Editar
+namespace Aplicacion.Contabilidad.Uvts
 {
-
-     public class Ejecuta: IRequest
+    public class Editar
     {
 
-        public int Id { get; set; }
-        public int uvt_ano { get; set; }
-        public double uvt_valor { get; set; }
-        public DateTime created_at { get; set; }
-        public DateTime? updated_at { get; set; }
-
-    }
-
-    public class EjecutaValidador : AbstractValidator<Ejecuta>
-    {
-        public EjecutaValidador()
+         public class Ejecuta: IRequest
         {
-            RuleFor(x=>x.Id).NotEmpty();
-            RuleFor(x=>x.uvt_ano).NotEmpty();
-            RuleFor(x=>x.uvt_valor).NotEmpty();
-    
-        }
-    }    
 
+            public int Id { get; set; }
+            public int uvt_ano { get; set; }
+            public double uvt_valor { get; set; }
+            public DateTime created_at { get; set; }
+            public DateTime? updated_at { get; set; }
 
-    public class Manejador: IRequestHandler<Ejecuta>
-    {
-
-        private readonly CntContext context;
-
-        public Manejador(CntContext context)
-        {
-            this.context = context;
         }
 
-        public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
+        public class EjecutaValidador : AbstractValidator<Ejecuta>
         {
-            var uvt = await context.cntUvts.FindAsync(request.Id);
-            if (uvt == null) {  
-                    throw new Exception("Registro no encontrado");
-            };   
-            uvt.uvt_ano =  request.uvt_ano;
-            uvt.uvt_valor = request.uvt_valor; 
-
-            var resultado=  await context.SaveChangesAsync();
-            if (resultado>0)
+            public EjecutaValidador()
             {
-                return Unit.Value;
+                RuleFor(x=>x.Id).NotEmpty();
+                RuleFor(x=>x.uvt_ano).NotEmpty();
+                RuleFor(x=>x.uvt_valor).NotEmpty();
+        
             }
-            throw new Exception("Error al modificar registro");
+        }    
 
 
+        public class Manejador: IRequestHandler<Ejecuta>
+        {
 
+            private readonly CntContext context;
+
+            public Manejador(CntContext context)
+            {
+                this.context = context;
+            }
+
+            public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
+            {
+                var uvt = await context.cntUvts.FindAsync(request.Id);
+                if (uvt == null) {  
+                        throw new Exception("Registro no encontrado");
+                };   
+                uvt.uvt_ano =  request.uvt_ano;
+                uvt.uvt_valor = request.uvt_valor; 
+
+                var resultado=  await context.SaveChangesAsync();
+                if (resultado>0)
+                {
+                    return Unit.Value;
+                }
+                throw new Exception("Error al modificar registro");
+ 
+
+
+            }
         }
-    }
 
-    
+        
+    }
 }

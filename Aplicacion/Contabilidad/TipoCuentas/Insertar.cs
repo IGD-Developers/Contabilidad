@@ -6,54 +6,55 @@ using System.Threading;
 using System;
 using FluentValidation;
 
-namespace Aplicacion.Contabilidad.TipoCuentas;
-
-public class Insertar
+namespace Aplicacion.Contabilidad.TipoCuentas
 {
-    public class Ejecuta: IRequest {
-
-        public string codigo { get; set; }
-        public string nombre { get; set; }
-
-    }
-
-    public class EjecutaValidador : AbstractValidator<Ejecuta>
+    public class Insertar
     {
-        public EjecutaValidador()
-        {
-            RuleFor(x=>x.codigo).NotEmpty();
-            RuleFor(x=>x.nombre).NotEmpty();
-    
-        }
-    }    
+        public class Ejecuta: IRequest {
 
+            public string codigo { get; set; }
+            public string nombre { get; set; }
 
-    public class Manejador: IRequestHandler<Ejecuta> {
-
-        private readonly CntContext context;
-
-        public Manejador(CntContext context)
-        {
-            this.context = context;
         }
 
-        public async  Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
+        public class EjecutaValidador : AbstractValidator<Ejecuta>
         {
-            var tipoCuenta = new CntTipoCuenta 
+            public EjecutaValidador()
             {
-                codigo = request.codigo,
-                nombre = request.nombre
-            };
-
-            context.cntTipoCuentas.Add(tipoCuenta);
-            var respuesta=await context.SaveChangesAsync();
-            if (respuesta>0)
-            {
-                return Unit.Value;
+                RuleFor(x=>x.codigo).NotEmpty();
+                RuleFor(x=>x.nombre).NotEmpty();
+        
             }
-            throw new Exception("Error 108 al insertar tipocuenta");
-        }
-    }
+        }    
 
-    
+
+        public class Manejador: IRequestHandler<Ejecuta> {
+
+            private readonly CntContext context;
+
+            public Manejador(CntContext context)
+            {
+                this.context = context;
+            }
+
+            public async  Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
+            {
+                var tipoCuenta = new CntTipoCuenta 
+                {
+                    codigo = request.codigo,
+                    nombre = request.nombre
+                };
+
+                context.cntTipoCuentas.Add(tipoCuenta);
+                var respuesta=await context.SaveChangesAsync();
+                if (respuesta>0)
+                {
+                    return Unit.Value;
+                }
+                throw new Exception("Error 108 al insertar tipocuenta");
+            }
+        }
+
+        
+    }
 }

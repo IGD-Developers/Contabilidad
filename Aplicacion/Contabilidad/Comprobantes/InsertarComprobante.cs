@@ -9,95 +9,97 @@ using Dominio.Contabilidad;
 using MediatR;
 using Persistencia;
 
-namespace Aplicacion.Contabilidad.Comprobantes;
-
-public class InsertarComprobante : InsertarComprobantesModel, IInsertarComprobante
+namespace Aplicacion.Contabilidad.Comprobantes
 {
-
-    private readonly CntContext _context;
-    private readonly IMapper _mapper;
-    private IInsertarConsecutivo _insertarConsecutivo;
-
-    public InsertarComprobante(CntContext context, IMapper mapper, IInsertarConsecutivo insertarConsecutivo)
-    {
-        _context = context;
-        _mapper = mapper;
-        _insertarConsecutivo = insertarConsecutivo;
-    }
-
-    public async Task<IdComprobanteModel> Insertar(InsertarComprobantesModel model)
+    public class InsertarComprobante : InsertarComprobantesModel, IInsertarComprobante
     {
 
+        private readonly CntContext _context;
+        private readonly IMapper _mapper;
+        private IInsertarConsecutivo _insertarConsecutivo;
 
-        ConsecutivoComprobanteModel cns = new ConsecutivoComprobanteModel
+        public InsertarComprobante(CntContext context, IMapper mapper, IInsertarConsecutivo insertarConsecutivo)
         {
-            id_tipocomprobante = model.id_tipocomprobante,
-            fecha = model.cco_fecha,
-            id_sucursal = model.id_sucursal
-        };
-
-
-
-        var resu = await _insertarConsecutivo.Insertar(cns);
-        System.Console.WriteLine(resu);
-        model.cco_ano = resu.co_ano;
-        model.cco_mes = resu.co_mes;
-        model.cco_consecutivo = resu.co_consecutivo;
-
-        IdComprobanteModel idComprobante = new IdComprobanteModel{Id = -1};
-        var entidadDto = _mapper.Map<InsertarComprobantesModel, CntComprobante>(model);
-        if(entidadDto.tcredito!=entidadDto.tdebito)
-        {
-            
-             throw new Exception("Los Débitos y Créditos no son iguales" );
-             //Console.WriteLine("Los Débitos y Créditos no son iguales" );
-
+            _context = context;
+            _mapper = mapper;
+            _insertarConsecutivo = insertarConsecutivo;
         }
-        //var transaction = _context.Database.BeginTransaction();
 
-        try
+        public async Task<IdComprobanteModel> Insertar(InsertarComprobantesModel model)
         {
 
 
-        await _context.cntComprobantes.AddAsync(entidadDto);
-        var respuesta1 = await _context.SaveChangesAsync();
-        int nuevoid = entidadDto.id;
-        idComprobante.Id = nuevoid;
-        Console.WriteLine(nuevoid);
-
-            if (model.comprobanteDetalleComprobantes != null)
+            ConsecutivoComprobanteModel cns = new ConsecutivoComprobanteModel
             {
-                foreach (InsertarDetalleComprobanteModel registro in model.comprobanteDetalleComprobantes)
-                {
-                    registro.id_comprobante = nuevoid;
-                    var detalleDto = _mapper.Map<InsertarDetalleComprobanteModel, CntDetalleComprobante>(registro);
+                id_tipocomprobante = model.id_tipocomprobante,
+                fecha = model.cco_fecha,
+                id_sucursal = model.id_sucursal
+            };
 
-                    _context.cntDetalleComprobantes.Add(detalleDto);
 
-                }
-                var respuesta2 = await _context.SaveChangesAsync();
-                if (respuesta2 > 0)
-                {
 
-                    //transaction.Commit();
-                    //return Unit.Value;
-                    // IdComprobanteModel idComprobante = new IdComprobanteModel
-                    // {Id = nuevoid};
-                    return idComprobante;
+            var resu = await _insertarConsecutivo.Insertar(cns);
+            System.Console.WriteLine(resu);
+            model.cco_ano = resu.co_ano;
+            model.cco_mes = resu.co_mes;
+            model.cco_consecutivo = resu.co_consecutivo;
 
-                }
+            IdComprobanteModel idComprobante = new IdComprobanteModel{Id = -1};
+            var entidadDto = _mapper.Map<InsertarComprobantesModel, CntComprobante>(model);
+            if(entidadDto.tcredito!=entidadDto.tdebito)
+            {
+                
+                 throw new Exception("Los Débitos y Créditos no son iguales" );
+                 //Console.WriteLine("Los Débitos y Créditos no son iguales" );
 
             }
+            //var transaction = _context.Database.BeginTransaction();
 
-            throw new System.NotImplementedException();
-        }
-         catch (Exception ex)
+            try
             {
 
-                throw new Exception("Error al insertar comprobante catch " + ex.Message);
-            }
 
+            await _context.cntComprobantes.AddAsync(entidadDto);
+            var respuesta1 = await _context.SaveChangesAsync();
+            int nuevoid = entidadDto.id;
+            idComprobante.Id = nuevoid;
+            Console.WriteLine(nuevoid);
+
+                if (model.comprobanteDetalleComprobantes != null)
+                {
+                    foreach (InsertarDetalleComprobanteModel registro in model.comprobanteDetalleComprobantes)
+                    {
+                        registro.id_comprobante = nuevoid;
+                        var detalleDto = _mapper.Map<InsertarDetalleComprobanteModel, CntDetalleComprobante>(registro);
+
+                        _context.cntDetalleComprobantes.Add(detalleDto);
+
+                    }
+                    var respuesta2 = await _context.SaveChangesAsync();
+                    if (respuesta2 > 0)
+                    {
+
+                        //transaction.Commit();
+                        //return Unit.Value;
+                        // IdComprobanteModel idComprobante = new IdComprobanteModel
+                        // {Id = nuevoid};
+                        return idComprobante;
+
+                    }
+
+                }
+
+                throw new System.NotImplementedException();
+            }
+             catch (Exception ex)
+                {
+
+                    throw new Exception("Error al insertar comprobante catch " + ex.Message);
+                }
+
+        }
     }
+
 }
 //          ConsecutivoComprobanteModel cns = new ConsecutivoComprobanteModel
 //                 {

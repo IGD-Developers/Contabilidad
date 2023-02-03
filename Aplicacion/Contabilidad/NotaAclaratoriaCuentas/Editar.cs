@@ -5,55 +5,56 @@ using FluentValidation;
 using MediatR;
 using Persistencia;
 
-namespace Aplicacion.Contabilidad.NotaAclaratoriaCuentas;
-
-public class Editar
+namespace Aplicacion.Contabilidad.NotaAclaratoriaCuentas
 {
-    public class Ejecuta : IRequest {
-        public int id { get; set; }
-        public int? id_notaaclaratoria { get; set; }
-        public int? id_puc { get; set; }
-    }
-
-     public class EjecutaValidador : AbstractValidator<Ejecuta>
+    public class Editar
     {
-        public EjecutaValidador()
-        {
-            RuleFor(x=>x.id).NotEmpty();
-            RuleFor(x=>x.id_notaaclaratoria).NotEmpty();
-            RuleFor(x=>x.id_puc).NotEmpty();
-
-        }
-    }
-
-    public class Manejador : IRequestHandler<Ejecuta>
-    {
-        private readonly CntContext _context;
-
-        public Manejador(CntContext context)
-        {
-            _context = context;
+        public class Ejecuta : IRequest {
+            public int id { get; set; }
+            public int? id_notaaclaratoria { get; set; }
+            public int? id_puc { get; set; }
         }
 
-        public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
+         public class EjecutaValidador : AbstractValidator<Ejecuta>
         {
-            var nota = await _context.cntNotaAclaratoriaCuentas.FindAsync(request.id);
+            public EjecutaValidador()
+            {
+                RuleFor(x=>x.id).NotEmpty();
+                RuleFor(x=>x.id_notaaclaratoria).NotEmpty();
+                RuleFor(x=>x.id_puc).NotEmpty();
 
-            if(nota == null){
-                throw new Exception("No se encontro nota");
+            }
+        }
+
+        public class Manejador : IRequestHandler<Ejecuta>
+        {
+            private readonly CntContext _context;
+
+            public Manejador(CntContext context)
+            {
+                _context = context;
             }
 
-            nota.id_notaaclaratoria = request.id_notaaclaratoria ?? nota.id_notaaclaratoria;
-            nota.id_puc = request.id_puc ?? nota.id_puc;
+            public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
+            {
+                var nota = await _context.cntNotaAclaratoriaCuentas.FindAsync(request.id);
 
-            var resultado = await _context.SaveChangesAsync();
+                if(nota == null){
+                    throw new Exception("No se encontro nota");
+                }
 
-            if(resultado>0){
-                return Unit.Value;
+                nota.id_notaaclaratoria = request.id_notaaclaratoria ?? nota.id_notaaclaratoria;
+                nota.id_puc = request.id_puc ?? nota.id_puc;
+
+                var resultado = await _context.SaveChangesAsync();
+
+                if(resultado>0){
+                    return Unit.Value;
+                }
+
+                throw new Exception("No se pudo editar la nota");
+
             }
-
-            throw new Exception("No se pudo editar la nota");
-
         }
     }
 }

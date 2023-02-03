@@ -8,30 +8,31 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Persistencia;
 
-namespace Aplicacion.Contabilidad.SeccionCiius;
-
-public class Consulta
+namespace Aplicacion.Contabilidad.SeccionCiius
 {
-    public class ListarSeccionCiius : IRequest<List<SeccionCiiusModel>>{}
-
-    public class Manejador : IRequestHandler<ListarSeccionCiius, List<SeccionCiiusModel>>
+    public class Consulta
     {
-        private readonly CntContext _context;
-        private readonly IMapper _mapper;
+        public class ListarSeccionCiius : IRequest<List<SeccionCiiusModel>>{}
 
-        public Manejador(CntContext context, IMapper mapper)
+        public class Manejador : IRequestHandler<ListarSeccionCiius, List<SeccionCiiusModel>>
         {
-            _context = context;
-            _mapper = mapper;
-        }
+            private readonly CntContext _context;
+            private readonly IMapper _mapper;
 
-        public async Task<List<SeccionCiiusModel>> Handle(ListarSeccionCiius request, CancellationToken cancellationToken)
-        {
-            var listarSeccionCiius = await _context.CntSeccionCiius.ToListAsync();
+            public Manejador(CntContext context, IMapper mapper)
+            {
+                _context = context;
+                _mapper = mapper;
+            }
 
-            var listarSeccionCiiusModel = _mapper.Map<List<CntSeccionCiiu>, List<SeccionCiiusModel>>(listarSeccionCiius);
-            
-            return listarSeccionCiiusModel;
+            public async Task<List<SeccionCiiusModel>> Handle(ListarSeccionCiius request, CancellationToken cancellationToken)
+            {
+                var listarSeccionCiius = await _context.CntSeccionCiius.ToListAsync();
+
+                var listarSeccionCiiusModel = _mapper.Map<List<CntSeccionCiiu>, List<SeccionCiiusModel>>(listarSeccionCiius);
+                
+                return listarSeccionCiiusModel;
+            }
         }
     }
 }

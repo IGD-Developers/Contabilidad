@@ -8,66 +8,67 @@ using AutoMapper;
 using Aplicacion.Models.Contabilidad.TipoImpuestos;
 using Dominio.Contabilidad;
 
-namespace Aplicacion.Contabilidad.TipoImpuestos;
-
-public class Editar
+namespace Aplicacion.Contabilidad.TipoImpuestos
 {
-    public class Ejecuta : EditarTipoImpuestosModel, IRequest
-    {  }
-
-    public class EjecutaValidador : AbstractValidator<Ejecuta>
+    public class Editar
     {
-        public EjecutaValidador()
+        public class Ejecuta : EditarTipoImpuestosModel, IRequest
+        {  }
+
+        public class EjecutaValidador : AbstractValidator<Ejecuta>
         {
-            RuleFor(x => x.codigo).NotEmpty();
-            RuleFor(x => x.nombre).NotEmpty();
-
-        }
-    }
-
-    public class Manejador : IRequestHandler<Ejecuta>
-    {
-
-        private readonly CntContext _context;
-        private readonly IMapper _mapper;
-
-
-
-        public Manejador(CntContext context, IMapper mapper)
-        {
-            _context = context;
-            _mapper = mapper;
-        }
-
-        public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
-        {
-            var entidad = await _context.cntTipoImpuestos.FindAsync(request.Id);
-
-            try
+            public EjecutaValidador()
             {
-                if (entidad == null)
-                {
-                    throw new Exception("Registro no encontrado");
-                };
+                RuleFor(x => x.codigo).NotEmpty();
+                RuleFor(x => x.nombre).NotEmpty();
 
-                var entidadDto = _mapper.Map<EditarTipoImpuestosModel, CntTipoImpuesto>(request, entidad);
-                var resultado = await _context.SaveChangesAsync();
-                if (resultado > 0)
+            }
+        }
+
+        public class Manejador : IRequestHandler<Ejecuta>
+        {
+
+            private readonly CntContext _context;
+            private readonly IMapper _mapper;
+
+
+
+            public Manejador(CntContext context, IMapper mapper)
+            {
+                _context = context;
+                _mapper = mapper;
+            }
+
+            public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
+            {
+                var entidad = await _context.cntTipoImpuestos.FindAsync(request.Id);
+
+                try
                 {
-                    return Unit.Value;
+                    if (entidad == null)
+                    {
+                        throw new Exception("Registro no encontrado");
+                    };
+
+                    var entidadDto = _mapper.Map<EditarTipoImpuestosModel, CntTipoImpuesto>(request, entidad);
+                    var resultado = await _context.SaveChangesAsync();
+                    if (resultado > 0)
+                    {
+                        return Unit.Value;
+                    }
+
+                    throw new Exception("No se realizaron modificaciones en la base de datos");
+                }
+                catch (Exception ex)
+                {
+                    //TODO: MARIA  Llave duplicada  CODIGO Centro Costo Implementar
+
+                    throw new Exception("Error al editar registro catch " + ex.Message);
+
                 }
 
-                throw new Exception("No se realizaron modificaciones en la base de datos");
             }
-            catch (Exception ex)
-            {
-                //TODO: MARIA  Llave duplicada  CODIGO Centro Costo Implementar
-
-                throw new Exception("Error al editar registro catch " + ex.Message);
-
-            }
-
         }
-    }
 
+    }
 }

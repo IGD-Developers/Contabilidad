@@ -1,6 +1,7 @@
-namespace Aplicacion.Models.Contabilidad.Tercero;
-
-public class EliminarTerceroModel
+namespace Aplicacion.Models.Contabilidad.Tercero
 {
-    public int Id { get; set; }
+    public class EliminarTerceroModel
+    {
+        public int Id { get; set; }
+    }
 }

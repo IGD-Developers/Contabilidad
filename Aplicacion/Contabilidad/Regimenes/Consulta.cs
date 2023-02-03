@@ -8,28 +8,29 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Persistencia;
 
-namespace Aplicacion.Contabilidad.Regimenes;
-
-public class Consulta
+namespace Aplicacion.Contabilidad.Regimenes
 {
-    public class ListarRegimenes : IRequest<List<RegimenModel>>{}
-
-    public class Manejador : IRequestHandler<ListarRegimenes, List<RegimenModel>>
+    public class Consulta
     {
-        public readonly CntContext _context;
-        public readonly IMapper _mapper;
+        public class ListarRegimenes : IRequest<List<RegimenModel>>{}
 
-        public Manejador(CntContext context,IMapper mapper)
+        public class Manejador : IRequestHandler<ListarRegimenes, List<RegimenModel>>
         {
-            _context = context;
-            _mapper = mapper;
-        }
+            public readonly CntContext _context;
+            public readonly IMapper _mapper;
 
-        public async Task<List<RegimenModel>> Handle(ListarRegimenes request, CancellationToken cancellationToken)
-        {
-            var listarRegimenes = await _context.CntRegimenes.ToListAsync();
-            var listarRegimenesModel = _mapper.Map<List<CntRegimen>, List<RegimenModel>>(listarRegimenes);
-            return listarRegimenesModel;
+            public Manejador(CntContext context,IMapper mapper)
+            {
+                _context = context;
+                _mapper = mapper;
+            }
+
+            public async Task<List<RegimenModel>> Handle(ListarRegimenes request, CancellationToken cancellationToken)
+            {
+                var listarRegimenes = await _context.CntRegimenes.ToListAsync();
+                var listarRegimenesModel = _mapper.Map<List<CntRegimen>, List<RegimenModel>>(listarRegimenes);
+                return listarRegimenesModel;
+            }
         }
     }
 }

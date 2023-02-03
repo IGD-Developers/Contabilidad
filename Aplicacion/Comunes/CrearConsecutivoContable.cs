@@ -1,6 +1,7 @@
-namespace Aplicacion.Comunes;
-
-public class CrearConsecutivoContable
+namespace Aplicacion.Comunes
 {
-    
+    public class CrearConsecutivoContable
+    {
+        
+    }
 }

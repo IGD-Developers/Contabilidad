@@ -8,30 +8,31 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Persistencia;
 
-namespace Aplicacion.Contabilidad.TipoPersonas;
-
-public class Consulta
+namespace Aplicacion.Contabilidad.TipoPersonas
 {
-    public class ListarTipoPersonas : IRequest<List<TipoPersonaModel>>{}
-
-    public class Manejador : IRequestHandler<ListarTipoPersonas, List<TipoPersonaModel>>
+    public class Consulta
     {
-        private readonly CntContext _context;
-        private readonly IMapper _mapper;
-        
-        public Manejador(CntContext context, IMapper mapper)
-        {
-            _context = context;
-            _mapper = mapper;
-        }
+        public class ListarTipoPersonas : IRequest<List<TipoPersonaModel>>{}
 
-        public async Task<List<TipoPersonaModel>> Handle(ListarTipoPersonas request, CancellationToken cancellationToken)
+        public class Manejador : IRequestHandler<ListarTipoPersonas, List<TipoPersonaModel>>
         {
-            var listaTipoPersonas = await _context.CntTipoPersonas.ToListAsync();
-
-            var tipoPersonasModel = _mapper.Map<List<CntTipoPersona>, List<TipoPersonaModel>>(listaTipoPersonas);
+            private readonly CntContext _context;
+            private readonly IMapper _mapper;
             
-            return tipoPersonasModel;
+            public Manejador(CntContext context, IMapper mapper)
+            {
+                _context = context;
+                _mapper = mapper;
+            }
+
+            public async Task<List<TipoPersonaModel>> Handle(ListarTipoPersonas request, CancellationToken cancellationToken)
+            {
+                var listaTipoPersonas = await _context.CntTipoPersonas.ToListAsync();
+
+                var tipoPersonasModel = _mapper.Map<List<CntTipoPersona>, List<TipoPersonaModel>>(listaTipoPersonas);
+                
+                return tipoPersonasModel;
+            }
         }
     }
 }

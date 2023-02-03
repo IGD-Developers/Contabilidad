@@ -8,60 +8,62 @@ using FluentValidation;
 using MediatR;
 using Persistencia;
 
-namespace Aplicacion.Contabilidad.CategoriaComprobantes;
-
-public class Insertar
+namespace Aplicacion.Contabilidad.CategoriaComprobantes
 {
-    public class Ejecuta : InsertarCategoriaComprobantesModel, IRequest
-    { }
-
-
-    public class EjecutaValidador : AbstractValidator<Ejecuta>
+    public class Insertar
     {
-        public EjecutaValidador()
+        public class Ejecuta : InsertarCategoriaComprobantesModel, IRequest
+        { }
+
+
+        public class EjecutaValidador : AbstractValidator<Ejecuta>
         {
-            RuleFor(x => x.codigo).NotEmpty();
-            RuleFor(x => x.nombre).NotEmpty();
-
-        }
-    }
-    public class Manejador : IRequestHandler<Ejecuta>
-    {
-
-        private CntContext _context;
-        private readonly IMapper _mapper;
-
-
-
-        public Manejador(CntContext context, IMapper mapper)
-        {
-            _context = context;
-            _mapper = mapper;
-        }
-
-        public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
-        {
-
-            var entidadDto = _mapper.Map<InsertarCategoriaComprobantesModel, CntCategoriaComprobante>(request);
-
-            //TODO: MARIA Llave duplicada codigo 
-            try
+            public EjecutaValidador()
             {
-                _context.cntCategoriaComprobantes.Add(entidadDto);
-                var estado = await _context.SaveChangesAsync();
-                if (estado > 0)
+                RuleFor(x => x.codigo).NotEmpty();
+                RuleFor(x => x.nombre).NotEmpty();
+
+            }
+        }
+        public class Manejador : IRequestHandler<Ejecuta>
+        {
+
+            private CntContext _context;
+            private readonly IMapper _mapper;
+
+
+
+            public Manejador(CntContext context, IMapper mapper)
+            {
+                _context = context;
+                _mapper = mapper;
+            }
+
+            public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
+            {
+
+                var entidadDto = _mapper.Map<InsertarCategoriaComprobantesModel, CntCategoriaComprobante>(request);
+
+                //TODO: MARIA Llave duplicada codigo 
+                try
                 {
-                    return Unit.Value;
+                    _context.cntCategoriaComprobantes.Add(entidadDto);
+                    var estado = await _context.SaveChangesAsync();
+                    if (estado > 0)
+                    {
+                        return Unit.Value;
+                    }
+                    throw new Exception("Error al insertar registro");
                 }
-                throw new Exception("Error al insertar registro");
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Error al Insertar registro catch " + ex.Message);
+                catch (Exception ex)
+                {
+                    throw new Exception("Error al Insertar registro catch " + ex.Message);
 
+                }
             }
         }
-    }
 
+
+    }
 
 }

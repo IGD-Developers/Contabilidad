@@ -3,22 +3,23 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Dominio.Configuracion;
 using Dominio.Contabilidad;
 
-namespace Persistencia.Mapeo.Configuracion;
-
-public class EmpresaMap : IEntityTypeConfiguration<CnfEmpresa>
+namespace Persistencia.Mapeo.Configuracion
 {
-    public void Configure(EntityTypeBuilder<CnfEmpresa> builder)
+    public class EmpresaMap : IEntityTypeConfiguration<CnfEmpresa>
     {
-        builder
-            .ToTable("cnf_empresa")
-            .HasKey(entity => entity.id);
-
+        public void Configure(EntityTypeBuilder<CnfEmpresa> builder)
+        {
             builder
-            .HasOne<CntTercero>(e=> e.terceroEmpresa)
-            .WithOne(t=> t.empresaTercero)
-            .HasForeignKey<CnfEmpresa>(e => e.id_tercero_gerente);    
+                .ToTable("cnf_empresa")
+                .HasKey(entity => entity.id);
 
-         }
+                builder
+                .HasOne<CntTercero>(e=> e.terceroEmpresa)
+                .WithOne(t=> t.empresaTercero)
+                .HasForeignKey<CnfEmpresa>(e => e.id_tercero_gerente);    
+    
+             }
 
-        
+            
+    }
 }

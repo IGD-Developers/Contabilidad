@@ -9,51 +9,52 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Persistencia;
 
-namespace Aplicacion.Contabilidad.TipoComprobantes;
-
-public class Consulta
+namespace Aplicacion.Contabilidad.TipoComprobantes
 {
-    //Lista de objetos tipo IRequest envolviendo una lista de tipo CntTipoComprobante
-    public class ListaCntTipoComprobantes : IRequest<List<ListarTipoComprobanteModel>>
+    public class Consulta
     {
-
-    }
-
-
-    //Clase Manejador que hereda de IRequestHandler. Obliga a implementar  Interfaz.
-    // Requiere Constructor
-    //Parametros: tipo de dato a devolver que es objeto IRequest ListaCntTipoComprobantes primera clase declarada,
-    //el segundo pmt es el formato en que se devuelve que es un  List<CntTipoComprobante> 
-    public class Manejador : IRequestHandler<ListaCntTipoComprobantes, List<ListarTipoComprobanteModel>>
-    {
-
-        private CntContext _context;
-        private readonly IMapper _mapper;
-
-
-
-        public Manejador(CntContext context, IMapper mapper)
+        //Lista de objetos tipo IRequest envolviendo una lista de tipo CntTipoComprobante
+        public class ListaCntTipoComprobantes : IRequest<List<ListarTipoComprobanteModel>>
         {
-            _context = context;
-            _mapper = mapper;
-
 
         }
-        //La interfaz se autogenera -agregamos async
-        //La interfaz consume el objeto de EF para devolver la lista de tipo de comprobantes 
 
-        public async Task<List<ListarTipoComprobanteModel>> Handle(ListaCntTipoComprobantes request, CancellationToken cancellationToken)
+
+        //Clase Manejador que hereda de IRequestHandler. Obliga a implementar  Interfaz.
+        // Requiere Constructor
+        //Parametros: tipo de dato a devolver que es objeto IRequest ListaCntTipoComprobantes primera clase declarada,
+        //el segundo pmt es el formato en que se devuelve que es un  List<CntTipoComprobante> 
+        public class Manejador : IRequestHandler<ListaCntTipoComprobantes, List<ListarTipoComprobanteModel>>
         {
-            // El contexto devuelve desde el dbset
-            var entidades = await _context.cntTipoComprobantes
-            .Include(t => t.categoria)
-            .ToListAsync();
 
-            var entidadesDto = _mapper.Map<List<CntTipoComprobante>, List<ListarTipoComprobanteModel>>(entidades);
+            private CntContext _context;
+            private readonly IMapper _mapper;
 
-            return entidadesDto;
 
+
+            public Manejador(CntContext context, IMapper mapper)
+            {
+                _context = context;
+                _mapper = mapper;
+
+
+            }
+            //La interfaz se autogenera -agregamos async
+            //La interfaz consume el objeto de EF para devolver la lista de tipo de comprobantes 
+
+            public async Task<List<ListarTipoComprobanteModel>> Handle(ListaCntTipoComprobantes request, CancellationToken cancellationToken)
+            {
+                // El contexto devuelve desde el dbset
+                var entidades = await _context.cntTipoComprobantes
+                .Include(t => t.categoria)
+                .ToListAsync();
+
+                var entidadesDto = _mapper.Map<List<CntTipoComprobante>, List<ListarTipoComprobanteModel>>(entidades);
+
+                return entidadesDto;
+
+            }
         }
-    }
 
+    }
 }

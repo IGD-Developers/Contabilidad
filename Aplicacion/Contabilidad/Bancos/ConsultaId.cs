@@ -8,43 +8,44 @@ using Aplicacion.Models.Contabilidad.Bancos;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 
-namespace Aplicacion.Contabilidad.Bancos;
-
-public class ConsultaId
+namespace Aplicacion.Contabilidad.Bancos
 {
-    public class ConsultarId : IdBancoModel,IRequest<ListarBancosModel>
-    { }
-
-    public class Manejador : IRequestHandler<ConsultarId, ListarBancosModel>
+    public class ConsultaId
     {
-        private CntContext _context;
+        public class ConsultarId : IdBancoModel,IRequest<ListarBancosModel>
+        { }
 
-        private readonly IMapper _mapper;
-
-
-
-        public Manejador(CntContext context, IMapper mapper)
+        public class Manejador : IRequestHandler<ConsultarId, ListarBancosModel>
         {
-            _context = context;
-            _mapper = mapper;
-        }
+            private CntContext _context;
 
-        public async Task<ListarBancosModel> Handle(ConsultarId request, CancellationToken cancellationToken)
-        {
+            private readonly IMapper _mapper;
 
 
-            var entidad = await _context.cntBancos
-            .SingleOrDefaultAsync(i => i.id == request.Id);
 
-            if (entidad == null)
+            public Manejador(CntContext context, IMapper mapper)
             {
-                throw new Exception("Registro no encontrado");
-            };
-            var entidadDto = _mapper.Map<CntBanco, ListarBancosModel>(entidad);
-            return entidadDto;
-            
-            
-        }
-    }
+                _context = context;
+                _mapper = mapper;
+            }
 
+            public async Task<ListarBancosModel> Handle(ConsultarId request, CancellationToken cancellationToken)
+            {
+
+
+                var entidad = await _context.cntBancos
+                .SingleOrDefaultAsync(i => i.id == request.Id);
+
+                if (entidad == null)
+                {
+                    throw new Exception("Registro no encontrado");
+                };
+                var entidadDto = _mapper.Map<CntBanco, ListarBancosModel>(entidad);
+                return entidadDto;
+                
+                
+            }
+        }
+
+    }
 }

@@ -1,8 +1,9 @@
-namespace Aplicacion.Models.Contabilidad.Pucs;
-
-public class ListarPucNotaAclaratoriaModel
+namespace Aplicacion.Models.Contabilidad.Pucs
 {
-    public int id { get; set; }
-    public string codigo { get; set; }
-    public string nombre { get; set; }
+    public class ListarPucNotaAclaratoriaModel
+    {
+        public int id { get; set; }
+        public string codigo { get; set; }
+        public string nombre { get; set; }
+    }
 }

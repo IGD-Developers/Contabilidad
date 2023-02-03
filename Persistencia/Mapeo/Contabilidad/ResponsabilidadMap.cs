@@ -2,14 +2,15 @@ using Dominio.Contabilidad;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Persistencia.Mapeo.Contabilidad;
-
-public class ResponsabilidadMap : IEntityTypeConfiguration<CntResponsabilidad>
+namespace Persistencia.Mapeo.Contabilidad
 {
-    public void Configure(EntityTypeBuilder<CntResponsabilidad> builder)
+    public class ResponsabilidadMap : IEntityTypeConfiguration<CntResponsabilidad>
     {
-        builder.ToTable("cnt_responsabilidad")
-            .HasKey( pk => pk.id);
-        
+        public void Configure(EntityTypeBuilder<CntResponsabilidad> builder)
+        {
+            builder.ToTable("cnt_responsabilidad")
+                .HasKey( pk => pk.id);
+            
+        }
     }
 }

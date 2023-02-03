@@ -1,10 +1,11 @@
-namespace Dominio.Contabilidad;
-
-public class CntBanco
+namespace Dominio.Contabilidad
 {
-    public int id { get; set; }
-    public string codigo  {get; set;}
-    public string nombre { get; set; }
+    public class CntBanco
+    {
+        public int id { get; set; }
+        public string codigo  {get; set;}
+        public string nombre { get; set; }
 
-  
+      
+    }
 }

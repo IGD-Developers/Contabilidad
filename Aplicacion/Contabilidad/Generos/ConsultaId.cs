@@ -7,36 +7,37 @@ using Dominio.Contabilidad;
 using MediatR;
 using Persistencia;
 
-namespace Aplicacion.Contabilidad.Generos;
-
-public class ConsultaId
+namespace Aplicacion.Contabilidad.Generos
 {
-    public class ConsultarId : IRequest<GeneroModel>{
-        public int Id;
-    }
-
-    public class Manejador : IRequestHandler<ConsultarId, GeneroModel>
+    public class ConsultaId
     {
-        private readonly CntContext _context;
-        private readonly IMapper _mapper;
-
-        public Manejador(CntContext context, IMapper mapper)
-        {
-            _context = context;
-            _mapper = mapper;
+        public class ConsultarId : IRequest<GeneroModel>{
+            public int Id;
         }
 
-        public async Task<GeneroModel> Handle(ConsultarId request, CancellationToken cancellationToken)
+        public class Manejador : IRequestHandler<ConsultarId, GeneroModel>
         {
-            var generoId = await  _context.CntGeneros.FindAsync(request.Id);
+            private readonly CntContext _context;
+            private readonly IMapper _mapper;
 
-            if(generoId==null){
-                throw new Exception("Genero Consultado no Existe");
+            public Manejador(CntContext context, IMapper mapper)
+            {
+                _context = context;
+                _mapper = mapper;
             }
 
-            var generoIdModel = _mapper.Map<CntGenero, GeneroModel>(generoId);
+            public async Task<GeneroModel> Handle(ConsultarId request, CancellationToken cancellationToken)
+            {
+                var generoId = await  _context.CntGeneros.FindAsync(request.Id);
 
-            return generoIdModel;
+                if(generoId==null){
+                    throw new Exception("Genero Consultado no Existe");
+                }
+
+                var generoIdModel = _mapper.Map<CntGenero, GeneroModel>(generoId);
+
+                return generoIdModel;
+            }
         }
     }
 }

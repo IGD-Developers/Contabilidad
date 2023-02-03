@@ -4,32 +4,33 @@ using System.Threading.Tasks;
 using System.Threading;
 using Dominio.Contabilidad;
 
-namespace Aplicacion.Contabilidad.NotaAclaratoriaTipos;
-
-public class ConsultaId
+namespace Aplicacion.Contabilidad.NotaAclaratoriaTipos
 {
-    public class ConsultarId : IRequest<CntNotaAclaratoriaTipo>
+    public class ConsultaId
     {
-
-        public int Id { get; set; }
-    }
-
-    public class Manejador : IRequestHandler<ConsultarId, CntNotaAclaratoriaTipo>
-    {
-
-        private readonly CntContext context;
-
-        public Manejador(CntContext context)
+        public class ConsultarId : IRequest<CntNotaAclaratoriaTipo>
         {
-            this.context = context;
+
+            public int Id { get; set; }
         }
 
-        public async Task<CntNotaAclaratoriaTipo> Handle(ConsultarId request, CancellationToken cancellationToken)
+        public class Manejador : IRequestHandler<ConsultarId, CntNotaAclaratoriaTipo>
         {
-            var notaAclaratoriaTipo = await context.cntNotaAclaratoriaTipos.FindAsync(request.Id);
-            return notaAclaratoriaTipo;
 
+            private readonly CntContext context;
+
+            public Manejador(CntContext context)
+            {
+                this.context = context;
+            }
+
+            public async Task<CntNotaAclaratoriaTipo> Handle(ConsultarId request, CancellationToken cancellationToken)
+            {
+                var notaAclaratoriaTipo = await context.cntNotaAclaratoriaTipos.FindAsync(request.Id);
+                return notaAclaratoriaTipo;
+
+            }
         }
-    }
 
+    }
 }

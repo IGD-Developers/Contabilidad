@@ -2,18 +2,19 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Dominio.Configuracion;
 
-namespace Persistencia.Mapeo.Configuracion;
-
-public class SucursalMap : IEntityTypeConfiguration<CnfSucursal>
+namespace Persistencia.Mapeo.Configuracion
 {
-    public void Configure(EntityTypeBuilder<CnfSucursal> builder)
+    public class SucursalMap : IEntityTypeConfiguration<CnfSucursal>
     {
-            builder.ToTable("cnf_sucursal")
-                .HasKey(entity => entity.id);
+        public void Configure(EntityTypeBuilder<CnfSucursal> builder)
+        {
+                builder.ToTable("cnf_sucursal")
+                    .HasKey(entity => entity.id);
 
-            builder.HasOne(suc => suc.empresa )
-                .WithMany(emp => emp.empresaSucursales)
-                .HasForeignKey(suc=> suc.id_empresa);    
-       
+                builder.HasOne(suc => suc.empresa )
+                    .WithMany(emp => emp.empresaSucursales)
+                    .HasForeignKey(suc=> suc.id_empresa);    
+           
+        }
     }
 }

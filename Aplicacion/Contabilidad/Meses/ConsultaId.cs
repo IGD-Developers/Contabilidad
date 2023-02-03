@@ -5,34 +5,35 @@ using System.Threading;
 using Dominio.Contabilidad;
 using System;
 
-namespace Aplicacion.Contabilidad.Meses;
-
-public class ConsultaId
+namespace Aplicacion.Contabilidad.Meses
 {
-
-    public class ConsultarId : IRequest<CntMes>
+    public class ConsultaId
     {
-        public int Id { get; set; }
-    }
 
-    public class Manejador : IRequestHandler<ConsultarId, CntMes>
-    {
-        private readonly CntContext context;
-
-        public Manejador(CntContext context)
+        public class ConsultarId : IRequest<CntMes>
         {
-            this.context = context;
+            public int Id { get; set; }
         }
 
-        public async Task<CntMes> Handle(ConsultarId request, CancellationToken cancellationToken)
+        public class Manejador : IRequestHandler<ConsultarId, CntMes>
         {
-            var mes = await context.cntMeses.FindAsync(request.Id);
-          if (mes == null) {  
-                throw new Exception("Registro no encontrado");
-            };                
+            private readonly CntContext context;
 
-            return mes;
+            public Manejador(CntContext context)
+            {
+                this.context = context;
+            }
+
+            public async Task<CntMes> Handle(ConsultarId request, CancellationToken cancellationToken)
+            {
+                var mes = await context.cntMeses.FindAsync(request.Id);
+              if (mes == null) {  
+                    throw new Exception("Registro no encontrado");
+                };                
+
+                return mes;
+            }
         }
-    }
 
+    }
 }

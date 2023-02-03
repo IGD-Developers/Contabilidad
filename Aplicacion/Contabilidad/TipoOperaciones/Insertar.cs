@@ -6,74 +6,75 @@ using System.Threading.Tasks;
 using System.Threading;
 using FluentValidation;
 
-namespace Aplicacion.Contabilidad.TipoOperaciones;
-
-public class Insertar
-
+namespace Aplicacion.Contabilidad.TipoOperaciones
 {
+    public class Insertar
 
-    public class Ejecuta: IRequest
     {
 
-        public string codigo { get; set; }
-        public string nombre { get; set; }
-        public string formula { get; set; }
-
-    }
-
-    public class EjecutaValidador : AbstractValidator<Ejecuta>
-    {
-        public EjecutaValidador()
+        public class Ejecuta: IRequest
         {
-            RuleFor(x=>x.codigo).NotEmpty();
-            RuleFor(x=>x.nombre).NotEmpty();
-    
-        }
-    }    
 
+            public string codigo { get; set; }
+            public string nombre { get; set; }
+            public string formula { get; set; }
 
-    public class Manejador: IRequestHandler<Ejecuta>
-    {
-
-        private readonly CntContext context;
-
-        public Manejador(CntContext context)
-        {
-            this.context = context;
         }
 
-    public class EjecutaValidador : AbstractValidator<Ejecuta>
-    {
-        public EjecutaValidador()
+        public class EjecutaValidador : AbstractValidator<Ejecuta>
         {
-            RuleFor(x=>x.codigo).NotEmpty();
-            RuleFor(x=>x.nombre).NotEmpty();
-    
-        }
-    }    
-
-
-        public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
-        {
-
-            var tipoOperacion = new CntTipoOperacion
+            public EjecutaValidador()
             {
-                codigo = request.codigo,
-                nombre = request.nombre,
-                formula = request.formula ?? ""
+                RuleFor(x=>x.codigo).NotEmpty();
+                RuleFor(x=>x.nombre).NotEmpty();
+        
+            }
+        }    
 
-            };
-            
 
-            context.cntTipoOperaciones.Add(tipoOperacion);
-            var respuesta = await context.SaveChangesAsync();
-            if (respuesta > 0)
+        public class Manejador: IRequestHandler<Ejecuta>
+        {
+
+            private readonly CntContext context;
+
+            public Manejador(CntContext context)
             {
-                return Unit.Value;
+                this.context = context;
             }
 
-            throw new Exception("Error al insertar TipoOperacion");
+        public class EjecutaValidador : AbstractValidator<Ejecuta>
+        {
+            public EjecutaValidador()
+            {
+                RuleFor(x=>x.codigo).NotEmpty();
+                RuleFor(x=>x.nombre).NotEmpty();
+        
+            }
+        }    
+
+
+            public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
+            {
+
+                var tipoOperacion = new CntTipoOperacion
+                {
+                    codigo = request.codigo,
+                    nombre = request.nombre,
+                    formula = request.formula ?? ""
+
+                };
+                
+
+                context.cntTipoOperaciones.Add(tipoOperacion);
+                var respuesta = await context.SaveChangesAsync();
+                if (respuesta > 0)
+                {
+                    return Unit.Value;
+                }
+
+                throw new Exception("Error al insertar TipoOperacion");
+            }
         }
+        
     }
-    
 }

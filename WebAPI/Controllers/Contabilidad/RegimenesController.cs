@@ -8,21 +8,22 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Persistencia;
 
-namespace WebAPI.Controllers;
-
-[ApiController]
-[Route("api/[controller]")]
-public class RegimenesController : MiControllerBase
+namespace WebAPI.Controllers
 {
-    
-    [HttpGet]
-    public async Task<ActionResult<List<RegimenModel>>>Get(){
-        return await Mediator.Send(new Consulta.ListarRegimenes());
-    }
+    [ApiController]
+    [Route("api/[controller]")]
+    public class RegimenesController : MiControllerBase
+    {
+        
+        [HttpGet]
+        public async Task<ActionResult<List<RegimenModel>>>Get(){
+            return await Mediator.Send(new Consulta.ListarRegimenes());
+        }
 
-    [HttpGet("{id}")]
-    public async Task<ActionResult<RegimenModel>>Detalle(int id){
-        return await Mediator.Send(new ConsultaId.ConsultarId{Id = id});
+        [HttpGet("{id}")]
+        public async Task<ActionResult<RegimenModel>>Detalle(int id){
+            return await Mediator.Send(new ConsultaId.ConsultarId{Id = id});
+        }
+        
     }
-    
 }

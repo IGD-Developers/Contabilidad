@@ -9,48 +9,49 @@ using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 
-namespace Aplicacion.Contabilidad.CuentaImpuestos;
-
-public class ConsultaId
+namespace Aplicacion.Contabilidad.CuentaImpuestos
 {
-
-    public class ConsultarId : IdCuentaImpuestoModel, IRequest<ListarCuentaImpuestosModel>
-    { }
-
-    public class Manejador : IRequestHandler<ConsultarId, ListarCuentaImpuestosModel>
+    public class ConsultaId
     {
-        private CntContext _context;
 
-        private readonly IMapper _mapper;
+        public class ConsultarId : IdCuentaImpuestoModel, IRequest<ListarCuentaImpuestosModel>
+        { }
 
-
-
-        public Manejador(CntContext context, IMapper mapper)
+        public class Manejador : IRequestHandler<ConsultarId, ListarCuentaImpuestosModel>
         {
-            _context = context;
-            _mapper = mapper;
-        }
+            private CntContext _context;
 
-        public async Task<ListarCuentaImpuestosModel> Handle(ConsultarId request, CancellationToken cancellationToken)
-        {
+            private readonly IMapper _mapper;
 
-        var entidadDto = await _context.cntCuentaImpuestos
-                                .Include(p => p.puc)
-                                .Include(p => p.tipoImpuesto)
-                                .Where(p=>p.id == request.Id)
-                                .Select(p =>  _mapper.Map<CntCuentaImpuesto,ListarCuentaImpuestosModel>(p))
-                                .SingleOrDefaultAsync();
-            
 
-            if (entidadDto == null)
+
+            public Manejador(CntContext context, IMapper mapper)
             {
-                throw new Exception("Registro no encontrado");
-            };
-            //var entidadDto = _mapper.Map<CntCuentaImpuesto, ListarCuentaImpuestosModel>(entidad);
-            return entidadDto;
+                _context = context;
+                _mapper = mapper;
+            }
+
+            public async Task<ListarCuentaImpuestosModel> Handle(ConsultarId request, CancellationToken cancellationToken)
+            {
+
+            var entidadDto = await _context.cntCuentaImpuestos
+                                    .Include(p => p.puc)
+                                    .Include(p => p.tipoImpuesto)
+                                    .Where(p=>p.id == request.Id)
+                                    .Select(p =>  _mapper.Map<CntCuentaImpuesto,ListarCuentaImpuestosModel>(p))
+                                    .SingleOrDefaultAsync();
+                
+
+                if (entidadDto == null)
+                {
+                    throw new Exception("Registro no encontrado");
+                };
+                //var entidadDto = _mapper.Map<CntCuentaImpuesto, ListarCuentaImpuestosModel>(entidad);
+                return entidadDto;
 
 
+            }
         }
-    }
 
+    }
 }

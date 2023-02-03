@@ -8,67 +8,68 @@ using FluentValidation;
 using Aplicacion.Models.Contabilidad.TipoImpuestos;
 using AutoMapper;
 
-namespace Aplicacion.Contabilidad.TipoImpuestos;
-
-public class Insertar
+namespace Aplicacion.Contabilidad.TipoImpuestos
 {
-
-    public class Ejecuta : InsertarTipoImpuestosModel, IRequest
-    { }
-
-    public class EjecutaValidador : AbstractValidator<Ejecuta>
-    {
-        public EjecutaValidador()
-        {
-            RuleFor(x => x.codigo).NotEmpty();
-            RuleFor(x => x.nombre).NotEmpty();
-
-        }
-    }
-
-
-    public class Manejador : IRequestHandler<Ejecuta>
+    public class Insertar
     {
 
-        private CntContext _context;
+        public class Ejecuta : InsertarTipoImpuestosModel, IRequest
+        { }
 
-        private readonly IMapper _mapper;
-
-
-
-        public Manejador(CntContext context, IMapper mapper)
+        public class EjecutaValidador : AbstractValidator<Ejecuta>
         {
-            _context = context;
-            _mapper = mapper;
-        }
-
-        public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
-        {
-
-            //Como vamos a grabar primero el modelo y luego la entidad:
-            try
+            public EjecutaValidador()
             {
-                var entidadDto = _mapper.Map<InsertarTipoImpuestosModel, CntTipoImpuesto>(request);
+                RuleFor(x => x.codigo).NotEmpty();
+                RuleFor(x => x.nombre).NotEmpty();
 
-                await _context.cntTipoImpuestos.AddAsync(entidadDto);
-                var respuesta = await _context.SaveChangesAsync();
-                if (respuesta > 0)
+            }
+        }
+
+
+        public class Manejador : IRequestHandler<Ejecuta>
+        {
+
+            private CntContext _context;
+
+            private readonly IMapper _mapper;
+
+
+
+            public Manejador(CntContext context, IMapper mapper)
+            {
+                _context = context;
+                _mapper = mapper;
+            }
+
+            public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
+            {
+
+                //Como vamos a grabar primero el modelo y luego la entidad:
+                try
                 {
+                    var entidadDto = _mapper.Map<InsertarTipoImpuestosModel, CntTipoImpuesto>(request);
 
-                    return Unit.Value;
+                    await _context.cntTipoImpuestos.AddAsync(entidadDto);
+                    var respuesta = await _context.SaveChangesAsync();
+                    if (respuesta > 0)
+                    {
+
+                        return Unit.Value;
+                    }
+                    throw new Exception("Error al insertar Registro");
                 }
-                throw new Exception("Error al insertar Registro");
+                catch (Exception ex)
+                {
+                    //TODO: MARIA  Llave duplicada  CODIGO TIPOIMPUESTO Implementar
+                    throw new Exception("Error al Insertar registro catch " + ex.Message);
+
+                }
+
+
+
             }
-            catch (Exception ex)
-            {
-                //TODO: MARIA  Llave duplicada  CODIGO TIPOIMPUESTO Implementar
-                throw new Exception("Error al Insertar registro catch " + ex.Message);
-
-            }
-
-
-
         }
-    }
 
+    }
 }

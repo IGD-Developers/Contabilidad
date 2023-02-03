@@ -8,48 +8,49 @@ using Aplicacion.Models.Configuracion.Sucursales;
 using Microsoft.EntityFrameworkCore;
 using AutoMapper;
 
-namespace Aplicacion.Configuracion.Sucursales;
-
-public class ConsultaId
+namespace Aplicacion.Configuracion.Sucursales
 {
-    public class ConsultarId : IdSucursalModel, IRequest<ListarSucursalModel>
-    { }
-
-    public class Manejador : IRequestHandler<ConsultarId, ListarSucursalModel>
+    public class ConsultaId
     {
+        public class ConsultarId : IdSucursalModel, IRequest<ListarSucursalModel>
+        { }
 
-        private CntContext _context;
-
-        private readonly IMapper _mapper;
-
-
-
-        public Manejador(CntContext context, IMapper mapper)
-        {
-            _context = context;
-            _mapper = mapper;
-
-        }
-
-
-        public async Task<ListarSucursalModel> Handle(ConsultarId request, CancellationToken cancellationToken)
+        public class Manejador : IRequestHandler<ConsultarId, ListarSucursalModel>
         {
 
-            var entidad = await _context.cnfSucursales
-            .Include(e => e.empresa)
-            .SingleOrDefaultAsync(i => i.id == request.Id);
+            private CntContext _context;
+
+            private readonly IMapper _mapper;
 
 
-            if (entidad == null)
+
+            public Manejador(CntContext context, IMapper mapper)
             {
-                throw new Exception("Registro no encontrado");
-            };
-            var entidadDto = _mapper.Map<CnfSucursal, ListarSucursalModel>(entidad);
+                _context = context;
+                _mapper = mapper;
 
-            return entidadDto;
+            }
 
 
+            public async Task<ListarSucursalModel> Handle(ConsultarId request, CancellationToken cancellationToken)
+            {
+
+                var entidad = await _context.cnfSucursales
+                .Include(e => e.empresa)
+                .SingleOrDefaultAsync(i => i.id == request.Id);
+
+
+                if (entidad == null)
+                {
+                    throw new Exception("Registro no encontrado");
+                };
+                var entidadDto = _mapper.Map<CnfSucursal, ListarSucursalModel>(entidad);
+
+                return entidadDto;
+
+
+            }
         }
-    }
 
+    }
 }

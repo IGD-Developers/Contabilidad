@@ -6,52 +6,53 @@ using System.Threading;
 using System;
 using FluentValidation;
 
-namespace Aplicacion.Contabilidad.ExogenaFormatos;
-
-public class Insertar
+namespace Aplicacion.Contabilidad.ExogenaFormatos
 {
-    public class Ejecuta:IRequest
+    public class Insertar
     {
-        public string codigo { get; set; }
-        public string nombre { get; set; }
-    }
-
-    public class EjecutaValidador : AbstractValidator<Ejecuta>
-    {
-        public EjecutaValidador()
+        public class Ejecuta:IRequest
         {
-            RuleFor(x=>x.codigo).NotEmpty();
-            RuleFor(x=>x.nombre).NotEmpty();
-    
-        }
-    }    
-
-
-    public class Manejador: IRequestHandler<Ejecuta>
-    {
-        private readonly CntContext context;
-
-        public Manejador(CntContext context)
-        {
-            this.context = context;
+            public string codigo { get; set; }
+            public string nombre { get; set; }
         }
 
-        public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
+        public class EjecutaValidador : AbstractValidator<Ejecuta>
         {
-
-            var exogenaFormato= new CntExogenaFormato()
+            public EjecutaValidador()
             {
-                codigo = request.nombre,
-                nombre= request.nombre
-            };
-
-            context.cntExogenaFormatos.Add(exogenaFormato);
-            var respuesta = await context.SaveChangesAsync();
-            if (respuesta > 0 )
-            {
-                return Unit.Value;
+                RuleFor(x=>x.codigo).NotEmpty();
+                RuleFor(x=>x.nombre).NotEmpty();
+        
             }
-            throw new Exception("Error al insertar ExogenaFormato");
+        }    
+
+
+        public class Manejador: IRequestHandler<Ejecuta>
+        {
+            private readonly CntContext context;
+
+            public Manejador(CntContext context)
+            {
+                this.context = context;
+            }
+
+            public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
+            {
+
+                var exogenaFormato= new CntExogenaFormato()
+                {
+                    codigo = request.nombre,
+                    nombre= request.nombre
+                };
+
+                context.cntExogenaFormatos.Add(exogenaFormato);
+                var respuesta = await context.SaveChangesAsync();
+                if (respuesta > 0 )
+                {
+                    return Unit.Value;
+                }
+                throw new Exception("Error al insertar ExogenaFormato");
+            }
         }
     }
 }

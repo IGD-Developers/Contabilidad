@@ -2,14 +2,15 @@ using Dominio.Contabilidad;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Persistencia.Mapeo.Contabilidad;
-
-public class RegimenMap : IEntityTypeConfiguration<CntRegimen>
+namespace Persistencia.Mapeo.Contabilidad
 {
-    public void Configure(EntityTypeBuilder<CntRegimen> builder)
+    public class RegimenMap : IEntityTypeConfiguration<CntRegimen>
     {
-        builder.ToTable("cnt_regimen")
-            .HasKey( pk => pk.id);
-        
+        public void Configure(EntityTypeBuilder<CntRegimen> builder)
+        {
+            builder.ToTable("cnt_regimen")
+                .HasKey( pk => pk.id);
+            
+        }
     }
 }

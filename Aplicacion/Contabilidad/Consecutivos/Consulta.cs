@@ -6,33 +6,36 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Persistencia;
 
-namespace Aplicacion.Contabilidad.Consecutivos;
-
-public class Consulta
-
+namespace Aplicacion.Contabilidad.Consecutivos
 {
-    public class ListaCntConsecutivos : IRequest<List<CntConsecutivo>>
+    public class Consulta
+
     {
-
-    }
-
-    public class manejador : IRequestHandler<ListaCntConsecutivos, List<CntConsecutivo>>
-    {
-
-        private readonly CntContext context;
-
-        public manejador(CntContext context)
+        public class ListaCntConsecutivos : IRequest<List<CntConsecutivo>>
         {
-            this.context = context;
+
         }
 
-        public async Task<List<CntConsecutivo>> Handle(ListaCntConsecutivos request, CancellationToken cancellationToken)
+        public class manejador : IRequestHandler<ListaCntConsecutivos, List<CntConsecutivo>>
         {
-            var consecutivos = await context.cntConsecutivos.ToListAsync();
-            return consecutivos;
+
+            private readonly CntContext context;
+
+            public manejador(CntContext context)
+            {
+                this.context = context;
+            }
+
+            public async Task<List<CntConsecutivo>> Handle(ListaCntConsecutivos request, CancellationToken cancellationToken)
+            {
+                var consecutivos = await context.cntConsecutivos.ToListAsync();
+                return consecutivos;
 
 
+            }
         }
+
+
     }
 
 

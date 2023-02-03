@@ -1,8 +1,9 @@
 using Dominio.Configuracion;
 
-namespace Aplicacion.Interfaces;
-
-public interface IJwtGenerador
+namespace Aplicacion.Interfaces
 {
-    string CrearToken(CnfUsuario usuario) ;
+    public interface IJwtGenerador
+    {
+        string CrearToken(CnfUsuario usuario) ;
+    }
 }

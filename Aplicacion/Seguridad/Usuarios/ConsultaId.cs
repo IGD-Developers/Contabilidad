@@ -4,30 +4,31 @@ using Dominio.Configuracion;
 using MediatR;
 using Persistencia;
 
-namespace Aplicacion.Seguridad;
-
-public class ConsultaId
+namespace Aplicacion.Seguridad
 {
-    public class ConsultarId : IRequest<CnfUsuario>
+    public class ConsultaId
     {
-        public int Id { get; set; }
-    }
-
-    public class Manejador : IRequestHandler<ConsultarId, CnfUsuario>
-    {
-
-        private readonly CntContext context;
-
-        public Manejador(CntContext context)
+        public class ConsultarId : IRequest<CnfUsuario>
         {
-            this.context = context;
+            public int Id { get; set; }
         }
 
-        public async Task<CnfUsuario> Handle(ConsultarId request, CancellationToken cancellationToken)
+        public class Manejador : IRequestHandler<ConsultarId, CnfUsuario>
         {
-            var usuario = await context.cnfUsuarios.FindAsync(request.Id);
-            return usuario;
-        }
-    }
 
+            private readonly CntContext context;
+
+            public Manejador(CntContext context)
+            {
+                this.context = context;
+            }
+
+            public async Task<CnfUsuario> Handle(ConsultarId request, CancellationToken cancellationToken)
+            {
+                var usuario = await context.cnfUsuarios.FindAsync(request.Id);
+                return usuario;
+            }
+        }
+
+    }
 }

@@ -8,30 +8,31 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Persistencia;
 
-namespace WebAPI.Controllers;
-
-[ApiController]
-[Route("api/[controller]")]
-public class MunicipiosController : ControllerBase
+namespace WebAPI.Controllers
 {
-    private readonly IMediator _mediator;
+    [ApiController]
+    [Route("api/[controller]")]
+    public class MunicipiosController : ControllerBase
+    {
+        private readonly IMediator _mediator;
 
-    public MunicipiosController(IMediator mediator){
-        this._mediator = mediator;
+        public MunicipiosController(IMediator mediator){
+            this._mediator = mediator;
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<List<MunicipioModel>>>Get(){
+            return await _mediator.Send(new Consulta.ListarMunicipios());
+        }
+
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<MunicipioModel>>Detalle(int id){
+            return await _mediator.Send(new ConsultaId.ConsultarId{Id = id});
+        }
+
+
+        
+        
     }
-
-    [HttpGet]
-    public async Task<ActionResult<List<MunicipioModel>>>Get(){
-        return await _mediator.Send(new Consulta.ListarMunicipios());
-    }
-
-
-    [HttpGet("{id}")]
-    public async Task<ActionResult<MunicipioModel>>Detalle(int id){
-        return await _mediator.Send(new ConsultaId.ConsultarId{Id = id});
-    }
-
-
-    
-    
 }

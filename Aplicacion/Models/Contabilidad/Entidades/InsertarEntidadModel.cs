@@ -1,8 +1,9 @@
-namespace Aplicacion.Models.Contabilidad.Entidades;
-
-public class InsertarEntidadModel
+namespace Aplicacion.Models.Contabilidad.Entidades
 {
-    public int id_tercero { get; set; }
-    public int id_tipoimpuesto { get; set; }
+    public class InsertarEntidadModel
+    {
+        public int id_tercero { get; set; }
+        public int id_tipoimpuesto { get; set; }
 
+    }
 }

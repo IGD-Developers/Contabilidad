@@ -8,46 +8,47 @@ using Aplicacion.Models.Contabilidad.TipoImpuestos;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 
-namespace Aplicacion.Contabilidad.TipoImpuestos;
-
-public class ConsultaId
+namespace Aplicacion.Contabilidad.TipoImpuestos
 {
-    public class ConsultarId : IdModel,IRequest<ListarTipoImpuestosModel>
-    { }
-
-    public class Manejador : IRequestHandler<ConsultarId, ListarTipoImpuestosModel>
+    public class ConsultaId
     {
-       private CntContext _context;
+        public class ConsultarId : IdModel,IRequest<ListarTipoImpuestosModel>
+        { }
 
-        private readonly IMapper _mapper;
-
-
-
-        public Manejador(CntContext context, IMapper mapper)
+        public class Manejador : IRequestHandler<ConsultarId, ListarTipoImpuestosModel>
         {
-            _context = context;
-            _mapper = mapper;
-        }
+           private CntContext _context;
 
-        public async Task<ListarTipoImpuestosModel> Handle(ConsultarId request, CancellationToken cancellationToken)
-        {
+            private readonly IMapper _mapper;
 
 
-            var entidad = await _context.cntTipoImpuestos
-            .SingleOrDefaultAsync(i => i.id == request.Id);
 
-            if (entidad == null)
+            public Manejador(CntContext context, IMapper mapper)
             {
-                throw new Exception("Registro no encontrado");
-            };
-            var entidadDto = _mapper.Map<CntTipoImpuesto, ListarTipoImpuestosModel>(entidad);
-            return entidadDto;
+                _context = context;
+                _mapper = mapper;
+            }
+
+            public async Task<ListarTipoImpuestosModel> Handle(ConsultarId request, CancellationToken cancellationToken)
+            {
 
 
-           
+                var entidad = await _context.cntTipoImpuestos
+                .SingleOrDefaultAsync(i => i.id == request.Id);
+
+                if (entidad == null)
+                {
+                    throw new Exception("Registro no encontrado");
+                };
+                var entidadDto = _mapper.Map<CntTipoImpuesto, ListarTipoImpuestosModel>(entidad);
+                return entidadDto;
+
+
+               
+
+            }
 
         }
 
     }
-
 }

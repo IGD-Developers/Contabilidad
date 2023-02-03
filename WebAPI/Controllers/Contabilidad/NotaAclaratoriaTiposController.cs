@@ -7,37 +7,38 @@ using Aplicacion.Contabilidad.NotaAclaratoriaTipos;
 using Dominio.Contabilidad;
 using Aplicacion.Models.Contabilidad.NotaAclaratoriaTipo;
 
-namespace WebAPI.Controllers.Contabilidad;
-
-
-[ApiController]
-[Route("api/[controller]")]
-
-public class NotaAclaratoriaTiposController : MiControllerBase
+namespace WebAPI.Controllers.Contabilidad
 {
 
+    [ApiController]
+    [Route("api/[controller]")]
 
-    [HttpGet]
-    public async Task<ActionResult<List<NotaAclaratoriaTipoModel>>> Get()
+    public class NotaAclaratoriaTiposController : MiControllerBase
     {
-        return await Mediator.Send(new Consulta.ListaCntNotaAclaratoriaTipos());
-    }
 
-    [HttpGet("{id}")]
-    public async Task<ActionResult<CntNotaAclaratoriaTipo>> GetId(int Id)
-    {
-        return await Mediator.Send(new ConsultaId.ConsultarId { Id = Id });
-    }
 
-    [HttpPost]
-    public async Task<ActionResult<Unit>> Insertar(Insertar.Ejecuta dato)
-    {
-        return await Mediator.Send(dato);
-    }
+        [HttpGet]
+        public async Task<ActionResult<List<NotaAclaratoriaTipoModel>>> Get()
+        {
+            return await Mediator.Send(new Consulta.ListaCntNotaAclaratoriaTipos());
+        }
 
-    [HttpPut]
-    public async Task<ActionResult<Unit>> Editar(Editar.Ejecuta dato){
-        return await Mediator.Send(dato);
-    }
+        [HttpGet("{id}")]
+        public async Task<ActionResult<CntNotaAclaratoriaTipo>> GetId(int Id)
+        {
+            return await Mediator.Send(new ConsultaId.ConsultarId { Id = Id });
+        }
 
+        [HttpPost]
+        public async Task<ActionResult<Unit>> Insertar(Insertar.Ejecuta dato)
+        {
+            return await Mediator.Send(dato);
+        }
+
+        [HttpPut]
+        public async Task<ActionResult<Unit>> Editar(Editar.Ejecuta dato){
+            return await Mediator.Send(dato);
+        }
+
+    }
 }

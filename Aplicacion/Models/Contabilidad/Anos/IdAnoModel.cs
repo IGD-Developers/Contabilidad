@@ -1,6 +1,7 @@
-namespace Aplicacion.Models.Contabilidad.Anos;
-
-public class IdAnoModel
+namespace Aplicacion.Models.Contabilidad.Anos
 {
-    public int Id { get; set; }
+    public class IdAnoModel
+    {
+        public int Id { get; set; }
+    }
 }

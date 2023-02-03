@@ -1,8 +1,9 @@
-namespace Aplicacion.Models.Contabilidad.CategoriaComprobantes;
-
-public class EditarCategoriaComprobantesModel
+namespace Aplicacion.Models.Contabilidad.CategoriaComprobantes
 {
-    public int Id { get; set; }
-    public string codigo { get; set; }
-    public string nombre { get; set; }
+    public class EditarCategoriaComprobantesModel
+    {
+        public int Id { get; set; }
+        public string codigo { get; set; }
+        public string nombre { get; set; }
+    }
 }

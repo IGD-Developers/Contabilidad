@@ -1,8 +1,9 @@
-namespace Aplicacion.Models.Configuracion.Empresas;
-
-public class IdEmpresasModel
+namespace Aplicacion.Models.Configuracion.Empresas
 {
- 
-    public int Id { get; set; }
-  
+    public class IdEmpresasModel
+    {
+     
+        public int Id { get; set; }
+      
+    }
 }

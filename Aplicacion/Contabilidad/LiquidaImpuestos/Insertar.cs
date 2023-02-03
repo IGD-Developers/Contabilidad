@@ -12,145 +12,146 @@ using Microsoft.EntityFrameworkCore;
 using Aplicacion.Contabilidad.Comprobantes;
 using Aplicacion.Models.Contabilidad.Comprobantes;
 
-namespace Aplicacion.Contabilidad.LiquidaImpuestos;
-
-public class Insertar
+namespace Aplicacion.Contabilidad.LiquidaImpuestos
 {
-
-    public class Ejecuta : InsertarLiquidaImpuestosModel, IRequest
-    { }
-
-
-
-    public class EjecutaValidador : AbstractValidator<Ejecuta>
+    public class Insertar
     {
-        public EjecutaValidador()
+
+        public class Ejecuta : InsertarLiquidaImpuestosModel, IRequest
+        { }
+
+
+
+        public class EjecutaValidador : AbstractValidator<Ejecuta>
         {
-            RuleFor(x => x.id_tipoimpuesto).NotEmpty();
-            // RuleFor(x => x.id_comprobante).NotEmpty();
-            // RuleFor(x => x.id_puc).NotEmpty();
-            // RuleFor(x => x.id_tercero).NotEmpty();
-            // RuleFor(x => x.id_sucursal).NotEmpty();
-            // RuleFor(x => x.lim_fechainicial).NotEmpty();
-            // RuleFor(x => x.lim_fechafinal).NotEmpty();
-           // RuleFor(x => x.id_usuario).NotEmpty();
-        }
-    }
-
-    public class Manejador : IRequestHandler<Ejecuta>
-    {
-        private readonly CntContext _context;
-        private readonly IMapper _mapper;
-        private IInsertarComprobante _insertarComprobante;
-
-
-
-        public Manejador(CntContext context, IMapper mapper, IInsertarComprobante insertarComprobante)
-        {
-            _context = context;
-            _mapper = mapper;
-            _insertarComprobante = insertarComprobante;
+            public EjecutaValidador()
+            {
+                RuleFor(x => x.id_tipoimpuesto).NotEmpty();
+                // RuleFor(x => x.id_comprobante).NotEmpty();
+                // RuleFor(x => x.id_puc).NotEmpty();
+                // RuleFor(x => x.id_tercero).NotEmpty();
+                // RuleFor(x => x.id_sucursal).NotEmpty();
+                // RuleFor(x => x.lim_fechainicial).NotEmpty();
+                // RuleFor(x => x.lim_fechafinal).NotEmpty();
+               // RuleFor(x => x.id_usuario).NotEmpty();
+            }
         }
 
-        public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
+        public class Manejador : IRequestHandler<Ejecuta>
         {
+            private readonly CntContext _context;
+            private readonly IMapper _mapper;
+            private IInsertarComprobante _insertarComprobante;
 
-            //Encontrar el id para el tipo de comprobante LIM para generar el comprobante contable
-            var idTipoComprobante = await _context.cntTipoComprobantes
-                                .Where(t => t.codigo == "LIM")
-                                .Select(t => new IdLiquidaImpuestoModel()
-                                { Id = t.id })
-                                .SingleOrDefaultAsync();
 
-            if (idTipoComprobante == null)
+
+            public Manejador(CntContext context, IMapper mapper, IInsertarComprobante insertarComprobante)
             {
-                throw new Exception("Error: Tipo Comproante LIM no encontrado");
-            };
+                _context = context;
+                _mapper = mapper;
+                _insertarComprobante = insertarComprobante;
+            }
 
-            var idTipoImpuesto = await _context.cntTipoImpuestos
-                                .Where(t => t.id == request.id_tipoimpuesto)
-                                .Select(t => new IdLiquidaImpuestoModel()
-                                { Id = t.id })
-                                .SingleOrDefaultAsync();
-
-            if (idTipoImpuesto == null)
-            {
-                throw new Exception("Error: Tipo Impuesto no encontrado");
-            };
-
-
-
-            var entidad = await _context.cntEntidades
-                 .Where(e => e.id == request.id_entidad && e.id_tipoimpuesto == request.id_tipoimpuesto)
-                 .Select(e => new IdLiquidaImpuestoModel() { Id = e.id_tercero })
-                 .FirstOrDefaultAsync();
-
-            if (entidad == null)
-            { throw new Exception("No se ha configurado correctamente la Entidad con su tipo de impuesto"); }
-
-            var cuentaCierre = await _context.cntCuentaImpuestos
-                .Where(ci => ci.id_tipoimpuesto == request.id_tipoimpuesto)
-                .Select(ci => new IdLiquidaImpuestoModel() { Id = ci.id_puc })
-                .FirstOrDefaultAsync();
-
-            if (cuentaCierre == null)
-            { throw new Exception("No se ha configurado la contrapartida para el tipo de Impuesto"); }
-
-           
-            //Generar saldos totalizados por tercero por cuenta.
-            //Si el saldo es debito generamos movimiento al crédito a la cuenta recibida en request.id_puc 
-            //y con el tercero request.id_tercero y Viceversa
-            //Iniciar Transacción 
-            //Add a detalleComprobante
-            //Generar Comprobante 
-
-            
-           // var entidadComprobante = new InsertarComprobantesModel();
-            //var entidadComprobante = _mapper.Map<InsertarComprobantesModel, CntComprobante>(request.comprobante);
-            var idEntidadComprobante = _insertarComprobante.Insertar(request.comprobante);
-
-            var entidadDto = _mapper.Map<InsertarLiquidaImpuestosModel, CntLiquidaImpuesto>(request);
-            InsertarComprobantesModel  comprobante = new InsertarComprobantesModel()
+            public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
             {
 
-                id_sucursal=request.id_sucursal,
-                id_tipocomprobante= idTipoComprobante.Id,
-                id_modulo = 2,
-                id_tercero = entidad.Id,
-                //cco_fecha=request.cco_fecha,
-                cco_documento=request.cco_documento,
-                cco_detalle = "Liquidación Automática de Cuentas por Tercero",
-                //id_usuario=request.id_usuario
+                //Encontrar el id para el tipo de comprobante LIM para generar el comprobante contable
+                var idTipoComprobante = await _context.cntTipoComprobantes
+                                    .Where(t => t.codigo == "LIM")
+                                    .Select(t => new IdLiquidaImpuestoModel()
+                                    { Id = t.id })
+                                    .SingleOrDefaultAsync();
 
-            };
-            var transaction = _context.Database.BeginTransaction();
-
-            try
-            {
-                var respuestacc = await _insertarComprobante.Insertar(comprobante);
-
-                transaction.Commit();
-                if(respuestacc.Id<0)
-                  throw new Exception("Error al insertar Comprobante");
-                
-
-               // _context.cntLiquidaImpuestos.Add(entidadDto);
-
-                var respuesta = await _context.SaveChangesAsync();
-                if (respuesta > 0)
+                if (idTipoComprobante == null)
                 {
+                    throw new Exception("Error: Tipo Comproante LIM no encontrado");
+                };
+
+                var idTipoImpuesto = await _context.cntTipoImpuestos
+                                    .Where(t => t.id == request.id_tipoimpuesto)
+                                    .Select(t => new IdLiquidaImpuestoModel()
+                                    { Id = t.id })
+                                    .SingleOrDefaultAsync();
+
+                if (idTipoImpuesto == null)
+                {
+                    throw new Exception("Error: Tipo Impuesto no encontrado");
+                };
+
+
+
+                var entidad = await _context.cntEntidades
+                     .Where(e => e.id == request.id_entidad && e.id_tipoimpuesto == request.id_tipoimpuesto)
+                     .Select(e => new IdLiquidaImpuestoModel() { Id = e.id_tercero })
+                     .FirstOrDefaultAsync();
+
+                if (entidad == null)
+                { throw new Exception("No se ha configurado correctamente la Entidad con su tipo de impuesto"); }
+
+                var cuentaCierre = await _context.cntCuentaImpuestos
+                    .Where(ci => ci.id_tipoimpuesto == request.id_tipoimpuesto)
+                    .Select(ci => new IdLiquidaImpuestoModel() { Id = ci.id_puc })
+                    .FirstOrDefaultAsync();
+
+                if (cuentaCierre == null)
+                { throw new Exception("No se ha configurado la contrapartida para el tipo de Impuesto"); }
+
+               
+                //Generar saldos totalizados por tercero por cuenta.
+                //Si el saldo es debito generamos movimiento al crédito a la cuenta recibida en request.id_puc 
+                //y con el tercero request.id_tercero y Viceversa
+                //Iniciar Transacción 
+                //Add a detalleComprobante
+                //Generar Comprobante 
+
+                
+               // var entidadComprobante = new InsertarComprobantesModel();
+                //var entidadComprobante = _mapper.Map<InsertarComprobantesModel, CntComprobante>(request.comprobante);
+                var idEntidadComprobante = _insertarComprobante.Insertar(request.comprobante);
+
+                var entidadDto = _mapper.Map<InsertarLiquidaImpuestosModel, CntLiquidaImpuesto>(request);
+                InsertarComprobantesModel  comprobante = new InsertarComprobantesModel()
+                {
+
+                    id_sucursal=request.id_sucursal,
+                    id_tipocomprobante= idTipoComprobante.Id,
+                    id_modulo = 2,
+                    id_tercero = entidad.Id,
+                    //cco_fecha=request.cco_fecha,
+                    cco_documento=request.cco_documento,
+                    cco_detalle = "Liquidación Automática de Cuentas por Tercero",
+                    //id_usuario=request.id_usuario
+
+                };
+                var transaction = _context.Database.BeginTransaction();
+
+                try
+                {
+                    var respuestacc = await _insertarComprobante.Insertar(comprobante);
+
                     transaction.Commit();
-                    return Unit.Value;
+                    if(respuestacc.Id<0)
+                      throw new Exception("Error al insertar Comprobante");
+                    
+
+                   // _context.cntLiquidaImpuestos.Add(entidadDto);
+
+                    var respuesta = await _context.SaveChangesAsync();
+                    if (respuesta > 0)
+                    {
+                        transaction.Commit();
+                        return Unit.Value;
+                    }
+
+                    throw new Exception("Error al insertar LiquidaImpuesto");
                 }
+                catch (Exception ex)
+                {
+                    throw new Exception("Error al Insertar registro catch " + ex.Message);
 
-                throw new Exception("Error al insertar LiquidaImpuesto");
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Error al Insertar registro catch " + ex.Message);
-
+                }
             }
         }
-    }
 
+    }
 }

@@ -2,14 +2,15 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Dominio.Contabilidad;
 
-namespace Persistencia.Mapeo.Contabilidad;
-
-public class NotaAclaratoriaTipoMap : IEntityTypeConfiguration<CntNotaAclaratoriaTipo>
+namespace Persistencia.Mapeo.Contabilidad
 {
-    public void Configure(EntityTypeBuilder<CntNotaAclaratoriaTipo> builder)
+    public class NotaAclaratoriaTipoMap : IEntityTypeConfiguration<CntNotaAclaratoriaTipo>
     {
-        builder
-            .ToTable("cnt_notaaclaratoriatipo")  
-            .HasKey(entity => entity.id);
+        public void Configure(EntityTypeBuilder<CntNotaAclaratoriaTipo> builder)
+        {
+            builder
+                .ToTable("cnt_notaaclaratoriatipo")  
+                .HasKey(entity => entity.id);
+        }
     }
 }

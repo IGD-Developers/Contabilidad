@@ -5,68 +5,69 @@ using FluentValidation;
 using MediatR;
 using Persistencia;
 
-namespace Aplicacion.Contabilidad.Meses;
-
-public class Editar
+namespace Aplicacion.Contabilidad.Meses
 {
-    public class Ejecuta : IRequest{
-        public int Id { get; set; }
-        public int? mes_ano { get; set; }
-        public int? mes_mes { get; set; }
-        public bool? mes_cerrado { get; set; }
-        public string id_usuario { get; set; }
-        
-    }
-
-    public class EjecutaValidador : AbstractValidator<Ejecuta>
+    public class Editar
     {
-        public EjecutaValidador()
-        {
-            RuleFor(x=>x.Id).NotEmpty();
-            RuleFor(x=>x.mes_ano).NotEmpty();
-            RuleFor(x=>x.mes_mes).NotEmpty();
-            RuleFor(x=>x.mes_cerrado).NotEmpty();
-            RuleFor(x=>x.id_usuario).NotEmpty();
+        public class Ejecuta : IRequest{
+            public int Id { get; set; }
+            public int? mes_ano { get; set; }
+            public int? mes_mes { get; set; }
+            public bool? mes_cerrado { get; set; }
+            public string id_usuario { get; set; }
             
         }
-    }
 
-    public class Manejador : IRequestHandler<Ejecuta>
-    {
-        private readonly CntContext _context;
-
-        public Manejador(CntContext context)
+        public class EjecutaValidador : AbstractValidator<Ejecuta>
         {
-            _context = context;
+            public EjecutaValidador()
+            {
+                RuleFor(x=>x.Id).NotEmpty();
+                RuleFor(x=>x.mes_ano).NotEmpty();
+                RuleFor(x=>x.mes_mes).NotEmpty();
+                RuleFor(x=>x.mes_cerrado).NotEmpty();
+                RuleFor(x=>x.id_usuario).NotEmpty();
+                
+            }
         }
 
-        public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
+        public class Manejador : IRequestHandler<Ejecuta>
         {
-            var cierre = await _context.cntMeses.FindAsync(request.Id);
-            
-            if(cierre==null){
-                throw new Exception("No se encontró cierre");
+            private readonly CntContext _context;
+
+            public Manejador(CntContext context)
+            {
+                _context = context;
             }
 
-            cierre.mes_mes = request.mes_mes ?? cierre.mes_mes;
-            cierre.mes_ano = request.mes_ano ?? cierre.mes_ano;
-            cierre.mes_cerrado = request.mes_cerrado ?? cierre.mes_cerrado;
-            // if (request.id_usuario!=null){
-            //     cierre.id_usuario = request.id_usuario;
-            // };
-            //cierre.id_usuario = request.id_usuario ?? cierre.id_usuario;
-            cierre.id_usuario = request.id_usuario;
+            public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
+            {
+                var cierre = await _context.cntMeses.FindAsync(request.Id);
+                
+                if(cierre==null){
+                    throw new Exception("No se encontró cierre");
+                }
 
-           // _context.Add(cierre);
-            var resultado = await _context.SaveChangesAsync();
+                cierre.mes_mes = request.mes_mes ?? cierre.mes_mes;
+                cierre.mes_ano = request.mes_ano ?? cierre.mes_ano;
+                cierre.mes_cerrado = request.mes_cerrado ?? cierre.mes_cerrado;
+                // if (request.id_usuario!=null){
+                //     cierre.id_usuario = request.id_usuario;
+                // };
+                //cierre.id_usuario = request.id_usuario ?? cierre.id_usuario;
+                cierre.id_usuario = request.id_usuario;
 
-            if(resultado>0){
-                return Unit.Value;
+               // _context.Add(cierre);
+                var resultado = await _context.SaveChangesAsync();
+
+                if(resultado>0){
+                    return Unit.Value;
+                }
+
+                throw new Exception("No se pudo editar el cierre");
+
+
             }
-
-            throw new Exception("No se pudo editar el cierre");
-
-
         }
     }
 }

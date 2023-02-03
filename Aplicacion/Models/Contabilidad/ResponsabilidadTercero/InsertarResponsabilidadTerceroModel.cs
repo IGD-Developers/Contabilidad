@@ -1,7 +1,8 @@
-namespace Aplicacion.Models.Contabilidad.ResponsabilidadTercero;
-
-public class InsertarResponsabilidadTerceroModel
+namespace Aplicacion.Models.Contabilidad.ResponsabilidadTercero
 {
-           public int id_tercero {get; set;}
-           public int id_responsabilidad {get; set;}
+    public class InsertarResponsabilidadTerceroModel
+    {
+               public int id_tercero {get; set;}
+               public int id_responsabilidad {get; set;}
+    }
 }

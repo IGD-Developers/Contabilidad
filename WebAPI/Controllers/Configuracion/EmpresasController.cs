@@ -9,54 +9,56 @@ using Dominio.Configuracion;
 using Microsoft.AspNetCore.Authorization;
 using Aplicacion.Models.Configuracion.Empresas;
 
-namespace WebAPI.Controllers.Configuracion;
-
-
-
-
-[ApiController]
-[Route("api/[controller]")]
-public class EmpresasController : MiControllerBase
+namespace WebAPI.Controllers.Configuracion
 {
-    // private readonly IMediator mediator;
 
-    // public EmpresasController(IMediator _mediator)
-    // {
-    //     mediator = _mediator;
-    // }
-    [HttpGet]
 
-    public async Task<ActionResult<List<ListarEmpresasModel>>> Get()
+
+    [ApiController]
+    [Route("api/[controller]")]
+    public class EmpresasController : MiControllerBase
     {
+        // private readonly IMediator mediator;
 
-        return await Mediator.Send(new Consulta.ListaCnfEmpresas());
+        // public EmpresasController(IMediator _mediator)
+        // {
+        //     mediator = _mediator;
+        // }
+        [HttpGet]
 
-    }
+        public async Task<ActionResult<List<ListarEmpresasModel>>> Get()
+        {
 
-    [HttpGet("{id}")]
+            return await Mediator.Send(new Consulta.ListaCnfEmpresas());
 
-    public async Task<ActionResult<ListarEmpresasModel>> GetId(int id)
-    {
+        }
 
-        return await Mediator.Send(new ConsultaId.ConsultarId { Id = id });
-    }
+        [HttpGet("{id}")]
 
-    
-[HttpPost]
+        public async Task<ActionResult<ListarEmpresasModel>> GetId(int id)
+        {
 
-public async Task<ActionResult<Unit>> Insertar(Insertar.Ejecuta data) {
+            return await Mediator.Send(new ConsultaId.ConsultarId { Id = id });
+        }
 
-    return await Mediator.Send(data);
+        
+    [HttpPost]
 
-}
+    public async Task<ActionResult<Unit>> Insertar(Insertar.Ejecuta data) {
 
-[HttpPut("{id}")]
-
-    public async Task<ActionResult<Unit>>  Editar(int id, Editar.Ejecuta data) 
-    
-    {
-        data.Id = id;
         return await Mediator.Send(data);
+
+    }
+
+    [HttpPut("{id}")]
+
+        public async Task<ActionResult<Unit>>  Editar(int id, Editar.Ejecuta data) 
+        
+        {
+            data.Id = id;
+            return await Mediator.Send(data);
+        }
+
     }
 
 }

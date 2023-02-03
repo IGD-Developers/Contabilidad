@@ -9,50 +9,51 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Persistencia;
 
-namespace Aplicacion.Contabilidad.NotaAclaratorias;
-
-public class Consulta
-
-
-//DESDE IMediaTr
-// Necesita dos clases 
-//UNA que herede de IRequest y  
-//OTRA como manejador de la clase que HEREDE DE IRequestHandler 
-//que maneja la LOGICA DE NEGOCIOS 
+namespace Aplicacion.Contabilidad.NotaAclaratorias
 {
-    public class ListaCntNotaAclaratorias : IRequest<List<ListarNotaAclaratoriaModel>>
+    public class Consulta
+
+
+    //DESDE IMediaTr
+    // Necesita dos clases 
+    //UNA que herede de IRequest y  
+    //OTRA como manejador de la clase que HEREDE DE IRequestHandler 
+    //que maneja la LOGICA DE NEGOCIOS 
     {
-
-
-    }
-
-    //El manejador necesita dos parametros:
-    //la primera clase de lista:  Formato en que lo vamos a devolver, tipo de dato
-    public class Manejador : IRequestHandler<ListaCntNotaAclaratorias, List<ListarNotaAclaratoriaModel>>
-    {
-
-        private readonly CntContext _context;
-        private readonly IMapper _mapper;
-
-        public Manejador(CntContext context, IMapper mapper)
+        public class ListaCntNotaAclaratorias : IRequest<List<ListarNotaAclaratoriaModel>>
         {
-            _context = context;
-            _mapper = mapper;
+
+
         }
 
-        public async Task<List<ListarNotaAclaratoriaModel>> Handle(ListaCntNotaAclaratorias request, CancellationToken cancellationToken)
+        //El manejador necesita dos parametros:
+        //la primera clase de lista:  Formato en que lo vamos a devolver, tipo de dato
+        public class Manejador : IRequestHandler<ListaCntNotaAclaratorias, List<ListarNotaAclaratoriaModel>>
         {
-           
-            var notaAclaratorias = await _context.cntNotaAclaratorias
-                .Include(t => t.notaAclaratoriaTipo)
-                .Include(p => p.cntPuct)
-                .Where(n => n.estado=="A")
-                .ToListAsync();
 
-            var notaAclaratoriasModel = _mapper.Map<List<CntNotaAclaratoria>, List<ListarNotaAclaratoriaModel>>(notaAclaratorias);
-            
-            return notaAclaratoriasModel;
+            private readonly CntContext _context;
+            private readonly IMapper _mapper;
 
+            public Manejador(CntContext context, IMapper mapper)
+            {
+                _context = context;
+                _mapper = mapper;
+            }
+
+            public async Task<List<ListarNotaAclaratoriaModel>> Handle(ListaCntNotaAclaratorias request, CancellationToken cancellationToken)
+            {
+               
+                var notaAclaratorias = await _context.cntNotaAclaratorias
+                    .Include(t => t.notaAclaratoriaTipo)
+                    .Include(p => p.cntPuct)
+                    .Where(n => n.estado=="A")
+                    .ToListAsync();
+
+                var notaAclaratoriasModel = _mapper.Map<List<CntNotaAclaratoria>, List<ListarNotaAclaratoriaModel>>(notaAclaratorias);
+                
+                return notaAclaratoriasModel;
+
+            }
         }
     }
 }

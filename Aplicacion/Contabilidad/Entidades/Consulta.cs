@@ -8,38 +8,39 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Persistencia;
 
-namespace Aplicacion.Contabilidad.Entidades;
-
-public class Consulta
+namespace Aplicacion.Contabilidad.Entidades
 {
-    public class ListaCntEntidades : IRequest<List<ListarEntidadesModel>>
-    {   }
-
-    public class Manejador : IRequestHandler<ListaCntEntidades, List<ListarEntidadesModel>>
+    public class Consulta
     {
+        public class ListaCntEntidades : IRequest<List<ListarEntidadesModel>>
+        {   }
 
-         private CntContext _context;
-         private readonly IMapper _mapper;
-
-
-
-        public Manejador(CntContext context,IMapper mapper)
+        public class Manejador : IRequestHandler<ListaCntEntidades, List<ListarEntidadesModel>>
         {
-            _context = context;
-            _mapper = mapper;
+
+             private CntContext _context;
+             private readonly IMapper _mapper;
+
+
+
+            public Manejador(CntContext context,IMapper mapper)
+            {
+                _context = context;
+                _mapper = mapper;
+            }
+
+            public async Task<List<ListarEntidadesModel>> Handle(ListaCntEntidades request, CancellationToken cancellationToken)
+            {
+                //TODO: MARIA- Validar existe tercero, existe tipoimpuesto
+                var entidades = await _context.cntEntidades
+                .Include(t=>t.tercero)
+                .Include(i=>i.tipoImpuesto)
+                .ToListAsync();
+                var entidadesDto = _mapper.Map<List<CntEntidad>,List<ListarEntidadesModel>>(entidades);
+                
+                return entidadesDto;
+            }
         }
 
-        public async Task<List<ListarEntidadesModel>> Handle(ListaCntEntidades request, CancellationToken cancellationToken)
-        {
-            //TODO: MARIA- Validar existe tercero, existe tipoimpuesto
-            var entidades = await _context.cntEntidades
-            .Include(t=>t.tercero)
-            .Include(i=>i.tipoImpuesto)
-            .ToListAsync();
-            var entidadesDto = _mapper.Map<List<CntEntidad>,List<ListarEntidadesModel>>(entidades);
-            
-            return entidadesDto;
-        }
     }
-
 }

@@ -1,7 +1,8 @@
-namespace Aplicacion.Models.Contabilidad.Pucs;
-
-public class IdPucModel
+namespace Aplicacion.Models.Contabilidad.Pucs
 {
-    public int Id { get; set; }
+    public class IdPucModel
+    {
+        public int Id { get; set; }
 
+    }
 }

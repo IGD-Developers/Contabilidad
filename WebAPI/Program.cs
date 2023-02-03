@@ -12,41 +12,42 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Persistencia;
 
-namespace WebAPI;
-
-public class Program
+namespace WebAPI
 {
-    public static void Main(string[] args)
+    public class Program
     {
-
-        
-        //Inciamos Host y los parametros yh propiedades devueltos quedan en hostServer
-        var hostServer= CreateHostBuilder(args).Build();
-        //Creamos Ambiente:
-        using(var ambiente = hostServer.Services.CreateScope())
+        public static void Main(string[] args)
         {
-            var services = ambiente.ServiceProvider;
 
-            try {
-            var userManager =services.GetRequiredService<UserManager<CnfUsuario>>();    
-            var context = services.GetRequiredService<CntContext>();
-            context.Database.Migrate();
-            DataInicial.InsertarData(context,userManager).Wait();
-            }catch(Exception e)
+            
+            //Inciamos Host y los parametros yh propiedades devueltos quedan en hostServer
+            var hostServer= CreateHostBuilder(args).Build();
+            //Creamos Ambiente:
+            using(var ambiente = hostServer.Services.CreateScope())
             {
-                var logging = services.GetRequiredService<ILogger<Program>>();
-                logging.LogError(e, "Error al Migrar");
+                var services = ambiente.ServiceProvider;
+
+                try {
+                var userManager =services.GetRequiredService<UserManager<CnfUsuario>>();    
+                var context = services.GetRequiredService<CntContext>();
+                context.Database.Migrate();
+                DataInicial.InsertarData(context,userManager).Wait();
+                }catch(Exception e)
+                {
+                    var logging = services.GetRequiredService<ILogger<Program>>();
+                    logging.LogError(e, "Error al Migrar");
+
+                }
 
             }
-
+             hostServer.Run();
         }
-         hostServer.Run();
-    }
 
-    public static IHostBuilder CreateHostBuilder(string[] args) =>
-        Host.CreateDefaultBuilder(args)
-            .ConfigureWebHostDefaults(webBuilder =>
-            {
-                webBuilder.UseStartup<Startup>();
-            });
+        public static IHostBuilder CreateHostBuilder(string[] args) =>
+            Host.CreateDefaultBuilder(args)
+                .ConfigureWebHostDefaults(webBuilder =>
+                {
+                    webBuilder.UseStartup<Startup>();
+                });
+    }
 }

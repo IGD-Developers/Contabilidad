@@ -5,30 +5,30 @@ using System.Threading.Tasks;
 using MediatR;
 using Persistencia.DapperConexion.Contabilidad.Pucs;
 
-namespace Aplicacion.Dapper.Contabilidad.PucsDapper;
-
-public class ConsultaDapper
+namespace Aplicacion.Dapper.Contabilidad.PucsDapper
 {
-
-     
-    public class Lista: IRequest<List<PucRepositorioModel>> {}
-
-    public class Manejador : IRequestHandler<Lista, List<PucRepositorioModel>>
+    public class ConsultaDapper
     {
-        private readonly IPucRepositorio _pucRepositorio;
 
-        public Manejador(IPucRepositorio pucRepositorio)
-        {
-            _pucRepositorio = pucRepositorio;
-        }
+         
+        public class Lista: IRequest<List<PucRepositorioModel>> {}
 
-        public async Task<List<PucRepositorioModel>> Handle(Lista request, CancellationToken cancellationToken)
+        public class Manejador : IRequestHandler<Lista, List<PucRepositorioModel>>
         {
-            var resultado =  await _pucRepositorio.ObtenerLista();
-            //IEnumerable resultado lo llevamos a ToList() Para concordar con el Controller
-            return resultado.ToList();
+            private readonly IPucRepositorio _pucRepositorio;
+
+            public Manejador(IPucRepositorio pucRepositorio)
+            {
+                _pucRepositorio = pucRepositorio;
+            }
+
+            public async Task<List<PucRepositorioModel>> Handle(Lista request, CancellationToken cancellationToken)
+            {
+                var resultado =  await _pucRepositorio.ObtenerLista();
+                //IEnumerable resultado lo llevamos a ToList() Para concordar con el Controller
+                return resultado.ToList();
+            }
         }
     }
-}
-    
-
+        
+    }

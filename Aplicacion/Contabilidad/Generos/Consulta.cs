@@ -8,29 +8,30 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Persistencia;
 
-namespace Aplicacion.Contabilidad.Generos;
-
-public class Consulta
+namespace Aplicacion.Contabilidad.Generos
 {
-    public class ListaGeneros : IRequest<List<GeneroModel>>{}
-
-    public class Manejador : IRequestHandler<ListaGeneros, List<GeneroModel>>
+    public class Consulta
     {
-        private readonly CntContext _context;
-        private readonly IMapper _mapper;
+        public class ListaGeneros : IRequest<List<GeneroModel>>{}
 
-        public Manejador(CntContext context, IMapper mapper)
+        public class Manejador : IRequestHandler<ListaGeneros, List<GeneroModel>>
         {
-            _context = context;
-            _mapper = mapper;
+            private readonly CntContext _context;
+            private readonly IMapper _mapper;
+
+            public Manejador(CntContext context, IMapper mapper)
+            {
+                _context = context;
+                _mapper = mapper;
+            }
+
+            public async Task<List<GeneroModel>> Handle(ListaGeneros request, CancellationToken cancellationToken)
+            {
+                var listaGeneros = await _context.CntGeneros.ToListAsync();
+                var listaGenerosModel = _mapper.Map<List<CntGenero>, List<GeneroModel>>(listaGeneros);
+                return listaGenerosModel;
+            }
         }
 
-        public async Task<List<GeneroModel>> Handle(ListaGeneros request, CancellationToken cancellationToken)
-        {
-            var listaGeneros = await _context.CntGeneros.ToListAsync();
-            var listaGenerosModel = _mapper.Map<List<CntGenero>, List<GeneroModel>>(listaGeneros);
-            return listaGenerosModel;
-        }
     }
-
 }

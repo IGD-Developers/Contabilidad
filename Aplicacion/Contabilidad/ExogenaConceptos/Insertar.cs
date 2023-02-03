@@ -6,57 +6,58 @@ using System.Threading.Tasks;
 using System.Threading;
 using FluentValidation;
 
-namespace Aplicacion.Contabilidad.ExogenaConceptos;
-
-public class Insertar
+namespace Aplicacion.Contabilidad.ExogenaConceptos
 {
-    public class Ejecuta: IRequest
+    public class Insertar
     {
-    public string codigo { get; set; }
-    public string nombre { get; set; }
-    public string estado { get; set; }
-    }
-
-
-   public class EjecutaValidador : AbstractValidator<Ejecuta>
-    {
-        public EjecutaValidador()
+        public class Ejecuta: IRequest
         {
-            RuleFor(x=>x.codigo).NotEmpty();
-            RuleFor(x=>x.nombre).NotEmpty();
-            RuleFor(x=>x.estado).NotEmpty();
-    
-    
-        }
-    }    
-    public class Manejador:IRequestHandler<Ejecuta>
-    {
-
-        private readonly CntContext context;
-
-        public Manejador(CntContext context)
-        {
-            this.context = context;
+        public string codigo { get; set; }
+        public string nombre { get; set; }
+        public string estado { get; set; }
         }
 
-        public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
+
+       public class EjecutaValidador : AbstractValidator<Ejecuta>
         {
-
-            var exogenaConcepto = new CntExogenaConcepto
+            public EjecutaValidador()
             {
-                codigo = request.codigo,
-                nombre = request.nombre,
-                estado = request.estado
-
-            };
-            context.cntExogenaConceptos.Add(exogenaConcepto);
-            var respuesta =  await context.SaveChangesAsync();
-            if (respuesta > 0)
-            {
-                return Unit.Value;
+                RuleFor(x=>x.codigo).NotEmpty();
+                RuleFor(x=>x.nombre).NotEmpty();
+                RuleFor(x=>x.estado).NotEmpty();
+        
+        
             }
-            throw new Exception("Error al insertar ExogenaConcepto");
+        }    
+        public class Manejador:IRequestHandler<Ejecuta>
+        {
+
+            private readonly CntContext context;
+
+            public Manejador(CntContext context)
+            {
+                this.context = context;
+            }
+
+            public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
+            {
+
+                var exogenaConcepto = new CntExogenaConcepto
+                {
+                    codigo = request.codigo,
+                    nombre = request.nombre,
+                    estado = request.estado
+
+                };
+                context.cntExogenaConceptos.Add(exogenaConcepto);
+                var respuesta =  await context.SaveChangesAsync();
+                if (respuesta > 0)
+                {
+                    return Unit.Value;
+                }
+                throw new Exception("Error al insertar ExogenaConcepto");
+            }
         }
+        
     }
-    
 }

@@ -7,35 +7,36 @@ using Dominio.Contabilidad;
 using MediatR;
 using Persistencia;
 
-namespace Aplicacion.Contabilidad.Responsabilidades;
-
-public class ConsultaId
+namespace Aplicacion.Contabilidad.Responsabilidades
 {
-    public class ConsultarId : IRequest<ResponsabilidadModel>{
-        public int Id;
-    }
-
-    public class Manejador : IRequestHandler<ConsultarId, ResponsabilidadModel>
+    public class ConsultaId
     {
-        private readonly CntContext _context;
-        private readonly IMapper _mapper;
-
-        public Manejador(CntContext context, IMapper mapper)
-        {
-            _context = context;
-            _mapper = mapper;
+        public class ConsultarId : IRequest<ResponsabilidadModel>{
+            public int Id;
         }
 
-        public async Task<ResponsabilidadModel> Handle(ConsultarId request, CancellationToken cancellationToken)
+        public class Manejador : IRequestHandler<ConsultarId, ResponsabilidadModel>
         {
-            var consultarId = await _context.cntResponsabilidades.FindAsync(request.Id);
-            
-            if(consultarId==null){
-                throw new Exception("Responsabilidad Consultada no existe");
+            private readonly CntContext _context;
+            private readonly IMapper _mapper;
+
+            public Manejador(CntContext context, IMapper mapper)
+            {
+                _context = context;
+                _mapper = mapper;
             }
 
-            var consultarIdModel = _mapper.Map<CntResponsabilidad, ResponsabilidadModel>(consultarId);
-            return consultarIdModel;
+            public async Task<ResponsabilidadModel> Handle(ConsultarId request, CancellationToken cancellationToken)
+            {
+                var consultarId = await _context.cntResponsabilidades.FindAsync(request.Id);
+                
+                if(consultarId==null){
+                    throw new Exception("Responsabilidad Consultada no existe");
+                }
+
+                var consultarIdModel = _mapper.Map<CntResponsabilidad, ResponsabilidadModel>(consultarId);
+                return consultarIdModel;
+            }
         }
     }
 }

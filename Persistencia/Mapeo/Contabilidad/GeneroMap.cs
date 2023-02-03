@@ -2,14 +2,15 @@ using Dominio.Contabilidad;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Persistencia.Mapeo.Contabilidad;
-
-public class GeneroMap : IEntityTypeConfiguration<CntGenero>
+namespace Persistencia.Mapeo.Contabilidad
 {
-    public void Configure(EntityTypeBuilder<CntGenero> builder)
+    public class GeneroMap : IEntityTypeConfiguration<CntGenero>
     {
-        builder.ToTable("cnt_genero")
-            .HasKey( pk => pk.id);
-        
+        public void Configure(EntityTypeBuilder<CntGenero> builder)
+        {
+            builder.ToTable("cnt_genero")
+                .HasKey( pk => pk.id);
+            
+        }
     }
 }

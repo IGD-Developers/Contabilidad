@@ -5,46 +5,47 @@ using Microsoft.AspNetCore.Mvc;
 using Aplicacion.Contabilidad.TipoOperaciones;
 using Dominio.Contabilidad;
 
-namespace WebAPI.Controllers.Contabilidad;
-
-
-[ApiController]
-[Route("api/[controller]")]
-public class TipoOperacionesController : MiControllerBase
+namespace WebAPI.Controllers.Contabilidad
 {
-    
 
-    [HttpGet]
-    public async Task<ActionResult<List<CntTipoOperacion>>> Get()
+    [ApiController]
+    [Route("api/[controller]")]
+    public class TipoOperacionesController : MiControllerBase
     {
+        
+
+        [HttpGet]
+        public async Task<ActionResult<List<CntTipoOperacion>>> Get()
+        {
 
 
-        return await Mediator.Send(new Consulta.ListaCntTipoOperaciones());
+            return await Mediator.Send(new Consulta.ListaCntTipoOperaciones());
+
+        }
+
+        [HttpGet("{id}")]
+
+        public async Task<ActionResult<CntTipoOperacion>> GetId(int Id)
+        {
+            return await Mediator.Send(new ConsultaId.ConsultarId { Id = Id });
+        }
+
+        [HttpPost]
+
+        public async Task<ActionResult<Unit>> Insertar(Insertar.Ejecuta data) {
+
+            return await Mediator.Send(data);
+        }
+
+        [HttpPut("{id}")]
+
+        public async Task<ActionResult<Unit>>  Editar(int id, Editar.Ejecuta data) 
+        
+        {
+            data.Id = id;
+            return await Mediator.Send(data);
+        }
+
 
     }
-
-    [HttpGet("{id}")]
-
-    public async Task<ActionResult<CntTipoOperacion>> GetId(int Id)
-    {
-        return await Mediator.Send(new ConsultaId.ConsultarId { Id = Id });
-    }
-
-    [HttpPost]
-
-    public async Task<ActionResult<Unit>> Insertar(Insertar.Ejecuta data) {
-
-        return await Mediator.Send(data);
-    }
-
-    [HttpPut("{id}")]
-
-    public async Task<ActionResult<Unit>>  Editar(int id, Editar.Ejecuta data) 
-    
-    {
-        data.Id = id;
-        return await Mediator.Send(data);
-    }
-
-
 }

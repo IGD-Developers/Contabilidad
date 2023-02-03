@@ -6,32 +6,33 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Persistencia;
 
-namespace Aplicacion.Contabilidad.TipoCuentas;
-
-public class Consulta
+namespace Aplicacion.Contabilidad.TipoCuentas
 {
-    public class ListaCntTipoCuentas : IRequest<List<CntTipoCuenta>>
+    public class Consulta
     {
-
-    }
-
-    public class Manejador : IRequestHandler<ListaCntTipoCuentas, List<CntTipoCuenta>>
-    {
-        private readonly CntContext context;
-
-        public Manejador(CntContext _context)
+        public class ListaCntTipoCuentas : IRequest<List<CntTipoCuenta>>
         {
-            context = _context;
+
         }
 
-        public async Task<List<CntTipoCuenta>> Handle(ListaCntTipoCuentas request, CancellationToken cancellationToken)
+        public class Manejador : IRequestHandler<ListaCntTipoCuentas, List<CntTipoCuenta>>
         {
-            var tipoCuentas = await context.cntTipoCuentas.ToListAsync();
-            return tipoCuentas;
+            private readonly CntContext context;
 
+            public Manejador(CntContext _context)
+            {
+                context = _context;
+            }
+
+            public async Task<List<CntTipoCuenta>> Handle(ListaCntTipoCuentas request, CancellationToken cancellationToken)
+            {
+                var tipoCuentas = await context.cntTipoCuentas.ToListAsync();
+                return tipoCuentas;
+
+            }
         }
+
+
+
     }
-
-
-
 }

@@ -5,56 +5,57 @@ using FluentValidation;
 using MediatR;
 using Persistencia;
 
-namespace Aplicacion.Contabilidad.NotaAclaratoriaTipos;
-
-public class Editar
+namespace Aplicacion.Contabilidad.NotaAclaratoriaTipos
 {
-    public class Ejecuta : IRequest{
-        public int id { get; set; }
-        public string codigo { get; set; }
-        public string nombre { get; set; }
-    }
-
-    public class EjecutaValidador : AbstractValidator<Ejecuta>
+    public class Editar
     {
-        public EjecutaValidador()
-        {
-            RuleFor(x=>x.id).NotEmpty();
-            RuleFor(x=>x.codigo).NotEmpty();
-            RuleFor(x=>x.nombre).NotEmpty();
-
-        }
-    }
-
-    public class Manejador : IRequestHandler<Ejecuta>
-    {
-        private readonly CntContext _context;
-
-        public Manejador(CntContext context)
-        {
-            _context = context;
+        public class Ejecuta : IRequest{
+            public int id { get; set; }
+            public string codigo { get; set; }
+            public string nombre { get; set; }
         }
 
-        public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
+        public class EjecutaValidador : AbstractValidator<Ejecuta>
         {
-            var nota = await _context.cntNotaAclaratoriaTipos.FindAsync(request.id);
+            public EjecutaValidador()
+            {
+                RuleFor(x=>x.id).NotEmpty();
+                RuleFor(x=>x.codigo).NotEmpty();
+                RuleFor(x=>x.nombre).NotEmpty();
 
-            if(nota == null){
-                throw new Exception("No se encontro nota aclaratoria tipo");
+            }
+        }
+
+        public class Manejador : IRequestHandler<Ejecuta>
+        {
+            private readonly CntContext _context;
+
+            public Manejador(CntContext context)
+            {
+                _context = context;
             }
 
-            nota.nombre = request.nombre ?? nota.nombre;
-            nota.codigo = request.codigo ?? nota.codigo;
+            public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
+            {
+                var nota = await _context.cntNotaAclaratoriaTipos.FindAsync(request.id);
 
-            var resultado = await _context.SaveChangesAsync();
+                if(nota == null){
+                    throw new Exception("No se encontro nota aclaratoria tipo");
+                }
 
-            if(resultado>0){
-                return Unit.Value;
+                nota.nombre = request.nombre ?? nota.nombre;
+                nota.codigo = request.codigo ?? nota.codigo;
+
+                var resultado = await _context.SaveChangesAsync();
+
+                if(resultado>0){
+                    return Unit.Value;
+                }
+
+                throw new Exception("No se ppudo editar la nota aclaratoria tipo");
+
+
             }
-
-            throw new Exception("No se ppudo editar la nota aclaratoria tipo");
-
-
         }
     }
 }

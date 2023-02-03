@@ -5,60 +5,61 @@ using System.Threading.Tasks;
 using System.Threading;
 using FluentValidation;
 
-namespace Aplicacion.Contabilidad.TipoOperaciones;
-
-public class Editar
+namespace Aplicacion.Contabilidad.TipoOperaciones
 {
-     public class Ejecuta: IRequest
+    public class Editar
     {
-        public int Id { get; set; }
-        public string codigo { get; set; }
-        public string nombre { get; set; }
-        public string formula { get; set; }
-
-    }
-
-    public class EjecutaValidador : AbstractValidator<Ejecuta>
-    {
-        public EjecutaValidador()
+         public class Ejecuta: IRequest
         {
-            RuleFor(x=>x.Id).NotEmpty();
-            RuleFor(x=>x.codigo).NotEmpty();
-            RuleFor(x=>x.nombre).NotEmpty();
-    
-        }
-    }    
+            public int Id { get; set; }
+            public string codigo { get; set; }
+            public string nombre { get; set; }
+            public string formula { get; set; }
 
-
-    public class Manejador: IRequestHandler<Ejecuta>
-    {
-
-        private readonly CntContext context;
-
-        public Manejador(CntContext context)
-        {
-            this.context = context;
         }
 
-        public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
+        public class EjecutaValidador : AbstractValidator<Ejecuta>
         {
-            var tipoOperacion = await context.cntTipoOperaciones.FindAsync(request.Id);
-            if (tipoOperacion == null) {  
-                    throw new Exception("Registro no encontrado");
-            };     
-
-            tipoOperacion.codigo = request.codigo;
-            tipoOperacion.nombre = request.nombre ;
-            tipoOperacion.formula = request.formula ?? tipoOperacion.formula;
-            var resultado=  await context.SaveChangesAsync();
-            if (resultado>0)
+            public EjecutaValidador()
             {
-                return Unit.Value;
+                RuleFor(x=>x.Id).NotEmpty();
+                RuleFor(x=>x.codigo).NotEmpty();
+                RuleFor(x=>x.nombre).NotEmpty();
+        
             }
-            throw new Exception("Error al modificar registro");
+        }    
 
 
+        public class Manejador: IRequestHandler<Ejecuta>
+        {
 
+            private readonly CntContext context;
+
+            public Manejador(CntContext context)
+            {
+                this.context = context;
+            }
+
+            public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
+            {
+                var tipoOperacion = await context.cntTipoOperaciones.FindAsync(request.Id);
+                if (tipoOperacion == null) {  
+                        throw new Exception("Registro no encontrado");
+                };     
+
+                tipoOperacion.codigo = request.codigo;
+                tipoOperacion.nombre = request.nombre ;
+                tipoOperacion.formula = request.formula ?? tipoOperacion.formula;
+                var resultado=  await context.SaveChangesAsync();
+                if (resultado>0)
+                {
+                    return Unit.Value;
+                }
+                throw new Exception("Error al modificar registro");
+ 
+
+
+            }
         }
     }
 }

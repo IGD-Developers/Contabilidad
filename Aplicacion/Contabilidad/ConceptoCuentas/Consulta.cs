@@ -6,31 +6,32 @@ using System.Threading;
 using Microsoft.EntityFrameworkCore;
 using Dominio.Contabilidad;
 
-namespace Aplicacion.Contabilidad.ConceptoCuentas;
-
-public class Consulta
+namespace Aplicacion.Contabilidad.ConceptoCuentas
 {
-
-    public class ListaCntConceptoCuentas : IRequest<List<CntConceptoCuenta>>
+    public class Consulta
     {
 
-    }
-
-
-    public class Manejador : IRequestHandler<ListaCntConceptoCuentas, List<CntConceptoCuenta>>
-    {
-        private readonly CntContext context;
-
-        public Manejador(CntContext context)
+        public class ListaCntConceptoCuentas : IRequest<List<CntConceptoCuenta>>
         {
-            this.context = context;
+
         }
 
-        public async Task<List<CntConceptoCuenta>> Handle(ListaCntConceptoCuentas request, CancellationToken cancellationToken)
-        {
-            var conceptoCuentas = await context.cntConceptoCuentas.ToListAsync();
-            return conceptoCuentas;
-        }
-    }
 
+        public class Manejador : IRequestHandler<ListaCntConceptoCuentas, List<CntConceptoCuenta>>
+        {
+            private readonly CntContext context;
+
+            public Manejador(CntContext context)
+            {
+                this.context = context;
+            }
+
+            public async Task<List<CntConceptoCuenta>> Handle(ListaCntConceptoCuentas request, CancellationToken cancellationToken)
+            {
+                var conceptoCuentas = await context.cntConceptoCuentas.ToListAsync();
+                return conceptoCuentas;
+            }
+        }
+
+    }
 }

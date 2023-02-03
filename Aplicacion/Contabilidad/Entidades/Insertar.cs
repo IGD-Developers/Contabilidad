@@ -11,62 +11,63 @@ using Aplicacion.Models.Contabilidad.LiquidaImpuestos;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 
-namespace Aplicacion.Contabilidad.Entidades;
-
-public class Insertar
+namespace Aplicacion.Contabilidad.Entidades
 {
-
-    public class Ejecuta : InsertarEntidadModel, IRequest
-    {  }
-
-
-    public class EjecutaValidador : AbstractValidator<Ejecuta>
+    public class Insertar
     {
-        public EjecutaValidador()
+
+        public class Ejecuta : InsertarEntidadModel, IRequest
+        {  }
+
+
+        public class EjecutaValidador : AbstractValidator<Ejecuta>
         {
-            RuleFor(x => x.id_tercero).NotEmpty();
-            RuleFor(x => x.id_tipoimpuesto).NotEmpty();
-
-        }
-    }
-
-
-    public class Manejador : IRequestHandler<Ejecuta>
-    {
-        private readonly CntContext _context;
-        private readonly IMapper _mapper;
-
-
-
-        public Manejador(CntContext context, IMapper mapper)
-        {
-            _context = context;
-            _mapper = mapper;
-        }
-
-        public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
-        {
-           
-            
-            
-            var entidadDto = _mapper.Map<InsertarEntidadModel, CntEntidad>(request);
-
-
-            _context.cntEntidades.Add(entidadDto);
-            try
+            public EjecutaValidador()
             {
-                var respuesta = await _context.SaveChangesAsync();
-                if (respuesta > 0)
-                {
-                    return Unit.Value;
-                }
-                throw new Exception("Error al insertar Entidad");
+                RuleFor(x => x.id_tercero).NotEmpty();
+                RuleFor(x => x.id_tipoimpuesto).NotEmpty();
+
             }
-            catch (Exception ex)
+        }
+
+
+        public class Manejador : IRequestHandler<Ejecuta>
+        {
+            private readonly CntContext _context;
+            private readonly IMapper _mapper;
+
+
+
+            public Manejador(CntContext context, IMapper mapper)
             {
-                throw new Exception("Error al Insertar registro catch " + ex.Message);
+                _context = context;
+                _mapper = mapper;
+            }
+
+            public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
+            {
+               
+                
+                
+                var entidadDto = _mapper.Map<InsertarEntidadModel, CntEntidad>(request);
 
 
+                _context.cntEntidades.Add(entidadDto);
+                try
+                {
+                    var respuesta = await _context.SaveChangesAsync();
+                    if (respuesta > 0)
+                    {
+                        return Unit.Value;
+                    }
+                    throw new Exception("Error al insertar Entidad");
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Error al Insertar registro catch " + ex.Message);
+
+
+                }
             }
         }
     }

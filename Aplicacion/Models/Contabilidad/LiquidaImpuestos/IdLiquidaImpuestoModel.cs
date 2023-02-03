@@ -1,6 +1,7 @@
-namespace Aplicacion.Models.Contabilidad.LiquidaImpuestos;
-
-public class IdLiquidaImpuestoModel
+namespace Aplicacion.Models.Contabilidad.LiquidaImpuestos
 {
-      public int Id { get; set; }
+    public class IdLiquidaImpuestoModel
+    {
+          public int Id { get; set; }
+    }
 }

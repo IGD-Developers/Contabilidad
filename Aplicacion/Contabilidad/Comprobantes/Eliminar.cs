@@ -7,87 +7,89 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Persistencia;
 
-namespace Aplicacion.Contabilidad.Comprobantes;
-
-public class Eliminar
+namespace Aplicacion.Contabilidad.Comprobantes
 {
-    
-    public class Ejecuta : EliminarComprobantesModel, IRequest
-    { }
-
-    public class EjecutaValidador : AbstractValidator<Ejecuta>
+    public class Eliminar
     {
-        public EjecutaValidador()
-        {
-            RuleFor(x => x.Id).NotEmpty();
-        }
-    }
+        
+        public class Ejecuta : EliminarComprobantesModel, IRequest
+        { }
 
-    public class Manejador : IRequestHandler<Ejecuta>
-    {
-        private readonly CntContext context;
-
-        public Manejador(CntContext context)
+        public class EjecutaValidador : AbstractValidator<Ejecuta>
         {
-            this.context = context;
+            public EjecutaValidador()
+            {
+                RuleFor(x => x.Id).NotEmpty();
+            }
         }
 
-        public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
+        public class Manejador : IRequestHandler<Ejecuta>
         {
-           var comprobante = await context.cntComprobantes
-            .Include(t => t.tipoComprobante)
-            .Include(d => d.comprobanteDetalleComprobantes)
-            .FirstOrDefaultAsync(cmp => cmp.id == request.Id);
+            private readonly CntContext context;
 
-            if (comprobante == null)
+            public Manejador(CntContext context)
             {
-                throw new Exception("Comprobante no encontrado");
+                this.context = context;
             }
 
-            if (comprobante.tipoComprobante.borrable == "F")
+            public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
             {
-                throw new Exception("El Tipo de Comprobante no permite Eliminación");
-            }
+               var comprobante = await context.cntComprobantes
+                .Include(t => t.tipoComprobante)
+                .Include(d => d.comprobanteDetalleComprobantes)
+                .FirstOrDefaultAsync(cmp => cmp.id == request.Id);
 
-            if (comprobante.estado != "A" )
-            {
-                throw new Exception("El Comprobante no está disponible para Eliminación porque ha sido sometido algún proceso que cambió su Estado ");
-            }
-            
-            //Inicia Transaccion - Tiene AutoRollback:
-            var transaction = context.Database.BeginTransaction();
-            
-            try
-            {
-                context.cntComprobantes.Remove(comprobante);
+                if (comprobante == null)
+                {
+                    throw new Exception("Comprobante no encontrado");
+                }
+
+                if (comprobante.tipoComprobante.borrable == "F")
+                {
+                    throw new Exception("El Tipo de Comprobante no permite Eliminación");
+                }
+
+                if (comprobante.estado != "A" )
+                {
+                    throw new Exception("El Comprobante no está disponible para Eliminación porque ha sido sometido algún proceso que cambió su Estado ");
+                }
                 
-                foreach (var registro in comprobante.comprobanteDetalleComprobantes)
+                //Inicia Transaccion - Tiene AutoRollback:
+                var transaction = context.Database.BeginTransaction();
+                
+                try
                 {
-
-                    context.cntDetalleComprobantes.Remove(registro);
+                    context.cntComprobantes.Remove(comprobante);
                     
+                    foreach (var registro in comprobante.comprobanteDetalleComprobantes)
+                    {
+
+                        context.cntDetalleComprobantes.Remove(registro);
+                        
+                    }
+
+                    var resultado = await context.SaveChangesAsync();
+
+                    if (resultado > 0)
+                    {
+                        transaction.Commit();
+                        return Unit.Value;
+                    }
+
                 }
-
-                var resultado = await context.SaveChangesAsync();
-
-                if (resultado > 0)
+                catch (Exception ex)
                 {
-                    transaction.Commit();
-                    return Unit.Value;
+                    throw new Exception("Error al Eliminar registro catch " + ex.Message);
+
+
                 }
 
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Error al Eliminar registro catch " + ex.Message);
-
-
+                throw new Exception("Error al Eliminar Registro");
             }
 
-            throw new Exception("Error al Eliminar Registro");
+
         }
 
-
     }
-
+   
 }

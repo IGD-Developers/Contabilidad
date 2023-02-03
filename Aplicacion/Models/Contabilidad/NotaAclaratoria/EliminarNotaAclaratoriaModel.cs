@@ -1,6 +1,7 @@
-namespace Aplicacion.Models.Contabilidad.NotaAclaratoria;
-
-public class EliminarNotaAclaratoriaModel
+namespace Aplicacion.Models.Contabilidad.NotaAclaratoria
 {
-    public int ID {get; set;}
+    public class EliminarNotaAclaratoriaModel
+    {
+        public int ID {get; set;}
+    }
 }

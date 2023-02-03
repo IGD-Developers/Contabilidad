@@ -1,9 +1,10 @@
-namespace Aplicacion.Models.Contabilidad.Bancos;
-
-public class InsertarBancosModel
+namespace Aplicacion.Models.Contabilidad.Bancos
 {
-     public string codigo { get; set; }
-     public string nombre { get; set; }
+    public class InsertarBancosModel
+    {
+         public string codigo { get; set; }
+         public string nombre { get; set; }
 
-   
+       
+    }
 }

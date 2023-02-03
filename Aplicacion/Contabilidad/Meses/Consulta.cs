@@ -6,31 +6,32 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Persistencia;
 
-namespace Aplicacion.Contabilidad.Meses;
-
-public class Consulta
+namespace Aplicacion.Contabilidad.Meses
 {
-    public class ListaCntMeses : IRequest<List<CntMes>>
+    public class Consulta
     {
-
-    }
-
-    public class Manejador : IRequestHandler<ListaCntMeses, List<CntMes>>
-    {
-        private CntContext context;
-
-        public Manejador(CntContext context)
-        {
-            this.context = context;
-        }
-
-        public async Task<List<CntMes>> Handle(ListaCntMeses request, CancellationToken cancellationToken)
+        public class ListaCntMeses : IRequest<List<CntMes>>
         {
 
-            var listaMeses = await context.cntMeses.ToListAsync();
-            return listaMeses;
-
         }
-    }
 
+        public class Manejador : IRequestHandler<ListaCntMeses, List<CntMes>>
+        {
+            private CntContext context;
+
+            public Manejador(CntContext context)
+            {
+                this.context = context;
+            }
+
+            public async Task<List<CntMes>> Handle(ListaCntMeses request, CancellationToken cancellationToken)
+            {
+
+                var listaMeses = await context.cntMeses.ToListAsync();
+                return listaMeses;
+
+            }
+        }
+
+    }
 }

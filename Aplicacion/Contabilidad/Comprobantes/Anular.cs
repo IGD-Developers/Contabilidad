@@ -7,75 +7,76 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Persistencia;
 
-namespace Aplicacion.Contabilidad.Comprobantes;
-
-public class Anular
+namespace Aplicacion.Contabilidad.Comprobantes
 {
-    public class Ejecuta : IdComprobanteModel, IRequest
-    { }
-
-    public class EjecutaValidador : AbstractValidator<Ejecuta>
+    public class Anular
     {
-        public EjecutaValidador()
-        {
-            RuleFor(x => x.Id).NotEmpty();
-        }
-    }
+        public class Ejecuta : IdComprobanteModel, IRequest
+        { }
 
-    public class Manejador : IRequestHandler<Ejecuta>
-    {
-        private readonly CntContext context;
-
-        public Manejador(CntContext context)
+        public class EjecutaValidador : AbstractValidator<Ejecuta>
         {
-            this.context = context;
+            public EjecutaValidador()
+            {
+                RuleFor(x => x.Id).NotEmpty();
+            }
         }
 
-        public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
+        public class Manejador : IRequestHandler<Ejecuta>
         {
-            var comprobante = await context.cntComprobantes
-            .Include(t => t.tipoComprobante)
-            .FirstOrDefaultAsync(cmp => cmp.id == request.Id);
+            private readonly CntContext context;
 
-            if (comprobante == null)
+            public Manejador(CntContext context)
             {
-                throw new Exception("Comprobante no encontrado");
+                this.context = context;
             }
 
-            if (comprobante.tipoComprobante.anulable == "F")
+            public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
             {
-                throw new Exception("El Tipo de Comprobante no permite Anulacion");
-            }
-            
-            DateTime fechaGrabada= comprobante.cco_fecha ?? DateTime.Now ;
+                var comprobante = await context.cntComprobantes
+                .Include(t => t.tipoComprobante)
+                .FirstOrDefaultAsync(cmp => cmp.id == request.Id);
 
-            if (fechaGrabada.Month != DateTime.Now.Month  
-                || fechaGrabada.Year != DateTime.Now.Year)
-            {
-                throw new Exception("Sólo puede Anular Comprobantes del mes actual");
-            }
-
-
-            try
-            {
-                comprobante.estado = "N";
-                var resultado = await context.SaveChangesAsync();
-                if (resultado > 0)
+                if (comprobante == null)
                 {
-                    return Unit.Value;
+                    throw new Exception("Comprobante no encontrado");
                 }
+
+                if (comprobante.tipoComprobante.anulable == "F")
+                {
+                    throw new Exception("El Tipo de Comprobante no permite Anulacion");
+                }
+                
+                DateTime fechaGrabada= comprobante.cco_fecha ?? DateTime.Now ;
+
+                if (fechaGrabada.Month != DateTime.Now.Month  
+                    || fechaGrabada.Year != DateTime.Now.Year)
+                {
+                    throw new Exception("Sólo puede Anular Comprobantes del mes actual");
+                }
+
+
+                try
+                {
+                    comprobante.estado = "N";
+                    var resultado = await context.SaveChangesAsync();
+                    if (resultado > 0)
+                    {
+                        return Unit.Value;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Error al Anular registro catch " + ex.Message);
+
+
+                }
+
+                throw new Exception("Error al Anular Registro");
             }
-            catch (Exception ex)
-            {
-                throw new Exception("Error al Anular registro catch " + ex.Message);
 
 
-            }
-
-            throw new Exception("Error al Anular Registro");
         }
 
-
     }
-
 }

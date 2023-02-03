@@ -8,44 +8,45 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Persistencia;
 
-namespace Aplicacion.Contabilidad.TipoComprobantes;
+namespace Aplicacion.Contabilidad.TipoComprobantes
 
 
-
-public class ConsultaId
 {
-    public class ConsultarId : IdModel, IRequest<ListarTipoComprobanteModel>
-    { }
-    public class Manejador : IRequestHandler<ConsultarId, ListarTipoComprobanteModel>
+    public class ConsultaId
     {
-        private CntContext _context;
-        private readonly IMapper _mapper;
-
-
-
-        public Manejador(CntContext context, IMapper mapper)
+        public class ConsultarId : IdModel, IRequest<ListarTipoComprobanteModel>
+        { }
+        public class Manejador : IRequestHandler<ConsultarId, ListarTipoComprobanteModel>
         {
-            _context = context;
-            _mapper = mapper;
-        }
+            private CntContext _context;
+            private readonly IMapper _mapper;
 
-        public async Task<ListarTipoComprobanteModel> Handle(ConsultarId request, CancellationToken cancellationToken)
-        {
-            var entidad = await _context.cntTipoComprobantes
-            .Include(t => t.categoria)
-            .SingleOrDefaultAsync(i => i.id == request.Id);
 
-            if (entidad == null)
+
+            public Manejador(CntContext context, IMapper mapper)
             {
-                throw new Exception("Registro no encontrado");
-            };
-            var entidadDto = _mapper.Map<CntTipoComprobante, ListarTipoComprobanteModel>(entidad);
+                _context = context;
+                _mapper = mapper;
+            }
 
-            return entidadDto;
+            public async Task<ListarTipoComprobanteModel> Handle(ConsultarId request, CancellationToken cancellationToken)
+            {
+                var entidad = await _context.cntTipoComprobantes
+                .Include(t => t.categoria)
+                .SingleOrDefaultAsync(i => i.id == request.Id);
+
+                if (entidad == null)
+                {
+                    throw new Exception("Registro no encontrado");
+                };
+                var entidadDto = _mapper.Map<CntTipoComprobante, ListarTipoComprobanteModel>(entidad);
+
+                return entidadDto;
+            }
         }
+
+
+
+
     }
-
-
-
-
 }

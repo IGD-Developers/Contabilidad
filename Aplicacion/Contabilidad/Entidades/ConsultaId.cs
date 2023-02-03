@@ -8,43 +8,44 @@ using Aplicacion.Models.Contabilidad.Entidades;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 
-namespace Aplicacion.Contabilidad.Entidades;
-
-public class ConsultaId
+namespace Aplicacion.Contabilidad.Entidades
 {
-    public class ConsultarId : IdEntidadModel,IRequest<ListarEntidadesModel>
-    {  }
-
-    public class Manejador : IRequestHandler<ConsultarId, ListarEntidadesModel>
+    public class ConsultaId
     {
-        private CntContext _context;
-         private readonly IMapper _mapper;
+        public class ConsultarId : IdEntidadModel,IRequest<ListarEntidadesModel>
+        {  }
 
-
-
-        public Manejador(CntContext context,IMapper mapper)
+        public class Manejador : IRequestHandler<ConsultarId, ListarEntidadesModel>
         {
-            _context = context;
-            _mapper = mapper;
+            private CntContext _context;
+             private readonly IMapper _mapper;
+
+
+
+            public Manejador(CntContext context,IMapper mapper)
+            {
+                _context = context;
+                _mapper = mapper;
+            }
+
+            public async Task<ListarEntidadesModel> Handle(ConsultarId request, CancellationToken cancellationToken)
+            {
+                
+                var entidad = await _context.cntEntidades
+                .Include(t=>t.tercero)
+                .Include(i=>i.tipoImpuesto)
+                .SingleOrDefaultAsync(i => i.id == request.Id);
+                
+                
+                 if (entidad == null) {
+                    throw new Exception("Registro no encontrado");
+                };
+
+                var entidadDto = _mapper.Map<CntEntidad,ListarEntidadesModel>(entidad);
+                
+                return entidadDto;
+            }
         }
 
-        public async Task<ListarEntidadesModel> Handle(ConsultarId request, CancellationToken cancellationToken)
-        {
-            
-            var entidad = await _context.cntEntidades
-            .Include(t=>t.tercero)
-            .Include(i=>i.tipoImpuesto)
-            .SingleOrDefaultAsync(i => i.id == request.Id);
-            
-            
-             if (entidad == null) {
-                throw new Exception("Registro no encontrado");
-            };
-
-            var entidadDto = _mapper.Map<CntEntidad,ListarEntidadesModel>(entidad);
-            
-            return entidadDto;
-        }
     }
-
 }

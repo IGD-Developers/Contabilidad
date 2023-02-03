@@ -7,36 +7,37 @@ using Dominio.Contabilidad;
 using MediatR;
 using Persistencia;
 
-namespace Aplicacion.Contabilidad.TipoPersonas;
-
-public class ConsultaId
+namespace Aplicacion.Contabilidad.TipoPersonas
 {
-    public class ConsultarId : IRequest<TipoPersonaModel>{
-        public int Id;
-    }
-
-    public class Manejador : IRequestHandler<ConsultarId, TipoPersonaModel>
+    public class ConsultaId
     {
-        private readonly CntContext _context;
-        private readonly IMapper _mapper;
-
-        public Manejador(CntContext context, IMapper mapper)
-        {
-            _context = context;
-            _mapper = mapper;
+        public class ConsultarId : IRequest<TipoPersonaModel>{
+            public int Id;
         }
 
-        public async Task<TipoPersonaModel> Handle(ConsultarId request, CancellationToken cancellationToken)
+        public class Manejador : IRequestHandler<ConsultarId, TipoPersonaModel>
         {
-            var consultaId = await _context.CntTipoPersonas.FindAsync(request.Id);
+            private readonly CntContext _context;
+            private readonly IMapper _mapper;
 
-            if(consultaId==null){
-                throw new Exception("Tipo de persona no existe");
+            public Manejador(CntContext context, IMapper mapper)
+            {
+                _context = context;
+                _mapper = mapper;
             }
 
-            var consultaIdModel = _mapper.Map<CntTipoPersona, TipoPersonaModel>(consultaId);
+            public async Task<TipoPersonaModel> Handle(ConsultarId request, CancellationToken cancellationToken)
+            {
+                var consultaId = await _context.CntTipoPersonas.FindAsync(request.Id);
 
-            return consultaIdModel;
+                if(consultaId==null){
+                    throw new Exception("Tipo de persona no existe");
+                }
+
+                var consultaIdModel = _mapper.Map<CntTipoPersona, TipoPersonaModel>(consultaId);
+
+                return consultaIdModel;
+            }
         }
     }
 }

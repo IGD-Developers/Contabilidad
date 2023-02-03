@@ -2,14 +2,15 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Dominio.Contabilidad;
 
-namespace Persistencia.Mapeo.Contabilidad;
-
-public class TipoImpuestoMap : IEntityTypeConfiguration<CntTipoImpuesto>
+namespace Persistencia.Mapeo.Contabilidad
 {
-    public void Configure(EntityTypeBuilder<CntTipoImpuesto> builder)
+    public class TipoImpuestoMap : IEntityTypeConfiguration<CntTipoImpuesto>
     {
-        builder
-            .ToTable("cnt_tipoimpuesto") 
-            .HasKey(entity => entity.id);
+        public void Configure(EntityTypeBuilder<CntTipoImpuesto> builder)
+        {
+            builder
+                .ToTable("cnt_tipoimpuesto") 
+                .HasKey(entity => entity.id);
+        }
     }
 }

@@ -7,35 +7,36 @@ using Dominio.Contabilidad;
 using MediatR;
 using Persistencia;
 
-namespace Aplicacion.Contabilidad.SeccionCiius;
-
-public class ConsultaId
+namespace Aplicacion.Contabilidad.SeccionCiius
 {
-    public class ConsultarId : IRequest<SeccionCiiusModel>{
-        public int Id;
-    }
-
-    public class Manejador : IRequestHandler<ConsultarId, SeccionCiiusModel>
+    public class ConsultaId
     {
-        private readonly CntContext _context;
-        private readonly IMapper _mapper;
-
-        public Manejador(CntContext context, IMapper mapper)
-        {
-            _context = context;
-            _mapper = mapper;
+        public class ConsultarId : IRequest<SeccionCiiusModel>{
+            public int Id;
         }
 
-        public async Task<SeccionCiiusModel> Handle(ConsultarId request, CancellationToken cancellationToken)
+        public class Manejador : IRequestHandler<ConsultarId, SeccionCiiusModel>
         {
-            var consultarId = await _context.CntSeccionCiius.FindAsync(request.Id);
+            private readonly CntContext _context;
+            private readonly IMapper _mapper;
 
-            if(consultarId == null){
-                throw new Exception("SECCION CIIUS CONSULTADA NO EXISTE");
+            public Manejador(CntContext context, IMapper mapper)
+            {
+                _context = context;
+                _mapper = mapper;
             }
 
-            var consultarIdModel = _mapper.Map<CntSeccionCiiu, SeccionCiiusModel>(consultarId);
-            return consultarIdModel;
+            public async Task<SeccionCiiusModel> Handle(ConsultarId request, CancellationToken cancellationToken)
+            {
+                var consultarId = await _context.CntSeccionCiius.FindAsync(request.Id);
+
+                if(consultarId == null){
+                    throw new Exception("SECCION CIIUS CONSULTADA NO EXISTE");
+                }
+
+                var consultarIdModel = _mapper.Map<CntSeccionCiiu, SeccionCiiusModel>(consultarId);
+                return consultarIdModel;
+            }
         }
     }
 }

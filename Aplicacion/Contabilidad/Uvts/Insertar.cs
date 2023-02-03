@@ -6,57 +6,58 @@ using System.Threading.Tasks;
 using System.Threading;
 using FluentValidation;
 
-namespace Aplicacion.Contabilidad.Uvts;
-
-public class Insertar
+namespace Aplicacion.Contabilidad.Uvts
 {
-    public class Ejecuta: IRequest
+    public class Insertar
     {
-
-        public int uvt_ano { get; set; }
-        public double uvt_valor { get; set; }
-        public DateTime created_at { get; set; }
-        public DateTime? updated_at { get; set; }
-
-    }
-
-    public class EjecutaValidador : AbstractValidator<Ejecuta>
-    {
-        public EjecutaValidador()
+        public class Ejecuta: IRequest
         {
-            RuleFor(x=>x.uvt_ano).NotEmpty();
-            RuleFor(x=>x.uvt_valor).NotEmpty();
-    
-        }
-    }    
 
+            public int uvt_ano { get; set; }
+            public double uvt_valor { get; set; }
+            public DateTime created_at { get; set; }
+            public DateTime? updated_at { get; set; }
 
-    public class Manejador: IRequestHandler<Ejecuta>
-    {
-
-        private readonly CntContext context;
-
-        public Manejador(CntContext context)
-        {
-            this.context = context;
         }
 
-        public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
+        public class EjecutaValidador : AbstractValidator<Ejecuta>
         {
-            var uvt = new CntUvt
+            public EjecutaValidador()
             {
-                uvt_ano =  request.uvt_ano,
-                uvt_valor = request.uvt_valor
-            };
+                RuleFor(x=>x.uvt_ano).NotEmpty();
+                RuleFor(x=>x.uvt_valor).NotEmpty();
+        
+            }
+        }    
 
-            context.cntUvts.Add(uvt);
-            var respuesta = await context.SaveChangesAsync();
-            if (respuesta > 0)
+
+        public class Manejador: IRequestHandler<Ejecuta>
+        {
+
+            private readonly CntContext context;
+
+            public Manejador(CntContext context)
             {
-                return Unit.Value;
+                this.context = context;
             }
 
-            throw new Exception("Error al insertar TipoOperacion");
+            public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
+            {
+                var uvt = new CntUvt
+                {
+                    uvt_ano =  request.uvt_ano,
+                    uvt_valor = request.uvt_valor
+                };
+
+                context.cntUvts.Add(uvt);
+                var respuesta = await context.SaveChangesAsync();
+                if (respuesta > 0)
+                {
+                    return Unit.Value;
+                }
+
+                throw new Exception("Error al insertar TipoOperacion");
+            }
         }
     }
 }

@@ -8,31 +8,32 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Persistencia;
 
-namespace Aplicacion.Contabilidad.TipoCiius;
-
-public class Consulta
+namespace Aplicacion.Contabilidad.TipoCiius
 {
-    public class ListarTipoCiius : IRequest<List<TipoCiiusModel>>{}
-
-    public class Manejador : IRequestHandler<ListarTipoCiius, List<TipoCiiusModel>>
+    public class Consulta
     {
-        private readonly CntContext _context;
-        private readonly IMapper _mapper;
+        public class ListarTipoCiius : IRequest<List<TipoCiiusModel>>{}
 
-        public Manejador(CntContext context, IMapper mapper)
+        public class Manejador : IRequestHandler<ListarTipoCiius, List<TipoCiiusModel>>
         {
-            _context = context;
-            _mapper = mapper;
+            private readonly CntContext _context;
+            private readonly IMapper _mapper;
+
+            public Manejador(CntContext context, IMapper mapper)
+            {
+                _context = context;
+                _mapper = mapper;
+            }
+
+            public async Task<List<TipoCiiusModel>> Handle(ListarTipoCiius request, CancellationToken cancellationToken)
+            {
+                var listaTipoCiius = await _context.cntTipoCiius.ToListAsync();
+
+                var listaTipoCiiusModel = _mapper.Map<List<CntTipoCiiu>,List<TipoCiiusModel>>(listaTipoCiius);
+                
+                return listaTipoCiiusModel;
+            }
         }
 
-        public async Task<List<TipoCiiusModel>> Handle(ListarTipoCiius request, CancellationToken cancellationToken)
-        {
-            var listaTipoCiius = await _context.cntTipoCiius.ToListAsync();
-
-            var listaTipoCiiusModel = _mapper.Map<List<CntTipoCiiu>,List<TipoCiiusModel>>(listaTipoCiius);
-            
-            return listaTipoCiiusModel;
-        }
     }
-
 }

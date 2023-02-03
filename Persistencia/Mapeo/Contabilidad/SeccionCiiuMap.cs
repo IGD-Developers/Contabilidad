@@ -2,16 +2,17 @@ using Dominio.Contabilidad;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Persistencia.Mapeo.Contabilidad;
-
-public class SeccionCiiuMap : IEntityTypeConfiguration<CntSeccionCiiu>
+namespace Persistencia.Mapeo.Contabilidad
 {
-    public void Configure(EntityTypeBuilder<CntSeccionCiiu> builder)
+    public class SeccionCiiuMap : IEntityTypeConfiguration<CntSeccionCiiu>
     {
-        builder.ToTable("cnt_seccionciiu")
-            .HasKey( pk => pk.id);
-    }
+        public void Configure(EntityTypeBuilder<CntSeccionCiiu> builder)
+        {
+            builder.ToTable("cnt_seccionciiu")
+                .HasKey( pk => pk.id);
+        }
 
-    
         
+            
+    }
 }

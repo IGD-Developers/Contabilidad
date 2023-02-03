@@ -1,6 +1,7 @@
-namespace Aplicacion.Models.Contabilidad.TipoComprobantes;
-
-public class IdModel
+namespace Aplicacion.Models.Contabilidad.TipoComprobantes
 {
-    public int Id { get; set; }
+    public class IdModel
+    {
+        public int Id { get; set; }
+    }
 }

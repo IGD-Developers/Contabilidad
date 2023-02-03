@@ -1,18 +1,19 @@
 using System;
 using System.Collections.Generic;
 
-namespace Dominio.Contabilidad;
-
-public class CntCategoriaComprobante:IDisposable
+namespace Dominio.Contabilidad
 {
-    public int id { get; set; }
-    public string codigo { get; set; }
-    public string nombre { get; set; }
-
-    public ICollection<CntTipoComprobante> categoriaTipoComprobantes { get; set; }
-
-    public void Dispose()
+    public class CntCategoriaComprobante:IDisposable
     {
-        GC.SuppressFinalize(this);
+        public int id { get; set; }
+        public string codigo { get; set; }
+        public string nombre { get; set; }
+
+        public ICollection<CntTipoComprobante> categoriaTipoComprobantes { get; set; }
+
+        public void Dispose()
+        {
+            GC.SuppressFinalize(this);
+        }
     }
 }

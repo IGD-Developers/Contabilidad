@@ -5,45 +5,46 @@ using Aplicacion.Models.Contabilidad.NotaAclaratoria;
 using MediatR;
 using Persistencia;
 
-namespace Aplicacion.Contabilidad.NotaAclaratorias;
-
-public class Eliminar
+namespace Aplicacion.Contabilidad.NotaAclaratorias
 {
-    public class Ejecuta : EliminarNotaAclaratoriaModel, IRequest{}
-
-    public class Manejador : IRequestHandler<Ejecuta>
+    public class Eliminar
     {
-        private readonly CntContext _context;
+        public class Ejecuta : EliminarNotaAclaratoriaModel, IRequest{}
 
-        public Manejador(CntContext context)
+        public class Manejador : IRequestHandler<Ejecuta>
         {
-            _context = context;
-        }
+            private readonly CntContext _context;
 
-        public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
-        {
-            //TODO: Traer solo un campo 
-            var nota = await _context.cntNotaAclaratorias.FindAsync(request.ID);
-            if(nota == null){
-                throw new Exception("Nota Aclaratoria a Eliminar no existe");
+            public Manejador(CntContext context)
+            {
+                _context = context;
             }
 
-            try {
-                _context.Remove(nota);
-
-                var resultado = await _context.SaveChangesAsync();
-                if(resultado>0){
-                    return Unit.Value;
+            public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
+            {
+                //TODO: Traer solo un campo 
+                var nota = await _context.cntNotaAclaratorias.FindAsync(request.ID);
+                if(nota == null){
+                    throw new Exception("Nota Aclaratoria a Eliminar no existe");
                 }
 
-                throw new Exception("No se elimino la nota aclaratoria");
+                try {
+                    _context.Remove(nota);
+    
+                    var resultado = await _context.SaveChangesAsync();
+                    if(resultado>0){
+                        return Unit.Value;
+                    }
+    
+                    throw new Exception("No se elimino la nota aclaratoria");
 
-            } catch (SystemException e) {
-                throw new Exception("Ocurrio un error al eliminar la nota aclaratoria cath", e);
+                } catch (SystemException e) {
+                    throw new Exception("Ocurrio un error al eliminar la nota aclaratoria cath", e);
+                }
+
+
+                
             }
-
-
-            
         }
     }
 }

@@ -7,37 +7,38 @@ using System;
 using Aplicacion.Models.Contabilidad.CentroCostos;
 using AutoMapper;
 
-namespace Aplicacion.Contabilidad.CentroCostos;
-
-public class ConsultaId
+namespace Aplicacion.Contabilidad.CentroCostos
 {
-    public class ConsultaPorId : IdCentroCostoModel, IRequest<ListarCentroCostosModel>
-    { }
-
-
-    public class Manejador : IRequestHandler<ConsultaPorId, ListarCentroCostosModel>
+    public class ConsultaId
     {
-
-        private CntContext _context;
-        private readonly IMapper _mapper;
-
+        public class ConsultaPorId : IdCentroCostoModel, IRequest<ListarCentroCostosModel>
+        { }
 
 
-        public Manejador(CntContext context, IMapper mapper)
+        public class Manejador : IRequestHandler<ConsultaPorId, ListarCentroCostosModel>
         {
-            _context = context;
-            _mapper = mapper;
-        }
 
-        public async Task<ListarCentroCostosModel> Handle(ConsultaPorId request, CancellationToken cancellationToken)
-        {
-            var entidad = await _context.cntCentroCostos.FindAsync(request.Id);
-            if (entidad == null)
+            private CntContext _context;
+            private readonly IMapper _mapper;
+
+
+
+            public Manejador(CntContext context, IMapper mapper)
             {
-                throw new Exception("Registro no encontrado");
-            };
-            var entidadDto = _mapper.Map<CntCentroCosto, ListarCentroCostosModel>(entidad);
-            return entidadDto;
+                _context = context;
+                _mapper = mapper;
+            }
+
+            public async Task<ListarCentroCostosModel> Handle(ConsultaPorId request, CancellationToken cancellationToken)
+            {
+                var entidad = await _context.cntCentroCostos.FindAsync(request.Id);
+                if (entidad == null)
+                {
+                    throw new Exception("Registro no encontrado");
+                };
+                var entidadDto = _mapper.Map<CntCentroCosto, ListarCentroCostosModel>(entidad);
+                return entidadDto;
+            }
         }
     }
 }

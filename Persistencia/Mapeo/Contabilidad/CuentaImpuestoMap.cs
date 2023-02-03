@@ -2,23 +2,24 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Dominio.Contabilidad;
 
-namespace Persistencia.Mapeo.Contabilidad;
-
-public class CuentaImpuestoMap : IEntityTypeConfiguration<CntCuentaImpuesto>
+namespace Persistencia.Mapeo.Contabilidad
 {
-    public void Configure(EntityTypeBuilder<CntCuentaImpuesto> builder)
+    public class CuentaImpuestoMap : IEntityTypeConfiguration<CntCuentaImpuesto>
     {
-        builder
-            .ToTable("cnt_cuentaimpuesto")
-            .HasKey(entity => entity.id);
-
+        public void Configure(EntityTypeBuilder<CntCuentaImpuesto> builder)
+        {
             builder
-                .HasOne<CntPuc>(c => c.puc)
-                .WithMany(p=>p.pucCuentaImpuestos)
-                .HasForeignKey(p => p.id_puc);    
+                .ToTable("cnt_cuentaimpuesto")
+                .HasKey(entity => entity.id);
 
-            builder.HasOne<CntTipoImpuesto>(c => c.tipoImpuesto)
-                .WithMany(t=>t.cntTipoImpuestoCntCuentaImpuestos)
-                .HasForeignKey(c => c.id_tipoimpuesto);    
-        }
+                builder
+                    .HasOne<CntPuc>(c => c.puc)
+                    .WithMany(p=>p.pucCuentaImpuestos)
+                    .HasForeignKey(p => p.id_puc);    
+
+                builder.HasOne<CntTipoImpuesto>(c => c.tipoImpuesto)
+                    .WithMany(t=>t.cntTipoImpuestoCntCuentaImpuestos)
+                    .HasForeignKey(c => c.id_tipoimpuesto);    
+            }
+    }
 }

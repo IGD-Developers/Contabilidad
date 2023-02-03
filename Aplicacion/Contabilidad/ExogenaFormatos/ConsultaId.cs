@@ -5,35 +5,36 @@ using System.Threading;
 using Dominio.Contabilidad;
 using System;
 
-namespace Aplicacion.Contabilidad.ExogenaFormatos;
-
-public class ConsultaId
+namespace Aplicacion.Contabilidad.ExogenaFormatos
 {
-
-    public class ConsultarId : IRequest<CntExogenaFormato>
+    public class ConsultaId
     {
 
-        public int Id { get; set; }
-    }
-
-    public class Manejador : IRequestHandler<ConsultarId, CntExogenaFormato>
-    {
-        private readonly CntContext context;
-
-        public Manejador(CntContext context)
+        public class ConsultarId : IRequest<CntExogenaFormato>
         {
-            this.context = context;
+
+            public int Id { get; set; }
         }
 
-        public async Task<CntExogenaFormato> Handle(ConsultarId request, CancellationToken cancellationToken)
+        public class Manejador : IRequestHandler<ConsultarId, CntExogenaFormato>
         {
-            var exogenaFormato = await context.cntExogenaFormatos.FindAsync(request.Id);
-            if (exogenaFormato == null) {  
-                throw new Exception("Registro no encontrado");
-            };                
+            private readonly CntContext context;
 
-            return exogenaFormato;
+            public Manejador(CntContext context)
+            {
+                this.context = context;
+            }
+
+            public async Task<CntExogenaFormato> Handle(ConsultarId request, CancellationToken cancellationToken)
+            {
+                var exogenaFormato = await context.cntExogenaFormatos.FindAsync(request.Id);
+                if (exogenaFormato == null) {  
+                    throw new Exception("Registro no encontrado");
+                };                
+
+                return exogenaFormato;
+            }
         }
-    }
 
+    }
 }

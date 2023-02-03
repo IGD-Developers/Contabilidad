@@ -9,50 +9,51 @@ using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 
-namespace Aplicacion.Contabilidad.LiquidaImpuestos;
-
-public class ConsultaId
+namespace Aplicacion.Contabilidad.LiquidaImpuestos
 {
-    public class ConsultarId : IdLiquidaImpuestoModel, IRequest<ListarLiquidaImpuestosModel>
-    { }
-
-
-
-    public class Manejador : IRequestHandler<ConsultarId, ListarLiquidaImpuestosModel>
+    public class ConsultaId
     {
-        private CntContext _context;
-
-        private readonly IMapper _mapper;
-
+        public class ConsultarId : IdLiquidaImpuestoModel, IRequest<ListarLiquidaImpuestosModel>
+        { }
 
 
-        public Manejador(CntContext context, IMapper mapper)
+
+        public class Manejador : IRequestHandler<ConsultarId, ListarLiquidaImpuestosModel>
         {
-            _context = context;
-            _mapper = mapper;
-        }
+            private CntContext _context;
 
-        public async Task<ListarLiquidaImpuestosModel> Handle(ConsultarId request, CancellationToken cancellationToken)
-        {
+            private readonly IMapper _mapper;
 
-            var entidad = await _context.cntLiquidaImpuestos
-            .Include(t => t.tercero)
-           .Include(ti => ti.tipoImpuesto)
-           .Include(co => co.comprobante)
-           .ThenInclude(tipoc => tipoc.tipoComprobante)
-           .Include(co => co.comprobante)
-           .ThenInclude(dt => dt.comprobanteDetalleComprobantes)
-           .Where(i => i.id == request.Id)
-            .Select(p => _mapper.Map<CntLiquidaImpuesto, ListarLiquidaImpuestosModel>(p))
-           .FirstOrDefaultAsync();
 
-            if (entidad == null)
+
+            public Manejador(CntContext context, IMapper mapper)
             {
-                throw new Exception("Registro no encontrado");
-            };
+                _context = context;
+                _mapper = mapper;
+            }
 
-            return entidad;
+            public async Task<ListarLiquidaImpuestosModel> Handle(ConsultarId request, CancellationToken cancellationToken)
+            {
+
+                var entidad = await _context.cntLiquidaImpuestos
+                .Include(t => t.tercero)
+               .Include(ti => ti.tipoImpuesto)
+               .Include(co => co.comprobante)
+               .ThenInclude(tipoc => tipoc.tipoComprobante)
+               .Include(co => co.comprobante)
+               .ThenInclude(dt => dt.comprobanteDetalleComprobantes)
+               .Where(i => i.id == request.Id)
+                .Select(p => _mapper.Map<CntLiquidaImpuesto, ListarLiquidaImpuestosModel>(p))
+               .FirstOrDefaultAsync();
+
+                if (entidad == null)
+                {
+                    throw new Exception("Registro no encontrado");
+                };
+
+                return entidad;
+            }
         }
-    }
 
+    }
 }

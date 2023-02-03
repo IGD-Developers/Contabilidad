@@ -8,37 +8,38 @@ using Dominio.Contabilidad;
 using Aplicacion.Models.Contabilidad.NotaAclaratoriaTipo;
 using AutoMapper;
 
-namespace Aplicacion.Contabilidad.NotaAclaratoriaTipos;
-
-public class Consulta
+namespace Aplicacion.Contabilidad.NotaAclaratoriaTipos
 {
-
-    public class ListaCntNotaAclaratoriaTipos : IRequest<List<NotaAclaratoriaTipoModel>>
-    {}
-
-    public class Manejador : IRequestHandler<ListaCntNotaAclaratoriaTipos, List<NotaAclaratoriaTipoModel>>
+    public class Consulta
     {
-        private CntContext _context;
-        private IMapper _mapper;
 
-        public Manejador(CntContext context, IMapper mapper)
+        public class ListaCntNotaAclaratoriaTipos : IRequest<List<NotaAclaratoriaTipoModel>>
+        {}
+
+        public class Manejador : IRequestHandler<ListaCntNotaAclaratoriaTipos, List<NotaAclaratoriaTipoModel>>
         {
-            _context = context;
-            _mapper = mapper;
+            private CntContext _context;
+            private IMapper _mapper;
+
+            public Manejador(CntContext context, IMapper mapper)
+            {
+                _context = context;
+                _mapper = mapper;
+            }
+
+            public async Task<List<NotaAclaratoriaTipoModel>> Handle(ListaCntNotaAclaratoriaTipos request, CancellationToken cancellationToken)
+            {
+                var notaAclaratoriaTipos = await _context.cntNotaAclaratoriaTipos.ToListAsync();
+                
+                var notaAclaratoriasTiposModel = _mapper.Map<List<CntNotaAclaratoriaTipo>, List<NotaAclaratoriaTipoModel>>(notaAclaratoriaTipos);
+                
+                return notaAclaratoriasTiposModel;
+
+            }
         }
 
-        public async Task<List<NotaAclaratoriaTipoModel>> Handle(ListaCntNotaAclaratoriaTipos request, CancellationToken cancellationToken)
-        {
-            var notaAclaratoriaTipos = await _context.cntNotaAclaratoriaTipos.ToListAsync();
-            
-            var notaAclaratoriasTiposModel = _mapper.Map<List<CntNotaAclaratoriaTipo>, List<NotaAclaratoriaTipoModel>>(notaAclaratoriaTipos);
-            
-            return notaAclaratoriasTiposModel;
 
-        }
+
+
     }
-
-
-
-
 }

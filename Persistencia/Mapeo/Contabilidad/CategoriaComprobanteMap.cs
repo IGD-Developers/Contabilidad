@@ -2,16 +2,17 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Dominio.Contabilidad;
 
-namespace Persistencia.Mapeo.Contabilidad;
-
-public class CategoriaComprobanteMap : IEntityTypeConfiguration<CntCategoriaComprobante>
+namespace Persistencia.Mapeo.Contabilidad
 {
-    public void Configure(EntityTypeBuilder<CntCategoriaComprobante> builder)
+    public class CategoriaComprobanteMap : IEntityTypeConfiguration<CntCategoriaComprobante>
     {
-        builder
-        .ToTable("cnt_categoriacomprobante")
-        .HasKey(entity => entity.id);
+        public void Configure(EntityTypeBuilder<CntCategoriaComprobante> builder)
+        {
+            builder
+            .ToTable("cnt_categoriacomprobante")
+            .HasKey(entity => entity.id);
 
 
-     }
+         }
+    }
 }

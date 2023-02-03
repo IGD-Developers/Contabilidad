@@ -1,6 +1,7 @@
-namespace Aplicacion.Contabilidad.Anos;
-
-public class Editar
+namespace Aplicacion.Contabilidad.Anos
 {
-    
+    public class Editar
+    {
+        
+    }
 }

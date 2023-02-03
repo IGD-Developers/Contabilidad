@@ -7,48 +7,49 @@ using Dominio.Contabilidad;
 using Aplicacion.Models.Contabilidad.CuentaImpuestos;
 
 
-namespace WebAPI.Controllers.Contabilidad;
-
-
-[ApiController]
-[Route("api/[controller]")]
-public class CuentaImpuestosController : MiControllerBase
+namespace WebAPI.Controllers.Contabilidad
 {
 
-    
-    [HttpGet]
-    public async Task<List<ListarCuentaImpuestosModel>> Get()
+    [ApiController]
+    [Route("api/[controller]")]
+    public class CuentaImpuestosController : MiControllerBase
     {
 
-        return await Mediator.Send(new Consulta.ListaCntCuentaImpuestos());
+        
+        [HttpGet]
+        public async Task<List<ListarCuentaImpuestosModel>> Get()
+        {
+
+            return await Mediator.Send(new Consulta.ListaCntCuentaImpuestos());
+
+        }
+
+        [HttpGet("{id}")]
+
+        public async Task<ActionResult<ListarCuentaImpuestosModel>> GetId(int id)
+        {
+            return await Mediator.Send(new ConsultaId.ConsultarId { Id = id });
+
+        }
+
+        // [HttpPost]
+
+        // public async Task<ActionResult<Unit>> Insertar(Insertar.Ejecuta data) {
+
+        //     return await Mediator.Send(data);
+
+        // }
+
+        
+        // [HttpPut("{id}")]
+
+        // public async Task<ActionResult<Unit>>  Editar(int id, Editar.Ejecuta data) 
+        
+        // {
+        //     data.Id = id;
+        //     return await Mediator.Send(data);
+        // }
+
 
     }
-
-    [HttpGet("{id}")]
-
-    public async Task<ActionResult<ListarCuentaImpuestosModel>> GetId(int id)
-    {
-        return await Mediator.Send(new ConsultaId.ConsultarId { Id = id });
-
-    }
-
-    // [HttpPost]
-
-    // public async Task<ActionResult<Unit>> Insertar(Insertar.Ejecuta data) {
-
-    //     return await Mediator.Send(data);
-
-    // }
-
-    
-    // [HttpPut("{id}")]
-
-    // public async Task<ActionResult<Unit>>  Editar(int id, Editar.Ejecuta data) 
-    
-    // {
-    //     data.Id = id;
-    //     return await Mediator.Send(data);
-    // }
-
-
 }

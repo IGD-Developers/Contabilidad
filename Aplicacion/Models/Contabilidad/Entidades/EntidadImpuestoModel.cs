@@ -1,8 +1,9 @@
-namespace Aplicacion.Models.Contabilidad.Entidades;
-
-public class EntidadImpuestoModel
+namespace Aplicacion.Models.Contabilidad.Entidades
 {
-    public string codigo { get; set; }
-    public string nombre { get; set; }
-    
+    public class EntidadImpuestoModel
+    {
+        public string codigo { get; set; }
+        public string nombre { get; set; }
+        
+    }
 }

@@ -1,7 +1,8 @@
-namespace Aplicacion.Interfaces;
-
-public interface IUsuarioSesion
-{
-        string ObtenerUsuarioSesion();
-    
+namespace Aplicacion.Interfaces
+{    
+    public interface IUsuarioSesion
+    {
+            string ObtenerUsuarioSesion();
+        
+    }
 }
