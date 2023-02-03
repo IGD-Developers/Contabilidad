@@ -5,32 +5,31 @@ using System.Threading;
 using Dominio.Contabilidad;
 using System;
 
-namespace Aplicacion.Contabilidad.Consecutivos
+namespace Aplicacion.Contabilidad.Consecutivos;
+
+public class ConsultaId
 {
-    public class ConsultaId
+
+    public class ConsultarId : IRequest<CntConsecutivo>
     {
+        public int Id { get; set; }
+    }
+    public class Manejador : IRequestHandler<ConsultarId, CntConsecutivo>
+    {
+        private readonly CntContext context;
 
-        public class ConsultarId : IRequest<CntConsecutivo>
+        public Manejador(CntContext context)
         {
-            public int Id { get; set; }
+            this.context = context;
         }
-        public class Manejador : IRequestHandler<ConsultarId, CntConsecutivo>
+
+        public async Task<CntConsecutivo> Handle(ConsultarId request, CancellationToken cancellationToken)
         {
-            private readonly CntContext context;
-
-            public Manejador(CntContext context)
-            {
-                this.context = context;
-            }
-
-            public async Task<CntConsecutivo> Handle(ConsultarId request, CancellationToken cancellationToken)
-            {
-                var consecutivo = await context.cntConsecutivos.FindAsync(request.Id);
-                if (consecutivo == null) {
-                    throw new Exception("Registro no encontrado");
-                };    
-                return consecutivo;
-            }
+            var consecutivo = await context.cntConsecutivos.FindAsync(request.Id);
+            if (consecutivo == null) {
+                throw new Exception("Registro no encontrado");
+            };    
+            return consecutivo;
         }
     }
 }

@@ -1,8 +1,7 @@
-namespace Aplicacion.Models.Contabilidad.PucTipos
+namespace Aplicacion.Models.Contabilidad.PucTipos;
+
+public class PucTipoModel
 {
-    public class PucTipoModel
-    {
-        public int Id { get; set; }
-        public string Codigo { get; set; }
-    }
+    public int Id { get; set; }
+    public string Codigo { get; set; }
 }

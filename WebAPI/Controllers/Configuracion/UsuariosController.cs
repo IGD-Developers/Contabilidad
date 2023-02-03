@@ -7,44 +7,43 @@ using Dominio.Configuracion;
 using Aplicacion.Seguridad;
 using Microsoft.AspNetCore.Authorization;
 
-namespace WebAPI.Controllers.Configuracion
+namespace WebAPI.Controllers.Configuracion;
+
+[AllowAnonymous]
+[ApiController]
+[Route("api/[controller]")]
+public class UsuariosController : MiControllerBase
 {
-    [AllowAnonymous]
-    [ApiController]
-    [Route("api/[controller]")]
-    public class UsuariosController : MiControllerBase
-    {
-         //extender Nombre del endpoint con "login"
-        // http://localhost:5000/api/Usuarios/login
+     //extender Nombre del endpoint con "login"
+    // http://localhost:5000/api/Usuarios/login
 
-        [HttpPost("login")]
+    [HttpPost("login")]
 
-        public async Task<ActionResult<UsuarioData>> Login(Login.Ejecuta parametros) {
+    public async Task<ActionResult<UsuarioData>> Login(Login.Ejecuta parametros) {
 
-            //Ahora invocamos directamente al manejador  de la Clase Login (que esta en Aplicacion.Seguridad) su public async Task<>
-            // que nos returna el objeto UsuarioData dependiendo de si existe el Usuario:
-            
-            return await Mediator.Send(parametros);
-
+        //Ahora invocamos directamente al manejador  de la Clase Login (que esta en Aplicacion.Seguridad) su public async Task<>
+        // que nos returna el objeto UsuarioData dependiendo de si existe el Usuario:
         
-        }
-        // http://localhost:5000/api/Usuarios/registrar
+        return await Mediator.Send(parametros);
 
-        [HttpPost("registrar")]
+    
+    }
+    // http://localhost:5000/api/Usuarios/registrar
 
-        public async Task<ActionResult<UsuarioData>> Registrar(Registrar.Ejecuta parametros) {
+    [HttpPost("registrar")]
 
-            //Ahora invocamos directamente al manejador  de la Clase Ejecuta (que esta en Aplicacion.Seguridad) su public async Task<>
-            // que nos returna el objeto UsuarioData :
-            
-            return await Mediator.Send(parametros);
+    public async Task<ActionResult<UsuarioData>> Registrar(Registrar.Ejecuta parametros) {
 
-        }
-            // http://localhost:5000/api/Usuarios
+        //Ahora invocamos directamente al manejador  de la Clase Ejecuta (que esta en Aplicacion.Seguridad) su public async Task<>
+        // que nos returna el objeto UsuarioData :
+        
+        return await Mediator.Send(parametros);
 
-        [HttpGet]
-        public async Task<ActionResult<UsuarioData>> DevolverUsuario(){
-            return await Mediator.Send(new UsuarioActual.Ejecuta());
-        }
+    }
+        // http://localhost:5000/api/Usuarios
+
+    [HttpGet]
+    public async Task<ActionResult<UsuarioData>> DevolverUsuario(){
+        return await Mediator.Send(new UsuarioActual.Ejecuta());
     }
 }

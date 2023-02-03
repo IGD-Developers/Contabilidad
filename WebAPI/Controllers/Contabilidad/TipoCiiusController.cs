@@ -8,22 +8,21 @@ using Aplicacion.Contabilidad.TipoCiius;
 using System.Threading.Tasks;
 using Aplicacion.Models.Contabilidad.TipoCiius;
 
-namespace WebAPI.Controllers
+namespace WebAPI.Controllers;
+
+[ApiController]
+[Route("api/[controller]")]
+public class TipoCiiusController : MiControllerBase
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    public class TipoCiiusController : MiControllerBase
-    {
-       
+   
 
-        [HttpGet]
-        public async Task<ActionResult<List<TipoCiiusModel>>>Get(){
-            return await Mediator.Send(new Consulta.ListarTipoCiius());
-        }
+    [HttpGet]
+    public async Task<ActionResult<List<TipoCiiusModel>>>Get(){
+        return await Mediator.Send(new Consulta.ListarTipoCiius());
+    }
 
-        [HttpGet("{Id}")]
-        public async Task<ActionResult<TipoCiiusModel>> Detalle(int Id){
-            return await Mediator.Send(new ConsultaId.ConsultarId{Id = Id});
-        }
+    [HttpGet("{Id}")]
+    public async Task<ActionResult<TipoCiiusModel>> Detalle(int Id){
+        return await Mediator.Send(new ConsultaId.ConsultarId{Id = Id});
     }
 }

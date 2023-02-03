@@ -9,54 +9,53 @@ using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 
-namespace Aplicacion.Contabilidad.Comprobantes
+namespace Aplicacion.Contabilidad.Comprobantes;
 
 
-{
-
-    public class ConsultaId {
-
-    public class ConsultarId: IdComprobanteModel,IRequest<ListarComprobantesModel> 
-    {  }
-
-    public class Manejador :IRequestHandler<ConsultarId,ListarComprobantesModel>{
-
-        private readonly CntContext context;
-        private readonly IMapper _mapper;
 
 
-            public Manejador(CntContext context, IMapper mapper)
-            {
-                this.context = context;
-                _mapper = mapper;
-            }
+public class ConsultaId {
 
-            public async Task<ListarComprobantesModel> Handle(ConsultarId request, CancellationToken cancellationToken)
-            {
-                // var Comprobante = await context.cntComprobantes.FindAsync(request.Id);
-                // if (Comprobante == null) {
-                //     throw new Exception("Registro no encontrado");
-                // };              
-                // return Comprobante;
+public class ConsultarId: IdComprobanteModel,IRequest<ListarComprobantesModel> 
+{  }
 
-                var Comprobante = await context.cntComprobantes
-                .Include(t => t.TipoComprobante)
-                .ThenInclude(ctg => ctg.Categoria)
-                .Include(s => s.Sucursal)
-                .Include(u => u.Usuario)
-                .Include(d => d.ComprobanteDetalleComprobantes)
-                .FirstOrDefaultAsync(cmp => cmp.Id == request.Id);
-                // Nota:la condicion del FirstOrDefaultAsync puede ir en un Where(cmp => cmp.Id == request.Id) 
+public class Manejador :IRequestHandler<ConsultarId,ListarComprobantesModel>{
 
-                if (Comprobante == null) {
-                    throw new Exception("Registro no encontrado");
-                };     
-                var comprobanteDto = _mapper.Map<CntComprobante,ListarComprobantesModel>(Comprobante);         
-                return comprobanteDto;
+    private readonly CntContext context;
+    private readonly IMapper _mapper;
 
-            }
+
+        public Manejador(CntContext context, IMapper mapper)
+        {
+            this.context = context;
+            _mapper = mapper;
         }
 
+        public async Task<ListarComprobantesModel> Handle(ConsultarId request, CancellationToken cancellationToken)
+        {
+            // var Comprobante = await context.cntComprobantes.FindAsync(request.Id);
+            // if (Comprobante == null) {
+            //     throw new Exception("Registro no encontrado");
+            // };              
+            // return Comprobante;
 
-}
+            var Comprobante = await context.cntComprobantes
+            .Include(t => t.TipoComprobante)
+            .ThenInclude(ctg => ctg.Categoria)
+            .Include(s => s.Sucursal)
+            .Include(u => u.Usuario)
+            .Include(d => d.ComprobanteDetalleComprobantes)
+            .FirstOrDefaultAsync(cmp => cmp.Id == request.Id);
+            // Nota:la condicion del FirstOrDefaultAsync puede ir en un Where(cmp => cmp.Id == request.Id) 
+
+            if (Comprobante == null) {
+                throw new Exception("Registro no encontrado");
+            };     
+            var comprobanteDto = _mapper.Map<CntComprobante,ListarComprobantesModel>(Comprobante);         
+            return comprobanteDto;
+
+        }
+    }
+
+
 }

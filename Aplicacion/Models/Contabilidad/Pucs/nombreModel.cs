@@ -1,7 +1,6 @@
-namespace Aplicacion.Models.Contabilidad.Pucs
+namespace Aplicacion.Models.Contabilidad.Pucs;
+
+public class NombreModel
 {
-    public class NombreModel
-    {
-        public string Nombre { get; set; }   
-    }
+    public string Nombre { get; set; }   
 }

@@ -1,9 +1,8 @@
-namespace Aplicacion.Models.Contabilidad.NotaAclaratoriaTipo
+namespace Aplicacion.Models.Contabilidad.NotaAclaratoriaTipo;
+
+public class NotaAclaratoriaTipoModel
 {
-    public class NotaAclaratoriaTipoModel
-    {
-        public int Id { get; set; }
-        public string Codigo { get; set; }
-        public string Nombre { get; set; }
-    }
+    public int Id { get; set; }
+    public string Codigo { get; set; }
+    public string Nombre { get; set; }
 }

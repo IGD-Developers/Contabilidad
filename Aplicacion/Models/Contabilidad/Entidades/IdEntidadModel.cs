@@ -1,7 +1,6 @@
-namespace Aplicacion.Models.Contabilidad.Entidades
+namespace Aplicacion.Models.Contabilidad.Entidades;
+
+public class IdEntidadModel
 {
-    public class IdEntidadModel
-    {
-         public int Id { get; set; }
-    }
+     public int Id { get; set; }
 }

@@ -1,8 +1,7 @@
-namespace Persistencia.DapperConexion
+namespace Persistencia.DapperConexion;
+
+public class ConexionConfiguracion
 {
-    public class ConexionConfiguracion
-    {
-        public string Conexion { get; set; }
-        
-    }
+    public string Conexion { get; set; }
+    
 }
