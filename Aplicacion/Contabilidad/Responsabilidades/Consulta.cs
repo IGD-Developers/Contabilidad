@@ -8,32 +8,31 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Persistencia;
 
-namespace Aplicacion.Contabilidad.Responsabilidades
+namespace Aplicacion.Contabilidad.Responsabilidades;
+
+public class Consulta
 {
-    public class Consulta
+    public class ListarResponsabilidades : IRequest<List<ResponsabilidadModel>>{}
+
+    public class Manejador : IRequestHandler<ListarResponsabilidades, List<ResponsabilidadModel>>
     {
-        public class ListarResponsabilidades : IRequest<List<ResponsabilidadModel>>{}
+        private readonly CntContext _context;
+        private readonly IMapper _mapper;
 
-        public class Manejador : IRequestHandler<ListarResponsabilidades, List<ResponsabilidadModel>>
+        public Manejador(CntContext context, IMapper mapper)
         {
-            private readonly CntContext _context;
-            private readonly IMapper _mapper;
-
-            public Manejador(CntContext context, IMapper mapper)
-            {
-                _context = context;
-                _mapper = mapper;
-            }
-
-            public async Task<List<ResponsabilidadModel>> Handle(ListarResponsabilidades request, CancellationToken cancellationToken)
-            {
-                var responsabilidades = await _context.cntResponsabilidades.ToListAsync();
-                var responsabilidadesModel = _mapper.Map<List<CntResponsabilidad>, List<ResponsabilidadModel>>(responsabilidades);
-
-                return responsabilidadesModel;
-            }
-
-          
+            _context = context;
+            _mapper = mapper;
         }
+
+        public async Task<List<ResponsabilidadModel>> Handle(ListarResponsabilidades request, CancellationToken cancellationToken)
+        {
+            var responsabilidades = await _context.cntResponsabilidades.ToListAsync();
+            var responsabilidadesModel = _mapper.Map<List<CntResponsabilidad>, List<ResponsabilidadModel>>(responsabilidades);
+
+            return responsabilidadesModel;
+        }
+
+      
     }
 }

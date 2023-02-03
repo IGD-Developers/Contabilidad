@@ -1,16 +1,15 @@
 using System.Collections.Generic;
 
-namespace Dominio.Contabilidad
+namespace Dominio.Contabilidad;
+
+public class CntExogenaFormato
+
 {
-    public class CntExogenaFormato
+    public int Id { get; set; }
+    public string Codigo { get; set; }
+    public string Nombre { get; set; }
 
-    {
-        public int Id { get; set; }
-        public string Codigo { get; set; }
-        public string Nombre { get; set; }
+    public ICollection<CntFormatoColumna> ExogenaFormatoFormatoColumnas { get; set; }
 
-        public ICollection<CntFormatoColumna> ExogenaFormatoFormatoColumnas { get; set; }
-
-        public ICollection<CntFormatoConcepto> ExogenaFormatoFormatoConceptos { get; set; }
-    }
+    public ICollection<CntFormatoConcepto> ExogenaFormatoFormatoConceptos { get; set; }
 }

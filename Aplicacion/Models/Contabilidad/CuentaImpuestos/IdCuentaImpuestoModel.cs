@@ -1,7 +1,6 @@
-namespace Aplicacion.Models.Contabilidad.CuentaImpuestos
+namespace Aplicacion.Models.Contabilidad.CuentaImpuestos;
+
+public class IdCuentaImpuestoModel
 {
-    public class IdCuentaImpuestoModel
-    {
-        public int Id { get; set; }
-    }
+    public int Id { get; set; }
 }

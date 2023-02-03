@@ -1,14 +1,13 @@
 using System.Collections.Generic;
 
-namespace Aplicacion.Models.Contabilidad.CategoriaComprobantes
+namespace Aplicacion.Models.Contabilidad.CategoriaComprobantes;
+
+public class ListarCategoriaComprobantesModel
 {
-    public class ListarCategoriaComprobantesModel
-    {
-        public int Id { get; set; }
-        public string Codigo { get; set; }
-        public string Nombre { get; set; }
+    public int Id { get; set; }
+    public string Codigo { get; set; }
+    public string Nombre { get; set; }
 
-        public ICollection<CategoriaTipoComprobantesModel> categoriaTipoComprobantes { get; set; }
+    public ICollection<CategoriaTipoComprobantesModel> categoriaTipoComprobantes { get; set; }
 
-    }
 }

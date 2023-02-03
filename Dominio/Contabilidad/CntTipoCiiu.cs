@@ -1,13 +1,12 @@
 using System.Collections.Generic;
 
-namespace Dominio.Contabilidad
-{
-    public class CntTipoCiiu
-    {
-        public int Id { get; set; }
-        public string Codigo { get; set; }
-        public string Nombre { get; set; }
+namespace Dominio.Contabilidad;
 
-        public ICollection<CntCiiu> TipoCiiuCiiu { get; set; }
-    }
+public class CntTipoCiiu
+{
+    public int Id { get; set; }
+    public string Codigo { get; set; }
+    public string Nombre { get; set; }
+
+    public ICollection<CntCiiu> TipoCiiuCiiu { get; set; }
 }

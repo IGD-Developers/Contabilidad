@@ -5,40 +5,39 @@ using Microsoft.AspNetCore.Mvc;
 using Dominio.Contabilidad;
 using Aplicacion.Contabilidad.Uvts;
 
-namespace WebAPI.Controllers.Contabilidad
+namespace WebAPI.Controllers.Contabilidad;
+
+
+[ApiController]
+[Route("api/[controller]")]
+public class UvtsController: MiControllerBase
 {
+    
 
-    [ApiController]
-    [Route("api/[controller]")]
-    public class UvtsController: MiControllerBase
-    {
-        
+    [HttpGet]
 
-        [HttpGet]
-
-        public async Task<ActionResult<List<CntUvt>>>  Get() {
-            return await Mediator.Send(new Consulta.ListaUvts());
-         }
+    public async Task<ActionResult<List<CntUvt>>>  Get() {
+        return await Mediator.Send(new Consulta.ListaUvts());
+     }
 
 
-        [HttpPost]
-        public async Task<ActionResult<Unit>>Insertar(Insertar.Ejecuta data){
-            return await Mediator.Send(data);
-        }
-
-        [HttpPut]
-        public async Task<ActionResult<Unit>>Editar(Editar.Ejecuta data){
-            return await Mediator.Send(data);
-        }
-
-        [HttpPut("{Id}")]
-
-        public async Task<ActionResult<Unit>>  Editar(int Id, Editar.Ejecuta data) 
-        
-        {
-            data.Id = Id;
-            return await Mediator.Send(data);
-        }
-
+    [HttpPost]
+    public async Task<ActionResult<Unit>>Insertar(Insertar.Ejecuta data){
+        return await Mediator.Send(data);
     }
+
+    [HttpPut]
+    public async Task<ActionResult<Unit>>Editar(Editar.Ejecuta data){
+        return await Mediator.Send(data);
+    }
+
+    [HttpPut("{Id}")]
+
+    public async Task<ActionResult<Unit>>  Editar(int Id, Editar.Ejecuta data) 
+    
+    {
+        data.Id = Id;
+        return await Mediator.Send(data);
+    }
+
 }

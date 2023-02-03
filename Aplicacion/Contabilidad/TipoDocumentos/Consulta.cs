@@ -8,33 +8,32 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Persistencia;
 
-namespace Aplicacion.Contabilidad.TipoDocumentos
+namespace Aplicacion.Contabilidad.TipoDocumentos;
+
+public class Consulta
 {
-    public class Consulta
+    //Clase que representa lista de elementos a retornar desde la db
+    public class ListaTipoDocumentos : IRequest<List<TipoDocumentoModel>>{}
+
+    //Clase para manejar la logica de la operacion
+    //(que va a devolver, formato)
+    public class Manejador : IRequestHandler<ListaTipoDocumentos, List<TipoDocumentoModel>>
     {
-        //Clase que representa lista de elementos a retornar desde la db
-        public class ListaTipoDocumentos : IRequest<List<TipoDocumentoModel>>{}
-
-        //Clase para manejar la logica de la operacion
-        //(que va a devolver, formato)
-        public class Manejador : IRequestHandler<ListaTipoDocumentos, List<TipoDocumentoModel>>
+        private readonly CntContext _context;
+        private readonly IMapper _mapper;
+        public Manejador(CntContext context, IMapper mapper)
         {
-            private readonly CntContext _context;
-            private readonly IMapper _mapper;
-            public Manejador(CntContext context, IMapper mapper)
-            {
-                _context = context;
-                _mapper = mapper;
-            }
+            _context = context;
+            _mapper = mapper;
+        }
 
-            public async Task<List<TipoDocumentoModel>> Handle(ListaTipoDocumentos request, CancellationToken cancellationToken)
-            {
-                var tipoDocumento = await _context.CntTipoDocumentos.ToListAsync();
+        public async Task<List<TipoDocumentoModel>> Handle(ListaTipoDocumentos request, CancellationToken cancellationToken)
+        {
+            var tipoDocumento = await _context.CntTipoDocumentos.ToListAsync();
 
-                var tipodocumentoModel = _mapper.Map<List<CntTipoDocumento>, List<TipoDocumentoModel>>(tipoDocumento);
-                
-                return tipodocumentoModel;
-            }
+            var tipodocumentoModel = _mapper.Map<List<CntTipoDocumento>, List<TipoDocumentoModel>>(tipoDocumento);
+            
+            return tipodocumentoModel;
         }
     }
 }

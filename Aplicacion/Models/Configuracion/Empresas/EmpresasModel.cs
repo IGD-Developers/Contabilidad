@@ -1,10 +1,9 @@
 using Aplicacion.Models.Contabilidad.Tercero;
 
-namespace Aplicacion.Models.Configuracion.Empresas
+namespace Aplicacion.Models.Configuracion.Empresas;
+
+public class EmpresasModel
 {
-    public class EmpresasModel
-    {
-        public string Nit { get; set; }
-        public string RazonSocial { get; set; }
-    }
+    public string Nit { get; set; }
+    public string RazonSocial { get; set; }
 }

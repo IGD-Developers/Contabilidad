@@ -1,7 +1,6 @@
-namespace Aplicacion.Models.Configuracion.Sucursales
+namespace Aplicacion.Models.Configuracion.Sucursales;
+
+public class IdSucursalModel
 {
-    public class IdSucursalModel
-    {
-        public int Id { get; set; }
-    }
+    public int Id { get; set; }
 }

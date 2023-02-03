@@ -1,19 +1,18 @@
 using System;
 using System.Collections.Generic;
 
-namespace Dominio.Contabilidad
+namespace Dominio.Contabilidad;
+
+public class CntCentroCosto
 {
-    public class CntCentroCosto
-    {
 
-        public int Id { get; set; }
-        public string Codigo { get; set; }
-        public string Nombre { get; set; }
-        public string Estado { get; set; }
-        public DateTime? CreatedAt { get; set; }
-        public DateTime? UpdatedAt { get; set; }
+    public int Id { get; set; }
+    public string Codigo { get; set; }
+    public string Nombre { get; set; }
+    public string Estado { get; set; }
+    public DateTime? CreatedAt { get; set; }
+    public DateTime? UpdatedAt { get; set; }
 
-        public ICollection<CntDetalleComprobante> CentroCostoDetalleComprobantes { get; set; }
+    public ICollection<CntDetalleComprobante> CentroCostoDetalleComprobantes { get; set; }
 
-    }
 }
