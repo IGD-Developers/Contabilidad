@@ -1,7 +1,6 @@
-namespace Aplicacion.Models.Contabilidad.LiquidaImpuestos
+namespace Aplicacion.Models.Contabilidad.LiquidaImpuestos;
+
+public class ImpuestoUsuarioModel
 {
-    public class ImpuestoUsuarioModel
-    {
-        
-    }
+    
 }

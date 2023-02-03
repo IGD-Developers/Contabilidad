@@ -10,44 +10,43 @@ using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Aplicacion.Contabilidad.Entidades
+namespace Aplicacion.Contabilidad.Entidades;
+
+public class ConsultaEntidadTipoImpuesto
 {
-    public class ConsultaEntidadTipoImpuesto
+    public class ConsultarEntidadTipoImpuesto : IdEntidadModel, IRequest<List<ListarEntidadesModel>>
+    { }
+
+    public class Manejador : IRequestHandler<ConsultarEntidadTipoImpuesto, List<ListarEntidadesModel>>
     {
-        public class ConsultarEntidadTipoImpuesto : IdEntidadModel, IRequest<List<ListarEntidadesModel>>
-        { }
+        private CntContext _context;
+        private readonly IMapper _mapper;
 
-        public class Manejador : IRequestHandler<ConsultarEntidadTipoImpuesto, List<ListarEntidadesModel>>
+
+
+        public Manejador(CntContext context, IMapper mapper)
         {
-            private CntContext _context;
-            private readonly IMapper _mapper;
+            _context = context;
+            _mapper = mapper;
+        }
 
+        public async Task<List<ListarEntidadesModel>> Handle(ConsultarEntidadTipoImpuesto request, CancellationToken cancellationToken)
+        {
+            var entidadDto = await _context.cntEntidades
+            .Include(t=>t.tercero)
+            .Include(i=>i.tipoImpuesto)
+            .Where(i => i.id_tipoimpuesto == request.Id)
+            .Select(p => _mapper.Map<CntEntidad, ListarEntidadesModel>(p))
+            .ToListAsync();
+            
+            
+             if (entidadDto == null) {
+                throw new Exception("Tipo de Impuesto sin  Entidades ");
+            };
 
-
-            public Manejador(CntContext context, IMapper mapper)
-            {
-                _context = context;
-                _mapper = mapper;
-            }
-
-            public async Task<List<ListarEntidadesModel>> Handle(ConsultarEntidadTipoImpuesto request, CancellationToken cancellationToken)
-            {
-                var entidadDto = await _context.cntEntidades
-                .Include(t=>t.tercero)
-                .Include(i=>i.tipoImpuesto)
-                .Where(i => i.id_tipoimpuesto == request.Id)
-                .Select(p => _mapper.Map<CntEntidad, ListarEntidadesModel>(p))
-                .ToListAsync();
-                
-                
-                 if (entidadDto == null) {
-                    throw new Exception("Tipo de Impuesto sin  Entidades ");
-                };
-
-                //var entidadDto = _mapper.Map<List<CntEntidad>,List<ListarEntidadesModel>>(entidades);
-                
-                return entidadDto;
-            }
+            //var entidadDto = _mapper.Map<List<CntEntidad>,List<ListarEntidadesModel>>(entidades);
+            
+            return entidadDto;
         }
     }
 }

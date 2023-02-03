@@ -1,9 +1,8 @@
-namespace Aplicacion.Models.Contabilidad.Genero
+namespace Aplicacion.Models.Contabilidad.Genero;
+
+public class GeneroModel
 {
-    public class GeneroModel
-    {
-        public int id { get; set; }
-        public string codigo { get; set; }
-        public string nombre { get; set; }
-    }
+    public int id { get; set; }
+    public string codigo { get; set; }
+    public string nombre { get; set; }
 }

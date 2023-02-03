@@ -8,33 +8,32 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Persistencia;
 
-namespace Aplicacion.Contabilidad.Municipios
+namespace Aplicacion.Contabilidad.Municipios;
+
+public class Consulta
 {
-    public class Consulta
+    public class ListarMunicipios : IRequest<List<MunicipioModel>>{}
+
+    public class Manejador : IRequestHandler<ListarMunicipios, List<MunicipioModel>>
     {
-        public class ListarMunicipios : IRequest<List<MunicipioModel>>{}
+        private readonly CntContext _context;
+        private readonly IMapper _mapper;
 
-        public class Manejador : IRequestHandler<ListarMunicipios, List<MunicipioModel>>
+        public Manejador(CntContext context, IMapper mapper)
         {
-            private readonly CntContext _context;
-            private readonly IMapper _mapper;
-
-            public Manejador(CntContext context, IMapper mapper)
-            {
-                _context = context;
-                _mapper = mapper;
-            }
-
-            public async Task<List<MunicipioModel>> Handle(ListarMunicipios request, CancellationToken cancellationToken)
-            {
-                var listarMunicipios = await _context.CntMunucipios
-                                        .Include(d=>d.departamento)
-                                        .ToListAsync();
-                var listarMunicipiosModel = _mapper.Map<List<CntMunicipio>,List<MunicipioModel>>(listarMunicipios);
-                
-                return listarMunicipiosModel;
-            }
+            _context = context;
+            _mapper = mapper;
         }
 
+        public async Task<List<MunicipioModel>> Handle(ListarMunicipios request, CancellationToken cancellationToken)
+        {
+            var listarMunicipios = await _context.CntMunucipios
+                                    .Include(d=>d.departamento)
+                                    .ToListAsync();
+            var listarMunicipiosModel = _mapper.Map<List<CntMunicipio>,List<MunicipioModel>>(listarMunicipios);
+            
+            return listarMunicipiosModel;
+        }
     }
+
 }

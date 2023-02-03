@@ -9,44 +9,43 @@ using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using System;
 
-namespace Aplicacion.Contabilidad.NotaAclaratorias
+namespace Aplicacion.Contabilidad.NotaAclaratorias;
+
+public class ConsultaId
 {
-    public class ConsultaId
+
+    public class ConsultarId : IRequest<ListarNotaAclaratoriaModel>
+    {
+         public int Id { get; set; }
+    }
+
+    public class Manejador : IRequestHandler<ConsultarId, ListarNotaAclaratoriaModel>
     {
 
-        public class ConsultarId : IRequest<ListarNotaAclaratoriaModel>
+        private readonly CntContext _context;
+        private readonly IMapper _mapper;
+
+        public Manejador(CntContext context, IMapper mapper)
         {
-             public int Id { get; set; }
+            _context = context;
+            _mapper = mapper;
         }
 
-        public class Manejador : IRequestHandler<ConsultarId, ListarNotaAclaratoriaModel>
+        public async Task<ListarNotaAclaratoriaModel> Handle(ConsultarId request, CancellationToken cancellationToken)
         {
-
-            private readonly CntContext _context;
-            private readonly IMapper _mapper;
-
-            public Manejador(CntContext context, IMapper mapper)
-            {
-                _context = context;
-                _mapper = mapper;
+            var notaAclaratoria = await _context.cntNotaAclaratorias
+            .Include(t => t.notaAclaratoriaTipo)
+            .Include(c => c.cntPuct)
+            .FirstOrDefaultAsync(x => x.id == request.Id);               
+                                        
+            if(notaAclaratoria == null){
+                throw new Exception("NOTA ACLARATORIA NO EXISTE");
             }
 
-            public async Task<ListarNotaAclaratoriaModel> Handle(ConsultarId request, CancellationToken cancellationToken)
-            {
-                var notaAclaratoria = await _context.cntNotaAclaratorias
-                .Include(t => t.notaAclaratoriaTipo)
-                .Include(c => c.cntPuct)
-                .FirstOrDefaultAsync(x => x.id == request.Id);               
-                                            
-                if(notaAclaratoria == null){
-                    throw new Exception("NOTA ACLARATORIA NO EXISTE");
-                }
+            var notaAclaratoriasModel = _mapper.Map<CntNotaAclaratoria, ListarNotaAclaratoriaModel>(notaAclaratoria);
 
-                var notaAclaratoriasModel = _mapper.Map<CntNotaAclaratoria, ListarNotaAclaratoriaModel>(notaAclaratoria);
-
-                return notaAclaratoriasModel;
-            }
+            return notaAclaratoriasModel;
         }
-
     }
+
 }

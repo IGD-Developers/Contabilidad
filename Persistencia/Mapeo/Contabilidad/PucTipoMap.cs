@@ -2,21 +2,20 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Dominio.Contabilidad;
 
-namespace Persistencia.Mapeo.Contabilidad
+namespace Persistencia.Mapeo.Contabilidad;
+
+public class PucTipoMap : IEntityTypeConfiguration<CntPucTipo>
 {
-    public class PucTipoMap : IEntityTypeConfiguration<CntPucTipo>
+    public void Configure(EntityTypeBuilder<CntPucTipo> builder)
     {
-        public void Configure(EntityTypeBuilder<CntPucTipo> builder)
-        {
-            builder.ToTable("cnt_puctipo")
-                .HasKey(entity => entity.id);
+        builder.ToTable("cnt_puctipo")
+            .HasKey(entity => entity.id);
 
-            builder
-                .Property(b => b.created_at);      
+        builder
+            .Property(b => b.created_at);      
 
-        }
-
-
-              
     }
+
+
+          
 }

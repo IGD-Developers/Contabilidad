@@ -7,37 +7,36 @@ using Dominio.Contabilidad;
 using MediatR;
 using Persistencia;
 
-namespace Aplicacion.Contabilidad.Departamentos
+namespace Aplicacion.Contabilidad.Departamentos;
+
+public class ConsultaId
 {
-    public class ConsultaId
+    //TODO:AGGD-ACTUALIZAR
+    public class ConsultarId : IRequest<DepartamentosModel>{
+        public int Id {get; set;}
+    }
+
+    public class Manejador : IRequestHandler<ConsultarId, DepartamentosModel>
     {
-        //TODO:AGGD-ACTUALIZAR
-        public class ConsultarId : IRequest<DepartamentosModel>{
-            public int Id {get; set;}
+        private readonly CntContext _context;
+        private readonly IMapper _mapper;
+
+        public Manejador(CntContext context, IMapper mapper)
+        {
+            _context = context;
+            _mapper = mapper;
         }
 
-        public class Manejador : IRequestHandler<ConsultarId, DepartamentosModel>
+        public async Task<DepartamentosModel> Handle(ConsultarId request, CancellationToken cancellationToken)
         {
-            private readonly CntContext _context;
-            private readonly IMapper _mapper;
+            var departamentos = await _context.CntDepartamentos.FindAsync(request.Id);
 
-            public Manejador(CntContext context, IMapper mapper)
-            {
-                _context = context;
-                _mapper = mapper;
+            if(departamentos == null){
+                throw new Exception("Departamento Consultado no Existe");
             }
 
-            public async Task<DepartamentosModel> Handle(ConsultarId request, CancellationToken cancellationToken)
-            {
-                var departamentos = await _context.CntDepartamentos.FindAsync(request.Id);
-
-                if(departamentos == null){
-                    throw new Exception("Departamento Consultado no Existe");
-                }
-
-                var departamentosModel = _mapper.Map<CntDepartamento, DepartamentosModel>(departamentos);
-                return departamentosModel;
-            }
+            var departamentosModel = _mapper.Map<CntDepartamento, DepartamentosModel>(departamentos);
+            return departamentosModel;
         }
     }
 }

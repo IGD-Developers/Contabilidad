@@ -8,24 +8,23 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Persistencia;
 
-namespace WebAPI.Controllers
+namespace WebAPI.Controllers;
+
+[ApiController]
+[Route("api/[controller]")]
+public class DepartamentosController : MiControllerBase
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    public class DepartamentosController : MiControllerBase
-    {
-      
-        [HttpGet]
-        public async Task<ActionResult<List<DepartamentosModel>>>Get(){
-            return await Mediator.Send(new Consulta.ListaDepartamentos());
-        }
-
-        [HttpGet("{id}")]
-        public async Task<ActionResult<DepartamentosModel>>Detalle(int id){
-            return await Mediator.Send(new ConsultaId.ConsultarId{Id = id});
-        }
-
-
-        
+  
+    [HttpGet]
+    public async Task<ActionResult<List<DepartamentosModel>>>Get(){
+        return await Mediator.Send(new Consulta.ListaDepartamentos());
     }
+
+    [HttpGet("{id}")]
+    public async Task<ActionResult<DepartamentosModel>>Detalle(int id){
+        return await Mediator.Send(new ConsultaId.ConsultarId{Id = id});
+    }
+
+
+    
 }

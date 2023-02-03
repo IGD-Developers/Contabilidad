@@ -7,37 +7,36 @@ using Dominio.Contabilidad;
 using MediatR;
 using Persistencia;
 
-namespace Aplicacion.Contabilidad.TipoCiius
+namespace Aplicacion.Contabilidad.TipoCiius;
+
+public class ConsultaId
 {
-    public class ConsultaId
+    public class ConsultarId : IRequest<TipoCiiusModel>{
+        public int Id;
+    }
+
+    public class Manejador : IRequestHandler<ConsultarId, TipoCiiusModel>
     {
-        public class ConsultarId : IRequest<TipoCiiusModel>{
-            public int Id;
+        private readonly CntContext _context;
+        private readonly IMapper _mapper;
+
+        public Manejador(CntContext context, IMapper mapper)
+        {
+            _context = context;
+            _mapper = mapper;
         }
 
-        public class Manejador : IRequestHandler<ConsultarId, TipoCiiusModel>
+        public async Task<TipoCiiusModel> Handle(ConsultarId request, CancellationToken cancellationToken)
         {
-            private readonly CntContext _context;
-            private readonly IMapper _mapper;
+            var consultaId = await _context.cntTipoCiius.FindAsync(request.Id);
 
-            public Manejador(CntContext context, IMapper mapper)
-            {
-                _context = context;
-                _mapper = mapper;
+            if(consultaId==null){
+                throw new Exception("TIPO CIIUS CONSULTADO NO EXISTE");
             }
 
-            public async Task<TipoCiiusModel> Handle(ConsultarId request, CancellationToken cancellationToken)
-            {
-                var consultaId = await _context.cntTipoCiius.FindAsync(request.Id);
+            var consultaIdModel = _mapper.Map<CntTipoCiiu, TipoCiiusModel>(consultaId);
 
-                if(consultaId==null){
-                    throw new Exception("TIPO CIIUS CONSULTADO NO EXISTE");
-                }
-
-                var consultaIdModel = _mapper.Map<CntTipoCiiu, TipoCiiusModel>(consultaId);
-
-                return consultaIdModel;
-            }
+            return consultaIdModel;
         }
     }
 }

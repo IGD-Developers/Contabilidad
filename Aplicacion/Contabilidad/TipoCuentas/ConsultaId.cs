@@ -5,37 +5,36 @@ using System.Threading;
 using Dominio.Contabilidad;
 using System;
 
-namespace Aplicacion.Contabilidad.TipoCuentas
+namespace Aplicacion.Contabilidad.TipoCuentas;
+
+public class ConsultaId
 {
-    public class ConsultaId
+
+    public class ConsultarId : IRequest<CntTipoCuenta>
+    {
+        public int Id { get; set; }
+    }
+
+    public class Manejador : IRequestHandler<ConsultarId, CntTipoCuenta>
     {
 
-        public class ConsultarId : IRequest<CntTipoCuenta>
+        private readonly CntContext context;
+
+        public Manejador(CntContext context)
         {
-            public int Id { get; set; }
+            this.context = context;
         }
 
-        public class Manejador : IRequestHandler<ConsultarId, CntTipoCuenta>
+        public async Task<CntTipoCuenta> Handle(ConsultarId request, CancellationToken cancellationToken)
         {
 
-            private readonly CntContext context;
+            var tipoCuenta = await context.cntTipoCuentas.FindAsync(request.Id);
+            if (tipoCuenta == null) {  
+                    throw new Exception("Registro no encontrado");
+            };                   
 
-            public Manejador(CntContext context)
-            {
-                this.context = context;
-            }
-
-            public async Task<CntTipoCuenta> Handle(ConsultarId request, CancellationToken cancellationToken)
-            {
-
-                var tipoCuenta = await context.cntTipoCuentas.FindAsync(request.Id);
-                if (tipoCuenta == null) {  
-                        throw new Exception("Registro no encontrado");
-                };                   
-
-                return tipoCuenta;
-            }
+            return tipoCuenta;
         }
-
     }
+
 }

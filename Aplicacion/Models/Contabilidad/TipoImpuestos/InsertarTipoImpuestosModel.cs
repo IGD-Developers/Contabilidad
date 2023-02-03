@@ -1,8 +1,7 @@
-namespace Aplicacion.Models.Contabilidad.TipoImpuestos
+namespace Aplicacion.Models.Contabilidad.TipoImpuestos;
+
+public class InsertarTipoImpuestosModel
 {
-    public class InsertarTipoImpuestosModel
-    {
-        public string codigo { get; set; }
-        public string nombre { get; set; }
-    }
+    public string codigo { get; set; }
+    public string nombre { get; set; }
 }
