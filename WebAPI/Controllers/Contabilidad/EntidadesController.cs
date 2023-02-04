@@ -2,11 +2,12 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Aplicacion.Contabilidad.Entidades;
 using Aplicacion.Models.Contabilidad.Entidades;
+using ContabilidadWebAPI.Controllers;
 using Dominio.Contabilidad;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
-namespace WebAPI.Controllers.Contabilidad;
+namespace ContabilidadWebAPI.Controllers.Contabilidad;
 
 
 [ApiController]
@@ -31,11 +32,11 @@ public class EntidadesController : MiControllerBase
     }
 
 
-[HttpGet("getfiltrotipo")]
-    public async Task<ActionResult<List<ListarEntidadesModel>>>  GetFiltroTipo(ConsultaEntidadTipoImpuesto.ConsultarEntidadTipoImpuesto data)
+    [HttpGet("getfiltrotipo")]
+    public async Task<ActionResult<List<ListarEntidadesModel>>> GetFiltroTipo(ConsultaEntidadTipoImpuesto.ConsultarEntidadTipoImpuesto data)
     {
         //var filtrado = new FiltroLiquidaImpuestosModel{IdSucursal=filtro.IdSucursal,FechaFinal=filtro.FechaFinal};
-       
+
         return await Mediator.Send(data);
 
     }

@@ -3,26 +3,29 @@ using System.Linq;
 using System.Threading.Tasks;
 using Aplicacion.Contabilidad.Regimenes;
 using Aplicacion.Models.Contabilidad.Regimen;
+using ContabilidadWebAPI.Controllers;
 using Dominio.Contabilidad;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Persistencia;
 
-namespace WebAPI.Controllers;
+namespace ContabilidadWebAPI.Controllers.Contabilidad;
 
 [ApiController]
 [Route("api/[controller]")]
 public class RegimenesController : MiControllerBase
 {
-    
+
     [HttpGet]
-    public async Task<ActionResult<List<RegimenModel>>>Get(){
+    public async Task<ActionResult<List<RegimenModel>>> Get()
+    {
         return await Mediator.Send(new Consulta.ListarRegimenes());
     }
 
     [HttpGet("{Id}")]
-    public async Task<ActionResult<RegimenModel>>Detalle(int Id){
-        return await Mediator.Send(new ConsultaId.ConsultarId{Id = Id});
+    public async Task<ActionResult<RegimenModel>> Detalle(int Id)
+    {
+        return await Mediator.Send(new ConsultaId.ConsultarId { Id = Id });
     }
-    
+
 }

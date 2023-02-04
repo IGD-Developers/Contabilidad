@@ -5,15 +5,16 @@ using Microsoft.AspNetCore.Mvc;
 using Aplicacion.Contabilidad.NotaAclaratorias;
 using Dominio.Contabilidad;
 using Aplicacion.Models.Contabilidad.NotaAclaratoria;
+using ContabilidadWebAPI.Controllers;
 
-namespace WebAPI.Controllers.Contabilidad;
+namespace ContabilidadWebAPI.Controllers.Contabilidad;
 
 
 [ApiController]
 [Route("api/[controller]")]
 public class NotaAclaratoriasController : MiControllerBase
 {
-    
+
     [HttpGet]
     public async Task<ActionResult<List<ListarNotaAclaratoriaModel>>> Get()
     {
@@ -29,25 +30,29 @@ public class NotaAclaratoriasController : MiControllerBase
     }
 
     [HttpPost]
-    public async Task<ActionResult<Unit>>Insertar(Insertar.Ejecuta data){
+    public async Task<ActionResult<Unit>> Insertar(Insertar.Ejecuta data)
+    {
         return await Mediator.Send(data);
     }
 
     [HttpPut("editar/{Id}")]
-    public async Task<ActionResult<Unit>>Editar(int Id, Editar.Ejecuta data){
+    public async Task<ActionResult<Unit>> Editar(int Id, Editar.Ejecuta data)
+    {
         data.Id = Id;
         return await Mediator.Send(data);
     }
 
     [HttpDelete("eliminar/{Id}")]
-    public async Task<ActionResult<Unit>>Eliminar(int Id, Eliminar.Ejecuta data){
+    public async Task<ActionResult<Unit>> Eliminar(int Id, Eliminar.Ejecuta data)
+    {
         data.Id = Id;
         return await Mediator.Send(data);
 
     }
 
     [HttpPut("cambiarestado/{Id}")]
-    public async Task<ActionResult<Unit>>CambiarEstado(int Id, ActivarInactivar.Ejecuta data){
+    public async Task<ActionResult<Unit>> CambiarEstado(int Id, ActivarInactivar.Ejecuta data)
+    {
         data.Id = Id;
         return await Mediator.Send(data);
     }

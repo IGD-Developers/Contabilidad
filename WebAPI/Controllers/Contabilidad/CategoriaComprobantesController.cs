@@ -8,8 +8,9 @@ using Dominio.Contabilidad;
 using Aplicacion.Contabilidad.CategoriaComprobantes;
 using Microsoft.AspNetCore.Authorization;
 using Aplicacion.Models.Contabilidad.CategoriaComprobantes;
+using ContabilidadWebAPI.Controllers;
 
-namespace WebAPI.Controllers.Contabilidad;
+namespace ContabilidadWebAPI.Controllers.Contabilidad;
 
 [ApiController]
 [Route("api/[controller]")]
@@ -27,7 +28,7 @@ public class CategoriaComprobantesController : MiControllerBase
     // }
 
     [HttpGet]
-   // [Authorize]
+    // [Authorize]
 
     public async Task<ActionResult<List<ListarCategoriaComprobantesModel>>> Get()
     {
@@ -61,8 +62,8 @@ public class CategoriaComprobantesController : MiControllerBase
 
     [HttpPut("{Id}")]
 
-    public async Task<ActionResult<Unit>>  Editar(int Id, Editar.Ejecuta data) 
-    
+    public async Task<ActionResult<Unit>> Editar(int Id, Editar.Ejecuta data)
+
     {
         data.Id = Id;
         return await Mediator.Send(data);

@@ -5,8 +5,9 @@ using System.Threading.Tasks;
 using Dominio.Contabilidad;
 using Aplicacion.Contabilidad.CentroCostos;
 using Aplicacion.Models.Contabilidad.CentroCostos;
+using ContabilidadWebAPI.Controllers;
 
-namespace WebAPI.Controllers.Contabilidad;
+namespace ContabilidadWebAPI.Controllers.Contabilidad;
 
 
 [ApiController]

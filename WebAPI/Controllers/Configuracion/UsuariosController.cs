@@ -7,7 +7,7 @@ using Dominio.Configuracion;
 using Aplicacion.Seguridad;
 using Microsoft.AspNetCore.Authorization;
 
-namespace WebAPI.Controllers.Configuracion;
+namespace ContabilidadWebAPI.Controllers.Configuracion;
 
 [AllowAnonymous]
 [ApiController]

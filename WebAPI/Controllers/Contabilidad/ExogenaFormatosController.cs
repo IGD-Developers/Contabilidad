@@ -4,8 +4,9 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Aplicacion.Contabilidad.ExogenaFormatos;
 using Dominio.Contabilidad;
+using ContabilidadWebAPI.Controllers;
 
-namespace WebAPI.Controllers.Contabilidad;
+namespace ContabilidadWebAPI.Controllers.Contabilidad;
 
 
 [ApiController]
@@ -32,7 +33,7 @@ public class ExogenaFormatosController : MiControllerBase
 
     [HttpPost]
 
-    public async Task<ActionResult<Unit>>  Insertar(Insertar.Ejecuta data)
+    public async Task<ActionResult<Unit>> Insertar(Insertar.Ejecuta data)
 
     {
 
@@ -41,8 +42,8 @@ public class ExogenaFormatosController : MiControllerBase
 
     [HttpPut("{Id}")]
 
-    public async Task<ActionResult<Unit>>  Editar(int Id, Editar.Ejecuta data) 
-    
+    public async Task<ActionResult<Unit>> Editar(int Id, Editar.Ejecuta data)
+
     {
         data.Id = Id;
         return await Mediator.Send(data);

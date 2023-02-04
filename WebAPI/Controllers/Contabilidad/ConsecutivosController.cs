@@ -4,15 +4,16 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using Aplicacion.Contabilidad.Consecutivos;
 using Dominio.Contabilidad;
+using ContabilidadWebAPI.Controllers;
 
-namespace WebAPI.Controllers.Contabilidad;
+namespace ContabilidadWebAPI.Controllers.Contabilidad;
 
 [ApiController]
 [Route("api/[controller]")]
 public class ConsecutivosController : MiControllerBase
 {
 
-   
+
     [HttpGet]
     public async Task<ActionResult<List<CntConsecutivo>>> Get()
 
@@ -23,7 +24,7 @@ public class ConsecutivosController : MiControllerBase
 
     [HttpPost]
 
-    public async Task<ActionResult<CntConsecutivo>>  Insertar(Insertar.Ejecuta data)
+    public async Task<ActionResult<CntConsecutivo>> Insertar(Insertar.Ejecuta data)
     {
 
         return await Mediator.Send(data);
@@ -38,8 +39,8 @@ public class ConsecutivosController : MiControllerBase
 
     [HttpPut("{Id}")]
 
-    public async Task<ActionResult<Unit>>  Editar(int Id, Editar.Ejecuta data) 
-    
+    public async Task<ActionResult<Unit>> Editar(int Id, Editar.Ejecuta data)
+
     {
         data.Id = Id;
         return await Mediator.Send(data);

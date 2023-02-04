@@ -4,8 +4,9 @@ using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using Dominio.Contabilidad;
 using Aplicacion.Contabilidad.Anos;
+using ContabilidadWebAPI.Controllers;
 
-namespace WebAPI.Controllers.Contabilidad;
+namespace ContabilidadWebAPI.Controllers.Contabilidad;
 
 
 [ApiController]

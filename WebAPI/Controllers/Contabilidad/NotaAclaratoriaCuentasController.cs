@@ -4,8 +4,9 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Aplicacion.Contabilidad.NotaAclaratoriaCuentas;
 using Dominio.Contabilidad;
+using ContabilidadWebAPI.Controllers;
 
-namespace WebAPI.Controllers.Contabilidad;
+namespace ContabilidadWebAPI.Controllers.Contabilidad;
 
 
 
@@ -14,7 +15,7 @@ namespace WebAPI.Controllers.Contabilidad;
 
 public class NotaAclaratoriaCuentasController : MiControllerBase
 {
-   
+
     [HttpGet]
     public async Task<ActionResult<List<CntNotaAclaratoriaCuenta>>> Get()
     {
@@ -24,12 +25,14 @@ public class NotaAclaratoriaCuentasController : MiControllerBase
     }
 
     [HttpPost]
-    public async Task<ActionResult<Unit>> Insertar(Insertar.Ejecuta dato){
+    public async Task<ActionResult<Unit>> Insertar(Insertar.Ejecuta dato)
+    {
         return await Mediator.Send(dato);
     }
 
     [HttpPut]
-    public async Task<ActionResult<Unit>> Editar(Editar.Ejecuta dato){
+    public async Task<ActionResult<Unit>> Editar(Editar.Ejecuta dato)
+    {
         return await Mediator.Send(dato);
     }
 

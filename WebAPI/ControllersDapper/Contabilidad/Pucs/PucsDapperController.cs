@@ -6,31 +6,33 @@ using Persistencia.DapperConexion.Contabilidad.Pucs;
 using Aplicacion.Dapper.Contabilidad.PucsDapper;
 using System;
 using MediatR;
+using ContabilidadWebAPI.Controllers;
 
-namespace WebAPI.ControllersDapper.Contabilidad.Pucs;
+namespace ContabilidadWebAPI.ControllersDapper.Contabilidad.Pucs;
 
 
 
 [ApiController]
 [Route("api/[controller]")]
-public class PucsDapperController: Controllers.MiControllerBase
+public class PucsDapperController : MiControllerBase
 {
-    
+
     [HttpGet]
     public async Task<ActionResult<List<PucRepositorioModel>>> ObtenerPucsDapper()
     {
 
         return await Mediator.Send(new ConsultaDapper.Lista());
-        
+
 
     }
 
     [HttpPost]
-    public async Task<ActionResult<Unit>> Insertar(InsertarDapper.Ejecuta data) {
+    public async Task<ActionResult<Unit>> Insertar(InsertarDapper.Ejecuta data)
+    {
 
         return await Mediator.Send(data);
     }
 
-   
 
-}   
+
+}

@@ -3,28 +3,31 @@ using System.Linq;
 using System.Threading.Tasks;
 using Aplicacion.Contabilidad.TipoDocumentos;
 using Aplicacion.Models.Contabilidad.TipoDocumento;
+using ContabilidadWebAPI.Controllers;
 using Dominio.Contabilidad;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Persistencia;
 
-namespace WebAPI.Controllers;
+namespace ContabilidadWebAPI.Controllers.Contabilidad;
 
 [ApiController]
 [Route("api/[controller]")]
 public class TipoDocumentosController : MiControllerBase
 {
- 
+
 
     //http://localhost:5000/api/CntTipoDocumentos
     [HttpGet]
-    public async Task<ActionResult<List<TipoDocumentoModel>>> Get(){
+    public async Task<ActionResult<List<TipoDocumentoModel>>> Get()
+    {
         return await Mediator.Send(new Consulta.ListaTipoDocumentos());
     }
 
     //http://localhost:5000/api/CntTipoDocumentos/1
     [HttpGet("{Id}")]
-    public async Task<ActionResult<TipoDocumentoModel>> Get(int Id){
-        return await Mediator.Send(new ConsultaId.ConsultarTipoDocumentoId{Id = Id});
+    public async Task<ActionResult<TipoDocumentoModel>> Get(int Id)
+    {
+        return await Mediator.Send(new ConsultaId.ConsultarTipoDocumentoId { Id = Id });
     }
 }

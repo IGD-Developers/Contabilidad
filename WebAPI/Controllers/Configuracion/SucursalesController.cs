@@ -6,7 +6,7 @@ using Dominio.Configuracion;
 using Aplicacion.Configuracion.Sucursales;
 using Aplicacion.Models.Configuracion.Sucursales;
 
-namespace WebAPI.Controllers.Configuracion;
+namespace ContabilidadWebAPI.Controllers.Configuracion;
 
 [ApiController]
 [Route("api/[controller]")]

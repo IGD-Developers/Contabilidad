@@ -4,26 +4,29 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Aplicacion.Contabilidad.FormatoConceptos;
 using Dominio.Contabilidad;
+using ContabilidadWebAPI.Controllers;
 
-namespace WebAPI.Controllers;
+namespace ContabilidadWebAPI.Controllers.Contabilidad;
 
 
 [ApiController]
 [Route("api/[controller]")]
-public class FormatoConceptosController: MiControllerBase
+public class FormatoConceptosController : MiControllerBase
 {
 
-   
+
     [HttpGet]
-    public async Task<ActionResult<List<CntFormatoConcepto>>> Get() {
+    public async Task<ActionResult<List<CntFormatoConcepto>>> Get()
+    {
 
         return await Mediator.Send(new Consulta.ListaCntFormatoConceptos());
-       
+
     }
     [HttpGet("{Id}")]
 
-    public async Task<ActionResult<CntFormatoConcepto>> GetId(int Id) {
-        return await Mediator.Send(new ConsultaId.ConsultarId{Id=Id});
+    public async Task<ActionResult<CntFormatoConcepto>> GetId(int Id)
+    {
+        return await Mediator.Send(new ConsultaId.ConsultarId { Id = Id });
     }
 
     [HttpPost]
@@ -35,8 +38,8 @@ public class FormatoConceptosController: MiControllerBase
 
     [HttpPut("{Id}")]
 
-    public async Task<ActionResult<Unit>>  Editar(int Id, Editar.Ejecuta data) 
-    
+    public async Task<ActionResult<Unit>> Editar(int Id, Editar.Ejecuta data)
+
     {
         data.Id = Id;
         return await Mediator.Send(data);

@@ -6,8 +6,9 @@ using Microsoft.AspNetCore.Mvc;
 using Aplicacion.Contabilidad.NotaAclaratoriaTipos;
 using Dominio.Contabilidad;
 using Aplicacion.Models.Contabilidad.NotaAclaratoriaTipo;
+using ContabilidadWebAPI.Controllers;
 
-namespace WebAPI.Controllers.Contabilidad;
+namespace ContabilidadWebAPI.Controllers.Contabilidad;
 
 
 [ApiController]
@@ -36,7 +37,8 @@ public class NotaAclaratoriaTiposController : MiControllerBase
     }
 
     [HttpPut]
-    public async Task<ActionResult<Unit>> Editar(Editar.Ejecuta dato){
+    public async Task<ActionResult<Unit>> Editar(Editar.Ejecuta dato)
+    {
         return await Mediator.Send(dato);
     }
 

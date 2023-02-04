@@ -6,8 +6,9 @@ using Aplicacion.Contabilidad.Pucs;
 //using Dominio.Contabilidad;
 using System;
 using Aplicacion.Models.Contabilidad.Pucs;
+using ContabilidadWebAPI.Controllers;
 
-namespace WebAPI.Controllers.Contabilidad;
+namespace ContabilidadWebAPI.Controllers.Contabilidad;
 
 
 [ApiController]
@@ -17,7 +18,7 @@ public class PucsController : MiControllerBase
 
 
 {
-    
+
     [HttpGet]
 
     public async Task<ActionResult<List<ListarPucModel>>> Get()
@@ -37,25 +38,26 @@ public class PucsController : MiControllerBase
 
     [HttpPost]
 
-    public async Task<ActionResult<Unit>> Insertar(Insertar.Ejecuta data) {
+    public async Task<ActionResult<Unit>> Insertar(Insertar.Ejecuta data)
+    {
 
         return await Mediator.Send(data);
     }
     [HttpPut("{Id}")]
 
-    public async Task<ActionResult<Unit>>  Editar(int Id, Editar.Ejecuta data) 
-    
+    public async Task<ActionResult<Unit>> Editar(int Id, Editar.Ejecuta data)
+
     {
         data.Id = Id;
         return await Mediator.Send(data);
-    }  
+    }
 
-     [HttpDelete("{Id}")]
+    [HttpDelete("{Id}")]
 
-    public async Task<ActionResult<Unit>>  Eliminar(int Id) 
-    
+    public async Task<ActionResult<Unit>> Eliminar(int Id)
+
     {
-         return await Mediator.Send(new Eliminar.Ejecuta{Id = Id});
-    }        
+        return await Mediator.Send(new Eliminar.Ejecuta { Id = Id });
+    }
 
 }

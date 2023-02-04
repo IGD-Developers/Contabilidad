@@ -9,7 +9,7 @@ using Dominio.Configuracion;
 using Microsoft.AspNetCore.Authorization;
 using Aplicacion.Models.Configuracion.Empresas;
 
-namespace WebAPI.Controllers.Configuracion;
+namespace ContabilidadWebAPI.Controllers.Configuracion;
 
 
 

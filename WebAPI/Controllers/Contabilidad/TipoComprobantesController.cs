@@ -6,14 +6,15 @@ using System.Threading.Tasks;
 using Aplicacion.Contabilidad.TipoComprobantes;
 using Dominio.Contabilidad;
 using Aplicacion.Models.Contabilidad.TipoComprobantes;
+using ContabilidadWebAPI.Controllers;
 
-namespace WebAPI.Controllers.Contabilidad;
+namespace ContabilidadWebAPI.Controllers.Contabilidad;
 
 [ApiController]
 [Route("api/[controller]")]
 public class TipoComprobantesController : MiControllerBase
 {
-    
+
 
     [HttpGet]
     public async Task<ActionResult<List<ListarTipoComprobanteModel>>> Get()
@@ -37,17 +38,18 @@ public class TipoComprobantesController : MiControllerBase
 
     [HttpPost]
 
-    public async  Task<ActionResult<Unit>> Insertar(Insertar.Ejecuta data) {
+    public async Task<ActionResult<Unit>> Insertar(Insertar.Ejecuta data)
+    {
 
         return await Mediator.Send(data);
 
 
     }
 
-     [HttpPut("{Id}")]
+    [HttpPut("{Id}")]
 
-    public async Task<ActionResult<Unit>>  Editar(int Id, Editar.Ejecuta data) 
-    
+    public async Task<ActionResult<Unit>> Editar(int Id, Editar.Ejecuta data)
+
     {
         data.Id = Id;
         return await Mediator.Send(data);

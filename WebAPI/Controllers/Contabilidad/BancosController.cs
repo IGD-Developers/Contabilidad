@@ -2,11 +2,12 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Aplicacion.Contabilidad.Bancos;
 using Aplicacion.Models.Contabilidad.Bancos;
+using ContabilidadWebAPI.Controllers;
 using Dominio.Contabilidad;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
-namespace WebAPI.Controllers.Contabilidad;
+namespace ContabilidadWebAPI.Controllers.Contabilidad;
 
 
 [ApiController]

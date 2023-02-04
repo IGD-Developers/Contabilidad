@@ -5,22 +5,25 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Aplicacion.Contabilidad.Responsabilidades;
 using Aplicacion.Models.Contabilidad.Responsabilidad;
+using ContabilidadWebAPI.Controllers;
 
-namespace WebAPI.Controllers;
+namespace ContabilidadWebAPI.Controllers.Contabilidad;
 
 [ApiController]
 [Route("api/[controller]")]
 public class ResponsabilidadesController : MiControllerBase
 {
-   
+
     [HttpGet]
-    public async Task<ActionResult<List<ResponsabilidadModel>>> Get(){
+    public async Task<ActionResult<List<ResponsabilidadModel>>> Get()
+    {
         return await Mediator.Send(new Consulta.ListarResponsabilidades());
     }
 
     [HttpGet("{Id}")]
-    public async Task<ActionResult<ResponsabilidadModel>> GetId(int Id){
-        return await Mediator.Send(new ConsultaId.ConsultarId{Id = Id});
+    public async Task<ActionResult<ResponsabilidadModel>> GetId(int Id)
+    {
+        return await Mediator.Send(new ConsultaId.ConsultarId { Id = Id });
 
     }
 }

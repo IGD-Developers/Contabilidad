@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 using Aplicacion.Contabilidad.LiquidaImpuestos;
 using Aplicacion.Models.Contabilidad.LiquidaImpuestos;
 using MediatR;
+using ContabilidadWebAPI.Controllers;
 
-
-namespace WebAPI.Controllers.Contabilidad;
+namespace ContabilidadWebAPI.Controllers.Contabilidad;
 
 
 
@@ -33,13 +33,13 @@ public class LiquidaImpuestosController : MiControllerBase
         return await Mediator.Send(new ConsultaId.ConsultarId { Id = Id });
 
     }
-   
-   
+
+
 
     [HttpGet("getfiltro")]
     public async Task<ActionResult<List<ListarLiquidaImpuestosModel>>> GetFiltro(Consulta.ListaCntLiquidaImpuestos data)
     {
-       
+
         return await Mediator.Send(data);
 
     }
@@ -49,11 +49,11 @@ public class LiquidaImpuestosController : MiControllerBase
     [HttpGet("getdata")]
     public async Task<ActionResult<List<ListarDetallesPreLiquidacionImpuestoModel>>> GetData(ConsultaPreLiquidacion.ConsultarPreLiquidacion data)
     {
-       
+
         return await Mediator.Send(data);
 
     }
-    
+
     // [HttpPost]
 
     // public async Task<ActionResult<Unit>> Insertar(Insertar.Ejecuta data)

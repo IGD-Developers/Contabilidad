@@ -12,7 +12,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Persistencia;
 
-namespace WebAPI;
+namespace ContabilidadWebAPI;
 
 public class Program
 {

@@ -5,8 +5,9 @@ using System.Collections.Generic;
 using Aplicacion.Contabilidad.TipoImpuestos;
 using Dominio.Contabilidad;
 using Aplicacion.Models.Contabilidad.TipoImpuestos;
+using ContabilidadWebAPI.Controllers;
 
-namespace WebAPI.Controllers.Contabilidad;
+namespace ContabilidadWebAPI.Controllers.Contabilidad;
 
 
 [ApiController]
@@ -14,7 +15,7 @@ namespace WebAPI.Controllers.Contabilidad;
 
 public class TipoImpuestosController : MiControllerBase
 {
-   
+
 
     [HttpGet]
 
@@ -38,20 +39,20 @@ public class TipoImpuestosController : MiControllerBase
 
     [HttpPost]
 
-    public async Task<ActionResult<Unit>>  Insertar(Insertar.Ejecuta data)
+    public async Task<ActionResult<Unit>> Insertar(Insertar.Ejecuta data)
     {
         return await Mediator.Send(data);
     }
 
     [HttpPut("{Id}")]
 
-    public async Task<ActionResult<Unit>>  Editar(int Id, Editar.Ejecuta data) 
-    
+    public async Task<ActionResult<Unit>> Editar(int Id, Editar.Ejecuta data)
+
     {
         data.Id = Id;
         return await Mediator.Send(data);
     }
 
-    
+
 
 }

@@ -7,22 +7,25 @@ using Persistencia;
 using Aplicacion.Contabilidad.TipoCiius;
 using System.Threading.Tasks;
 using Aplicacion.Models.Contabilidad.TipoCiius;
+using ContabilidadWebAPI.Controllers;
 
-namespace WebAPI.Controllers;
+namespace ContabilidadWebAPI.Controllers.Contabilidad;
 
 [ApiController]
 [Route("api/[controller]")]
 public class TipoCiiusController : MiControllerBase
 {
-   
+
 
     [HttpGet]
-    public async Task<ActionResult<List<TipoCiiusModel>>>Get(){
+    public async Task<ActionResult<List<TipoCiiusModel>>> Get()
+    {
         return await Mediator.Send(new Consulta.ListarTipoCiius());
     }
 
     [HttpGet("{Id}")]
-    public async Task<ActionResult<TipoCiiusModel>> Detalle(int Id){
-        return await Mediator.Send(new ConsultaId.ConsultarId{Id = Id});
+    public async Task<ActionResult<TipoCiiusModel>> Detalle(int Id)
+    {
+        return await Mediator.Send(new ConsultaId.ConsultarId { Id = Id });
     }
 }

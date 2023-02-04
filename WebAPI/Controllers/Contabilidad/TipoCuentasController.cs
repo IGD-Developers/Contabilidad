@@ -4,8 +4,9 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Aplicacion.Contabilidad.TipoCuentas;
 using Dominio.Contabilidad;
+using ContabilidadWebAPI.Controllers;
 
-namespace WebAPI.Controllers.Contabilidad;
+namespace ContabilidadWebAPI.Controllers.Contabilidad;
 
 [ApiController]
 [Route("api/[controller]")]
@@ -32,15 +33,16 @@ public class TipoCuentasController : MiControllerBase
 
     [HttpPost]
 
-    public async Task<ActionResult<Unit>> Insertar(Insertar.Ejecuta data) {
+    public async Task<ActionResult<Unit>> Insertar(Insertar.Ejecuta data)
+    {
 
         return await Mediator.Send(data);
     }
 
     [HttpPut("{Id}")]
 
-    public async Task<ActionResult<Unit>>  Editar(int Id, Editar.Ejecuta data) 
-    
+    public async Task<ActionResult<Unit>> Editar(int Id, Editar.Ejecuta data)
+
     {
         data.Id = Id;
         return await Mediator.Send(data);

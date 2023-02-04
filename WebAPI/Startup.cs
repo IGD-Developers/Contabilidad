@@ -40,7 +40,7 @@ using Aplicacion.Contabilidad.Terceros;
 using Aplicacion.Contabilidad.Comprobantes;
 using FluentValidation;
 
-namespace WebAPI;
+namespace ContabilidadWebAPI;
 
 public class Startup
 {
