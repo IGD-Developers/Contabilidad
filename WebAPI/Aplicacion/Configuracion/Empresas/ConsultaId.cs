@@ -11,49 +11,42 @@ using ContabilidadWebAPI.Aplicacion.Models.Configuracion.Empresas;
 
 namespace ContabilidadWebAPI.Aplicacion.Configuracion.Empresas;
 
-public class ConsultaId
+public class ConsultarEmpresaRequest : IdEmpresasModel, IRequest<ListarEmpresasModel>
+{ }
+
+public class ConsultarEmpresaHandler : IRequestHandler<ConsultarEmpresaRequest, ListarEmpresasModel>
 {
 
-    public class ConsultarId : IdEmpresasModel, IRequest<ListarEmpresasModel>
-    { }
+    private readonly CntContext _context;
+    private readonly IMapper _mapper;
 
-    public class Manejador : IRequestHandler<ConsultarId, ListarEmpresasModel>
+
+
+    public ConsultarEmpresaHandler(CntContext context, IMapper mapper)
     {
-
-        private readonly CntContext _context;
-        private readonly IMapper _mapper;
-
-
-
-        public Manejador(CntContext context, IMapper mapper)
-        {
-            _context = context;
-            _mapper = mapper;
-        }
-
-        public async Task<ListarEmpresasModel> Handle(ConsultarId request, CancellationToken cancellationToken)
-        {
-
-
-            var entidad = await _context.cnfEmpresas
-            .Include(t => t.TerceroEmpresa)
-            .SingleOrDefaultAsync(i => i.Id == request.Id);
-
-            //.FindAsync(request.Id);
-
-            if (entidad == null)
-            {
-                throw new Exception("Registro no encontrado");
-            };
-            var entidadDto = _mapper.Map<CnfEmpresa, ListarEmpresasModel>(entidad);
-            return entidadDto;
-
-
-            // return Empresa;
-
-        }
+        _context = context;
+        _mapper = mapper;
     }
 
+    public async Task<ListarEmpresasModel> Handle(ConsultarEmpresaRequest request, CancellationToken cancellationToken)
+    {
 
 
+        var entidad = await _context.cnfEmpresas
+        .Include(t => t.TerceroEmpresa)
+        .SingleOrDefaultAsync(i => i.Id == request.Id);
+
+        //.FindAsync(request.Id);
+
+        if (entidad == null)
+        {
+            throw new Exception("Registro no encontrado");
+        };
+        var entidadDto = _mapper.Map<CnfEmpresa, ListarEmpresasModel>(entidad);
+        return entidadDto;
+
+
+        // return Empresa;
+
+    }
 }
