@@ -1,12 +1,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Aplicacion.Contabilidad.Municipios;
-using Aplicacion.Models.Contabilidad.Municipios;
-using Dominio.Contabilidad;
+using ContabilidadWebAPI.Aplicacion.Contabilidad.Municipios;
+using ContabilidadWebAPI.Aplicacion.Models.Contabilidad.Municipios;
+using ContabilidadWebAPI.Dominio.Contabilidad;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Persistencia;
+using ContabilidadWebAPI.Persistencia;
 
 namespace ContabilidadWebAPI.Controllers.Contabilidad;
 

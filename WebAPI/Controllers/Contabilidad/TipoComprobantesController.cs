@@ -3,10 +3,10 @@ using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using MediatR;
 using System.Threading.Tasks;
-using Aplicacion.Contabilidad.TipoComprobantes;
-using Dominio.Contabilidad;
-using Aplicacion.Models.Contabilidad.TipoComprobantes;
+using ContabilidadWebAPI.Dominio.Contabilidad;
 using ContabilidadWebAPI.Controllers;
+using ContabilidadWebAPI.Aplicacion.Contabilidad.TipoComprobantes;
+using ContabilidadWebAPI.Aplicacion.Models.Contabilidad.TipoComprobantes;
 
 namespace ContabilidadWebAPI.Controllers.Contabilidad;
 

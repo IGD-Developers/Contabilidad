@@ -1,13 +1,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Aplicacion.Contabilidad.Regimenes;
-using Aplicacion.Models.Contabilidad.Regimen;
+using ContabilidadWebAPI.Aplicacion.Contabilidad.Regimenes;
+using ContabilidadWebAPI.Aplicacion.Models.Contabilidad.Regimen;
 using ContabilidadWebAPI.Controllers;
-using Dominio.Contabilidad;
+using ContabilidadWebAPI.Dominio.Contabilidad;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Persistencia;
+using ContabilidadWebAPI.Persistencia;
 
 namespace ContabilidadWebAPI.Controllers.Contabilidad;
 

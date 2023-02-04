@@ -2,10 +2,10 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using System.Collections.Generic;
-using Aplicacion.Contabilidad.CuentaImpuestos;
-using Dominio.Contabilidad;
-using Aplicacion.Models.Contabilidad.CuentaImpuestos;
+using ContabilidadWebAPI.Dominio.Contabilidad;
 using ContabilidadWebAPI.Controllers;
+using ContabilidadWebAPI.Aplicacion.Contabilidad.CuentaImpuestos;
+using ContabilidadWebAPI.Aplicacion.Models.Contabilidad.CuentaImpuestos;
 
 namespace ContabilidadWebAPI.Controllers.Contabilidad;
 

@@ -2,9 +2,9 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Aplicacion.Contabilidad.ExogenaFormatos;
-using Dominio.Contabilidad;
 using ContabilidadWebAPI.Controllers;
+using ContabilidadWebAPI.Aplicacion.Contabilidad.ExogenaFormatos;
+using ContabilidadWebAPI.Dominio.Contabilidad;
 
 namespace ContabilidadWebAPI.Controllers.Contabilidad;
 

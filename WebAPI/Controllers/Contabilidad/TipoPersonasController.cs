@@ -1,13 +1,12 @@
 using System.Collections.Generic;
 using System.Linq;
-using Dominio.Contabilidad;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Persistencia;
-using Aplicacion.Contabilidad.TipoPersonas;
+using ContabilidadWebAPI.Persistencia;
 using System.Threading.Tasks;
-using Aplicacion.Models.Contabilidad.TipoPersona;
 using ContabilidadWebAPI.Controllers;
+using ContabilidadWebAPI.Aplicacion.Contabilidad.TipoPersonas;
+using ContabilidadWebAPI.Aplicacion.Models.Contabilidad.TipoPersona;
 
 namespace ContabilidadWebAPI.Controllers.Contabilidad;
 

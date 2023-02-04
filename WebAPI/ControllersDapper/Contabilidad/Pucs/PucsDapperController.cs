@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Persistencia.DapperConexion.Contabilidad.Pucs;
-using Aplicacion.Dapper.Contabilidad.PucsDapper;
 using System;
 using MediatR;
 using ContabilidadWebAPI.Controllers;
+using ContabilidadWebAPI.Persistencia.DapperConexion.Contabilidad.Pucs;
+using ContabilidadWebAPI.Aplicacion.Dapper.Contabilidad.PucsDapper;
 
 namespace ContabilidadWebAPI.ControllersDapper.Contabilidad.Pucs;
 

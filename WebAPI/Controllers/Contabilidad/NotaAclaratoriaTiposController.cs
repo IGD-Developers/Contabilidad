@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Aplicacion.Contabilidad.NotaAclaratoriaTipos;
-using Dominio.Contabilidad;
-using Aplicacion.Models.Contabilidad.NotaAclaratoriaTipo;
 using ContabilidadWebAPI.Controllers;
+using ContabilidadWebAPI.Aplicacion.Contabilidad.NotaAclaratoriaTipos;
+using ContabilidadWebAPI.Dominio.Contabilidad;
+using ContabilidadWebAPI.Aplicacion.Models.Contabilidad.NotaAclaratoriaTipo;
 
 namespace ContabilidadWebAPI.Controllers.Contabilidad;
 

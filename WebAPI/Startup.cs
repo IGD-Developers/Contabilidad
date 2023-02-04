@@ -1,44 +1,32 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Persistencia;
-using Dominio;
-using Aplicacion;
 using MediatR;
-using Dominio.Configuracion;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.AspNetCore.Authentication;
 using FluentValidation.AspNetCore;
-using Aplicacion.Seguridad;
-using Aplicacion.Interfaces;
-using Seguridad.TokenSeguridad;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
-using Seguridad;
-using System.Text.Json.Serialization;
-using AutoMapper;
-using Persistencia.DapperConexion;
-using Persistencia.DapperConexion.Contabilidad.Pucs;
-using Aplicacion.Contabilidad.Consecutivos;
-using Aplicacion.Contabilidad.Terceros;
-using Aplicacion.Contabilidad.Comprobantes;
 using FluentValidation;
+using ContabilidadWebAPI.Aplicacion.Contabilidad.Terceros;
+using ContabilidadWebAPI.Aplicacion.Interfaces;
+using ContabilidadWebAPI.Persistencia.DapperConexion.Contabilidad.Pucs;
+using ContabilidadWebAPI.Aplicacion.Contabilidad.Consecutivos;
+using ContabilidadWebAPI.Persistencia.DapperConexion;
+using ContabilidadWebAPI.Seguridad.TokenSeguridad;
+using ContabilidadWebAPI.Persistencia;
+using ContabilidadWebAPI.Aplicacion.Contabilidad.Comprobantes;
+using ContabilidadWebAPI.Aplicacion.Seguridad;
+using ContabilidadWebAPI.Dominio.Configuracion;
 
 namespace ContabilidadWebAPI;
 
@@ -123,7 +111,7 @@ public class Startup
         services.AddScoped<IUsuarioSesion, UsuarioSesion>();
         services.AddScoped<IJwtGenerador,JwtGenerador>();
         //Ojo le agrego Aplicacion.Seguridad porque me da referencia Ambigua:
-        services.AddAutoMapper(typeof(Aplicacion.Seguridad.Consulta.Manejador));
+        services.AddAutoMapper(typeof(Aplicacion.Seguridad.Usuarios.Consulta.Manejador));
 
         services.AddTransient<IFactoryConnection, FactoryConnection>();
         services.AddScoped<IPucRepositorio, PucRepositorio>();

@@ -1,0 +1,21 @@
+using System;
+using ContabilidadWebAPI.Aplicacion.Models.Configuracion.Sucursales;
+using ContabilidadWebAPI.Aplicacion.Models.Configuracion.Usuarios;
+using ContabilidadWebAPI.Aplicacion.Models.Contabilidad.TipoComprobantes;
+
+namespace Aplicacion.Models.Contabilidad.Comprobantes
+{
+    public class AnularComprobantesModel
+    {
+        public int Id { get; set; }
+       // public string cco_estado { get; set; }
+        
+
+
+       
+        // public  TipoComprobanteModel TipoComprobante{ get; set; }
+        // public SucursalModel Sucursal{get;set;}
+        // public UsuarioModel Usuario{get;set;}
+        
+    }
+}

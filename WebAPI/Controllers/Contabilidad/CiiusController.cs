@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Aplicacion.Contabilidad.Ciius;
-using Aplicacion.Models.Contabilidad.Ciius;
+using ContabilidadWebAPI.Aplicacion.Contabilidad.Ciius;
+using ContabilidadWebAPI.Aplicacion.Models.Contabilidad.Ciius;
 using ContabilidadWebAPI.Controllers;
-using Dominio.Contabilidad;
+using ContabilidadWebAPI.Dominio.Contabilidad;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

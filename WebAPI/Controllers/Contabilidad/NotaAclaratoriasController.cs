@@ -2,10 +2,8 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Aplicacion.Contabilidad.NotaAclaratorias;
-using Dominio.Contabilidad;
-using Aplicacion.Models.Contabilidad.NotaAclaratoria;
-using ContabilidadWebAPI.Controllers;
+using ContabilidadWebAPI.Aplicacion.Contabilidad.NotaAclaratorias;
+using ContabilidadWebAPI.Aplicacion.Models.Contabilidad.NotaAclaratoria;
 
 namespace ContabilidadWebAPI.Controllers.Contabilidad;
 

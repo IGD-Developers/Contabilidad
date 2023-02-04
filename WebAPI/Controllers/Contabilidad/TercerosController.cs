@@ -1,15 +1,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Dominio.Contabilidad;
+using ContabilidadWebAPI.Dominio.Contabilidad;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Persistencia;
-using Aplicacion.Contabilidad.Terceros;
-using Aplicacion.Models.Contabilidad.Tercero;
+using ContabilidadWebAPI.Persistencia;
 using ContabilidadWebAPI.Controllers;
-//using Aplicacion.Contabilidad.juridico;
-//using Aplicacion.Contabilidad.Terceros.Natural;
+using ContabilidadWebAPI.Aplicacion.Contabilidad.Terceros;
+using ContabilidadWebAPI.Aplicacion.Models.Contabilidad.Tercero;
+//using ContabilidadWebAPI.Aplicacion.Contabilidad.juridico;
+//using ContabilidadWebAPI.Aplicacion.Contabilidad.Terceros.Natural;
 
 namespace ContabilidadWebAPI.Controllers.Contabilidad;
 
