@@ -2,12 +2,12 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using MediatR;
-using Dominio.Configuracion;
-//using Aplicacion.Configuracion.Usuarios;
-using Aplicacion.Seguridad;
+using ContabilidadWebAPI.Dominio.Configuracion;
+//using ContabilidadWebAPI.Aplicacion.Configuracion.Usuarios;
 using Microsoft.AspNetCore.Authorization;
+using ContabilidadWebAPI.Aplicacion.Seguridad;
 
-namespace WebAPI.Controllers.Configuracion;
+namespace ContabilidadWebAPI.Controllers.Configuracion;
 
 [AllowAnonymous]
 [ApiController]

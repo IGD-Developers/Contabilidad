@@ -1,28 +1,31 @@
 using System.Collections.Generic;
 using System.Linq;
-using Dominio.Contabilidad;
+using ContabilidadWebAPI.Dominio.Contabilidad;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Persistencia;
-using Aplicacion.Contabilidad.TipoCiius;
+using ContabilidadWebAPI.Persistencia;
 using System.Threading.Tasks;
-using Aplicacion.Models.Contabilidad.TipoCiius;
+using ContabilidadWebAPI.Controllers;
+using ContabilidadWebAPI.Aplicacion.Contabilidad.TipoCiius;
+using ContabilidadWebAPI.Aplicacion.Models.Contabilidad.TipoCiius;
 
-namespace WebAPI.Controllers;
+namespace ContabilidadWebAPI.Controllers.Contabilidad;
 
 [ApiController]
 [Route("api/[controller]")]
 public class TipoCiiusController : MiControllerBase
 {
-   
+
 
     [HttpGet]
-    public async Task<ActionResult<List<TipoCiiusModel>>>Get(){
+    public async Task<ActionResult<List<TipoCiiusModel>>> Get()
+    {
         return await Mediator.Send(new Consulta.ListarTipoCiius());
     }
 
     [HttpGet("{Id}")]
-    public async Task<ActionResult<TipoCiiusModel>> Detalle(int Id){
-        return await Mediator.Send(new ConsultaId.ConsultarId{Id = Id});
+    public async Task<ActionResult<TipoCiiusModel>> Detalle(int Id)
+    {
+        return await Mediator.Send(new ConsultaId.ConsultarId { Id = Id });
     }
 }

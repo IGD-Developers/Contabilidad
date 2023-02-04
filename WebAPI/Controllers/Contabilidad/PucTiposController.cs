@@ -2,10 +2,11 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Aplicacion.Contabilidad.PucTipos;
-using Dominio.Contabilidad;
+using ContabilidadWebAPI.Controllers;
+using ContabilidadWebAPI.Aplicacion.Contabilidad.PucTipos;
+using ContabilidadWebAPI.Dominio.Contabilidad;
 
-namespace WebAPI.Controllers.Contabilidad;
+namespace ContabilidadWebAPI.Controllers.Contabilidad;
 
 
 [ApiController]
@@ -33,7 +34,8 @@ public class PucTiposController : MiControllerBase
 
     [HttpPost]
 
-    public async Task<ActionResult<Unit>> insertar(Insertar.Ejecuta data){
+    public async Task<ActionResult<Unit>> insertar(Insertar.Ejecuta data)
+    {
 
         return await Mediator.Send(data);
 
@@ -42,8 +44,8 @@ public class PucTiposController : MiControllerBase
 
     [HttpPut("{Id}")]
 
-    public async Task<ActionResult<Unit>>  Editar(int Id, Editar.Ejecuta data) 
-    
+    public async Task<ActionResult<Unit>> Editar(int Id, Editar.Ejecuta data)
+
     {
         data.Id = Id;
         return await Mediator.Send(data);

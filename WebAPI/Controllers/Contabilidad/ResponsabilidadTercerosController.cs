@@ -1,26 +1,29 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Dominio.Contabilidad;
+using ContabilidadWebAPI.Dominio.Contabilidad;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Aplicacion.Contabilidad.ResponsabilidadTerceros;
-using Aplicacion.Models.Contabilidad.ResponsabilidadTercero;
+using ContabilidadWebAPI.Controllers;
+using ContabilidadWebAPI.Aplicacion.Contabilidad.ResponsabilidadTerceros;
+using ContabilidadWebAPI.Aplicacion.Models.Contabilidad.ResponsabilidadTercero;
 
-namespace WebAPI.Controllers;
+namespace ContabilidadWebAPI.Controllers.Contabilidad;
 
 [ApiController]
 [Route("api/[controller]")]
 public class ResponsabilidadTercerosController : MiControllerBase
-{       
+{
 
     [HttpGet]
-    public async Task<ActionResult<List<ResponsabilidadTerceroModel>>>Get(){
+    public async Task<ActionResult<List<ResponsabilidadTerceroModel>>> Get()
+    {
         return await Mediator.Send(new Consulta.ListarResponsabilidades());
     }
 
     [HttpGet("{Id}")]
-    public async Task<ActionResult<ResponsabilidadTerceroModel>>GetId(int Id){
-        return await Mediator.Send(new ConsultaId.ConsultarId{Id = Id});
+    public async Task<ActionResult<ResponsabilidadTerceroModel>> GetId(int Id)
+    {
+        return await Mediator.Send(new ConsultaId.ConsultarId { Id = Id });
     }
 
     /* [HttpPost]

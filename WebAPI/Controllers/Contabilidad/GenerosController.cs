@@ -1,14 +1,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Aplicacion.Contabilidad.Generos;
-using Aplicacion.Models.Contabilidad.Genero;
-using Dominio.Contabilidad;
+using ContabilidadWebAPI.Aplicacion.Contabilidad.Generos;
+using ContabilidadWebAPI.Aplicacion.Models.Contabilidad.Genero;
+using ContabilidadWebAPI.Controllers;
+using ContabilidadWebAPI.Dominio.Contabilidad;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Persistencia;
+using ContabilidadWebAPI.Persistencia;
 
-namespace WebAPI.Controllers;
+namespace ContabilidadWebAPI.Controllers.Contabilidad;
 
 [ApiController]
 [Route("api/[controller]")]
@@ -16,13 +17,15 @@ public class GenerosController : MiControllerBase
 {
     //http://localhost:5000/api/CntGeneros
     [HttpGet]
-    public async Task<ActionResult<List<GeneroModel>>>Get(){
+    public async Task<ActionResult<List<GeneroModel>>> Get()
+    {
         return await Mediator.Send(new Consulta.ListaGeneros());
     }
 
 
     [HttpGet("{Id}")]
-    public async Task<ActionResult<GeneroModel>>Detalle(int Id){
-        return await Mediator.Send(new ConsultaId.ConsultarId{Id = Id});
-    }      
+    public async Task<ActionResult<GeneroModel>> Detalle(int Id)
+    {
+        return await Mediator.Send(new ConsultaId.ConsultarId { Id = Id });
+    }
 }

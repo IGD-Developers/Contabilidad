@@ -2,12 +2,12 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using System.Collections.Generic;
-using Aplicacion.Contabilidad.CuentaImpuestos;
-using Dominio.Contabilidad;
-using Aplicacion.Models.Contabilidad.CuentaImpuestos;
+using ContabilidadWebAPI.Dominio.Contabilidad;
+using ContabilidadWebAPI.Controllers;
+using ContabilidadWebAPI.Aplicacion.Contabilidad.CuentaImpuestos;
+using ContabilidadWebAPI.Aplicacion.Models.Contabilidad.CuentaImpuestos;
 
-
-namespace WebAPI.Controllers.Contabilidad;
+namespace ContabilidadWebAPI.Controllers.Contabilidad;
 
 
 [ApiController]
@@ -15,7 +15,7 @@ namespace WebAPI.Controllers.Contabilidad;
 public class CuentaImpuestosController : MiControllerBase
 {
 
-    
+
     [HttpGet]
     public async Task<List<ListarCuentaImpuestosModel>> Get()
     {
@@ -40,11 +40,11 @@ public class CuentaImpuestosController : MiControllerBase
 
     // }
 
-    
+
     // [HttpPut("{Id}")]
 
     // public async Task<ActionResult<Unit>>  Editar(int Id, Editar.Ejecuta data) 
-    
+
     // {
     //     data.Id = Id;
     //     return await Mediator.Send(data);

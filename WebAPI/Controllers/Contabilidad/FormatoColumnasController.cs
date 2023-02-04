@@ -2,10 +2,11 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Aplicacion.Contabilidad.FormatoColumnas;
-using Dominio.Contabilidad;
+using ContabilidadWebAPI.Controllers;
+using ContabilidadWebAPI.Dominio.Contabilidad;
+using ContabilidadWebAPI.Aplicacion.Contabilidad.FormatoColumnas;
 
-namespace WebAPI.Controllers.Contabilidad;
+namespace ContabilidadWebAPI.Controllers.Contabilidad;
 
 
 [ApiController]
@@ -14,7 +15,7 @@ public class FormatoColumnasController : MiControllerBase
 {
 
 
-    
+
 
     [HttpGet]
     public async Task<ActionResult<List<CntFormatoColumna>>> Get()
@@ -41,8 +42,8 @@ public class FormatoColumnasController : MiControllerBase
 
     [HttpPut("{Id}")]
 
-    public async Task<ActionResult<Unit>>  Editar(int Id, Editar.Ejecuta data) 
-    
+    public async Task<ActionResult<Unit>> Editar(int Id, Editar.Ejecuta data)
+
     {
         data.Id = Id;
         return await Mediator.Send(data);

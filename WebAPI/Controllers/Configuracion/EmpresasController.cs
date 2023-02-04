@@ -1,15 +1,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
-using Persistencia;
+using ContabilidadWebAPI.Persistencia;
 using MediatR;
 using System.Threading.Tasks;
-using Aplicacion.Configuracion.Empresas;
-using Dominio.Configuracion;
+using ContabilidadWebAPI.Dominio.Configuracion;
 using Microsoft.AspNetCore.Authorization;
-using Aplicacion.Models.Configuracion.Empresas;
+using ContabilidadWebAPI.Aplicacion.Configuracion.Empresas;
+using ContabilidadWebAPI.Aplicacion.Models.Configuracion.Empresas;
 
-namespace WebAPI.Controllers.Configuracion;
+namespace ContabilidadWebAPI.Controllers.Configuracion;
 
 
 
