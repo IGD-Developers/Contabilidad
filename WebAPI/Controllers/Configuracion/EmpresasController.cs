@@ -1,14 +1,3 @@
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.AspNetCore.Mvc;
-using ContabilidadWebAPI.Persistencia;
-using MediatR;
-using System.Threading.Tasks;
-using ContabilidadWebAPI.Dominio.Configuracion;
-using Microsoft.AspNetCore.Authorization;
-using ContabilidadWebAPI.Aplicacion.Configuracion.Empresas;
-using ContabilidadWebAPI.Aplicacion.Models.Configuracion.Empresas;
-
 namespace ContabilidadWebAPI.Controllers.Configuracion;
 
 
