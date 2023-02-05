@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using ContabilidadWebAPI.Dominio.Configuracion;
-
 namespace ContabilidadWebAPI.Dominio.Contabilidad;
 
 public class CntPuc

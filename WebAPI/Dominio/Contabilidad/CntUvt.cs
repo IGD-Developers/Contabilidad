@@ -1,5 +1,3 @@
-using System;
-
 namespace ContabilidadWebAPI.Dominio.Contabilidad;
 
 public class CntUvt

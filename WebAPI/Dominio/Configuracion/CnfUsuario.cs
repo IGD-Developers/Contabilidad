@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Generic;
-using ContabilidadWebAPI.Dominio.Contabilidad;
-using Microsoft.AspNetCore.Identity;
-
 namespace ContabilidadWebAPI.Dominio.Configuracion;
 
 public class CnfUsuario : IdentityUser

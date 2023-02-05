@@ -1,6 +1,3 @@
-using System.Collections.Generic;
-using System;
-
 namespace ContabilidadWebAPI.Dominio.Contabilidad;
 
 public class CntTipoDocumento

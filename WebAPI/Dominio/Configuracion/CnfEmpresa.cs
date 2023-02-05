@@ -1,6 +1,3 @@
-using System.Collections.Generic;
-using ContabilidadWebAPI.Dominio.Contabilidad;
-
 namespace ContabilidadWebAPI.Dominio.Configuracion;
 
 public class CnfEmpresa

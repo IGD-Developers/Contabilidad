@@ -1,6 +1,3 @@
-using System;
-using ContabilidadWebAPI.Dominio.Configuracion;
-
 namespace ContabilidadWebAPI.Dominio.Contabilidad;
 
 public class CntMes
