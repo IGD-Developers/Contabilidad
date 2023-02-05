@@ -10,59 +10,54 @@ using ContabilidadWebAPI.Persistencia;
 
 namespace ContabilidadWebAPI.Aplicacion.Contabilidad.CentroCostos;
 
-public class Insertar
+public class InsertarCentroCostoRequest : InsertarCentroCostosModel, IRequest
+{ }
+
+public class InsertarCentroCostoValidator : IRequestHandler<InsertarCentroCostoRequest>
 {
+    private CntContext _context;
+    private readonly IMapper _mapper;
 
-    public class Ejecuta : InsertarCentroCostosModel, IRequest
-    { }
 
-    public class Manejador : IRequestHandler<Ejecuta>
+
+    public InsertarCentroCostoValidator(CntContext context, IMapper mapper)
     {
-        private CntContext _context;
-        private readonly IMapper _mapper;
+        _context = context;
+        _mapper = mapper;
+    }
 
-
-
-        public Manejador(CntContext context, IMapper mapper)
+    public class InsertarCentroCostoHandler : AbstractValidator<InsertarCentroCostoRequest>
+    {
+        public InsertarCentroCostoHandler()
         {
-            _context = context;
-            _mapper = mapper;
-        }
+            RuleFor(x => x.Codigo).NotEmpty();
+            RuleFor(x => x.Nombre).NotEmpty();
 
-        public class EjecutaValidador : AbstractValidator<Ejecuta>
-        {
-            public EjecutaValidador()
-            {
-                RuleFor(x => x.Codigo).NotEmpty();
-                RuleFor(x => x.Nombre).NotEmpty();
-
-            }
-        }
-
-        public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
-        {
-
-            var entidadDto = _mapper.Map<InsertarCentroCostosModel, CntCentroCosto>(request);
-
-
-            try
-            {
-                _context.cntCentroCostos.Add(entidadDto);
-
-                var respuesta = await _context.SaveChangesAsync();
-                if (respuesta > 0)
-                {
-                    return Unit.Value;
-                }
-                throw new Exception("Error al insertar CentroCosto");
-                //TODO: MARIA  Llave duplicada  CODIGO CentroCosto Implementar
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Error al Insertar registro catch " + ex.Message);
-
-            }
         }
     }
 
+    public async Task<Unit> Handle(InsertarCentroCostoRequest request, CancellationToken cancellationToken)
+    {
+
+        var entidadDto = _mapper.Map<InsertarCentroCostosModel, CntCentroCosto>(request);
+
+
+        try
+        {
+            _context.cntCentroCostos.Add(entidadDto);
+
+            var respuesta = await _context.SaveChangesAsync();
+            if (respuesta > 0)
+            {
+                return Unit.Value;
+            }
+            throw new Exception("Error al insertar CentroCosto");
+            //TODO: MARIA  Llave duplicada  CODIGO CentroCosto Implementar
+        }
+        catch (Exception ex)
+        {
+            throw new Exception("Error al Insertar registro catch " + ex.Message);
+
+        }
+    }
 }

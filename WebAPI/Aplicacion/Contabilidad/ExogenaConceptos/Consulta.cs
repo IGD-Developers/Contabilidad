@@ -8,32 +8,25 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ContabilidadWebAPI.Aplicacion.Contabilidad.ExogenaConceptos;
 
-public class Consulta
+public class ListaCntExogenaConceptosRequest : IRequest<List<CntExogenaConcepto>>
 {
-    public class ListaCntExogenaConceptos : IRequest<List<CntExogenaConcepto>>
+}
+
+
+public class ListaCntExogenaConceptosHandler : IRequestHandler<ListaCntExogenaConceptosRequest, List<CntExogenaConcepto>>
+{
+
+    private CntContext context;
+
+    public ListaCntExogenaConceptosHandler(CntContext context)
     {
-
-
-
+        this.context = context;
     }
 
-
-    public class Manejador : IRequestHandler<ListaCntExogenaConceptos, List<CntExogenaConcepto>>
+    public async Task<List<CntExogenaConcepto>> Handle(ListaCntExogenaConceptosRequest request, CancellationToken cancellationToken)
     {
+        var exogenaConceptos = await context.cntExogenaConceptos.ToListAsync();
+        return exogenaConceptos;
 
-        private CntContext context;
-
-        public Manejador(CntContext context)
-        {
-            this.context = context;
-        }
-
-        public async Task<List<CntExogenaConcepto>> Handle(ListaCntExogenaConceptos request, CancellationToken cancellationToken)
-        {
-            var exogenaConceptos = await context.cntExogenaConceptos.ToListAsync();
-            return exogenaConceptos;
-
-        }
     }
-
 }

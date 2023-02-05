@@ -62,7 +62,7 @@ public class Startup
 
 
        // services.AddMediatR(typeof(Aplicacion.CntComprobantes.Consulta.Manejador).Assembly);
-        services.AddMediatR(typeof(Aplicacion.Contabilidad.CategoriaComprobantes.Consulta.Manejador).Assembly);
+        services.AddMediatR(typeof(Aplicacion.Contabilidad.CategoriaComprobantes.ConsultarCategoriaComprobanteHandler).Assembly);
         services.AddTransient(typeof(IInsertarConsecutivo), typeof(InsertarConsecutivo));
         services.AddTransient(typeof(IInsertarComprobante), typeof(InsertarComprobante));
         services.AddTransient(typeof(IFunciones), typeof(Funciones));

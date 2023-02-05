@@ -8,30 +8,24 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ContabilidadWebAPI.Aplicacion.Contabilidad.DetalleComprobantes;
 
-public class Consulta
+public class ListaDetalleComprobantesRequest : IRequest<List<CntDetalleComprobante>>
 {
 
-    public class ListaDetalleComprobantes : IRequest<List<CntDetalleComprobante>>
+
+}
+
+public class ListaDetalleComprobantesHandler : IRequestHandler<ListaDetalleComprobantesRequest, List<CntDetalleComprobante>>
+{
+    private readonly CntContext context;
+
+    public ListaDetalleComprobantesHandler(CntContext context)
     {
-
-
+        this.context = context;
     }
 
-    public class Manejador : IRequestHandler<ListaDetalleComprobantes, List<CntDetalleComprobante>>
+    public async Task<List<CntDetalleComprobante>> Handle(ListaDetalleComprobantesRequest request, CancellationToken cancellationToken)
     {
-        private readonly CntContext context;
-
-        public Manejador(CntContext context)
-        {
-            this.context = context;
-        }
-
-        public async Task<List<CntDetalleComprobante>> Handle(ListaDetalleComprobantes request, CancellationToken cancellationToken)
-        {
-            var detalleComprobantes = await context.cntDetalleComprobantes.ToListAsync();
-            return detalleComprobantes;
-        }
+        var detalleComprobantes = await context.cntDetalleComprobantes.ToListAsync();
+        return detalleComprobantes;
     }
-
-
 }

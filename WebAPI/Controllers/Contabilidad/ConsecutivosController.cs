@@ -12,19 +12,16 @@ namespace ContabilidadWebAPI.Controllers.Contabilidad;
 [Route("api/[controller]")]
 public class ConsecutivosController : MiControllerBase
 {
-
-
     [HttpGet]
     public async Task<ActionResult<List<CntConsecutivo>>> Get()
 
     {
-        return await Mediator.Send(new Consulta.ListaCntConsecutivos());
+        return await Mediator.Send(new ListaCntConsecutivosRequest());
 
     }
 
     [HttpPost]
-
-    public async Task<ActionResult<CntConsecutivo>> Insertar(Insertar.Ejecuta data)
+    public async Task<ActionResult<CntConsecutivo>> Insertar(InsertarConsecutivoRequest data)
     {
 
         return await Mediator.Send(data);
@@ -38,13 +35,10 @@ public class ConsecutivosController : MiControllerBase
     // }
 
     [HttpPut("{Id}")]
-
-    public async Task<ActionResult<Unit>> Editar(int Id, Editar.Ejecuta data)
-
+    public async Task<ActionResult<Unit>> Editar(int Id, EditarConsecutivoRequest data)
     {
         data.Id = Id;
         return await Mediator.Send(data);
     }
-
 
 }

@@ -10,36 +10,27 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ContabilidadWebAPI.Aplicacion.Contabilidad.CentroCostos;
 
-public class Consulta
+public class ListaCntCentroCostosRequest : IRequest<List<ListarCentroCostosModel>>
+{ }
+
+public class ListaCntCentroCostosHandler : IRequestHandler<ListaCntCentroCostosRequest, List<ListarCentroCostosModel>>
 {
+    private CntContext _context;
+    private readonly IMapper _mapper;
 
-    public class ListaCntCentroCostos : IRequest<List<ListarCentroCostosModel>>
+
+
+    public ListaCntCentroCostosHandler(CntContext context, IMapper mapper)
     {
-
-
+        _context = context;
+        _mapper = mapper;
     }
 
-    public class Manejador : IRequestHandler<ListaCntCentroCostos, List<ListarCentroCostosModel>>
+    public async Task<List<ListarCentroCostosModel>> Handle(ListaCntCentroCostosRequest request, CancellationToken cancellationToken)
     {
-        private CntContext _context;
-        private readonly IMapper _mapper;
 
-
-
-        public Manejador(CntContext context, IMapper mapper)
-        {
-            _context = context;
-            _mapper = mapper;
-        }
-
-        public async Task<List<ListarCentroCostosModel>> Handle(ListaCntCentroCostos request, CancellationToken cancellationToken)
-        {
-
-            var entidades = await _context.cntCentroCostos.ToListAsync();
-            var entidadesDto = _mapper.Map<List<CntCentroCosto>, List<ListarCentroCostosModel>>(entidades);
-            return entidadesDto;
-        }
+        var entidades = await _context.cntCentroCostos.ToListAsync();
+        var entidadesDto = _mapper.Map<List<CntCentroCosto>, List<ListarCentroCostosModel>>(entidades);
+        return entidadesDto;
     }
-
-
 }

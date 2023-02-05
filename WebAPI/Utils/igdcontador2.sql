@@ -1297,20 +1297,20 @@ INSERT INTO `cnt_comprobante` VALUES ('90', '2', '8', '1', '2', null, '2021', '0
 DROP TABLE IF EXISTS `cnt_conceptocuenta`;
 CREATE TABLE `cnt_conceptocuenta` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `id_exogenaconcepto` int NOT NULL,
+  `IdExogenaconcepto` int NOT NULL,
   `id_puc` int NOT NULL,
-  `id_formatocolumna` int NOT NULL,
-  `id_tipooperacion` int NOT NULL DEFAULT '3' COMMENT '1=suma debito periodo 2=suma cr periodo 3=db periodo - cr periodo 4=saldo final',
+  `IdFormatocolumna` int NOT NULL,
+  `IdTipooperacion` int NOT NULL DEFAULT '3' COMMENT '1=suma debito periodo 2=suma cr periodo 3=db periodo - cr periodo 4=saldo final',
   `estado` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`) USING BTREE,
-  KEY `fk_cnt_conceptocuenta_cnt_exogenaconcepto_1` (`id_exogenaconcepto`),
-  KEY `fk_cnt_conceptocuenta_cnt_formatocolumna_1` (`id_formatocolumna`),
+  KEY `fk_cnt_conceptocuenta_cnt_exogenaconcepto_1` (`IdExogenaconcepto`),
+  KEY `fk_cnt_conceptocuenta_cnt_formatocolumna_1` (`IdFormatocolumna`),
   KEY `fk_cnt_conceptocuenta_cnt_pucauxcuenta_1` (`id_puc`),
-  KEY `fk_cnt_conceptocuenta_cnt_tipooperacion_1` (`id_tipooperacion`),
-  CONSTRAINT `cnt_conceptocuenta_ibfk_1` FOREIGN KEY (`id_exogenaconcepto`) REFERENCES `cnt_exogenaconcepto` (`id`),
-  CONSTRAINT `cnt_conceptocuenta_ibfk_2` FOREIGN KEY (`id_formatocolumna`) REFERENCES `cnt_formatocolumna` (`id`),
+  KEY `fk_cnt_conceptocuenta_cnt_tipooperacion_1` (`IdTipooperacion`),
+  CONSTRAINT `cnt_conceptocuenta_ibfk_1` FOREIGN KEY (`IdExogenaconcepto`) REFERENCES `cnt_exogenaconcepto` (`id`),
+  CONSTRAINT `cnt_conceptocuenta_ibfk_2` FOREIGN KEY (`IdFormatocolumna`) REFERENCES `cnt_formatocolumna` (`id`),
   CONSTRAINT `cnt_conceptocuenta_ibfk_3` FOREIGN KEY (`id_puc`) REFERENCES `cnt_puc` (`id`),
-  CONSTRAINT `cnt_conceptocuenta_ibfk_4` FOREIGN KEY (`id_tipooperacion`) REFERENCES `cnt_tipooperacion` (`id`)
+  CONSTRAINT `cnt_conceptocuenta_ibfk_4` FOREIGN KEY (`IdTipooperacion`) REFERENCES `cnt_tipooperacion` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
@@ -1722,13 +1722,13 @@ INSERT INTO `cnt_exogenaformato` VALUES ('14', '2276', 'Información de rentas d
 DROP TABLE IF EXISTS `cnt_formatocolumna`;
 CREATE TABLE `cnt_formatocolumna` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `id_exogenaformato` int NOT NULL,
-  `fco_columna` char(3) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '',
-  `fco_campo` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '',
-  `fco_tipo` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '0',
+  `IdExogenaformato` int NOT NULL,
+  `FcoColumna` char(3) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '',
+  `FcoCampo` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '',
+  `FcoTipo` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`) USING BTREE,
-  KEY `fk_cnt_formatocolumna_cnt_exogenaformato_1` (`id_exogenaformato`),
-  CONSTRAINT `cnt_formatocolumna_ibfk_1` FOREIGN KEY (`id_exogenaformato`) REFERENCES `cnt_exogenaformato` (`id`)
+  KEY `fk_cnt_formatocolumna_cnt_exogenaformato_1` (`IdExogenaformato`),
+  CONSTRAINT `cnt_formatocolumna_ibfk_1` FOREIGN KEY (`IdExogenaformato`) REFERENCES `cnt_exogenaformato` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
@@ -1775,13 +1775,13 @@ INSERT INTO `cnt_formatocolumna` VALUES ('34', '2', 'O', 'Retención que le prac
 DROP TABLE IF EXISTS `cnt_formatoconcepto`;
 CREATE TABLE `cnt_formatoconcepto` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `id_exogenaformato` int NOT NULL,
-  `id_exogenaconcepto` int NOT NULL,
+  `IdExogenaformato` int NOT NULL,
+  `IdExogenaconcepto` int NOT NULL,
   PRIMARY KEY (`id`) USING BTREE,
-  KEY `fk_cnt_formatoconcepto_cnt_exogenaformato_1` (`id_exogenaformato`),
-  KEY `fk_cnt_formatoconcepto_cnt_exogenaconcepto_1` (`id_exogenaconcepto`),
-  CONSTRAINT `cnt_formatoconcepto_ibfk_1` FOREIGN KEY (`id_exogenaconcepto`) REFERENCES `cnt_exogenaconcepto` (`id`),
-  CONSTRAINT `cnt_formatoconcepto_ibfk_2` FOREIGN KEY (`id_exogenaformato`) REFERENCES `cnt_exogenaformato` (`id`)
+  KEY `fk_cnt_formatoconcepto_cnt_exogenaformato_1` (`IdExogenaformato`),
+  KEY `fk_cnt_formatoconcepto_cnt_exogenaconcepto_1` (`IdExogenaconcepto`),
+  CONSTRAINT `cnt_formatoconcepto_ibfk_1` FOREIGN KEY (`IdExogenaconcepto`) REFERENCES `cnt_exogenaconcepto` (`id`),
+  CONSTRAINT `cnt_formatoconcepto_ibfk_2` FOREIGN KEY (`IdExogenaformato`) REFERENCES `cnt_exogenaformato` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=81 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------

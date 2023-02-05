@@ -12,47 +12,43 @@ using ContabilidadWebAPI.Dominio.Contabilidad;
 
 namespace ContabilidadWebAPI.Aplicacion.Contabilidad.Comprobantes;
 
-public class Consulta
+public class ListaCntComprobantesRequest : IRequest<List<ListarComprobantesModel>>
 {
-    public class ListaCntComprobantes : IRequest<List<ListarComprobantesModel>>
+
+}
+
+public class ListaCntComprobantesHandler : IRequestHandler<ListaCntComprobantesRequest, List<ListarComprobantesModel>>
+{
+
+    private readonly CntContext _context;
+    private readonly IMapper _mapper;
+
+
+
+    public ListaCntComprobantesHandler(CntContext context, IMapper mapper)
     {
+        _context = context;
+        _mapper = mapper;
+
+
 
     }
 
-    public class Manejador : IRequestHandler<ListaCntComprobantes, List<ListarComprobantesModel>>
+    public async Task<List<ListarComprobantesModel>> Handle(ListaCntComprobantesRequest request, CancellationToken cancellationToken)
     {
+        // El contexto devuelve el dbset
 
-        private readonly CntContext _context;
-        private readonly IMapper _mapper;
+        var comprobantes = await _context.cntComprobantes
+        .Include(t => t.TipoComprobante)
+        .ThenInclude(ctg => ctg.Categoria)
+        .Include(s => s.Sucursal)
+        .Include(u => u.Usuario)
+        .Include(d => d.ComprobanteDetalleComprobantes)
+        .ToListAsync();
 
+        var comprobantesDto = _mapper.Map<List<CntComprobante>, List<ListarComprobantesModel>>(comprobantes);
 
+        return comprobantesDto;
 
-        public Manejador(CntContext context, IMapper mapper)
-        {
-            _context = context;
-            _mapper = mapper;
-
-
-
-        }
-
-        public async Task<List<ListarComprobantesModel>> Handle(ListaCntComprobantes request, CancellationToken cancellationToken)
-        {
-            // El contexto devuelve el dbset
-
-            var comprobantes = await _context.cntComprobantes
-            .Include(t => t.TipoComprobante)
-            .ThenInclude(ctg => ctg.Categoria)
-            .Include(s => s.Sucursal)
-            .Include(u => u.Usuario)
-            .Include(d => d.ComprobanteDetalleComprobantes)
-            .ToListAsync();
-
-            var comprobantesDto = _mapper.Map<List<CntComprobante>, List<ListarComprobantesModel>>(comprobantes);
-
-            return comprobantesDto;
-
-        }
     }
-
 }

@@ -19,7 +19,7 @@ public class ComprobantesController : MiControllerBase
     public async Task<ActionResult<List<ListarComprobantesModel>>> Get()
     {
 
-        return await Mediator.Send(new Consulta.ListaCntComprobantes());
+        return await Mediator.Send(new ListaCntComprobantesRequest());
     }
 
     [HttpGet("{Id}")]
@@ -27,14 +27,14 @@ public class ComprobantesController : MiControllerBase
     public async Task<ActionResult<ListarComprobantesModel>> GetId(int Id)
     {
 
-        return await Mediator.Send(new ConsultaId.ConsultarId { Id = Id });
+        return await Mediator.Send(new ConsultarComprobanteRequest { Id = Id });
 
 
     }
 
     [HttpPost]
 
-    public async Task<ActionResult<Unit>> Insertar(Insertar.Ejecuta data)
+    public async Task<ActionResult<Unit>> Insertar(InsertarComprobanteRequest data)
     {
         data.IdModulo = 1;
         return await Mediator.Send(data);
@@ -44,7 +44,7 @@ public class ComprobantesController : MiControllerBase
     [HttpPost("liquidaimpuesto")]
 
 
-    public async Task<ActionResult<Unit>> LiquidaImpuesto(Insertar.Ejecuta data)
+    public async Task<ActionResult<Unit>> LiquidaImpuesto(InsertarComprobanteRequest data)
     {
         data.IdModulo = 2;
         return await Mediator.Send(data);
@@ -54,7 +54,7 @@ public class ComprobantesController : MiControllerBase
 
     [HttpPut("{Id}")]
 
-    public async Task<ActionResult<Unit>> Editar(int Id, Editar.Ejecuta data)
+    public async Task<ActionResult<Unit>> Editar(int Id, EditarComprobanteRequest data)
 
     {
         data.Id = Id;
@@ -63,7 +63,7 @@ public class ComprobantesController : MiControllerBase
 
     [HttpPut("anular/{Id}")]
 
-    public async Task<ActionResult<Unit>> Anular(int Id, Anular.Ejecuta data)
+    public async Task<ActionResult<Unit>> Anular(int Id, AnularComprobanteRequest data)
 
     {
         data.Id = Id;
@@ -72,7 +72,7 @@ public class ComprobantesController : MiControllerBase
 
     [HttpDelete("eliminar/{Id}")]
 
-    public async Task<ActionResult<Unit>> Eliminar(int Id, Eliminar.Ejecuta data)
+    public async Task<ActionResult<Unit>> Eliminar(int Id, EliminarComprobanteRequest data)
 
     {
         data.Id = Id;
@@ -83,17 +83,10 @@ public class ComprobantesController : MiControllerBase
 
     [HttpPut("revertir/{Id}")]
 
-    public async Task<ActionResult<Unit>> Revertir(int Id, Revertir.Ejecuta data)
+    public async Task<ActionResult<Unit>> Revertir(int Id, RevertirComprobanteRequest data)
 
     {
         data.Id = Id;
         return await Mediator.Send(data);
-
     }
-
-
 }
-
-
-
-

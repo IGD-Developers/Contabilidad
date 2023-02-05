@@ -7,32 +7,28 @@ using ContabilidadWebAPI.Dominio.Contabilidad;
 
 namespace ContabilidadWebAPI.Aplicacion.Contabilidad.DetalleComprobantes;
 
-public class ConsultaId
+public class ConsultarDetalleComprobanteRequest : IRequest<CntDetalleComprobante>
 {
 
-    public class ConsultarId : IRequest<CntDetalleComprobante>
-    {
+    public int Id { get; set; }
+}
 
-        public int Id { get; set; }
+public class ConsultarDetalleComprobanteHandler : IRequestHandler<ConsultarDetalleComprobanteRequest, CntDetalleComprobante>
+{
+    private readonly CntContext context;
+
+    public ConsultarDetalleComprobanteHandler(CntContext context)
+    {
+        this.context = context;
     }
 
-    public class Manejador : IRequestHandler<ConsultarId, CntDetalleComprobante>
+    public async Task<CntDetalleComprobante> Handle(ConsultarDetalleComprobanteRequest request, CancellationToken cancellationToken)
     {
-        private readonly CntContext context;
-
-        public Manejador(CntContext context)
+        var detalleComprobante = await context.cntDetalleComprobantes.FindAsync(request.Id);
+        if (detalleComprobante == null)
         {
-            this.context = context;
-        }
-
-        public async Task<CntDetalleComprobante> Handle(ConsultarId request, CancellationToken cancellationToken)
-        {
-            var detalleComprobante = await context.cntDetalleComprobantes.FindAsync(request.Id);
-            if (detalleComprobante == null)
-            {
-                throw new Exception("Registro no encontrado");
-            };
-            return detalleComprobante;
-        }
+            throw new Exception("Registro no encontrado");
+        };
+        return detalleComprobante;
     }
 }

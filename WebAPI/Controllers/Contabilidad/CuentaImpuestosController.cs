@@ -14,22 +14,16 @@ namespace ContabilidadWebAPI.Controllers.Contabilidad;
 [Route("api/[controller]")]
 public class CuentaImpuestosController : MiControllerBase
 {
-
-
     [HttpGet]
     public async Task<List<ListarCuentaImpuestosModel>> Get()
     {
-
-        return await Mediator.Send(new Consulta.ListaCntCuentaImpuestos());
-
+        return await Mediator.Send(new ListaCntCuentaImpuestosRequest());
     }
 
     [HttpGet("{Id}")]
-
     public async Task<ActionResult<ListarCuentaImpuestosModel>> GetId(int Id)
     {
-        return await Mediator.Send(new ConsultaId.ConsultarId { Id = Id });
-
+        return await Mediator.Send(new ConsultarCuentaImpuestoRequest { Id = Id });
     }
 
     // [HttpPost]

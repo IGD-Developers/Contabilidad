@@ -366,16 +366,16 @@ partial class IdentityCoreInicial
                 b.Property<string>("Estado")
                     .HasColumnType("longtext");
 
-                b.Property<int>("id_exogenaconcepto")
+                b.Property<int>("IdExogenaconcepto")
                     .HasColumnType("int");
 
-                b.Property<int>("id_formatocolumna")
+                b.Property<int>("IdFormatocolumna")
                     .HasColumnType("int");
 
                 b.Property<int>("IdPuc")
                     .HasColumnType("int");
 
-                b.Property<int>("id_tipooperacion")
+                b.Property<int>("IdTipooperacion")
                     .HasColumnType("int");
 
                 b.HasKey("Id");
@@ -560,21 +560,21 @@ partial class IdentityCoreInicial
                     .ValueGeneratedOnAdd()
                     .HasColumnType("int");
 
-                b.Property<string>("fco_campo")
+                b.Property<string>("FcoCampo")
                     .HasColumnType("longtext");
 
-                b.Property<string>("fco_columna")
+                b.Property<string>("FcoColumna")
                     .HasColumnType("longtext");
 
-                b.Property<string>("fco_tipo")
+                b.Property<string>("FcoTipo")
                     .HasColumnType("longtext");
 
-                b.Property<int>("id_exogenaformato")
+                b.Property<int>("IdExogenaformato")
                     .HasColumnType("int");
 
                 b.HasKey("Id");
 
-                b.HasIndex("id_exogenaformato");
+                b.HasIndex("IdExogenaformato");
 
                 b.ToTable("cnt_formatocolumna");
             });
@@ -585,17 +585,17 @@ partial class IdentityCoreInicial
                     .ValueGeneratedOnAdd()
                     .HasColumnType("int");
 
-                b.Property<int>("id_exogenaconcepto")
+                b.Property<int>("IdExogenaconcepto")
                     .HasColumnType("int");
 
-                b.Property<int>("id_exogenaformato")
+                b.Property<int>("IdExogenaformato")
                     .HasColumnType("int");
 
                 b.HasKey("Id");
 
-                b.HasIndex("id_exogenaconcepto");
+                b.HasIndex("IdExogenaconcepto");
 
-                b.HasIndex("id_exogenaformato");
+                b.HasIndex("IdExogenaformato");
 
                 b.ToTable("cnt_formatoconcepto");
             });
@@ -1490,7 +1490,7 @@ partial class IdentityCoreInicial
             {
                 b.HasOne("Dominio.Contabilidad.CntExogenaFormato", "exogenaFormato")
                     .WithMany("exogenaFormatoFormatoColumnas")
-                    .HasForeignKey("id_exogenaformato")
+                    .HasForeignKey("IdExogenaformato")
                     .OnDelete(DeleteBehavior.Cascade)
                     .IsRequired();
 
@@ -1501,13 +1501,13 @@ partial class IdentityCoreInicial
             {
                 b.HasOne("Dominio.Contabilidad.CntExogenaConcepto", "exogenaConcepto")
                     .WithMany("exogenaConceptoFormatoConceptos")
-                    .HasForeignKey("id_exogenaconcepto")
+                    .HasForeignKey("IdExogenaconcepto")
                     .OnDelete(DeleteBehavior.Cascade)
                     .IsRequired();
 
                 b.HasOne("Dominio.Contabilidad.CntExogenaFormato", "exogenaFormato")
                     .WithMany("exogenaFormatoFormatoConceptos")
-                    .HasForeignKey("id_exogenaformato")
+                    .HasForeignKey("IdExogenaformato")
                     .OnDelete(DeleteBehavior.Cascade)
                     .IsRequired();
 

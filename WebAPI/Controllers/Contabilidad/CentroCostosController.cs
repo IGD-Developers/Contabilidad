@@ -22,7 +22,7 @@ public class CentroCostosController : MiControllerBase
     {
 
 
-        return await Mediator.Send(new Consulta.ListaCntCentroCostos());
+        return await Mediator.Send(new ListaCntCentroCostosRequest());
 
     }
 
@@ -31,17 +31,17 @@ public class CentroCostosController : MiControllerBase
     public async Task<ActionResult<ListarCentroCostosModel>> GetId(int Id)
     {
 
-        return await Mediator.Send(new ConsultaId.ConsultaPorId { Id = Id });
+        return await Mediator.Send(new ConsultarCentroCostoRequest { Id = Id });
     }
 
     [HttpPost]
-    public async Task<ActionResult<Unit>> Insertar(Insertar.Ejecuta data) {
+    public async Task<ActionResult<Unit>> Insertar(InsertarCentroCostoRequest data) {
 
         return await Mediator.Send(data);
     }
     [HttpPut("{Id}")]
 
-    public async Task<ActionResult<Unit>>  Editar(int Id, Editar.Ejecuta data) 
+    public async Task<ActionResult<Unit>>  Editar(int Id, EditarCentroCostoRequest data) 
     
     {
         data.Id = Id;

@@ -7,35 +7,30 @@ using ContabilidadWebAPI.Persistencia;
 
 namespace ContabilidadWebAPI.Aplicacion.Contabilidad.FormatoColumnas;
 
-public class ConsultaId
+public class ConsultarFormatoColumnaRequest : IRequest<CntFormatoColumna>
 {
+    public int Id { get; set; }
+}
 
-    public class ConsultarId : IRequest<CntFormatoColumna>
+
+public class ConsultarFormatoColumnaHandler : IRequestHandler<ConsultarFormatoColumnaRequest, CntFormatoColumna>
+{
+    private readonly CntContext context;
+
+    public ConsultarFormatoColumnaHandler(CntContext context)
     {
-        public int Id { get; set; }
+        this.context = context;
     }
 
-
-    public class Manejador : IRequestHandler<ConsultarId, CntFormatoColumna>
+    public async Task<CntFormatoColumna> Handle(ConsultarFormatoColumnaRequest request, CancellationToken cancellationToken)
     {
-        private readonly CntContext context;
-
-        public Manejador(CntContext context)
+        var formatoColumna = await context.cntFormatoColumnas.FindAsync(request.Id);
+        if (formatoColumna == null)
         {
-            this.context = context;
-        }
+            throw new Exception("Registro no encontrado");
+        };
 
-        public async Task<CntFormatoColumna> Handle(ConsultarId request, CancellationToken cancellationToken)
-        {
-            var formatoColumna = await context.cntFormatoColumnas.FindAsync(request.Id);
-            if (formatoColumna == null)
-            {
-                throw new Exception("Registro no encontrado");
-            };
+        return formatoColumna;
 
-            return formatoColumna;
-
-        }
     }
-
 }

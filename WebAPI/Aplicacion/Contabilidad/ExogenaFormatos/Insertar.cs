@@ -8,50 +8,47 @@ using ContabilidadWebAPI.Persistencia;
 
 namespace ContabilidadWebAPI.Aplicacion.Contabilidad.ExogenaFormatos;
 
-public class Insertar
+public class InsertarExogenaFormatoRequest : IRequest
 {
-    public class Ejecuta : IRequest
+    public string Codigo { get; set; }
+    public string Nombre { get; set; }
+}
+
+public class InsertarExogenaFormatoValidator : AbstractValidator<InsertarExogenaFormatoRequest>
+{
+    public InsertarExogenaFormatoValidator()
     {
-        public string Codigo { get; set; }
-        public string Nombre { get; set; }
+        RuleFor(x => x.Codigo).NotEmpty();
+        RuleFor(x => x.Nombre).NotEmpty();
+
+    }
+}
+
+
+public class InsertarExogenaFormatoHandler : IRequestHandler<InsertarExogenaFormatoRequest>
+{
+    private readonly CntContext context;
+
+    public InsertarExogenaFormatoHandler(CntContext context)
+    {
+        this.context = context;
     }
 
-    public class EjecutaValidador : AbstractValidator<Ejecuta>
+    public async Task<Unit> Handle(InsertarExogenaFormatoRequest request, CancellationToken cancellationToken)
     {
-        public EjecutaValidador()
+
+        var exogenaFormato = new CntExogenaFormato()
         {
-            RuleFor(x => x.Codigo).NotEmpty();
-            RuleFor(x => x.Nombre).NotEmpty();
+            Codigo = request.Nombre,
+            Nombre = request.Nombre
+        };
 
-        }
-    }
-
-
-    public class Manejador : IRequestHandler<Ejecuta>
-    {
-        private readonly CntContext context;
-
-        public Manejador(CntContext context)
+        context.cntExogenaFormatos.Add(exogenaFormato);
+        var respuesta = await context.SaveChangesAsync();
+        if (respuesta > 0)
         {
-            this.context = context;
+            return Unit.Value;
         }
-
-        public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
-        {
-
-            var exogenaFormato = new CntExogenaFormato()
-            {
-                Codigo = request.Nombre,
-                Nombre = request.Nombre
-            };
-
-            context.cntExogenaFormatos.Add(exogenaFormato);
-            var respuesta = await context.SaveChangesAsync();
-            if (respuesta > 0)
-            {
-                return Unit.Value;
-            }
-            throw new Exception("Error al insertar ExogenaFormato");
-        }
+        throw new Exception("Error al insertar ExogenaFormato");
     }
 }

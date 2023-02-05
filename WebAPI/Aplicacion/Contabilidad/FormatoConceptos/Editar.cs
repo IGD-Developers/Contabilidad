@@ -8,59 +8,54 @@ using ContabilidadWebAPI.Persistencia;
 
 namespace ContabilidadWebAPI.Aplicacion.Contabilidad.FormatoConceptos;
 
-public class Editar
+public class EditarFormatoConceptoRequest : IRequest
 {
+    public int Id { get; set; }
+    public int IdExogenaformato { get; set; }
+    public int IdExogenaconcepto { get; set; }
 
-    public class Ejecuta : IRequest
+}
+
+public class EditarFormatoConceptoValidator : AbstractValidator<EditarFormatoConceptoRequest>
+{
+    public EditarFormatoConceptoValidator()
     {
-        public int Id { get; set; }
-        public int id_exogenaformato { get; set; }
-        public int id_exogenaconcepto { get; set; }
+        RuleFor(x => x.Id).NotEmpty();
+        RuleFor(x => x.IdExogenaformato).NotEmpty();
+        RuleFor(x => x.IdExogenaconcepto).NotEmpty();
 
     }
 
-    public class EjecutaValidador : AbstractValidator<Ejecuta>
+}
+
+public class EditarFormatoConceptoHandler : IRequestHandler<EditarFormatoConceptoRequest>
+{
+    private readonly CntContext context;
+
+    public EditarFormatoConceptoHandler(CntContext context)
     {
-        public EjecutaValidador()
-        {
-            RuleFor(x => x.Id).NotEmpty();
-            RuleFor(x => x.id_exogenaformato).NotEmpty();
-            RuleFor(x => x.id_exogenaconcepto).NotEmpty();
-
-        }
-
+        this.context = context;
     }
 
-    public class Manejador : IRequestHandler<Ejecuta>
+    public async Task<Unit> Handle(EditarFormatoConceptoRequest request, CancellationToken cancellationToken)
     {
-        private readonly CntContext context;
 
-        public Manejador(CntContext context)
+        var formatoConcepto = await context.cntFormatoConceptos.FindAsync(request.Id);
+        if (formatoConcepto == null)
         {
-            this.context = context;
+            throw new Exception("Registro no encontrado");
+        };
+
+        formatoConcepto.IdExogenaformato = request.IdExogenaformato;
+        formatoConcepto.IdExogenaconcepto = request.IdExogenaconcepto;
+
+        var resultado = await context.SaveChangesAsync();
+        if (resultado > 0)
+        {
+            return Unit.Value;
         }
 
-        public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
-        {
+        throw new Exception("Error al modificar registro");
 
-            var formatoConcepto = await context.cntFormatoConceptos.FindAsync(request.Id);
-            if (formatoConcepto == null)
-            {
-                throw new Exception("Registro no encontrado");
-            };
-
-            formatoConcepto.IdExogenaformato = request.id_exogenaformato;
-            formatoConcepto.IdExogenaconcepto = request.id_exogenaconcepto;
-
-            var resultado = await context.SaveChangesAsync();
-            if (resultado > 0)
-            {
-                return Unit.Value;
-            }
-
-            throw new Exception("Error al modificar registro");
-
-        }
     }
-
 }

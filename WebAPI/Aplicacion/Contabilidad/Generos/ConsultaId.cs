@@ -9,36 +9,33 @@ using MediatR;
 
 namespace ContabilidadWebAPI.Aplicacion.Contabilidad.Generos;
 
-public class ConsultaId
+public class ConsultarGeneroRequest : IRequest<GeneroModel>
 {
-    public class ConsultarId : IRequest<GeneroModel>
+    public int Id;
+}
+
+public class ConsultarGeneroHandler : IRequestHandler<ConsultarGeneroRequest, GeneroModel>
+{
+    private readonly CntContext _context;
+    private readonly IMapper _mapper;
+
+    public ConsultarGeneroHandler(CntContext context, IMapper mapper)
     {
-        public int Id;
+        _context = context;
+        _mapper = mapper;
     }
 
-    public class Manejador : IRequestHandler<ConsultarId, GeneroModel>
+    public async Task<GeneroModel> Handle(ConsultarGeneroRequest request, CancellationToken cancellationToken)
     {
-        private readonly CntContext _context;
-        private readonly IMapper _mapper;
+        var generoId = await _context.CntGeneros.FindAsync(request.Id);
 
-        public Manejador(CntContext context, IMapper mapper)
+        if (generoId == null)
         {
-            _context = context;
-            _mapper = mapper;
+            throw new Exception("Genero Consultado no Existe");
         }
 
-        public async Task<GeneroModel> Handle(ConsultarId request, CancellationToken cancellationToken)
-        {
-            var generoId = await _context.CntGeneros.FindAsync(request.Id);
+        var generoIdModel = _mapper.Map<CntGenero, GeneroModel>(generoId);
 
-            if (generoId == null)
-            {
-                throw new Exception("Genero Consultado no Existe");
-            }
-
-            var generoIdModel = _mapper.Map<CntGenero, GeneroModel>(generoId);
-
-            return generoIdModel;
-        }
+        return generoIdModel;
     }
 }

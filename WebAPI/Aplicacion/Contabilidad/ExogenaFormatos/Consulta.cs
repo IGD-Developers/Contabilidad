@@ -8,32 +8,25 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ContabilidadWebAPI.Aplicacion.Contabilidad.ExogenaFormatos;
 
-public class Consulta
+public class ListaCntExogenaFormatosRequest : IRequest<List<CntExogenaFormato>>
 {
-    public class ListaCntExogenaFormatos : IRequest<List<CntExogenaFormato>>
-    {
 
+}
+
+public class ListaCntExogenaFormatosHandler : IRequestHandler<ListaCntExogenaFormatosRequest, List<CntExogenaFormato>>
+{
+
+    private readonly CntContext context;
+
+    public ListaCntExogenaFormatosHandler(CntContext context)
+    {
+        this.context = context;
     }
 
-    public class Manejador : IRequestHandler<ListaCntExogenaFormatos, List<CntExogenaFormato>>
+    public async Task<List<CntExogenaFormato>> Handle(ListaCntExogenaFormatosRequest request, CancellationToken cancellationToken)
     {
 
-        private readonly CntContext context;
-
-        public Manejador(CntContext context)
-        {
-            this.context = context;
-        }
-
-        public async Task<List<CntExogenaFormato>> Handle(ListaCntExogenaFormatos request, CancellationToken cancellationToken)
-        {
-
-            var exogenaFormatos = await context.cntExogenaFormatos.ToListAsync();
-            return exogenaFormatos;
-        }
+        var exogenaFormatos = await context.cntExogenaFormatos.ToListAsync();
+        return exogenaFormatos;
     }
-
-
-
-
 }

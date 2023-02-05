@@ -33,7 +33,7 @@ public class CategoriaComprobantesController : MiControllerBase
     public async Task<ActionResult<List<ListarCategoriaComprobantesModel>>> Get()
     {
 
-        return await Mediator.Send(new Consulta.ListaCntCategoriaComprobantes());
+        return await Mediator.Send(new ListaCntCategoriaComprobantesRequest());
 
 
 
@@ -46,14 +46,14 @@ public class CategoriaComprobantesController : MiControllerBase
     public async Task<ActionResult<ListarCategoriaComprobantesModel>> GetId(int Id)
     {
 
-        return await Mediator.Send(new ConsultaId.ConsultarId { Id = Id });
+        return await Mediator.Send(new ConsultarCategoriaComprobanteRequest { Id = Id });
 
     }
 
 
     [HttpPost]
 
-    public async Task<ActionResult<Unit>> Insertar(Insertar.Ejecuta data)
+    public async Task<ActionResult<Unit>> Insertar(InsertarCategoriaComprobanteRequest data)
     {
 
         return await Mediator.Send(data);
@@ -62,7 +62,7 @@ public class CategoriaComprobantesController : MiControllerBase
 
     [HttpPut("{Id}")]
 
-    public async Task<ActionResult<Unit>> Editar(int Id, Editar.Ejecuta data)
+    public async Task<ActionResult<Unit>> Editar(int Id, EditarCategoriaComprobanteRequest data)
 
     {
         data.Id = Id;

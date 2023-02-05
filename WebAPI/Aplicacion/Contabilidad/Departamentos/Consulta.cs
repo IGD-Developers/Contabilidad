@@ -10,27 +10,24 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ContabilidadWebAPI.Aplicacion.Contabilidad.Departamentos;
 
-public class Consulta
+public class ListaDepartamentosRequest : IRequest<List<DepartamentosModel>> { }
+
+public class ListaDepartamentosHandler : IRequestHandler<ListaDepartamentosRequest, List<DepartamentosModel>>
 {
-    public class ListaDepartamentos : IRequest<List<DepartamentosModel>> { }
-
-    public class Manejador : IRequestHandler<ListaDepartamentos, List<DepartamentosModel>>
+    public readonly CntContext _context;
+    public readonly IMapper _mapper;
+    public ListaDepartamentosHandler(CntContext context, IMapper mapper)
     {
-        public readonly CntContext _context;
-        public readonly IMapper _mapper;
-        public Manejador(CntContext context, IMapper mapper)
-        {
-            _context = context;
-            _mapper = mapper;
+        _context = context;
+        _mapper = mapper;
 
 
-        }
+    }
 
-        public async Task<List<DepartamentosModel>> Handle(ListaDepartamentos request, CancellationToken cancellationToken)
-        {
-            var departamentos = await _context.CntDepartamentos.ToListAsync();
-            var DepartamentosModel = _mapper.Map<List<CntDepartamento>, List<DepartamentosModel>>(departamentos);
-            return DepartamentosModel;
-        }
+    public async Task<List<DepartamentosModel>> Handle(ListaDepartamentosRequest request, CancellationToken cancellationToken)
+    {
+        var departamentos = await _context.CntDepartamentos.ToListAsync();
+        var DepartamentosModel = _mapper.Map<List<CntDepartamento>, List<DepartamentosModel>>(departamentos);
+        return DepartamentosModel;
     }
 }

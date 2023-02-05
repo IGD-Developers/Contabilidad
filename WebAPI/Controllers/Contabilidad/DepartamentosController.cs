@@ -15,19 +15,15 @@ namespace ContabilidadWebAPI.Controllers.Contabilidad;
 [Route("api/[controller]")]
 public class DepartamentosController : MiControllerBase
 {
-
     [HttpGet]
     public async Task<ActionResult<List<DepartamentosModel>>> Get()
     {
-        return await Mediator.Send(new Consulta.ListaDepartamentos());
+        return await Mediator.Send(new ListaDepartamentosRequest());
     }
 
     [HttpGet("{Id}")]
     public async Task<ActionResult<DepartamentosModel>> Detalle(int Id)
     {
-        return await Mediator.Send(new ConsultaId.ConsultarId { Id = Id });
+        return await Mediator.Send(new ConsultarDepartamentoRequest{ Id = Id });
     }
-
-
-
 }

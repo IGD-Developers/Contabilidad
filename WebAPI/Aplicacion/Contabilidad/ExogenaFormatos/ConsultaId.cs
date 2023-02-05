@@ -7,34 +7,29 @@ using ContabilidadWebAPI.Dominio.Contabilidad;
 
 namespace ContabilidadWebAPI.Aplicacion.Contabilidad.ExogenaFormatos;
 
-public class ConsultaId
+public class ConsultarExogenaFormatoRequest : IRequest<CntExogenaFormato>
 {
 
-    public class ConsultarId : IRequest<CntExogenaFormato>
-    {
+    public int Id { get; set; }
+}
 
-        public int Id { get; set; }
+public class ConsultarExogenaFormatoHandler : IRequestHandler<ConsultarExogenaFormatoRequest, CntExogenaFormato>
+{
+    private readonly CntContext context;
+
+    public ConsultarExogenaFormatoHandler(CntContext context)
+    {
+        this.context = context;
     }
 
-    public class Manejador : IRequestHandler<ConsultarId, CntExogenaFormato>
+    public async Task<CntExogenaFormato> Handle(ConsultarExogenaFormatoRequest request, CancellationToken cancellationToken)
     {
-        private readonly CntContext context;
-
-        public Manejador(CntContext context)
+        var exogenaFormato = await context.cntExogenaFormatos.FindAsync(request.Id);
+        if (exogenaFormato == null)
         {
-            this.context = context;
-        }
+            throw new Exception("Registro no encontrado");
+        };
 
-        public async Task<CntExogenaFormato> Handle(ConsultarId request, CancellationToken cancellationToken)
-        {
-            var exogenaFormato = await context.cntExogenaFormatos.FindAsync(request.Id);
-            if (exogenaFormato == null)
-            {
-                throw new Exception("Registro no encontrado");
-            };
-
-            return exogenaFormato;
-        }
+        return exogenaFormato;
     }
-
 }
