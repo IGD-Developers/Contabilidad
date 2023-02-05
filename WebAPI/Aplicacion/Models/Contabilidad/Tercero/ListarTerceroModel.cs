@@ -1,15 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using ContabilidadWebAPI.Aplicacion.Models.Contabilidad.Departamentos;
-using ContabilidadWebAPI.Aplicacion.Models.Contabilidad.Entidades;
-using ContabilidadWebAPI.Aplicacion.Models.Contabilidad.Genero;
-using ContabilidadWebAPI.Aplicacion.Models.Contabilidad.Ciius;
-using ContabilidadWebAPI.Aplicacion.Models.Contabilidad.Municipios;
-using ContabilidadWebAPI.Aplicacion.Models.Contabilidad.TipoDocumento;
-using ContabilidadWebAPI.Aplicacion.Models.Contabilidad.ResponsabilidadTercero;
-using ContabilidadWebAPI.Aplicacion.Models.Contabilidad.TipoPersona;
-using ContabilidadWebAPI.Aplicacion.Models.Contabilidad.Regimen;
-
 namespace ContabilidadWebAPI.Aplicacion.Models.Contabilidad.Tercero;
 
 public class ListarTerceroModel

@@ -1,6 +1,3 @@
-using ContabilidadWebAPI.Aplicacion.Models.Contabilidad.SeccionCiius;
-using ContabilidadWebAPI.Aplicacion.Models.Contabilidad.TipoCiius;
-
 namespace ContabilidadWebAPI.Aplicacion.Models.Contabilidad.Ciius;
 
 public class CiiuModel

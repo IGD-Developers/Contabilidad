@@ -1,5 +1,3 @@
-using System;
-
 namespace ContabilidadWebAPI.Aplicacion.Contabilidad.Terceros;
 
 

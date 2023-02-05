@@ -1,10 +1,3 @@
-using System;
-using System.Threading;
-using System.Threading.Tasks;
-using ContabilidadWebAPI.Aplicacion.Models.Contabilidad.NotaAclaratoria;
-using ContabilidadWebAPI.Persistencia;
-using MediatR;
-
 namespace ContabilidadWebAPI.Aplicacion.Contabilidad.NotaAclaratorias;
 
 public class EliminarNotaAclaratoriaRequest : EliminarNotaAclaratoriaModel, IRequest { }

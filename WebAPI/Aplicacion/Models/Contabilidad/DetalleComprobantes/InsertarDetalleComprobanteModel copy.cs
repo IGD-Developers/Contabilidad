@@ -1,5 +1,3 @@
-using ContabilidadWebAPI.Dominio.Contabilidad;
-
 namespace ContabilidadWebAPI.Aplicacion.Models.Contabilidad.DetalleComprobantes;
 
 public class InsertarDetalleComprobanteModel

@@ -1,16 +1,3 @@
-using MediatR;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using System.Threading;
-using Microsoft.EntityFrameworkCore;
-//using ContabilidadWebAPI.Dominio.Contabilidad;
-using ContabilidadWebAPI.Aplicacion.Models.Contabilidad.LiquidaImpuestos;
-using AutoMapper;
-using System.Linq;
-using System;
-using ContabilidadWebAPI.Persistencia;
-using ContabilidadWebAPI.Dominio.Contabilidad;
-
 namespace ContabilidadWebAPI.Aplicacion.Contabilidad.LiquidaImpuestos;
 
 

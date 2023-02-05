@@ -1,15 +1,3 @@
-using MediatR;
-using System.Threading.Tasks;
-using System.Threading;
-using System;
-using AutoMapper;
-using Microsoft.EntityFrameworkCore;
-using System.Linq;
-using ContabilidadWebAPI.Aplicacion.Models.Contabilidad.LiquidaImpuestos;
-using ContabilidadWebAPI.Dominio.Contabilidad;
-using ContabilidadWebAPI.Persistencia;
-using ContabilidadWebAPI.Aplicacion.Models.Contabilidad.Pucs;
-
 namespace ContabilidadWebAPI.Aplicacion.Contabilidad.Pucs;
 
 public class ConsultarPucRequest : IdPucModel, IRequest<ListarPucModel>

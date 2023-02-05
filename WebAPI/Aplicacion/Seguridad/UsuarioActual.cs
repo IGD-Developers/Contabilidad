@@ -1,10 +1,3 @@
-using MediatR;
-using System.Threading.Tasks;
-using System.Threading;
-using Microsoft.AspNetCore.Identity;
-using ContabilidadWebAPI.Aplicacion.Interfaces;
-using ContabilidadWebAPI.Dominio.Configuracion;
-
 namespace ContabilidadWebAPI.Aplicacion.Seguridad;
 
 public class ConsultarUsuarioActualRequest : IRequest<UsuarioData>

@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Generic;
-using ContabilidadWebAPI.Aplicacion.Models.Contabilidad.DetalleComprobantes;
-using ContabilidadWebAPI.Aplicacion.Models.Contabilidad.Comprobantes;
-
 namespace ContabilidadWebAPI.Aplicacion.Models.Contabilidad.LiquidaImpuestos;
 
 public class InsertarLiquidaImpuestosModel

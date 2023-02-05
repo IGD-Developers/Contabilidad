@@ -1,15 +1,3 @@
-using System;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using ContabilidadWebAPI.Aplicacion.Interfaces;
-using ContabilidadWebAPI.Dominio.Configuracion;
-using ContabilidadWebAPI.Persistencia;
-using FluentValidation;
-using MediatR;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-
 namespace ContabilidadWebAPI.Aplicacion.Seguridad;
 
 public class RegistrarUsuarioRequest : IRequest<UsuarioData>

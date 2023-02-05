@@ -1,10 +1,3 @@
-using MediatR;
-using System.Threading.Tasks;
-using System.Threading;
-using System;
-using ContabilidadWebAPI.Dominio.Contabilidad;
-using ContabilidadWebAPI.Persistencia;
-
 namespace ContabilidadWebAPI.Aplicacion.Contabilidad.Meses;
 
 public class ConsultarMesRequest : IRequest<CntMes>

@@ -1,11 +1,3 @@
-using MediatR;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using System.Threading;
-using Microsoft.EntityFrameworkCore;
-using ContabilidadWebAPI.Persistencia;
-using ContabilidadWebAPI.Dominio.Contabilidad;
-
 namespace ContabilidadWebAPI.Aplicacion.Contabilidad.ConceptoCuentas;
 
 public class ListaCntConceptoCuentasRequest : IRequest<List<CntConceptoCuenta>>

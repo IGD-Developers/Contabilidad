@@ -1,10 +1,3 @@
-using MediatR;
-using System.Threading.Tasks;
-using System.Threading;
-using System;
-using ContabilidadWebAPI.Persistencia;
-using ContabilidadWebAPI.Dominio.Contabilidad;
-
 namespace ContabilidadWebAPI.Aplicacion.Contabilidad.FormatoConceptos;
 
 public class ConsultarFormatoConceptoRequest : IRequest<CntFormatoConcepto>

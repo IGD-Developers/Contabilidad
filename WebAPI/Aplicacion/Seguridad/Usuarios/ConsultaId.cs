@@ -1,9 +1,3 @@
-using System.Threading;
-using System.Threading.Tasks;
-using ContabilidadWebAPI.Dominio.Configuracion;
-using ContabilidadWebAPI.Persistencia;
-using MediatR;
-
 namespace ContabilidadWebAPI.Aplicacion.Seguridad.Usuarios;
 
 public class ConsultarCnfUsuarioIdRequest : IRequest<CnfUsuario>

@@ -1,15 +1,3 @@
-using System.Threading;
-using System.Threading.Tasks;
-using MediatR;
-using System;
-using FluentValidation;
-using AutoMapper;
-using System.Linq;
-using Microsoft.EntityFrameworkCore;
-using ContabilidadWebAPI.Aplicacion.Models.Contabilidad.NotaAclaratoria;
-using ContabilidadWebAPI.Persistencia;
-using ContabilidadWebAPI.Dominio.Contabilidad;
-
 namespace ContabilidadWebAPI.Aplicacion.Contabilidad.NotaAclaratorias;
 
 public class EditarNotaAclaratoriaRequest : EditarNotaAclaratoriaModel, IRequest

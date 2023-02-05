@@ -1,7 +1,3 @@
-using System;
-using ContabilidadWebAPI.Aplicacion.Models.Contabilidad.NotaAclaratoriaTipo;
-using ContabilidadWebAPI.Aplicacion.Models.Contabilidad.Pucs;
-
 namespace ContabilidadWebAPI.Aplicacion.Models.Contabilidad.NotaAclaratoria;
 
 public class ListarNotaAclaratoriaModel

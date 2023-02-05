@@ -1,10 +1,3 @@
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using ContabilidadWebAPI.Persistencia.DapperConexion.Contabilidad.Pucs;
-using MediatR;
-
 namespace ContabilidadWebAPI.Aplicacion.Dapper.Contabilidad.PucsDapper;
 
 public class ConsultarPucsDapperRequest : IRequest<List<PucRepositorioModel>> { }

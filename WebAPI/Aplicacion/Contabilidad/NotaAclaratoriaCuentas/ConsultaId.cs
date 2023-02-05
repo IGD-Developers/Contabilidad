@@ -1,9 +1,3 @@
-using MediatR;
-using System.Threading.Tasks;
-using System.Threading;
-using ContabilidadWebAPI.Persistencia;
-using ContabilidadWebAPI.Dominio.Contabilidad;
-
 namespace ContabilidadWebAPI.Aplicacion.Contabilidad.NotaAclaratoriaCuentas;
 
 public class ConsultarNotaAclaratoriaCuentaRequest : IRequest<CntNotaAclaratoriaCuenta>

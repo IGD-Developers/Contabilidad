@@ -1,13 +1,3 @@
-using System.Collections.Generic;
-using System.Threading;
-using MediatR;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-using AutoMapper;
-using ContabilidadWebAPI.Persistencia;
-using ContabilidadWebAPI.Dominio.Contabilidad;
-using ContabilidadWebAPI.Aplicacion.Models.Contabilidad.NotaAclaratoriaTipo;
-
 namespace ContabilidadWebAPI.Aplicacion.Contabilidad.NotaAclaratoriaTipos;
 
 public class ListaCntNotaAclaratoriaTiposRequest : IRequest<List<NotaAclaratoriaTipoModel>>

@@ -1,11 +1,3 @@
-using MediatR;
-using System.Threading.Tasks;
-using System.Threading;
-using System;
-using FluentValidation;
-using ContabilidadWebAPI.Persistencia;
-using ContabilidadWebAPI.Aplicacion.Models.Contabilidad.Pucs;
-
 namespace ContabilidadWebAPI.Aplicacion.Contabilidad.Pucs;
 
 public class EliminarPucRequest : IdPucModel, IRequest

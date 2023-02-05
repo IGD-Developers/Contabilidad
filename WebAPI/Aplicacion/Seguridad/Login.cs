@@ -1,13 +1,3 @@
-using MediatR;
-using ContabilidadWebAPI.Persistencia;
-using System;
-using System.Threading.Tasks;
-using System.Threading;
-using Microsoft.AspNetCore.Identity;
-using FluentValidation;
-using ContabilidadWebAPI.Aplicacion.Interfaces;
-using ContabilidadWebAPI.Dominio.Configuracion;
-
 namespace ContabilidadWebAPI.Aplicacion.Seguridad;
 
 public class LoginRequest : IRequest<UsuarioData>

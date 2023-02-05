@@ -1,10 +1,4 @@
-using MediatR;
-using System.Threading.Tasks;
-using System.Threading;
-using System;
 using ContabilidadWebAPI.Aplicacion.Models.Contabilidad.PucTipos;
-using ContabilidadWebAPI.Persistencia;
-using ContabilidadWebAPI.Dominio.Contabilidad;
 
 namespace ContabilidadWebAPI.Aplicacion.Contabilidad.PucTipos;
 

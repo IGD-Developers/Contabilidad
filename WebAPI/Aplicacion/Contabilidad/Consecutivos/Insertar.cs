@@ -1,11 +1,3 @@
-using System;
-using MediatR;
-using System.Threading.Tasks;
-using System.Threading;
-using Microsoft.EntityFrameworkCore;
-using ContabilidadWebAPI.Persistencia;
-using ContabilidadWebAPI.Dominio.Contabilidad;
-
 namespace ContabilidadWebAPI.Aplicacion.Contabilidad.Consecutivos;
 
 public class InsertarConsecutivoRequest : IRequest<CntConsecutivo>

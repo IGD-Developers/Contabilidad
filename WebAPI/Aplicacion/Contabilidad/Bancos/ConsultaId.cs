@@ -1,13 +1,3 @@
-using MediatR;
-using System.Threading.Tasks;
-using System.Threading;
-using System;
-using AutoMapper;
-using Microsoft.EntityFrameworkCore;
-using ContabilidadWebAPI.Aplicacion.Models.Contabilidad.Bancos;
-using ContabilidadWebAPI.Persistencia;
-using ContabilidadWebAPI.Dominio.Contabilidad;
-
 namespace ContabilidadWebAPI.Aplicacion.Contabilidad.Bancos;
 
 public class ConsultarBancoRequest : IdBancoModel, IRequest<ListarBancosModel>

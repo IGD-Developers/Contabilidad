@@ -1,12 +1,3 @@
-using MediatR;
-using System.Threading.Tasks;
-using System.Threading;
-using System;
-using AutoMapper;
-using ContabilidadWebAPI.Dominio.Contabilidad;
-using ContabilidadWebAPI.Aplicacion.Models.Contabilidad.CentroCostos;
-using ContabilidadWebAPI.Persistencia;
-
 namespace ContabilidadWebAPI.Aplicacion.Contabilidad.CentroCostos;
 
 public class ConsultarCentroCostoRequest : IdCentroCostoModel, IRequest<ListarCentroCostosModel>

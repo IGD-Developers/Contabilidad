@@ -1,11 +1,3 @@
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
-using ContabilidadWebAPI.Dominio.Contabilidad;
-using ContabilidadWebAPI.Persistencia;
-using MediatR;
-using Microsoft.EntityFrameworkCore;
-
 namespace ContabilidadWebAPI.Aplicacion.Contabilidad.DetalleComprobantes;
 
 public class ListaDetalleComprobantesRequest : IRequest<List<CntDetalleComprobante>>

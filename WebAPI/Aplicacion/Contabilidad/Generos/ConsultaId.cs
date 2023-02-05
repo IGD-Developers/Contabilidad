@@ -1,12 +1,3 @@
-using System;
-using System.Threading;
-using System.Threading.Tasks;
-using AutoMapper;
-using ContabilidadWebAPI.Aplicacion.Models.Contabilidad.Genero;
-using ContabilidadWebAPI.Dominio.Contabilidad;
-using ContabilidadWebAPI.Persistencia;
-using MediatR;
-
 namespace ContabilidadWebAPI.Aplicacion.Contabilidad.Generos;
 
 public class ConsultarGeneroRequest : IRequest<GeneroModel>

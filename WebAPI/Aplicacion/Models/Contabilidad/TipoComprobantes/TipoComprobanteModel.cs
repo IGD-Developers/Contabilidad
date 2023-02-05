@@ -1,5 +1,3 @@
-using ContabilidadWebAPI.Aplicacion.Models.Contabilidad.CategoriaComprobantes;
-
 namespace ContabilidadWebAPI.Aplicacion.Models.Contabilidad.TipoComprobantes;
 
 public class TipoComprobanteModel

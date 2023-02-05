@@ -1,13 +1,3 @@
-using MediatR;
-using System.Threading.Tasks;
-using System.Threading;
-using System;
-using AutoMapper;
-using Microsoft.EntityFrameworkCore;
-using ContabilidadWebAPI.Dominio.Contabilidad;
-using ContabilidadWebAPI.Persistencia;
-using ContabilidadWebAPI.Aplicacion.Models.Contabilidad.CategoriaComprobantes;
-
 namespace ContabilidadWebAPI.Aplicacion.Contabilidad.CategoriaComprobantes;
 
 public class ConsultarCategoriaComprobanteRequest : IdCategoriaModel, IRequest<ListarCategoriaComprobantesModel>

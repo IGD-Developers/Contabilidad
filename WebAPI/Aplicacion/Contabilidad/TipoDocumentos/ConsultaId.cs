@@ -1,12 +1,3 @@
-using System;
-using System.Threading;
-using System.Threading.Tasks;
-using AutoMapper;
-using ContabilidadWebAPI.Aplicacion.Models.Contabilidad.TipoDocumento;
-using ContabilidadWebAPI.Dominio.Contabilidad;
-using ContabilidadWebAPI.Persistencia;
-using MediatR;
-
 namespace ContabilidadWebAPI.Aplicacion.Contabilidad.TipoDocumentos;
 
 public class ConsultarTipoDocumentoRequest : IRequest<TipoDocumentoModel>

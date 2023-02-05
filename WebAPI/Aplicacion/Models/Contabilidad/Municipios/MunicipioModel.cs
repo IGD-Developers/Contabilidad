@@ -1,5 +1,3 @@
-using ContabilidadWebAPI.Aplicacion.Models.Contabilidad.Departamentos;
-
 namespace ContabilidadWebAPI.Aplicacion.Models.Contabilidad.Municipios;
 
 public class MunicipioModel

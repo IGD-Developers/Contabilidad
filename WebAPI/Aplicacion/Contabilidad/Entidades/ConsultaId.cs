@@ -1,13 +1,3 @@
-using MediatR;
-using System.Threading.Tasks;
-using System.Threading;
-using System;
-using AutoMapper;
-using Microsoft.EntityFrameworkCore;
-using ContabilidadWebAPI.Dominio.Contabilidad;
-using ContabilidadWebAPI.Persistencia;
-using ContabilidadWebAPI.Aplicacion.Models.Contabilidad.Entidades;
-
 namespace ContabilidadWebAPI.Aplicacion.Contabilidad.Entidades;
 
 public class ConsultarEntidadRequest : IdEntidadModel, IRequest<ListarEntidadesModel>

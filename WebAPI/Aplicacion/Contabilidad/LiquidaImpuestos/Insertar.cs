@@ -1,17 +1,3 @@
-using MediatR;
-using System;
-using System.Threading.Tasks;
-using System.Threading;
-using FluentValidation;
-using ContabilidadWebAPI.Aplicacion.Models.Contabilidad.LiquidaImpuestos;
-using AutoMapper;
-using System.Linq;
-using Microsoft.EntityFrameworkCore;
-using ContabilidadWebAPI.Aplicacion.Models.Contabilidad.Comprobantes;
-using ContabilidadWebAPI.Persistencia;
-using ContabilidadWebAPI.Aplicacion.Contabilidad.Comprobantes;
-using ContabilidadWebAPI.Dominio.Contabilidad;
-
 namespace ContabilidadWebAPI.Aplicacion.Contabilidad.LiquidaImpuestos;
 
 public class InsertarLiquidaImpuestoRequest : InsertarLiquidaImpuestosModel, IRequest

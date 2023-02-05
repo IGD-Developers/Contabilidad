@@ -1,11 +1,3 @@
-using System;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using ContabilidadWebAPI.Aplicacion.Models.Contabilidad.Tercero;
-using ContabilidadWebAPI.Persistencia;
-using MediatR;
-
 namespace ContabilidadWebAPI.Aplicacion.Contabilidad.Terceros;
 
 public class EliminarTerceroRequest : EliminarTerceroModel, IRequest { }

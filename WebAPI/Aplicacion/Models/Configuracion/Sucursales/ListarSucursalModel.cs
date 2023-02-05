@@ -1,5 +1,3 @@
-using ContabilidadWebAPI.Aplicacion.Models.Configuracion.Empresas;
-
 namespace ContabilidadWebAPI.Aplicacion.Models.Configuracion.Sucursales;
 
 public class ListarSucursalModel
