@@ -1,8 +1,3 @@
-using System.Linq;
-using System.Security.Claims;
-using ContabilidadWebAPI.Aplicacion.Interfaces;
-using Microsoft.AspNetCore.Http;
-
 namespace ContabilidadWebAPI.Seguridad.TokenSeguridad;
 
 public class UsuarioSesion : IUsuarioSesion
