@@ -7,36 +7,29 @@ using ContabilidadWebAPI.Dominio.Contabilidad;
 
 namespace ContabilidadWebAPI.Aplicacion.Contabilidad.Uvts;
 
-public class ConsultaId
+public class ConsultarUvtRequest : IRequest<CntUvt>
 {
 
-    public class ConsultarId : IRequest<CntUvt>
-    {
+    public int Id { get; set; }
+}
 
-        public int Id { get; set; }
+public class ConsultarUvtHandler : IRequestHandler<ConsultarUvtRequest, CntUvt>
+{
+    private readonly CntContext context;
+
+    public ConsultarUvtHandler(CntContext context)
+    {
+        this.context = context;
     }
 
-    public class Manejador : IRequestHandler<ConsultarId, CntUvt>
+    public async Task<CntUvt> Handle(ConsultarUvtRequest request, CancellationToken cancellationToken)
     {
-        private readonly CntContext context;
-
-        public Manejador(CntContext context)
+        var uvt = await context.cntUvts.FindAsync(request.Id);
+        if (uvt == null)
         {
-            this.context = context;
-        }
+            throw new Exception("Registro no encontrado");
+        };
 
-        public async Task<CntUvt> Handle(ConsultarId request, CancellationToken cancellationToken)
-        {
-            var uvt = await context.cntUvts.FindAsync(request.Id);
-            if (uvt == null)
-            {
-                throw new Exception("Registro no encontrado");
-            };
-
-            return uvt;
-        }
+        return uvt;
     }
-
-
-
 }

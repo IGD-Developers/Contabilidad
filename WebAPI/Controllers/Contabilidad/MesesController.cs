@@ -18,24 +18,24 @@ public class MesesController : MiControllerBase
     public async Task<ActionResult<List<CntMes>>> Get()
     {
 
-        return await Mediator.Send(new Consulta.ListaCntMeses());
+        return await Mediator.Send(new ListaCntMesesRequest());
 
     }
 
     [HttpPost]
-    public async Task<ActionResult<Unit>> Insertar(Insertar.Ejecuta data)
+    public async Task<ActionResult<Unit>> Insertar(InsertarMesRequest data)
     {
         return await Mediator.Send(data);
     }
 
     // [HttpPut]
-    // public async Task<ActionResult<Unit>>Editar(Editar.Ejecuta data){
+    // public async Task<ActionResult<Unit>>Editar(Editar.ActivarInactivarNotaAclaratoriaRequest data){
     //     return await Mediator.Send(data);
     // }
 
     [HttpPut("{Id}")]
 
-    public async Task<ActionResult<Unit>> Editar(int Id, Editar.Ejecuta data)
+    public async Task<ActionResult<Unit>> Editar(int Id, EditarMesRequest data)
 
     {
         data.Id = Id;

@@ -7,6 +7,7 @@ using System;
 using ContabilidadWebAPI.Controllers;
 using ContabilidadWebAPI.Aplicacion.Contabilidad.Pucs;
 using ContabilidadWebAPI.Aplicacion.Models.Contabilidad.Pucs;
+using static ContabilidadWebAPI.Aplicacion.Contabilidad.Pucs.Insertar;
 
 namespace ContabilidadWebAPI.Controllers.Contabilidad;
 
@@ -24,7 +25,7 @@ public class PucsController : MiControllerBase
     public async Task<ActionResult<List<ListarPucModel>>> Get()
     {
 
-        return await Mediator.Send(new Consulta.ListaCntPucs());
+        return await Mediator.Send(new ListaCntPucsRequest());
     }
 
 
@@ -33,19 +34,19 @@ public class PucsController : MiControllerBase
     public async Task<ActionResult<ListarPucModel>> GetId(int Id)
     {
 
-        return await Mediator.Send(new ConsultaId.ConsultarId { Id = Id });
+        return await Mediator.Send(new ConsultarPucRequest { Id = Id });
     }
 
     [HttpPost]
 
-    public async Task<ActionResult<Unit>> Insertar(Insertar.Ejecuta data)
+    public async Task<ActionResult<Unit>> Insertar(InsertarPucRequest data)
     {
 
         return await Mediator.Send(data);
     }
     [HttpPut("{Id}")]
 
-    public async Task<ActionResult<Unit>> Editar(int Id, Editar.Ejecuta data)
+    public async Task<ActionResult<Unit>> Editar(int Id, EditarPucRequest data)
 
     {
         data.Id = Id;
@@ -57,7 +58,7 @@ public class PucsController : MiControllerBase
     public async Task<ActionResult<Unit>> Eliminar(int Id)
 
     {
-        return await Mediator.Send(new Eliminar.Ejecuta { Id = Id });
+        return await Mediator.Send(new EliminarPucRequest { Id = Id });
     }
 
 }

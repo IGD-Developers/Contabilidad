@@ -9,33 +9,30 @@ using MediatR;
 
 namespace ContabilidadWebAPI.Aplicacion.Contabilidad.TipoDocumentos;
 
-public class ConsultaId
+public class ConsultarTipoDocumentoRequest : IRequest<TipoDocumentoModel>
 {
-    public class ConsultarTipoDocumentoId : IRequest<TipoDocumentoModel>
+    public int Id { get; set; }
+}
+
+public class ConsultarTipoDocumentoHandler : IRequestHandler<ConsultarTipoDocumentoRequest, TipoDocumentoModel>
+{
+    private readonly CntContext _context;
+    private readonly IMapper _mapper;
+    public ConsultarTipoDocumentoHandler(CntContext context, IMapper mapper)
     {
-        public int Id { get; set; }
+        _context = context;
+        _mapper = mapper;
+
     }
 
-    public class Manejador : IRequestHandler<ConsultarTipoDocumentoId, TipoDocumentoModel>
+    public async Task<TipoDocumentoModel> Handle(ConsultarTipoDocumentoRequest request, CancellationToken cancellationToken)
     {
-        private readonly CntContext _context;
-        private readonly IMapper _mapper;
-        public Manejador(CntContext context, IMapper mapper)
-        {
-            _context = context;
-            _mapper = mapper;
+        var tipoDocumento = await _context.CntTipoDocumentos.FindAsync(request.Id);
 
-        }
+        if (tipoDocumento == null)
+            throw new Exception("Tipo Documento Consultado no Existe");
 
-        public async Task<TipoDocumentoModel> Handle(ConsultarTipoDocumentoId request, CancellationToken cancellationToken)
-        {
-            var tipoDocumento = await _context.CntTipoDocumentos.FindAsync(request.Id);
-
-            if (tipoDocumento == null)
-                throw new Exception("Tipo Documento Consultado no Existe");
-
-            var TipoDocumentoModel = _mapper.Map<CntTipoDocumento, TipoDocumentoModel>(tipoDocumento);
-            return TipoDocumentoModel;
-        }
+        var TipoDocumentoModel = _mapper.Map<CntTipoDocumento, TipoDocumentoModel>(tipoDocumento);
+        return TipoDocumentoModel;
     }
 }

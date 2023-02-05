@@ -7,27 +7,22 @@ using MediatR;
 
 namespace ContabilidadWebAPI.Aplicacion.Dapper.Contabilidad.PucsDapper;
 
-public class ConsultaDapper
+public class ConsultarPucsDapperRequest : IRequest<List<PucRepositorioModel>> { }
+
+public class ConsultarPucsDapperHandler : IRequestHandler<ConsultarPucsDapperRequest, List<PucRepositorioModel>>
 {
+    private readonly IPucRepositorio _pucRepositorio;
 
-
-    public class Lista : IRequest<List<PucRepositorioModel>> { }
-
-    public class Manejador : IRequestHandler<Lista, List<PucRepositorioModel>>
+    public ConsultarPucsDapperHandler(IPucRepositorio pucRepositorio)
     {
-        private readonly IPucRepositorio _pucRepositorio;
+        _pucRepositorio = pucRepositorio;
+    }
 
-        public Manejador(IPucRepositorio pucRepositorio)
-        {
-            _pucRepositorio = pucRepositorio;
-        }
-
-        public async Task<List<PucRepositorioModel>> Handle(Lista request, CancellationToken cancellationToken)
-        {
-            var resultado = await _pucRepositorio.ObtenerLista();
-            //IEnumerable resultado lo llevamos a ToList() Para concordar con el Controller
-            return resultado.ToList();
-        }
+    public async Task<List<PucRepositorioModel>> Handle(ConsultarPucsDapperRequest request, CancellationToken cancellationToken)
+    {
+        var resultado = await _pucRepositorio.ObtenerLista();
+        //IEnumerable resultado lo llevamos a ToList() Para concordar con el Controller
+        return resultado.ToList();
     }
 }
 

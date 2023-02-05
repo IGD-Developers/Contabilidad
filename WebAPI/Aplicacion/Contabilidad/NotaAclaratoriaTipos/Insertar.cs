@@ -9,54 +9,51 @@ using MediatR;
 
 namespace ContabilidadWebAPI.Aplicacion.Contabilidad.NotaAclaratoriaTipos;
 
-public class Insertar
+public class InsertarNotaAclaratoriaTipoRequest : IRequest
 {
-    public class Ejecuta : IRequest
-    {
 
-        [StringLength(3, MinimumLength = 3, ErrorMessage = "Debe ingresar solo 3 caracteres")]
-        public string Codigo { get; set; }
-        public string Nombre { get; set; }
+    [StringLength(3, MinimumLength = 3, ErrorMessage = "Debe ingresar solo 3 caracteres")]
+    public string Codigo { get; set; }
+    public string Nombre { get; set; }
+
+}
+
+public class InsertarNotaAclaratoriaTipoValidator : AbstractValidator<InsertarNotaAclaratoriaTipoRequest>
+{
+    public InsertarNotaAclaratoriaTipoValidator()
+    {
+        RuleFor(x => x.Codigo).NotEmpty();
+        RuleFor(x => x.Nombre).NotEmpty();
 
     }
+}
 
-    public class EjecutaValidador : AbstractValidator<Ejecuta>
+public class InsertarNotaAclaratoriaTipoHandler : IRequestHandler<InsertarNotaAclaratoriaTipoRequest>
+{
+    private readonly CntContext _context;
+
+    public InsertarNotaAclaratoriaTipoHandler(CntContext context)
     {
-        public EjecutaValidador()
-        {
-            RuleFor(x => x.Codigo).NotEmpty();
-            RuleFor(x => x.Nombre).NotEmpty();
-
-        }
+        _context = context;
     }
 
-    public class Manejador : IRequestHandler<Ejecuta>
+    public async Task<Unit> Handle(InsertarNotaAclaratoriaTipoRequest request, CancellationToken cancellationToken)
     {
-        private readonly CntContext _context;
-
-        public Manejador(CntContext context)
+        var nota = new CntNotaAclaratoriaTipo
         {
-            _context = context;
+            Codigo = request.Codigo,
+            Nombre = request.Nombre
+        };
+
+        _context.cntNotaAclaratoriaTipos.Add(nota);
+        var valor = await _context.SaveChangesAsync();
+
+        if (valor > 0)
+        {
+            return Unit.Value;
         }
 
-        public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
-        {
-            var nota = new CntNotaAclaratoriaTipo
-            {
-                Codigo = request.Codigo,
-                Nombre = request.Nombre
-            };
+        throw new Exception("No se pudo insertar la nota aclaratoria tipo");
 
-            _context.cntNotaAclaratoriaTipos.Add(nota);
-            var valor = await _context.SaveChangesAsync();
-
-            if (valor > 0)
-            {
-                return Unit.Value;
-            }
-
-            throw new Exception("No se pudo insertar la nota aclaratoria tipo");
-
-        }
     }
 }

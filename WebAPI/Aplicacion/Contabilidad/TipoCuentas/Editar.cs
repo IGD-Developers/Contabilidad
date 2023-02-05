@@ -8,60 +8,55 @@ using ContabilidadWebAPI.Persistencia;
 
 namespace ContabilidadWebAPI.Aplicacion.Contabilidad.TipoCuentas;
 
-public class Editar
+public class EditarTipoCuentaRequest : IRequest
 {
 
+    public int Id { get; set; }
+    public string Codigo { get; set; }
+    public string Nombre { get; set; }
 
-    public class Ejecuta : IRequest
+}
+
+public class EditarTipoCuentaValidator : AbstractValidator<EditarTipoCuentaRequest>
+{
+    public EditarTipoCuentaValidator()
     {
-
-        public int Id { get; set; }
-        public string Codigo { get; set; }
-        public string Nombre { get; set; }
+        RuleFor(x => x.Id).NotEmpty();
+        RuleFor(x => x.Codigo).NotEmpty();
+        RuleFor(x => x.Nombre).NotEmpty();
 
     }
+}
 
-    public class EjecutaValidador : AbstractValidator<Ejecuta>
+public class EditarTipoCuentaHandler : IRequestHandler<EditarTipoCuentaRequest>
+{
+
+    private readonly CntContext context;
+
+    public EditarTipoCuentaHandler(CntContext context)
     {
-        public EjecutaValidador()
-        {
-            RuleFor(x => x.Id).NotEmpty();
-            RuleFor(x => x.Codigo).NotEmpty();
-            RuleFor(x => x.Nombre).NotEmpty();
-
-        }
+        this.context = context;
     }
 
-    public class Manejador : IRequestHandler<Ejecuta>
+    public async Task<Unit> Handle(EditarTipoCuentaRequest request, CancellationToken cancellationToken)
     {
-
-        private readonly CntContext context;
-
-        public Manejador(CntContext context)
+        var TipoCuenta = await context.cntTipoCuentas.FindAsync(request.Id);
+        if (TipoCuenta == null)
         {
-            this.context = context;
-        }
+            throw new Exception("Registro no encontrado");
+        };
 
-        public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
+        TipoCuenta.Codigo = request.Codigo;
+        TipoCuenta.Nombre = request.Nombre;
+
+        var resultado = await context.SaveChangesAsync();
+        if (resultado > 0)
         {
-            var TipoCuenta = await context.cntTipoCuentas.FindAsync(request.Id);
-            if (TipoCuenta == null)
-            {
-                throw new Exception("Registro no encontrado");
-            };
-
-            TipoCuenta.Codigo = request.Codigo;
-            TipoCuenta.Nombre = request.Nombre;
-
-            var resultado = await context.SaveChangesAsync();
-            if (resultado > 0)
-            {
-                return Unit.Value;
-            }
-            throw new Exception("Error al modificar registro");
-
-
-
+            return Unit.Value;
         }
+        throw new Exception("Error al modificar registro");
+
+
+
     }
 }

@@ -10,43 +10,39 @@ using ContabilidadWebAPI.Dominio.Contabilidad;
 
 namespace ContabilidadWebAPI.Aplicacion.Contabilidad.TipoImpuestos;
 
-public class ConsultaId
+public class ConsultarTipoImpuestoRequest : IdModel, IRequest<ListarTipoImpuestosModel>
+{ }
+
+public class ConsultarTipoImpuestoHandler : IRequestHandler<ConsultarTipoImpuestoRequest, ListarTipoImpuestosModel>
 {
-    public class ConsultarId : IdModel, IRequest<ListarTipoImpuestosModel>
-    { }
+    private CntContext _context;
 
-    public class Manejador : IRequestHandler<ConsultarId, ListarTipoImpuestosModel>
+    private readonly IMapper _mapper;
+
+
+
+    public ConsultarTipoImpuestoHandler(CntContext context, IMapper mapper)
     {
-        private CntContext _context;
+        _context = context;
+        _mapper = mapper;
+    }
 
-        private readonly IMapper _mapper;
+    public async Task<ListarTipoImpuestosModel> Handle(ConsultarTipoImpuestoRequest request, CancellationToken cancellationToken)
+    {
 
 
+        var entidad = await _context.cntTipoImpuestos
+        .SingleOrDefaultAsync(i => i.Id == request.Id);
 
-        public Manejador(CntContext context, IMapper mapper)
+        if (entidad == null)
         {
-            _context = context;
-            _mapper = mapper;
-        }
-
-        public async Task<ListarTipoImpuestosModel> Handle(ConsultarId request, CancellationToken cancellationToken)
-        {
-
-
-            var entidad = await _context.cntTipoImpuestos
-            .SingleOrDefaultAsync(i => i.Id == request.Id);
-
-            if (entidad == null)
-            {
-                throw new Exception("Registro no encontrado");
-            };
-            var entidadDto = _mapper.Map<CntTipoImpuesto, ListarTipoImpuestosModel>(entidad);
-            return entidadDto;
+            throw new Exception("Registro no encontrado");
+        };
+        var entidadDto = _mapper.Map<CntTipoImpuesto, ListarTipoImpuestosModel>(entidad);
+        return entidadDto;
 
 
 
-
-        }
 
     }
 

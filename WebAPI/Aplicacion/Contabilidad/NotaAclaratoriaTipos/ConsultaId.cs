@@ -6,30 +6,26 @@ using ContabilidadWebAPI.Dominio.Contabilidad;
 
 namespace ContabilidadWebAPI.Aplicacion.Contabilidad.NotaAclaratoriaTipos;
 
-public class ConsultaId
+public class ConsultarNotaAclaratoriaTipoRequest : IRequest<CntNotaAclaratoriaTipo>
 {
-    public class ConsultarId : IRequest<CntNotaAclaratoriaTipo>
-    {
 
-        public int Id { get; set; }
+    public int Id { get; set; }
+}
+
+public class ConsultarNotaAclaratoriaTipoHandler : IRequestHandler<ConsultarNotaAclaratoriaTipoRequest, CntNotaAclaratoriaTipo>
+{
+
+    private readonly CntContext context;
+
+    public ConsultarNotaAclaratoriaTipoHandler(CntContext context)
+    {
+        this.context = context;
     }
 
-    public class Manejador : IRequestHandler<ConsultarId, CntNotaAclaratoriaTipo>
+    public async Task<CntNotaAclaratoriaTipo> Handle(ConsultarNotaAclaratoriaTipoRequest request, CancellationToken cancellationToken)
     {
+        var notaAclaratoriaTipo = await context.cntNotaAclaratoriaTipos.FindAsync(request.Id);
+        return notaAclaratoriaTipo;
 
-        private readonly CntContext context;
-
-        public Manejador(CntContext context)
-        {
-            this.context = context;
-        }
-
-        public async Task<CntNotaAclaratoriaTipo> Handle(ConsultarId request, CancellationToken cancellationToken)
-        {
-            var notaAclaratoriaTipo = await context.cntNotaAclaratoriaTipos.FindAsync(request.Id);
-            return notaAclaratoriaTipo;
-
-        }
     }
-
 }

@@ -8,59 +8,55 @@ using MediatR;
 
 namespace ContabilidadWebAPI.Aplicacion.Contabilidad.Meses;
 
-public class Insertar
+public class InsertarMesRequest : IRequest
 {
-    public class Ejecuta : IRequest
+    public int mes_ano { get; set; }
+    public int mes_mes { get; set; }
+    public bool mes_cerrado { get; set; }
+    public string IdUsuario { get; set; }
+
+}
+
+public class InsertarMesValidator : AbstractValidator<InsertarMesRequest>
+{
+    public InsertarMesValidator()
     {
-        public int mes_ano { get; set; }
-        public int mes_mes { get; set; }
-        public bool mes_cerrado { get; set; }
-        public string IdUsuario { get; set; }
+        RuleFor(x => x.mes_ano).NotEmpty();
+        RuleFor(x => x.mes_mes).NotEmpty();
+        RuleFor(x => x.mes_cerrado).NotEmpty();
+        RuleFor(x => x.IdUsuario).NotEmpty();
 
     }
+}
 
-    public class EjecutaValidador : AbstractValidator<Ejecuta>
+public class InsertarMesHandler : IRequestHandler<InsertarMesRequest>
+{
+    public readonly CntContext _context;
+
+    public InsertarMesHandler(CntContext context)
     {
-        public EjecutaValidador()
-        {
-            RuleFor(x => x.mes_ano).NotEmpty();
-            RuleFor(x => x.mes_mes).NotEmpty();
-            RuleFor(x => x.mes_cerrado).NotEmpty();
-            RuleFor(x => x.IdUsuario).NotEmpty();
-
-        }
+        _context = context;
     }
 
-    public class Manejador : IRequestHandler<Ejecuta>
+    public async Task<Unit> Handle(InsertarMesRequest request, CancellationToken cancellationToken)
     {
-        public readonly CntContext _context;
-
-        public Manejador(CntContext context)
+        var mes = new CntMes
         {
-            _context = context;
+            MesAno = request.mes_ano,
+            MesMes = request.mes_mes,
+            MesCerrado = request.mes_cerrado,
+            IdUsuario = request.IdUsuario
+
+        };
+
+        _context.cntMeses.Add(mes);
+        var valor = await _context.SaveChangesAsync();
+
+        if (valor > 0)
+        {
+            return Unit.Value;
         }
 
-        public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
-        {
-            var mes = new CntMes
-            {
-                MesAno = request.mes_ano,
-                MesMes = request.mes_mes,
-                MesCerrado = request.mes_cerrado,
-                IdUsuario = request.IdUsuario
-
-            };
-
-            _context.cntMeses.Add(mes);
-            var valor = await _context.SaveChangesAsync();
-
-            if (valor > 0)
-            {
-                return Unit.Value;
-            }
-
-            throw new Exception("No se pudo insertar el Mes");
-        }
+        throw new Exception("No se pudo insertar el Mes");
     }
-
 }

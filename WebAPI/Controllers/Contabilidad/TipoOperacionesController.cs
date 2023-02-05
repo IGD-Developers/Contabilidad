@@ -20,7 +20,7 @@ public class TipoOperacionesController : MiControllerBase
     {
 
 
-        return await Mediator.Send(new Consulta.ListaCntTipoOperaciones());
+        return await Mediator.Send(new ListaCntTipoOperacionesRequest());
 
     }
 
@@ -28,12 +28,12 @@ public class TipoOperacionesController : MiControllerBase
 
     public async Task<ActionResult<CntTipoOperacion>> GetId(int Id)
     {
-        return await Mediator.Send(new ConsultaId.ConsultarId { Id = Id });
+        return await Mediator.Send(new ConsultarTipoOperacionRequest { Id = Id });
     }
 
     [HttpPost]
 
-    public async Task<ActionResult<Unit>> Insertar(Insertar.Ejecuta data)
+    public async Task<ActionResult<Unit>> Insertar(InsertarTipoOperacionRequest data)
     {
 
         return await Mediator.Send(data);
@@ -41,7 +41,7 @@ public class TipoOperacionesController : MiControllerBase
 
     [HttpPut("{Id}")]
 
-    public async Task<ActionResult<Unit>> Editar(int Id, Editar.Ejecuta data)
+    public async Task<ActionResult<Unit>> Editar(int Id, EditarTipoOperacionRequest data)
 
     {
         data.Id = Id;

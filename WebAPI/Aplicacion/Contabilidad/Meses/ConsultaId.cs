@@ -7,33 +7,28 @@ using ContabilidadWebAPI.Persistencia;
 
 namespace ContabilidadWebAPI.Aplicacion.Contabilidad.Meses;
 
-public class ConsultaId
+public class ConsultarMesRequest : IRequest<CntMes>
 {
+    public int Id { get; set; }
+}
 
-    public class ConsultarId : IRequest<CntMes>
+public class ConsultarMesHandler : IRequestHandler<ConsultarMesRequest, CntMes>
+{
+    private readonly CntContext context;
+
+    public ConsultarMesHandler(CntContext context)
     {
-        public int Id { get; set; }
+        this.context = context;
     }
 
-    public class Manejador : IRequestHandler<ConsultarId, CntMes>
+    public async Task<CntMes> Handle(ConsultarMesRequest request, CancellationToken cancellationToken)
     {
-        private readonly CntContext context;
-
-        public Manejador(CntContext context)
+        var mes = await context.cntMeses.FindAsync(request.Id);
+        if (mes == null)
         {
-            this.context = context;
-        }
+            throw new Exception("Registro no encontrado");
+        };
 
-        public async Task<CntMes> Handle(ConsultarId request, CancellationToken cancellationToken)
-        {
-            var mes = await context.cntMeses.FindAsync(request.Id);
-            if (mes == null)
-            {
-                throw new Exception("Registro no encontrado");
-            };
-
-            return mes;
-        }
+        return mes;
     }
-
 }

@@ -19,7 +19,7 @@ public class UsuariosController : MiControllerBase
 
     [HttpPost("login")]
 
-    public async Task<ActionResult<UsuarioData>> Login(Login.Ejecuta parametros) {
+    public async Task<ActionResult<UsuarioData>> Login(LoginRequest parametros) {
 
         //Ahora invocamos directamente al manejador  de la Clase Login (que esta en Aplicacion.Seguridad) su public async Task<>
         // que nos returna el objeto UsuarioData dependiendo de si existe el Usuario:
@@ -32,7 +32,7 @@ public class UsuariosController : MiControllerBase
 
     [HttpPost("registrar")]
 
-    public async Task<ActionResult<UsuarioData>> Registrar(Registrar.Ejecuta parametros) {
+    public async Task<ActionResult<UsuarioData>> Registrar(RegistrarUsuarioRequest parametros) {
 
         //Ahora invocamos directamente al manejador  de la Clase Ejecuta (que esta en Aplicacion.Seguridad) su public async Task<>
         // que nos returna el objeto UsuarioData :
@@ -44,6 +44,6 @@ public class UsuariosController : MiControllerBase
 
     [HttpGet]
     public async Task<ActionResult<UsuarioData>> DevolverUsuario(){
-        return await Mediator.Send(new UsuarioActual.Ejecuta());
+        return await Mediator.Send(new ConsultarUsuarioActualRequest());
     }
 }

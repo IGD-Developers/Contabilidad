@@ -7,48 +7,45 @@ using MediatR;
 
 namespace ContabilidadWebAPI.Aplicacion.Contabilidad.NotaAclaratorias;
 
-public class Eliminar
+public class EliminarNotaAclaratoriaRequest : EliminarNotaAclaratoriaModel, IRequest { }
+
+public class EliminarNotaAclaratoriaHandler : IRequestHandler<EliminarNotaAclaratoriaRequest>
 {
-    public class Ejecuta : EliminarNotaAclaratoriaModel, IRequest { }
+    private readonly CntContext _context;
 
-    public class Manejador : IRequestHandler<Ejecuta>
+    public EliminarNotaAclaratoriaHandler(CntContext context)
     {
-        private readonly CntContext _context;
+        _context = context;
+    }
 
-        public Manejador(CntContext context)
+    public async Task<Unit> Handle(EliminarNotaAclaratoriaRequest request, CancellationToken cancellationToken)
+    {
+        //TODO: Traer solo un campo 
+        var nota = await _context.cntNotaAclaratorias.FindAsync(request.Id);
+        if (nota == null)
         {
-            _context = context;
+            throw new Exception("Nota Aclaratoria a Eliminar no existe");
         }
 
-        public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
+        try
         {
-            //TODO: Traer solo un campo 
-            var nota = await _context.cntNotaAclaratorias.FindAsync(request.Id);
-            if (nota == null)
+            _context.Remove(nota);
+
+            var resultado = await _context.SaveChangesAsync();
+            if (resultado > 0)
             {
-                throw new Exception("Nota Aclaratoria a Eliminar no existe");
+                return Unit.Value;
             }
 
-            try
-            {
-                _context.Remove(nota);
-
-                var resultado = await _context.SaveChangesAsync();
-                if (resultado > 0)
-                {
-                    return Unit.Value;
-                }
-
-                throw new Exception("No se elimino la nota aclaratoria");
-
-            }
-            catch (SystemException e)
-            {
-                throw new Exception("Ocurrio un error al eliminar la nota aclaratoria cath", e);
-            }
-
-
+            throw new Exception("No se elimino la nota aclaratoria");
 
         }
+        catch (SystemException e)
+        {
+            throw new Exception("Ocurrio un error al eliminar la nota aclaratoria cath", e);
+        }
+
+
+
     }
 }

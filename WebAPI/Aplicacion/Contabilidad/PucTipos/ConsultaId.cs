@@ -8,36 +8,31 @@ using ContabilidadWebAPI.Dominio.Contabilidad;
 
 namespace ContabilidadWebAPI.Aplicacion.Contabilidad.PucTipos;
 
-public class ConsultaId
+public class ConsultarPucTipoRequest : IdPucTipoModel, IRequest<CntPucTipo>
+{ }
+
+
+public class ConsultarPucTipoHandler : IRequestHandler<ConsultarPucTipoRequest, CntPucTipo>
 {
 
-    public class ConsultarId : IdPucTipoModel, IRequest<CntPucTipo>
-    { }
+    private readonly CntContext context;
 
+    public ConsultarPucTipoHandler(CntContext context)
+    {
+        this.context = context;
+    }
 
-    public class Manejador : IRequestHandler<ConsultarId, CntPucTipo>
+    public async Task<CntPucTipo> Handle(ConsultarPucTipoRequest request, CancellationToken cancellationToken)
     {
 
-        private readonly CntContext context;
-
-        public Manejador(CntContext context)
+        var PucTipo = await context.cntPucTipos.FindAsync(request.Id);
+        if (PucTipo == null)
         {
-            this.context = context;
-        }
-
-        public async Task<CntPucTipo> Handle(ConsultarId request, CancellationToken cancellationToken)
-        {
-
-            var PucTipo = await context.cntPucTipos.FindAsync(request.Id);
-            if (PucTipo == null)
-            {
-                throw new Exception("Registro no encontrado");
-            };
-            return PucTipo;
-
-        }
-
+            throw new Exception("Registro no encontrado");
+        };
+        return PucTipo;
 
     }
+
 
 }

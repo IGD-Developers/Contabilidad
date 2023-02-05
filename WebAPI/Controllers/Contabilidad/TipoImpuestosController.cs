@@ -6,6 +6,7 @@ using ContabilidadWebAPI.Dominio.Contabilidad;
 using ContabilidadWebAPI.Controllers;
 using ContabilidadWebAPI.Aplicacion.Contabilidad.TipoImpuestos;
 using ContabilidadWebAPI.Aplicacion.Models.Contabilidad.TipoImpuestos;
+using ContabilidadWebAPI.Aplicacion.Contabilidad.TipoOperaciones;
 
 namespace ContabilidadWebAPI.Controllers.Contabilidad;
 
@@ -23,7 +24,7 @@ public class TipoImpuestosController : MiControllerBase
     public async Task<ActionResult<List<ListarTipoImpuestosModel>>> Get()
     {
 
-        return await Mediator.Send(new Consulta.ListaCntTipoImpuestos());
+        return await Mediator.Send(new ListaCntTipoImpuestosRequest());
 
 
 
@@ -34,19 +35,19 @@ public class TipoImpuestosController : MiControllerBase
     public async Task<ActionResult<ListarTipoImpuestosModel>> GetId(int Id)
     {
 
-        return await Mediator.Send(new ConsultaId.ConsultarId { Id = Id });
+        return await Mediator.Send(new ConsultarTipoImpuestoRequest { Id = Id });
     }
 
     [HttpPost]
 
-    public async Task<ActionResult<Unit>> Insertar(Insertar.Ejecuta data)
+    public async Task<ActionResult<Unit>> Insertar(InsertarTipoImpuestoRequest data)
     {
         return await Mediator.Send(data);
     }
 
     [HttpPut("{Id}")]
 
-    public async Task<ActionResult<Unit>> Editar(int Id, Editar.Ejecuta data)
+    public async Task<ActionResult<Unit>> Editar(int Id, EditarTipoImpuestoRequest data)
 
     {
         data.Id = Id;

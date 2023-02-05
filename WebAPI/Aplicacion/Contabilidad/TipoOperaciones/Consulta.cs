@@ -8,28 +8,23 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ContabilidadWebAPI.Aplicacion.Contabilidad.TipoOperaciones;
 
-public class Consulta
+public class ListaCntTipoOperacionesRequest : IRequest<List<CntTipoOperacion>>
 {
 
-    public class ListaCntTipoOperaciones : IRequest<List<CntTipoOperacion>>
-    {
+}
 
+public class ListaCntTipoOperacionesHandler : IRequestHandler<ListaCntTipoOperacionesRequest, List<CntTipoOperacion>>
+{
+    private readonly CntContext context;
+
+    public ListaCntTipoOperacionesHandler(CntContext context)
+    {
+        this.context = context;
     }
 
-    public class Manejador : IRequestHandler<ListaCntTipoOperaciones, List<CntTipoOperacion>>
+    public async Task<List<CntTipoOperacion>> Handle(ListaCntTipoOperacionesRequest request, CancellationToken cancellationToken)
     {
-        private readonly CntContext context;
-
-        public Manejador(CntContext context)
-        {
-            this.context = context;
-        }
-
-        public async Task<List<CntTipoOperacion>> Handle(ListaCntTipoOperaciones request, CancellationToken cancellationToken)
-        {
-            var tipoOperaciones = await context.cntTipoOperaciones.ToListAsync();
-            return tipoOperaciones;
-        }
+        var tipoOperaciones = await context.cntTipoOperaciones.ToListAsync();
+        return tipoOperaciones;
     }
-
 }

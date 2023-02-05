@@ -8,30 +8,24 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ContabilidadWebAPI.Aplicacion.Contabilidad.PucTipos;
 
-public class Consulta
+public class ListaCntPucTiposRequest : IRequest<List<CntPucTipo>>
 {
 
-    public class ListaCntPucTipos : IRequest<List<CntPucTipo>>
+
+}
+
+public class ListaCntPucTiposHandler : IRequestHandler<ListaCntPucTiposRequest, List<CntPucTipo>>
+{
+    private readonly CntContext context;
+    public ListaCntPucTiposHandler(CntContext _context)
     {
-
-
+        context = _context;
     }
 
-    public class Manejador : IRequestHandler<ListaCntPucTipos, List<CntPucTipo>>
+    public async Task<List<CntPucTipo>> Handle(ListaCntPucTiposRequest request, CancellationToken cancellationToken)
     {
-        private readonly CntContext context;
-        public Manejador(CntContext _context)
-        {
-            context = _context;
-        }
+        var pucTipos = await context.cntPucTipos.ToListAsync();
+        return pucTipos;
 
-        public async Task<List<CntPucTipo>> Handle(ListaCntPucTipos request, CancellationToken cancellationToken)
-        {
-            var pucTipos = await context.cntPucTipos.ToListAsync();
-            return pucTipos;
-
-        }
     }
-
-
 }
