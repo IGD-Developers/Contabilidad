@@ -1,11 +1,3 @@
-using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
-using ContabilidadWebAPI.Persistencia.Mapeo.Contabilidad;
-using ContabilidadWebAPI.Persistencia.Mapeo.Configuracion;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using ContabilidadWebAPI.Dominio.Contabilidad;
-using ContabilidadWebAPI.Dominio.Configuracion;
-
 namespace ContabilidadWebAPI.Persistencia;
 
 public class CntContext : IdentityDbContext<CnfUsuario>

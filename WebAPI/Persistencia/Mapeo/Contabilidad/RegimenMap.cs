@@ -1,7 +1,3 @@
-using ContabilidadWebAPI.Dominio.Contabilidad;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-
 namespace ContabilidadWebAPI.Persistencia.Mapeo.Contabilidad;
 
 public class RegimenMap : IEntityTypeConfiguration<CntRegimen>

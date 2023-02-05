@@ -1,9 +1,3 @@
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Microsoft.AspNetCore.Identity;
-using ContabilidadWebAPI.Dominio.Contabilidad;
-using ContabilidadWebAPI.Dominio.Configuracion;
-
 namespace ContabilidadWebAPI.Persistencia.Mapeo.Configuracion;
 
 public class UsuarioMap : IEntityTypeConfiguration<CnfUsuario>
