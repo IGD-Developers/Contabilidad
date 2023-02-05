@@ -17,31 +17,31 @@ public class NotaAclaratoriasController : MiControllerBase
     public async Task<ActionResult<List<ListarNotaAclaratoriaModel>>> Get()
     {
 
-        return await Mediator.Send(new Consulta.ListaCntNotaAclaratorias());
+        return await Mediator.Send(new ListaCntNotaAclaratoriasRequest());
 
     }
 
     [HttpGet("{Id}")]
     public async Task<ActionResult<ListarNotaAclaratoriaModel>> GetId(int Id)
     {
-        return await Mediator.Send(new ConsultaId.ConsultarId { Id = Id });
+        return await Mediator.Send(new ConsultarNotaAclaratoriaRequest { Id = Id });
     }
 
     [HttpPost]
-    public async Task<ActionResult<Unit>> Insertar(Insertar.Ejecuta data)
+    public async Task<ActionResult<Unit>> Insertar(InsertarNotaAclaratoriaRequest data)
     {
         return await Mediator.Send(data);
     }
 
     [HttpPut("editar/{Id}")]
-    public async Task<ActionResult<Unit>> Editar(int Id, Editar.Ejecuta data)
+    public async Task<ActionResult<Unit>> Editar(int Id, EditarNotaAclaratoriaRequest data)
     {
         data.Id = Id;
         return await Mediator.Send(data);
     }
 
     [HttpDelete("eliminar/{Id}")]
-    public async Task<ActionResult<Unit>> Eliminar(int Id, Eliminar.Ejecuta data)
+    public async Task<ActionResult<Unit>> Eliminar(int Id, EliminarNotaAclaratoriaRequest data)
     {
         data.Id = Id;
         return await Mediator.Send(data);
@@ -49,7 +49,7 @@ public class NotaAclaratoriasController : MiControllerBase
     }
 
     [HttpPut("cambiarestado/{Id}")]
-    public async Task<ActionResult<Unit>> CambiarEstado(int Id, ActivarInactivar.Ejecuta data)
+    public async Task<ActionResult<Unit>> CambiarEstado(int Id, ActivarInactivarNotaAclaratoriaRequest data)
     {
         data.Id = Id;
         return await Mediator.Send(data);

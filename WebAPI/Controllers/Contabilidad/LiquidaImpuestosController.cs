@@ -30,14 +30,14 @@ public class LiquidaImpuestosController : MiControllerBase
     public async Task<ActionResult<ListarLiquidaImpuestosModel>> GetId(int Id)
     {
 
-        return await Mediator.Send(new ConsultaId.ConsultarId { Id = Id });
+        return await Mediator.Send(new ConsultarLiquidaImpuestoRequest { Id = Id });
 
     }
 
 
 
     [HttpGet("getfiltro")]
-    public async Task<ActionResult<List<ListarLiquidaImpuestosModel>>> GetFiltro(Consulta.ListaCntLiquidaImpuestos data)
+    public async Task<ActionResult<List<ListarLiquidaImpuestosModel>>> GetFiltro(ListaCntLiquidaImpuestosRequest data)
     {
 
         return await Mediator.Send(data);
@@ -47,7 +47,7 @@ public class LiquidaImpuestosController : MiControllerBase
 
 
     [HttpGet("getdata")]
-    public async Task<ActionResult<List<ListarDetallesPreLiquidacionImpuestoModel>>> GetData(ConsultaPreLiquidacion.ConsultarPreLiquidacion data)
+    public async Task<ActionResult<List<ListarDetallesPreLiquidacionImpuestoModel>>> GetData(ConsultarPreLiquidacionRequest data)
     {
 
         return await Mediator.Send(data);
@@ -56,14 +56,14 @@ public class LiquidaImpuestosController : MiControllerBase
 
     // [HttpPost]
 
-    // public async Task<ActionResult<Unit>> Insertar(Insertar.Ejecuta data)
+    // public async Task<ActionResult<Unit>> Insertar(Insertar.ActivarInactivarNotaAclaratoriaRequest data)
     // {
 
     //     return await Mediator.Send(data);
     // }
     [HttpPut("{Id}")]
 
-    public async Task<ActionResult<Unit>> Editar(int Id, Editar.Ejecuta data)
+    public async Task<ActionResult<Unit>> Editar(int Id, EditarLiquidaImpuestoRequest data)
 
     {
         data.Id = Id;

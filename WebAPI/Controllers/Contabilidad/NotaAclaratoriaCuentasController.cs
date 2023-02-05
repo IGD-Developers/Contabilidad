@@ -20,18 +20,18 @@ public class NotaAclaratoriaCuentasController : MiControllerBase
     public async Task<ActionResult<List<CntNotaAclaratoriaCuenta>>> Get()
     {
 
-        return await Mediator.Send(new Consulta.ListaCntNotaAclaratoriaCuentas());
+        return await Mediator.Send(new ListaCntNotaAclaratoriaCuentasRequest());
 
     }
 
     [HttpPost]
-    public async Task<ActionResult<Unit>> Insertar(Insertar.Ejecuta dato)
+    public async Task<ActionResult<Unit>> Insertar(InsertarNotaAclaratoriaCuentaRequest dato)
     {
         return await Mediator.Send(dato);
     }
 
     [HttpPut]
-    public async Task<ActionResult<Unit>> Editar(Editar.Ejecuta dato)
+    public async Task<ActionResult<Unit>> Editar(EditarNotaAclaratoriaCuentaRequest dato)
     {
         return await Mediator.Send(dato);
     }
