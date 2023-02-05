@@ -17,7 +17,7 @@ public class BancosController : MiControllerBase
     [HttpGet]
     public async Task<ActionResult<List<ListarBancosModel>>> Get()
     {
-        return await Mediator.Send(new Consulta.ListaCntBancos());
+        return await Mediator.Send(new ListaCntBancosRequest());
     }
 
 
@@ -27,13 +27,13 @@ public class BancosController : MiControllerBase
     public async Task<ActionResult<ListarBancosModel>> GetId(int Id)
     {
 
-        return await Mediator.Send(new ConsultaId.ConsultarId { Id = Id });
+        return await Mediator.Send(new ConsultarBancoRequest { Id = Id });
 
     }
     
     [HttpPost]
 
-    public async Task<ActionResult<Unit>> Insertar(Insertar.Ejecuta data)
+    public async Task<ActionResult<Unit>> Insertar(InsertarBancoRequest data)
     {
 
         return await Mediator.Send(data);
@@ -42,7 +42,7 @@ public class BancosController : MiControllerBase
 
 [HttpPut("{Id}")]
 
-    public async Task<ActionResult<Unit>>  Editar(int Id, Editar.Ejecuta data) 
+    public async Task<ActionResult<Unit>>  Editar(int Id, EditarBancoRequest data) 
     
     {
         data.Id = Id;

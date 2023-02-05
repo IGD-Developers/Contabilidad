@@ -8,55 +8,52 @@ using ContabilidadWebAPI.Persistencia;
 
 namespace ContabilidadWebAPI.Aplicacion.Contabilidad.Uvts;
 
-public class Insertar
+public class InsertarUvtRequest : IRequest
 {
-    public class Ejecuta : IRequest
-    {
 
-        public int uvt_ano { get; set; }
-        public double uvt_valor { get; set; }
-        public DateTime CreatedAt { get; set; }
-        public DateTime? UpdatedAt { get; set; }
+    public int uvt_ano { get; set; }
+    public double uvt_valor { get; set; }
+    public DateTime CreatedAt { get; set; }
+    public DateTime? UpdatedAt { get; set; }
+
+}
+
+public class InsertarUvtValidator : AbstractValidator<InsertarUvtRequest>
+{
+    public InsertarUvtValidator()
+    {
+        RuleFor(x => x.uvt_ano).NotEmpty();
+        RuleFor(x => x.uvt_valor).NotEmpty();
 
     }
+}
 
-    public class EjecutaValidador : AbstractValidator<Ejecuta>
+
+public class InsertarUvtHandler : IRequestHandler<InsertarUvtRequest>
+{
+
+    private readonly CntContext context;
+
+    public InsertarUvtHandler(CntContext context)
     {
-        public EjecutaValidador()
-        {
-            RuleFor(x => x.uvt_ano).NotEmpty();
-            RuleFor(x => x.uvt_valor).NotEmpty();
-
-        }
+        this.context = context;
     }
 
-
-    public class Manejador : IRequestHandler<Ejecuta>
+    public async Task<Unit> Handle(InsertarUvtRequest request, CancellationToken cancellationToken)
     {
-
-        private readonly CntContext context;
-
-        public Manejador(CntContext context)
+        var uvt = new CntUvt
         {
-            this.context = context;
+            UvtAno = request.uvt_ano,
+            UvtValor = request.uvt_valor
+        };
+
+        context.cntUvts.Add(uvt);
+        var respuesta = await context.SaveChangesAsync();
+        if (respuesta > 0)
+        {
+            return Unit.Value;
         }
 
-        public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
-        {
-            var uvt = new CntUvt
-            {
-                UvtAno = request.uvt_ano,
-                UvtValor = request.uvt_valor
-            };
-
-            context.cntUvts.Add(uvt);
-            var respuesta = await context.SaveChangesAsync();
-            if (respuesta > 0)
-            {
-                return Unit.Value;
-            }
-
-            throw new Exception("Error al insertar TipoOperacion");
-        }
+        throw new Exception("Error al insertar TipoOperacion");
     }
 }

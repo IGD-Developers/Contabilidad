@@ -8,55 +8,49 @@ using ContabilidadWebAPI.Persistencia;
 
 namespace ContabilidadWebAPI.Aplicacion.Contabilidad.ExogenaFormatos;
 
-public class Editar
+public class EditarExogenaFormatoRequest : IRequest
 {
+    public int Id { get; set; }
+    public string Codigo { get; set; }
+    public string Nombre { get; set; }
+}
 
-    public class Ejecuta : IRequest
+public class EditarExogenaFormatoValidator : AbstractValidator<EditarExogenaFormatoRequest>
+{
+    public EditarExogenaFormatoValidator()
     {
-        public int Id { get; set; }
-        public string Codigo { get; set; }
-        public string Nombre { get; set; }
+        RuleFor(x => x.Id).NotEmpty();
+        RuleFor(x => x.Codigo).NotEmpty();
+        RuleFor(x => x.Nombre).NotEmpty();
+
+    }
+}
+
+public class EditarExogenaFormatoHandler : IRequestHandler<EditarExogenaFormatoRequest>
+{
+    private readonly CntContext context;
+
+    public EditarExogenaFormatoHandler(CntContext context)
+    {
+        this.context = context;
     }
 
-    public class EjecutaValidador : AbstractValidator<Ejecuta>
+    public async Task<Unit> Handle(EditarExogenaFormatoRequest request, CancellationToken cancellationToken)
     {
-        public EjecutaValidador()
+        var exogenaFormato = await context.cntExogenaFormatos.FindAsync(request.Id);
+        if (exogenaFormato == null)
         {
-            RuleFor(x => x.Id).NotEmpty();
-            RuleFor(x => x.Codigo).NotEmpty();
-            RuleFor(x => x.Nombre).NotEmpty();
-
+            throw new Exception("Registro no encontrado");
+        };
+        exogenaFormato.Codigo = request.Nombre;
+        exogenaFormato.Nombre = request.Nombre;
+        var resultado = await context.SaveChangesAsync();
+        if (resultado > 0)
+        {
+            return Unit.Value;
         }
+
+        throw new Exception("Error al modificar registro");
+
     }
-
-    public class Manejador : IRequestHandler<Ejecuta>
-    {
-        private readonly CntContext context;
-
-        public Manejador(CntContext context)
-        {
-            this.context = context;
-        }
-
-        public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
-        {
-            var exogenaFormato = await context.cntExogenaFormatos.FindAsync(request.Id);
-            if (exogenaFormato == null)
-            {
-                throw new Exception("Registro no encontrado");
-            };
-            exogenaFormato.Codigo = request.Nombre;
-            exogenaFormato.Nombre = request.Nombre;
-            var resultado = await context.SaveChangesAsync();
-            if (resultado > 0)
-            {
-                return Unit.Value;
-            }
-
-            throw new Exception("Error al modificar registro");
-
-        }
-    }
-
-
 }

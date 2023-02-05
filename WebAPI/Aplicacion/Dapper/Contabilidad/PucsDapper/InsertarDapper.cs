@@ -7,75 +7,70 @@ using MediatR;
 
 namespace ContabilidadWebAPI.Aplicacion.Dapper.Contabilidad.PucsDapper;
 
-public class InsertarDapper
+public class InsertarPucsDapperRequest : IRequest
 {
 
-    public class Ejecuta : IRequest
+    public string Codigo { get; set; }
+    public string Nombre { get; set; }
+    public int? IdPuctipo { get; set; }
+    public int? IdTipocuenta { get; set; }
+    public bool PacActiva { get; set; }
+    public bool PacBase { get; set; }
+    public bool PacAjusteniif { get; set; }
+
+    public string IdUsuario { get; set; }
+}
+
+public class InsertarPucsDapperValidator : AbstractValidator<InsertarPucsDapperRequest>
+{
+    public InsertarPucsDapperValidator()
     {
 
-        public string Codigo { get; set; }
-        public string Nombre { get; set; }
-        public int? IdPuctipo { get; set; }
-        public int? IdTipocuenta { get; set; }
-        public bool PacActiva { get; set; }
-        public bool PacBase { get; set; }
-        public bool PacAjusteniif { get; set; }
+        RuleFor(x => x.Codigo).NotEmpty();
+        RuleFor(x => x.Nombre).NotEmpty();
+        RuleFor(x => x.IdTipocuenta).NotEmpty();
+        // RuleFor(x=>x.PacActiva).NotEmpty();
+        // RuleFor(x=>x.PacBase).NotEmpty();
+        // RuleFor(x=>x.PacAjusteniif).NotEmpty();
+        RuleFor(x => x.IdUsuario).NotEmpty();
 
-        public string IdUsuario { get; set; }
+
     }
+}
 
-    public class EjecutaValidador : AbstractValidator<Ejecuta>
+
+public class InsertarPucsDapperHandler : IRequestHandler<InsertarPucsDapperRequest>
+{
+
+    private readonly IPucRepositorio _pucRepositorio;
+
+    public InsertarPucsDapperHandler(IPucRepositorio pucRepositorio)
     {
-        public EjecutaValidador()
-        {
-
-            RuleFor(x => x.Codigo).NotEmpty();
-            RuleFor(x => x.Nombre).NotEmpty();
-            RuleFor(x => x.IdTipocuenta).NotEmpty();
-            // RuleFor(x=>x.PacActiva).NotEmpty();
-            // RuleFor(x=>x.PacBase).NotEmpty();
-            // RuleFor(x=>x.PacAjusteniif).NotEmpty();
-            RuleFor(x => x.IdUsuario).NotEmpty();
-
-
-        }
+        _pucRepositorio = pucRepositorio;
     }
 
-
-    public class Manejador : IRequestHandler<Ejecuta>
+    public async Task<Unit> Handle(InsertarPucsDapperRequest request, CancellationToken cancellationToken)
     {
 
-        private readonly IPucRepositorio _pucRepositorio;
-
-        public Manejador(IPucRepositorio pucRepositorio)
+        PucRepositorioModel modelo = new PucRepositorioModel
         {
-            _pucRepositorio = pucRepositorio;
+            Codigo = request.Codigo,
+            Nombre = request.Nombre,
+            IdPuctipo = request.IdPuctipo,
+            IdTipocuenta = request.IdTipocuenta,
+            PacActiva = request.PacActiva,
+            PacBase = request.PacBase,
+            PacAjusteniif = request.PacAjusteniif,
+            IdUsuario = request.IdUsuario
+        };
+
+        var resultado = await _pucRepositorio.Insertar(modelo);
+        if (resultado > 0)
+        {
+            return Unit.Value;
         }
 
-        public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
-        {
-
-            PucRepositorioModel modelo = new PucRepositorioModel
-            {
-                Codigo = request.Codigo,
-                Nombre = request.Nombre,
-                IdPuctipo = request.IdPuctipo,
-                IdTipocuenta = request.IdTipocuenta,
-                PacActiva = request.PacActiva,
-                PacBase = request.PacBase,
-                PacAjusteniif = request.PacAjusteniif,
-                IdUsuario = request.IdUsuario
-            };
-
-            var resultado = await _pucRepositorio.Insertar(modelo);
-            if (resultado > 0)
-            {
-                return Unit.Value;
-            }
-
-            throw new Exception("Error al registrar Cuenta");
-        }
+        throw new Exception("Error al registrar Cuenta");
     }
-
 }
 

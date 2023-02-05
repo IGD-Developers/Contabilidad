@@ -19,7 +19,7 @@ public class SucursalesController : MiControllerBase
     {
 
 
-        return await Mediator.Send(new Consulta.ListaCnfSucursales());
+        return await Mediator.Send(new ListaCnfSucursalesRequest());
     }
 
     [HttpGet("{Id}")]
@@ -27,19 +27,19 @@ public class SucursalesController : MiControllerBase
     public async Task<ActionResult<ListarSucursalModel>> GetId(int Id)
     {
 
-        return await Mediator.Send(new ConsultaId.ConsultarId { Id = Id });
+        return await Mediator.Send(new ConsultarSucursalRequest { Id = Id });
     }
 
     [HttpPost]
 
-    public async Task<ActionResult<Unit>> Insertar(Insertar.Ejecuta data){
+    public async Task<ActionResult<Unit>> Insertar(InsertarSucursalRequest data){
 
         return await  Mediator.Send(data);
     }
 
      [HttpPut("{Id}")]
 
-    public async Task<ActionResult<Unit>>  Editar(int Id, Editar.Ejecuta data) 
+    public async Task<ActionResult<Unit>>  Editar(int Id, EditarSucursalRequest data) 
     
     {
         data.Id = Id;

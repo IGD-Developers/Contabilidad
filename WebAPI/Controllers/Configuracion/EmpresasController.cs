@@ -29,7 +29,7 @@ public class EmpresasController : MiControllerBase
     public async Task<ActionResult<List<ListarEmpresasModel>>> Get()
     {
 
-        return await Mediator.Send(new Consulta.ListaCnfEmpresas());
+        return await Mediator.Send(new ListaCnfEmpresasRequest());
 
     }
 
@@ -38,13 +38,13 @@ public class EmpresasController : MiControllerBase
     public async Task<ActionResult<ListarEmpresasModel>> GetId(int Id)
     {
 
-        return await Mediator.Send(new ConsultaId.ConsultarId { Id = Id });
+        return await Mediator.Send(new ConsultarEmpresaRequest { Id = Id });
     }
 
     
 [HttpPost]
 
-public async Task<ActionResult<Unit>> Insertar(Insertar.Ejecuta data) {
+public async Task<ActionResult<Unit>> Insertar(InsertarEmpresaRequest data) {
 
     return await Mediator.Send(data);
 
@@ -52,7 +52,7 @@ public async Task<ActionResult<Unit>> Insertar(Insertar.Ejecuta data) {
 
 [HttpPut("{Id}")]
 
-    public async Task<ActionResult<Unit>>  Editar(int Id, Editar.Ejecuta data) 
+    public async Task<ActionResult<Unit>>  Editar(int Id, EditarEmpresaRequest data) 
     
     {
         data.Id = Id;

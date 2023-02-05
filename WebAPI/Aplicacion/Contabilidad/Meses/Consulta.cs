@@ -8,29 +8,25 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ContabilidadWebAPI.Aplicacion.Contabilidad.Meses;
 
-public class Consulta
+public class ListaCntMesesRequest : IRequest<List<CntMes>>
 {
-    public class ListaCntMeses : IRequest<List<CntMes>>
-    {
 
+}
+
+public class ListaCntMesesHandler : IRequestHandler<ListaCntMesesRequest, List<CntMes>>
+{
+    private CntContext context;
+
+    public ListaCntMesesHandler(CntContext context)
+    {
+        this.context = context;
     }
 
-    public class Manejador : IRequestHandler<ListaCntMeses, List<CntMes>>
+    public async Task<List<CntMes>> Handle(ListaCntMesesRequest request, CancellationToken cancellationToken)
     {
-        private CntContext context;
 
-        public Manejador(CntContext context)
-        {
-            this.context = context;
-        }
+        var listaMeses = await context.cntMeses.ToListAsync();
+        return listaMeses;
 
-        public async Task<List<CntMes>> Handle(ListaCntMeses request, CancellationToken cancellationToken)
-        {
-
-            var listaMeses = await context.cntMeses.ToListAsync();
-            return listaMeses;
-
-        }
     }
-
 }

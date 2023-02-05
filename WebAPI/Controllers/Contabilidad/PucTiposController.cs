@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 using ContabilidadWebAPI.Controllers;
 using ContabilidadWebAPI.Aplicacion.Contabilidad.PucTipos;
 using ContabilidadWebAPI.Dominio.Contabilidad;
+using ContabilidadWebAPI.Aplicacion.Contabilidad.Pucs;
+using static ContabilidadWebAPI.Aplicacion.Contabilidad.Pucs.Insertar;
 
 namespace ContabilidadWebAPI.Controllers.Contabilidad;
 
@@ -19,7 +21,7 @@ public class PucTiposController : MiControllerBase
     public async Task<ActionResult<List<CntPucTipo>>> Get()
     {
 
-        return await Mediator.Send(new Consulta.ListaCntPucTipos());
+        return await Mediator.Send(new ListaCntPucTiposRequest());
     }
 
 
@@ -28,13 +30,13 @@ public class PucTiposController : MiControllerBase
     public async Task<ActionResult<CntPucTipo>> GetId(int Id)
     {
 
-        return await Mediator.Send(new ConsultaId.ConsultarId { Id = Id });
+        return await Mediator.Send(new ConsultarPucTipoRequest { Id = Id });
 
     }
 
     [HttpPost]
 
-    public async Task<ActionResult<Unit>> insertar(Insertar.Ejecuta data)
+    public async Task<ActionResult<Unit>> insertar(InsertarPucTipoRequest data)
     {
 
         return await Mediator.Send(data);
@@ -44,7 +46,7 @@ public class PucTiposController : MiControllerBase
 
     [HttpPut("{Id}")]
 
-    public async Task<ActionResult<Unit>> Editar(int Id, Editar.Ejecuta data)
+    public async Task<ActionResult<Unit>> Editar(int Id, EditarPucTipoRequest data)
 
     {
         data.Id = Id;

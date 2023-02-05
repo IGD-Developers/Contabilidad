@@ -7,45 +7,41 @@ using ContabilidadWebAPI.Persistencia;
 
 namespace ContabilidadWebAPI.Aplicacion.Contabilidad.ConceptoCuentas;
 
-public class Insertar
+public class InsertarConceptoCuentaRequest : IRequest
 {
-    public class Ejecuta : IRequest
-    {
 
-        public int id_exogenaconcepto { get; set; }
-        public int IdPuc { get; set; }
-        public int id_formatocolumna { get; set; }
-        public int id_tipooperacion { get; set; }
-        public string Estado { get; set; }
+    public int IdExogenaconcepto { get; set; }
+    public int IdPuc { get; set; }
+    public int IdFormatocolumna { get; set; }
+    public int IdTipooperacion { get; set; }
+    public string Estado { get; set; }
+}
+
+public class InsertarConceptoCuentaHandler : IRequestHandler<InsertarConceptoCuentaRequest>
+{
+    private readonly CntContext context;
+
+    public InsertarConceptoCuentaHandler(CntContext context)
+    {
+        this.context = context;
     }
 
-    public class Manejador : IRequestHandler<Ejecuta>
+    public async Task<Unit> Handle(InsertarConceptoCuentaRequest request, CancellationToken cancellationToken)
     {
-        private readonly CntContext context;
-
-        public Manejador(CntContext context)
+        var conceptoCuenta = new CntConceptoCuenta
         {
-            this.context = context;
-        }
-
-        public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
+            IdExogenaconcepto = request.IdExogenaconcepto,
+            IdPuc = request.IdPuc,
+            IdFormatocolumna = request.IdFormatocolumna,
+            IdTipooperacion = request.IdTipooperacion,
+            Estado = request.Estado
+        };
+        context.cntConceptoCuentas.Add(conceptoCuenta);
+        var respuesta = await context.SaveChangesAsync();
+        if (respuesta > 0)
         {
-            var conceptoCuenta = new CntConceptoCuenta
-            {
-                IdExogenaconcepto = request.id_exogenaconcepto,
-                IdPuc = request.IdPuc,
-                IdFormatocolumna = request.id_formatocolumna,
-                IdTipooperacion = request.id_tipooperacion,
-                Estado = request.Estado
-            };
-            context.cntConceptoCuentas.Add(conceptoCuenta);
-            var respuesta = await context.SaveChangesAsync();
-            if (respuesta > 0)
-            {
-                return Unit.Value;
-            }
-            throw new Exception("Error 112 al insertar conceptocuenta");
+            return Unit.Value;
         }
+        throw new Exception("Error 112 al insertar conceptocuenta");
     }
-
 }

@@ -7,65 +7,62 @@ using ContabilidadWebAPI.Persistencia;
 
 namespace ContabilidadWebAPI.Aplicacion.Contabilidad.FormatoColumnas;
 
-public class Editar
+public class EditarFormatoColumnaRequest : IRequest
 {
-    public class Ejecuta : IRequest
-    {
 
-        public int Id { get; set; }
-        public int id_exogenaformato { get; set; }
-        public string fco_columna { get; set; }
-        public string fco_campo { get; set; }
-        public string fco_tipo { get; set; }
+    public int Id { get; set; }
+    public int IdExogenaformato { get; set; }
+    public string FcoColumna { get; set; }
+    public string FcoCampo { get; set; }
+    public string FcoTipo { get; set; }
+}
+
+public class EditarFormatoColumnaValidator : AbstractValidator<EditarFormatoColumnaRequest>
+{
+    public EditarFormatoColumnaValidator()
+    {
+        RuleFor(x => x.Id).NotEmpty();
+        RuleFor(x => x.IdExogenaformato).NotEmpty();
+        RuleFor(x => x.FcoColumna).NotEmpty();
+        RuleFor(x => x.FcoCampo).NotEmpty();
+        RuleFor(x => x.FcoTipo).NotEmpty();
+
+    }
+}
+
+public class EditarFormatoColumnaHandler : IRequestHandler<EditarFormatoColumnaRequest>
+{
+    private readonly CntContext context;
+
+    public EditarFormatoColumnaHandler(CntContext context)
+    {
+        this.context = context;
     }
 
-    public class EjecutaValidador : AbstractValidator<Ejecuta>
+    public async Task<Unit> Handle(EditarFormatoColumnaRequest request, CancellationToken cancellationToken)
     {
-        public EjecutaValidador()
+
+        var formatoColumna = await context.cntFormatoColumnas.FindAsync(request.Id);
+        if (formatoColumna == null)
         {
-            RuleFor(x => x.Id).NotEmpty();
-            RuleFor(x => x.id_exogenaformato).NotEmpty();
-            RuleFor(x => x.fco_columna).NotEmpty();
-            RuleFor(x => x.fco_campo).NotEmpty();
-            RuleFor(x => x.fco_tipo).NotEmpty();
+            throw new Exception("Registro no encontrado");
+        };
+        formatoColumna.IdExogenaformato = request.IdExogenaformato;
+        formatoColumna.FcoColumna = request.FcoColumna; ;
+        formatoColumna.FcoCampo = request.FcoCampo; ;
+        formatoColumna.FcoTipo = request.FcoTipo;
 
-        }
-    }
-
-    public class Manejador : IRequestHandler<Ejecuta>
-    {
-        private readonly CntContext context;
-
-        public Manejador(CntContext context)
+        var resultado = await context.SaveChangesAsync();
+        if (resultado > 0)
         {
-            this.context = context;
+            return Unit.Value;
         }
 
-        public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
-        {
-
-            var formatoColumna = await context.cntFormatoColumnas.FindAsync(request.Id);
-            if (formatoColumna == null)
-            {
-                throw new Exception("Registro no encontrado");
-            };
-            formatoColumna.IdExogenaformato = request.id_exogenaformato;
-            formatoColumna.FcoColumna = request.fco_columna; ;
-            formatoColumna.FcoCampo = request.fco_campo; ;
-            formatoColumna.FcoTipo = request.fco_tipo;
-
-            var resultado = await context.SaveChangesAsync();
-            if (resultado > 0)
-            {
-                return Unit.Value;
-            }
-
-            throw new Exception("Error al modificar registro");
+        throw new Exception("Error al modificar registro");
 
 
 
 
-        }
     }
 }
 

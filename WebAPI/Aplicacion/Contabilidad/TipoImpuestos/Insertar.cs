@@ -10,65 +10,60 @@ using ContabilidadWebAPI.Dominio.Contabilidad;
 
 namespace ContabilidadWebAPI.Aplicacion.Contabilidad.TipoImpuestos;
 
-public class Insertar
+public class InsertarTipoImpuestoRequest : InsertarTipoImpuestosModel, IRequest
+{ }
+
+public class InsertarTipoImpuestoValidator : AbstractValidator<InsertarTipoImpuestoRequest>
+{
+    public InsertarTipoImpuestoValidator()
+    {
+        RuleFor(x => x.Codigo).NotEmpty();
+        RuleFor(x => x.Nombre).NotEmpty();
+
+    }
+}
+
+
+public class InsertarTipoImpuestoHandler : IRequestHandler<InsertarTipoImpuestoRequest>
 {
 
-    public class Ejecuta : InsertarTipoImpuestosModel, IRequest
-    { }
+    private CntContext _context;
 
-    public class EjecutaValidador : AbstractValidator<Ejecuta>
+    private readonly IMapper _mapper;
+
+
+
+    public InsertarTipoImpuestoHandler(CntContext context, IMapper mapper)
     {
-        public EjecutaValidador()
-        {
-            RuleFor(x => x.Codigo).NotEmpty();
-            RuleFor(x => x.Nombre).NotEmpty();
-
-        }
+        _context = context;
+        _mapper = mapper;
     }
 
-
-    public class Manejador : IRequestHandler<Ejecuta>
+    public async Task<Unit> Handle(InsertarTipoImpuestoRequest request, CancellationToken cancellationToken)
     {
 
-        private CntContext _context;
-
-        private readonly IMapper _mapper;
-
-
-
-        public Manejador(CntContext context, IMapper mapper)
+        //Como vamos a grabar primero el modelo y luego la entidad:
+        try
         {
-            _context = context;
-            _mapper = mapper;
+            var entidadDto = _mapper.Map<InsertarTipoImpuestosModel, CntTipoImpuesto>(request);
+
+            await _context.cntTipoImpuestos.AddAsync(entidadDto);
+            var respuesta = await _context.SaveChangesAsync();
+            if (respuesta > 0)
+            {
+
+                return Unit.Value;
+            }
+            throw new Exception("Error al insertar Registro");
+        }
+        catch (Exception ex)
+        {
+            //TODO: MARIA  Llave duplicada  CODIGO TIPOIMPUESTO Implementar
+            throw new Exception("Error al Insertar registro catch " + ex.Message);
+
         }
 
-        public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
-        {
-
-            //Como vamos a grabar primero el modelo y luego la entidad:
-            try
-            {
-                var entidadDto = _mapper.Map<InsertarTipoImpuestosModel, CntTipoImpuesto>(request);
-
-                await _context.cntTipoImpuestos.AddAsync(entidadDto);
-                var respuesta = await _context.SaveChangesAsync();
-                if (respuesta > 0)
-                {
-
-                    return Unit.Value;
-                }
-                throw new Exception("Error al insertar Registro");
-            }
-            catch (Exception ex)
-            {
-                //TODO: MARIA  Llave duplicada  CODIGO TIPOIMPUESTO Implementar
-                throw new Exception("Error al Insertar registro catch " + ex.Message);
-
-            }
 
 
-
-        }
     }
-
 }

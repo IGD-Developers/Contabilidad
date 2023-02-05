@@ -8,30 +8,26 @@ using ContabilidadWebAPI.Persistencia;
 
 namespace ContabilidadWebAPI.Aplicacion.Contabilidad.Anos;
 
-public class ConsultaId
+public class ConsultarAnoRequest : IdAnoModel, IRequest<CntAno>
+{ }
+
+public class ConsultarAnoHandler : IRequestHandler<ConsultarAnoRequest, CntAno>
 {
-    public class ConsultarId : IdAnoModel, IRequest<CntAno>
-    { }
+    private readonly CntContext context;
 
-    public class Manejador : IRequestHandler<ConsultarId, CntAno>
+    public ConsultarAnoHandler(CntContext context)
     {
-        private readonly CntContext context;
-
-        public Manejador(CntContext context)
-        {
-            this.context = context;
-        }
-
-        public async Task<CntAno> Handle(ConsultarId request, CancellationToken cancellationToken)
-        {
-            var ano = await context.cntAnos.FindAsync(request.Id);
-            if (ano == null)
-            {
-                throw new Exception("Registro no encontrado");
-            };
-            return ano;
-
-        }
+        this.context = context;
     }
 
+    public async Task<CntAno> Handle(ConsultarAnoRequest request, CancellationToken cancellationToken)
+    {
+        var ano = await context.cntAnos.FindAsync(request.Id);
+        if (ano == null)
+        {
+            throw new Exception("Registro no encontrado");
+        };
+        return ano;
+
+    }
 }

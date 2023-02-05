@@ -7,30 +7,26 @@ using ContabilidadWebAPI.Dominio.Contabilidad;
 
 namespace ContabilidadWebAPI.Aplicacion.Contabilidad.Consecutivos;
 
-public class ConsultaId
+public class ConsultarConsecutivoRequest : IRequest<CntConsecutivo>
 {
+    public int Id { get; set; }
+}
+public class ConsultarConsecutivoHandler : IRequestHandler<ConsultarConsecutivoRequest, CntConsecutivo>
+{
+    private readonly CntContext context;
 
-    public class ConsultarId : IRequest<CntConsecutivo>
+    public ConsultarConsecutivoHandler(CntContext context)
     {
-        public int Id { get; set; }
+        this.context = context;
     }
-    public class Manejador : IRequestHandler<ConsultarId, CntConsecutivo>
+
+    public async Task<CntConsecutivo> Handle(ConsultarConsecutivoRequest request, CancellationToken cancellationToken)
     {
-        private readonly CntContext context;
-
-        public Manejador(CntContext context)
+        var consecutivo = await context.cntConsecutivos.FindAsync(request.Id);
+        if (consecutivo == null)
         {
-            this.context = context;
-        }
-
-        public async Task<CntConsecutivo> Handle(ConsultarId request, CancellationToken cancellationToken)
-        {
-            var consecutivo = await context.cntConsecutivos.FindAsync(request.Id);
-            if (consecutivo == null)
-            {
-                throw new Exception("Registro no encontrado");
-            };
-            return consecutivo;
-        }
+            throw new Exception("Registro no encontrado");
+        };
+        return consecutivo;
     }
 }

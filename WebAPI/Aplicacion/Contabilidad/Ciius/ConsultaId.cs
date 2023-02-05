@@ -10,39 +10,35 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ContabilidadWebAPI.Aplicacion.Contabilidad.Ciius;
 
-public class ConsultaId
+public class ConsultarCiiuRequest : IRequest<CiiuModel>
 {
-    public class ConsultarId : IRequest<CiiuModel>
+    public int Id { get; set; }
+}
+
+public class ConsultarCiiuHandler : IRequestHandler<ConsultarCiiuRequest, CiiuModel>
+{
+    private readonly CntContext _cntContext;
+    private readonly IMapper _mapper;
+
+    public ConsultarCiiuHandler(CntContext cntContext, IMapper mapper)
     {
-        public int Id { get; set; }
+        _cntContext = cntContext;
+        _mapper = mapper;
     }
 
-    public class Manejador : IRequestHandler<ConsultarId, CiiuModel>
+    public async Task<CiiuModel> Handle(ConsultarCiiuRequest request, CancellationToken cancellationToken)
     {
-        private readonly CntContext _cntContext;
-        private readonly IMapper _mapper;
+        var ciiusId = await _cntContext.CntCiius
+        .Include(x => x.CiiuSeccionCiiu)
+        .Include(x => x.CiiuTipoCiiu)
+        .FirstOrDefaultAsync(x => x.Id == request.Id);
 
-        public Manejador(CntContext cntContext, IMapper mapper)
+        if (ciiusId == null)
         {
-            _cntContext = cntContext;
-            _mapper = mapper;
+            throw new Exception("CIIUS Consultado no Existe");
         }
 
-        public async Task<CiiuModel> Handle(ConsultarId request, CancellationToken cancellationToken)
-        {
-            var ciiusId = await _cntContext.CntCiius
-            .Include(x => x.CiiuSeccionCiiu)
-            .Include(x => x.CiiuTipoCiiu)
-            .FirstOrDefaultAsync(x => x.Id == request.Id);
-
-            if (ciiusId == null)
-            {
-                throw new Exception("CIIUS Consultado no Existe");
-            }
-
-            var ciiusIdModel = _mapper.Map<CntCiiu, CiiuModel>(ciiusId);
-            return ciiusIdModel;
-        }
+        var ciiusIdModel = _mapper.Map<CntCiiu, CiiuModel>(ciiusId);
+        return ciiusIdModel;
     }
-
 }

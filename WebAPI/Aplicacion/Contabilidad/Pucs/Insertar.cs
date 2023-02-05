@@ -14,13 +14,13 @@ namespace ContabilidadWebAPI.Aplicacion.Contabilidad.Pucs;
 
 public class Insertar
 {
-    public class Ejecuta : InsertarPucModel, IRequest
+    public class InsertarPucRequest : InsertarPucModel, IRequest
     { }
 
 
-    public class EjecutaValidador : AbstractValidator<Ejecuta>
+    public class InsertarPucValidator : AbstractValidator<InsertarPucRequest>
     {
-        public EjecutaValidador()
+        public InsertarPucValidator()
         {
             RuleFor(x => x.Codigo).NotEmpty();
             RuleFor(x => x.Nombre).NotEmpty();
@@ -38,7 +38,7 @@ public class Insertar
         }
     }
 
-    public class Manejador : IRequestHandler<Ejecuta>
+    public class InsertarPucHandler : IRequestHandler<InsertarPucRequest>
     {
 
         private readonly CntContext _context;
@@ -46,13 +46,13 @@ public class Insertar
 
 
 
-        public Manejador(CntContext context, IMapper mapper)
+        public InsertarPucHandler(CntContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;
         }
 
-        public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(InsertarPucRequest request, CancellationToken cancellationToken)
         {
             //Clase : primer digito
             //Grupo: dos digitos

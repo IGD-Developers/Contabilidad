@@ -21,18 +21,15 @@ public class PucsDapperController : MiControllerBase
     public async Task<ActionResult<List<PucRepositorioModel>>> ObtenerPucsDapper()
     {
 
-        return await Mediator.Send(new ConsultaDapper.Lista());
+        return await Mediator.Send(new ConsultarPucsDapperRequest());
 
 
     }
 
     [HttpPost]
-    public async Task<ActionResult<Unit>> Insertar(InsertarDapper.Ejecuta data)
+    public async Task<ActionResult<Unit>> Insertar(InsertarPucsDapperRequest data)
     {
 
         return await Mediator.Send(data);
     }
-
-
-
 }

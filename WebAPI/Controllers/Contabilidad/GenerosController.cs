@@ -19,13 +19,12 @@ public class GenerosController : MiControllerBase
     [HttpGet]
     public async Task<ActionResult<List<GeneroModel>>> Get()
     {
-        return await Mediator.Send(new Consulta.ListaGeneros());
+        return await Mediator.Send(new ListaGenerosRequest());
     }
-
 
     [HttpGet("{Id}")]
     public async Task<ActionResult<GeneroModel>> Detalle(int Id)
     {
-        return await Mediator.Send(new ConsultaId.ConsultarId { Id = Id });
+        return await Mediator.Send(new ConsultarGeneroRequest{ Id = Id });
     }
 }

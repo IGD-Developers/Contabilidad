@@ -24,14 +24,14 @@ public class MunicipiosController : ControllerBase
     [HttpGet]
     public async Task<ActionResult<List<MunicipioModel>>> Get()
     {
-        return await _mediator.Send(new Consulta.ListarMunicipios());
+        return await _mediator.Send(new ListarMunicipiosRequest());
     }
 
 
     [HttpGet("{Id}")]
     public async Task<ActionResult<MunicipioModel>> Detalle(int Id)
     {
-        return await _mediator.Send(new ConsultaId.ConsultarId { Id = Id });
+        return await _mediator.Send(new ConsultarMunicipioRequest { Id = Id });
     }
 
 

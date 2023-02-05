@@ -10,42 +10,38 @@ using ContabilidadWebAPI.Aplicacion.Models.Contabilidad.Entidades;
 
 namespace ContabilidadWebAPI.Aplicacion.Contabilidad.Entidades;
 
-public class ConsultaId
+public class ConsultarEntidadRequest : IdEntidadModel, IRequest<ListarEntidadesModel>
+{ }
+
+public class ConsultarEntidadHandler : IRequestHandler<ConsultarEntidadRequest, ListarEntidadesModel>
 {
-    public class ConsultarId : IdEntidadModel, IRequest<ListarEntidadesModel>
-    { }
+    private CntContext _context;
+    private readonly IMapper _mapper;
 
-    public class Manejador : IRequestHandler<ConsultarId, ListarEntidadesModel>
+
+
+    public ConsultarEntidadHandler(CntContext context, IMapper mapper)
     {
-        private CntContext _context;
-        private readonly IMapper _mapper;
-
-
-
-        public Manejador(CntContext context, IMapper mapper)
-        {
-            _context = context;
-            _mapper = mapper;
-        }
-
-        public async Task<ListarEntidadesModel> Handle(ConsultarId request, CancellationToken cancellationToken)
-        {
-
-            var entidad = await _context.cntEntidades
-            .Include(t => t.Tercero)
-            .Include(i => i.TipoImpuesto)
-            .SingleOrDefaultAsync(i => i.Id == request.Id);
-
-
-            if (entidad == null)
-            {
-                throw new Exception("Registro no encontrado");
-            };
-
-            var entidadDto = _mapper.Map<CntEntidad, ListarEntidadesModel>(entidad);
-
-            return entidadDto;
-        }
+        _context = context;
+        _mapper = mapper;
     }
 
+    public async Task<ListarEntidadesModel> Handle(ConsultarEntidadRequest request, CancellationToken cancellationToken)
+    {
+
+        var entidad = await _context.cntEntidades
+        .Include(t => t.Tercero)
+        .Include(i => i.TipoImpuesto)
+        .SingleOrDefaultAsync(i => i.Id == request.Id);
+
+
+        if (entidad == null)
+        {
+            throw new Exception("Registro no encontrado");
+        };
+
+        var entidadDto = _mapper.Map<CntEntidad, ListarEntidadesModel>(entidad);
+
+        return entidadDto;
+    }
 }

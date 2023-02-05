@@ -9,35 +9,32 @@ using MediatR;
 
 namespace ContabilidadWebAPI.Aplicacion.Contabilidad.Regimenes;
 
-public class ConsultaId
+public class ConsultarRegimenRequest : IRequest<RegimenModel>
 {
-    public class ConsultarId : IRequest<RegimenModel>
+    public int Id;
+}
+
+public class ConsultarRegimenHandler : IRequestHandler<ConsultarRegimenRequest, RegimenModel>
+{
+    private readonly CntContext _context;
+    private readonly IMapper _mapper;
+
+    public ConsultarRegimenHandler(CntContext context, IMapper mapper)
     {
-        public int Id;
+        _context = context;
+        _mapper = mapper;
     }
 
-    public class Manejador : IRequestHandler<ConsultarId, RegimenModel>
+    public async Task<RegimenModel> Handle(ConsultarRegimenRequest request, CancellationToken cancellationToken)
     {
-        private readonly CntContext _context;
-        private readonly IMapper _mapper;
+        var consultaId = await _context.CntRegimenes.FindAsync(request.Id);
 
-        public Manejador(CntContext context, IMapper mapper)
+        if (consultaId == null)
         {
-            _context = context;
-            _mapper = mapper;
+            throw new Exception("Regimen Consultado no Existe");
         }
 
-        public async Task<RegimenModel> Handle(ConsultarId request, CancellationToken cancellationToken)
-        {
-            var consultaId = await _context.CntRegimenes.FindAsync(request.Id);
-
-            if (consultaId == null)
-            {
-                throw new Exception("Regimen Consultado no Existe");
-            }
-
-            var consultaIdModel = _mapper.Map<CntRegimen, RegimenModel>(consultaId);
-            return consultaIdModel;
-        }
+        var consultaIdModel = _mapper.Map<CntRegimen, RegimenModel>(consultaId);
+        return consultaIdModel;
     }
 }

@@ -62,7 +62,7 @@ public class Startup
 
 
        // services.AddMediatR(typeof(Aplicacion.CntComprobantes.Consulta.Manejador).Assembly);
-        services.AddMediatR(typeof(Aplicacion.Contabilidad.CategoriaComprobantes.Consulta.Manejador).Assembly);
+        services.AddMediatR(typeof(Aplicacion.Contabilidad.CategoriaComprobantes.ConsultarCategoriaComprobanteHandler).Assembly);
         services.AddTransient(typeof(IInsertarConsecutivo), typeof(InsertarConsecutivo));
         services.AddTransient(typeof(IInsertarComprobante), typeof(InsertarComprobante));
         services.AddTransient(typeof(IFunciones), typeof(Funciones));
@@ -80,7 +80,7 @@ public class Startup
 
         services.AddFluentValidationAutoValidation()
                 .AddFluentValidationClientsideAdapters()
-                .AddValidatorsFromAssemblyContaining<Login>();
+                .AddValidatorsFromAssemblyContaining<LoginValidator>();
 
         // services.AddControllers().AddJsonOptions(x =>
         // x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve);
@@ -111,7 +111,7 @@ public class Startup
         services.AddScoped<IUsuarioSesion, UsuarioSesion>();
         services.AddScoped<IJwtGenerador,JwtGenerador>();
         //Ojo le agrego Aplicacion.Seguridad porque me da referencia Ambigua:
-        services.AddAutoMapper(typeof(Aplicacion.Seguridad.Usuarios.Consulta.Manejador));
+        services.AddAutoMapper(typeof(Aplicacion.Seguridad.Usuarios.ListaCnfUsuariosHandler));
 
         services.AddTransient<IFactoryConnection, FactoryConnection>();
         services.AddScoped<IPucRepositorio, PucRepositorio>();

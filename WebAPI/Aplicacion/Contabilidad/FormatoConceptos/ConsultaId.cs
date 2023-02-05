@@ -7,32 +7,29 @@ using ContabilidadWebAPI.Dominio.Contabilidad;
 
 namespace ContabilidadWebAPI.Aplicacion.Contabilidad.FormatoConceptos;
 
-public class ConsultaId
+public class ConsultarFormatoConceptoRequest : IRequest<CntFormatoConcepto>
 {
-    public class ConsultarId : IRequest<CntFormatoConcepto>
+    public int Id { get; set; }
+}
+
+public class ConsultarFormatoConceptoHandler : IRequestHandler<ConsultarFormatoConceptoRequest, CntFormatoConcepto>
+{
+
+    private readonly CntContext context;
+
+    public ConsultarFormatoConceptoHandler(CntContext context)
     {
-        public int Id { get; set; }
+        this.context = context;
     }
 
-    public class Manejador : IRequestHandler<ConsultarId, CntFormatoConcepto>
+    public async Task<CntFormatoConcepto> Handle(ConsultarFormatoConceptoRequest request, CancellationToken cancellationToken)
     {
-
-        private readonly CntContext context;
-
-        public Manejador(CntContext context)
+        var formatoConcepto = await context.cntFormatoConceptos.FindAsync(request.Id);
+        if (formatoConcepto == null)
         {
-            this.context = context;
-        }
+            throw new Exception("Registro no encontrado");
+        };
 
-        public async Task<CntFormatoConcepto> Handle(ConsultarId request, CancellationToken cancellationToken)
-        {
-            var formatoConcepto = await context.cntFormatoConceptos.FindAsync(request.Id);
-            if (formatoConcepto == null)
-            {
-                throw new Exception("Registro no encontrado");
-            };
-
-            return formatoConcepto;
-        }
+        return formatoConcepto;
     }
 }

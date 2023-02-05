@@ -171,10 +171,10 @@ public partial class IdentityCoreInicial : Migration
             {
                 Id = table.Column<int>(type: "int", nullable: false)
                     .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                id_exogenaconcepto = table.Column<int>(type: "int", nullable: false),
+                IdExogenaconcepto = table.Column<int>(type: "int", nullable: false),
                 IdPuc = table.Column<int>(type: "int", nullable: false),
-                id_formatocolumna = table.Column<int>(type: "int", nullable: false),
-                id_tipooperacion = table.Column<int>(type: "int", nullable: false),
+                IdFormatocolumna = table.Column<int>(type: "int", nullable: false),
+                IdTipooperacion = table.Column<int>(type: "int", nullable: false),
                 Estado = table.Column<string>(type: "longtext", nullable: true)
                     .Annotation("MySql:CharSet", "utf8mb4")
             },
@@ -708,12 +708,12 @@ public partial class IdentityCoreInicial : Migration
             {
                 Id = table.Column<int>(type: "int", nullable: false)
                     .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                id_exogenaformato = table.Column<int>(type: "int", nullable: false),
-                fco_columna = table.Column<string>(type: "longtext", nullable: true)
+                IdExogenaformato = table.Column<int>(type: "int", nullable: false),
+                FcoColumna = table.Column<string>(type: "longtext", nullable: true)
                     .Annotation("MySql:CharSet", "utf8mb4"),
-                fco_campo = table.Column<string>(type: "longtext", nullable: true)
+                FcoCampo = table.Column<string>(type: "longtext", nullable: true)
                     .Annotation("MySql:CharSet", "utf8mb4"),
-                fco_tipo = table.Column<string>(type: "longtext", nullable: true)
+                FcoTipo = table.Column<string>(type: "longtext", nullable: true)
                     .Annotation("MySql:CharSet", "utf8mb4")
             },
             constraints: table =>
@@ -721,7 +721,7 @@ public partial class IdentityCoreInicial : Migration
                 table.PrimaryKey("PK_cnt_formatocolumna", x => x.Id);
                 table.ForeignKey(
                     name: "FK_cnt_formatocolumna_cnt_exogenaformato_id_exogenaformato",
-                    column: x => x.id_exogenaformato,
+                    column: x => x.IdExogenaformato,
                     principalTable: "cnt_exogenaformato",
                     principalColumn: "Id",
                     onDelete: ReferentialAction.Cascade);
@@ -734,21 +734,21 @@ public partial class IdentityCoreInicial : Migration
             {
                 Id = table.Column<int>(type: "int", nullable: false)
                     .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                id_exogenaformato = table.Column<int>(type: "int", nullable: false),
-                id_exogenaconcepto = table.Column<int>(type: "int", nullable: false)
+                IdExogenaformato = table.Column<int>(type: "int", nullable: false),
+                IdExogenaconcepto = table.Column<int>(type: "int", nullable: false)
             },
             constraints: table =>
             {
                 table.PrimaryKey("PK_cnt_formatoconcepto", x => x.Id);
                 table.ForeignKey(
                     name: "FK_cnt_formatoconcepto_cnt_exogenaconcepto_id_exogenaconcepto",
-                    column: x => x.id_exogenaconcepto,
+                    column: x => x.IdExogenaconcepto,
                     principalTable: "cnt_exogenaconcepto",
                     principalColumn: "Id",
                     onDelete: ReferentialAction.Cascade);
                 table.ForeignKey(
                     name: "FK_cnt_formatoconcepto_cnt_exogenaformato_id_exogenaformato",
-                    column: x => x.id_exogenaformato,
+                    column: x => x.IdExogenaformato,
                     principalTable: "cnt_exogenaformato",
                     principalColumn: "Id",
                     onDelete: ReferentialAction.Cascade);
@@ -1377,17 +1377,17 @@ public partial class IdentityCoreInicial : Migration
         migrationBuilder.CreateIndex(
             name: "IX_cnt_formatocolumna_id_exogenaformato",
             table: "cnt_formatocolumna",
-            column: "id_exogenaformato");
+            column: "IdExogenaformato");
 
         migrationBuilder.CreateIndex(
             name: "IX_cnt_formatoconcepto_id_exogenaconcepto",
             table: "cnt_formatoconcepto",
-            column: "id_exogenaconcepto");
+            column: "IdExogenaconcepto");
 
         migrationBuilder.CreateIndex(
             name: "IX_cnt_formatoconcepto_id_exogenaformato",
             table: "cnt_formatoconcepto",
-            column: "id_exogenaformato");
+            column: "IdExogenaformato");
 
         migrationBuilder.CreateIndex(
             name: "IX_cnt_liquidaimpuesto_id_comprobante",

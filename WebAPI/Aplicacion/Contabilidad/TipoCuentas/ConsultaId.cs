@@ -7,35 +7,30 @@ using ContabilidadWebAPI.Persistencia;
 
 namespace ContabilidadWebAPI.Aplicacion.Contabilidad.TipoCuentas;
 
-public class ConsultaId
+public class ConsultarTipoCuentaRequest : IRequest<CntTipoCuenta>
+{
+    public int Id { get; set; }
+}
+
+public class ConsultarTipoCuentaHandler : IRequestHandler<ConsultarTipoCuentaRequest, CntTipoCuenta>
 {
 
-    public class ConsultarId : IRequest<CntTipoCuenta>
+    private readonly CntContext context;
+
+    public ConsultarTipoCuentaHandler(CntContext context)
     {
-        public int Id { get; set; }
+        this.context = context;
     }
 
-    public class Manejador : IRequestHandler<ConsultarId, CntTipoCuenta>
+    public async Task<CntTipoCuenta> Handle(ConsultarTipoCuentaRequest request, CancellationToken cancellationToken)
     {
 
-        private readonly CntContext context;
-
-        public Manejador(CntContext context)
+        var TipoCuenta = await context.cntTipoCuentas.FindAsync(request.Id);
+        if (TipoCuenta == null)
         {
-            this.context = context;
-        }
+            throw new Exception("Registro no encontrado");
+        };
 
-        public async Task<CntTipoCuenta> Handle(ConsultarId request, CancellationToken cancellationToken)
-        {
-
-            var TipoCuenta = await context.cntTipoCuentas.FindAsync(request.Id);
-            if (TipoCuenta == null)
-            {
-                throw new Exception("Registro no encontrado");
-            };
-
-            return TipoCuenta;
-        }
+        return TipoCuenta;
     }
-
 }

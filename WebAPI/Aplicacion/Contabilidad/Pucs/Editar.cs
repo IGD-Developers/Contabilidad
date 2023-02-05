@@ -10,74 +10,70 @@ using ContabilidadWebAPI.Aplicacion.Models.Contabilidad.Pucs;
 
 namespace ContabilidadWebAPI.Aplicacion.Contabilidad.Pucs;
 
-public class Editar
+public class EditarPucRequest : EditarPucModel, IRequest
+{ }
+
+
+public class EditarPucValidator : AbstractValidator<EditarPucRequest>
+{
+    public EditarPucValidator()
+    {
+
+        RuleFor(x => x.Nombre).NotEmpty();
+        RuleFor(x => x.IdPuctipo).NotEmpty();
+        RuleFor(x => x.IdTipocuenta).NotEmpty();
+        RuleFor(x => x.PacActiva).Must(x => x == false || x == true);
+        RuleFor(x => x.PacBase).Must(x => x == false || x == true);
+        RuleFor(x => x.PacAjusteniif).Must(x => x == false || x == true);
+
+
+    }
+}
+
+
+
+
+public class EditarPucHandler : IRequestHandler<EditarPucRequest>
 {
 
-    public class Ejecuta : EditarPucModel, IRequest
-    { }
+    private readonly CntContext _context;
+    private readonly IMapper _mapper;
 
 
-    public class EjecutaValidador : AbstractValidator<Ejecuta>
+
+    public EditarPucHandler(CntContext context, IMapper mapper)
     {
-        public EjecutaValidador()
-        {
-
-            RuleFor(x => x.Nombre).NotEmpty();
-            RuleFor(x => x.IdPuctipo).NotEmpty();
-            RuleFor(x => x.IdTipocuenta).NotEmpty();
-            RuleFor(x => x.PacActiva).Must(x => x == false || x == true);
-            RuleFor(x => x.PacBase).Must(x => x == false || x == true);
-            RuleFor(x => x.PacAjusteniif).Must(x => x == false || x == true);
-
-
-        }
+        _context = context;
+        _mapper = mapper;
     }
 
-
-
-
-    public class Manejador : IRequestHandler<Ejecuta>
+    public async Task<Unit> Handle(EditarPucRequest request, CancellationToken cancellationToken)
     {
-
-        private readonly CntContext _context;
-        private readonly IMapper _mapper;
-
-
-
-        public Manejador(CntContext context, IMapper mapper)
+        var entidad = await _context.cntPucs.FindAsync(request.Id);
+        if (entidad == null)
         {
-            _context = context;
-            _mapper = mapper;
-        }
+            throw new Exception("Registro no encontrado");
+        };
 
-        public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
+        var entidadDto = _mapper.Map<EditarPucModel, CntPuc>(request, entidad);
+
+        try
         {
-            var entidad = await _context.cntPucs.FindAsync(request.Id);
-            if (entidad == null)
+            var resultado = await _context.SaveChangesAsync();
+            if (resultado > 0)
             {
-                throw new Exception("Registro no encontrado");
-            };
-
-            var entidadDto = _mapper.Map<EditarPucModel, CntPuc>(request, entidad);
-
-            try
-            {
-                var resultado = await _context.SaveChangesAsync();
-                if (resultado > 0)
-                {
-                    return Unit.Value;
-                }
-
-                throw new Exception("No se realizaron modificaciones al registro");
-            }
-            catch (Exception ex)
-            {
-                //TODO: MARIA  Llave duplicada  CODIGO PUC Implementar
-
-                throw new Exception("Error al editar registro catch " + ex.Message);
+                return Unit.Value;
             }
 
+            throw new Exception("No se realizaron modificaciones al registro");
         }
+        catch (Exception ex)
+        {
+            //TODO: MARIA  Llave duplicada  CODIGO PUC Implementar
+
+            throw new Exception("Error al editar registro catch " + ex.Message);
+        }
+
     }
 }
 // puc.Nombre = request.Nombre;

@@ -20,7 +20,7 @@ public class TipoComprobantesController : MiControllerBase
     public async Task<ActionResult<List<ListarTipoComprobanteModel>>> Get()
     {
 
-        return await Mediator.Send(new Consulta.ListaCntTipoComprobantes());
+        return await Mediator.Send(new ListaCntTipoComprobantesRequest());
 
     }
 
@@ -31,14 +31,14 @@ public class TipoComprobantesController : MiControllerBase
     public async Task<ActionResult<ListarTipoComprobanteModel>> GetId(int Id)
     {
 
-        return await Mediator.Send(new ConsultaId.ConsultarId { Id = Id });
+        return await Mediator.Send(new ConsultarTipoComprobanteRequest { Id = Id });
 
     }
 
 
     [HttpPost]
 
-    public async Task<ActionResult<Unit>> Insertar(Insertar.Ejecuta data)
+    public async Task<ActionResult<Unit>> Insertar(InsertarTipoComprobanteRequest data)
     {
 
         return await Mediator.Send(data);
@@ -48,7 +48,7 @@ public class TipoComprobantesController : MiControllerBase
 
     [HttpPut("{Id}")]
 
-    public async Task<ActionResult<Unit>> Editar(int Id, Editar.Ejecuta data)
+    public async Task<ActionResult<Unit>> Editar(int Id, EditarTipoComprobanteRequest data)
 
     {
         data.Id = Id;

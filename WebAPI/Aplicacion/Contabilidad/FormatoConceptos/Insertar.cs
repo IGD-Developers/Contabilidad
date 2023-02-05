@@ -8,56 +8,50 @@ using ContabilidadWebAPI.Persistencia;
 
 namespace ContabilidadWebAPI.Aplicacion.Contabilidad.FormatoConceptos;
 
-public class Insertar
+public class InsertarFormatoConceptoRequest : IRequest
 {
 
-    public class Ejecuta : IRequest
-    {
+    public int IdExogenaformato { get; set; }
+    public int IdExogenaconcepto { get; set; }
 
-        public int id_exogenaformato { get; set; }
-        public int id_exogenaconcepto { get; set; }
+}
+
+public class InsertarFormatoConceptoValidator : AbstractValidator<InsertarFormatoConceptoRequest>
+{
+    public InsertarFormatoConceptoValidator()
+    {
+        RuleFor(x => x.IdExogenaformato).NotEmpty();
+        RuleFor(x => x.IdExogenaconcepto).NotEmpty();
 
     }
 
-    public class EjecutaValidador : AbstractValidator<Ejecuta>
+}
+
+public class InsertarFormatoConceptoHandler : IRequestHandler<InsertarFormatoConceptoRequest>
+{
+
+    private readonly CntContext context;
+
+    public InsertarFormatoConceptoHandler(CntContext context)
     {
-        public EjecutaValidador()
-        {
-            RuleFor(x => x.id_exogenaformato).NotEmpty();
-            RuleFor(x => x.id_exogenaconcepto).NotEmpty();
-
-        }
-
+        this.context = context;
     }
 
-
-    public class Manejador : IRequestHandler<Ejecuta>
+    public async Task<Unit> Handle(InsertarFormatoConceptoRequest request, CancellationToken cancellationToken)
     {
 
-        private readonly CntContext context;
-
-        public Manejador(CntContext context)
+        var formatoConcepto = new CntFormatoConcepto
         {
-            this.context = context;
-        }
+            IdExogenaformato = request.IdExogenaformato,
+            IdExogenaconcepto = request.IdExogenaconcepto
+        };
 
-        public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
+        context.cntFormatoConceptos.Add(formatoConcepto);
+        var respuesta = await context.SaveChangesAsync();
+        if (respuesta > 0)
         {
-
-            var formatoConcepto = new CntFormatoConcepto
-            {
-                IdExogenaformato = request.id_exogenaformato,
-                IdExogenaconcepto = request.id_exogenaconcepto
-            };
-
-            context.cntFormatoConceptos.Add(formatoConcepto);
-            var respuesta = await context.SaveChangesAsync();
-            if (respuesta > 0)
-            {
-                return Unit.Value;
-            }
-            throw new Exception("Error al insertar FormatoConcepto");
+            return Unit.Value;
         }
+        throw new Exception("Error al insertar FormatoConcepto");
     }
-
 }

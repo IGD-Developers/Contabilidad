@@ -9,36 +9,33 @@ using MediatR;
 
 namespace ContabilidadWebAPI.Aplicacion.Contabilidad.ResponsabilidadTerceros;
 
-public class ConsultaId
+public class ConsultarResponsabilidadTerceroRequest : IRequest<ResponsabilidadTerceroModel>
 {
-    public class ConsultarId : IRequest<ResponsabilidadTerceroModel>
+    public int Id;
+}
+
+public class ConsultarResponsabilidadTerceroHandler : IRequestHandler<ConsultarResponsabilidadTerceroRequest, ResponsabilidadTerceroModel>
+{
+    private readonly CntContext _context;
+    private readonly IMapper _mapper;
+
+    public ConsultarResponsabilidadTerceroHandler(CntContext context, IMapper mapper)
     {
-        public int Id;
+        _context = context;
+        _mapper = mapper;
     }
 
-    public class Manejador : IRequestHandler<ConsultarId, ResponsabilidadTerceroModel>
+    public async Task<ResponsabilidadTerceroModel> Handle(ConsultarResponsabilidadTerceroRequest request, CancellationToken cancellationToken)
     {
-        private readonly CntContext _context;
-        private readonly IMapper _mapper;
+        var consulta = await _context.cntResponsabilidadTerceros.FindAsync(request.Id);
 
-        public Manejador(CntContext context, IMapper mapper)
+        if (consulta == null)
         {
-            _context = context;
-            _mapper = mapper;
+            throw new Exception("Responsabilidad Tercero consultada no se encontro");
         }
 
-        public async Task<ResponsabilidadTerceroModel> Handle(ConsultarId request, CancellationToken cancellationToken)
-        {
-            var consulta = await _context.cntResponsabilidadTerceros.FindAsync(request.Id);
+        var consultaModel = _mapper.Map<CntResponsabilidadTer, ResponsabilidadTerceroModel>(consulta);
 
-            if (consulta == null)
-            {
-                throw new Exception("Responsabilidad Tercero consultada no se encontro");
-            }
-
-            var consultaModel = _mapper.Map<CntResponsabilidadTer, ResponsabilidadTerceroModel>(consulta);
-
-            return consultaModel;
-        }
+        return consultaModel;
     }
 }

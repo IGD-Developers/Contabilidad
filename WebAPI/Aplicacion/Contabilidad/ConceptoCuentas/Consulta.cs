@@ -8,29 +8,24 @@ using ContabilidadWebAPI.Dominio.Contabilidad;
 
 namespace ContabilidadWebAPI.Aplicacion.Contabilidad.ConceptoCuentas;
 
-public class Consulta
+public class ListaCntConceptoCuentasRequest : IRequest<List<CntConceptoCuenta>>
 {
 
-    public class ListaCntConceptoCuentas : IRequest<List<CntConceptoCuenta>>
-    {
+}
 
+
+public class ListaCntConceptoCuentasHandler : IRequestHandler<ListaCntConceptoCuentasRequest, List<CntConceptoCuenta>>
+{
+    private readonly CntContext context;
+
+    public ListaCntConceptoCuentasHandler(CntContext context)
+    {
+        this.context = context;
     }
 
-
-    public class Manejador : IRequestHandler<ListaCntConceptoCuentas, List<CntConceptoCuenta>>
+    public async Task<List<CntConceptoCuenta>> Handle(ListaCntConceptoCuentasRequest request, CancellationToken cancellationToken)
     {
-        private readonly CntContext context;
-
-        public Manejador(CntContext context)
-        {
-            this.context = context;
-        }
-
-        public async Task<List<CntConceptoCuenta>> Handle(ListaCntConceptoCuentas request, CancellationToken cancellationToken)
-        {
-            var conceptoCuentas = await context.cntConceptoCuentas.ToListAsync();
-            return conceptoCuentas;
-        }
+        var conceptoCuentas = await context.cntConceptoCuentas.ToListAsync();
+        return conceptoCuentas;
     }
-
 }
