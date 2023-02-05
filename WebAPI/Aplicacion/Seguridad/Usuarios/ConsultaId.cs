@@ -6,28 +6,24 @@ using MediatR;
 
 namespace ContabilidadWebAPI.Aplicacion.Seguridad.Usuarios;
 
-public class ConsultaId
+public class ConsultarCnfUsuarioIdRequest : IRequest<CnfUsuario>
 {
-    public class ConsultarId : IRequest<CnfUsuario>
+    public int Id { get; set; }
+}
+
+public class ConsultarCnfUsuarioIdHandler : IRequestHandler<ConsultarCnfUsuarioIdRequest, CnfUsuario>
+{
+
+    private readonly CntContext context;
+
+    public ConsultarCnfUsuarioIdHandler(CntContext context)
     {
-        public int Id { get; set; }
+        this.context = context;
     }
 
-    public class Manejador : IRequestHandler<ConsultarId, CnfUsuario>
+    public async Task<CnfUsuario> Handle(ConsultarCnfUsuarioIdRequest request, CancellationToken cancellationToken)
     {
-
-        private readonly CntContext context;
-
-        public Manejador(CntContext context)
-        {
-            this.context = context;
-        }
-
-        public async Task<CnfUsuario> Handle(ConsultarId request, CancellationToken cancellationToken)
-        {
-            var Usuario = await context.cnfUsuarios.FindAsync(request.Id);
-            return Usuario;
-        }
+        var Usuario = await context.cnfUsuarios.FindAsync(request.Id);
+        return Usuario;
     }
-
 }
