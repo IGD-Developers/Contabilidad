@@ -10,48 +10,43 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ContabilidadWebAPI.Aplicacion.Contabilidad.Terceros;
 
-public class ConsultaId
+public class ConsultarTerceroRequest : IRequest<ListarTerceroModel>
 {
-    public class TerceroId : IRequest<ListarTerceroModel>
+    public int Id;
+}
+
+public class ConsultarTerceroHandler : IRequestHandler<ConsultarTerceroRequest, ListarTerceroModel>
+{
+    private readonly CntContext _context;
+    private readonly IMapper _mapper;
+
+    public ConsultarTerceroHandler(CntContext context, IMapper mapper)
     {
-        public int Id;
+        _context = context;
+        _mapper = mapper;
     }
 
-    public class Manejador : IRequestHandler<TerceroId, ListarTerceroModel>
+    public async Task<ListarTerceroModel> Handle(ConsultarTerceroRequest request, CancellationToken cancellationToken)
     {
-        private readonly CntContext _context;
-        private readonly IMapper _mapper;
+        var terceroId = await _context.CntTerceros
+        .Include(g => g.Genero)
+        .Include(d => d.Documentos)
+        .Include(m => m.Municipio).ThenInclude(z => z.Departamento)
+        .Include(r => r.Regimen)
+        .Include(p => p.TipoPersona)
+        .Include(c => c.Ciiu).ThenInclude(z => z.CiiuSeccionCiiu)
+        .Include(c => c.Ciiu).ThenInclude(z => z.CiiuTipoCiiu)
+        .Include(r => r.ResponsabilidadTerceros).ThenInclude(z => z.Responsabilidad)
+        .Include(e => e.EntidadTerceros).ThenInclude(z => z.TipoImpuesto)
+        .FirstOrDefaultAsync(q => q.Id == request.Id);
 
-        public Manejador(CntContext context, IMapper mapper)
+        if (terceroId == null)
         {
-            _context = context;
-            _mapper = mapper;
+            throw new Exception("TERCERO CONSULTADO NO EXISTE");
         }
 
-        public async Task<ListarTerceroModel> Handle(TerceroId request, CancellationToken cancellationToken)
-        {
-            var terceroId = await _context.CntTerceros
-            .Include(g => g.Genero)
-            .Include(d => d.Documentos)
-            .Include(m => m.Municipio).ThenInclude(z => z.Departamento)
-            .Include(r => r.Regimen)
-            .Include(p => p.TipoPersona)
-            .Include(c => c.Ciiu).ThenInclude(z => z.CiiuSeccionCiiu)
-            .Include(c => c.Ciiu).ThenInclude(z => z.CiiuTipoCiiu)
-            .Include(r => r.ResponsabilidadTerceros).ThenInclude(z => z.Responsabilidad)
-            .Include(e => e.EntidadTerceros).ThenInclude(z => z.TipoImpuesto)
-            .FirstOrDefaultAsync(q => q.Id == request.Id);
+        var terceroIdModel = _mapper.Map<CntTercero, ListarTerceroModel>(terceroId);
 
-            if (terceroId == null)
-            {
-                throw new Exception("TERCERO CONSULTADO NO EXISTE");
-            }
-
-            var terceroIdModel = _mapper.Map<CntTercero, ListarTerceroModel>(terceroId);
-
-            return terceroIdModel;
-        }
+        return terceroIdModel;
     }
-
-
 }

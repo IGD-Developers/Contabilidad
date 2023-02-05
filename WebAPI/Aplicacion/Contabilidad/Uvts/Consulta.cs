@@ -8,28 +8,24 @@ using ContabilidadWebAPI.Dominio.Contabilidad;
 
 namespace ContabilidadWebAPI.Aplicacion.Contabilidad.Uvts;
 
-public class Consulta
+public class ListaUvtsRequest : IRequest<List<CntUvt>>
 {
-    public class ListaUvts : IRequest<List<CntUvt>>
-    {
 
+}
+
+public class ListaUvtsHandler : IRequestHandler<ListaUvtsRequest, List<CntUvt>>
+{
+    private readonly CntContext context;
+
+    public ListaUvtsHandler(CntContext context)
+    {
+        this.context = context;
     }
 
-    public class Manejador : IRequestHandler<ListaUvts, List<CntUvt>>
+    public async Task<List<CntUvt>> Handle(ListaUvtsRequest request, CancellationToken cancellationToken)
     {
-        private readonly CntContext context;
+        var uvts = await context.cntUvts.ToListAsync();
+        return uvts;
 
-        public Manejador(CntContext context)
-        {
-            this.context = context;
-        }
-
-        public async Task<List<CntUvt>> Handle(ListaUvts request, CancellationToken cancellationToken)
-        {
-            var uvts = await context.cntUvts.ToListAsync();
-            return uvts;
-
-        }
     }
-
 }

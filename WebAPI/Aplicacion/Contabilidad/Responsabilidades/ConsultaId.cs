@@ -9,35 +9,32 @@ using MediatR;
 
 namespace ContabilidadWebAPI.Aplicacion.Contabilidad.Responsabilidades;
 
-public class ConsultaId
+public class ConsultarResponsabilidadRequest : IRequest<ResponsabilidadModel>
 {
-    public class ConsultarId : IRequest<ResponsabilidadModel>
+    public int Id;
+}
+
+public class ConsultarResponsabilidadHandler : IRequestHandler<ConsultarResponsabilidadRequest, ResponsabilidadModel>
+{
+    private readonly CntContext _context;
+    private readonly IMapper _mapper;
+
+    public ConsultarResponsabilidadHandler(CntContext context, IMapper mapper)
     {
-        public int Id;
+        _context = context;
+        _mapper = mapper;
     }
 
-    public class Manejador : IRequestHandler<ConsultarId, ResponsabilidadModel>
+    public async Task<ResponsabilidadModel> Handle(ConsultarResponsabilidadRequest request, CancellationToken cancellationToken)
     {
-        private readonly CntContext _context;
-        private readonly IMapper _mapper;
+        var consultarId = await _context.cntResponsabilidades.FindAsync(request.Id);
 
-        public Manejador(CntContext context, IMapper mapper)
+        if (consultarId == null)
         {
-            _context = context;
-            _mapper = mapper;
+            throw new Exception("Responsabilidad Consultada no existe");
         }
 
-        public async Task<ResponsabilidadModel> Handle(ConsultarId request, CancellationToken cancellationToken)
-        {
-            var consultarId = await _context.cntResponsabilidades.FindAsync(request.Id);
-
-            if (consultarId == null)
-            {
-                throw new Exception("Responsabilidad Consultada no existe");
-            }
-
-            var consultarIdModel = _mapper.Map<CntResponsabilidad, ResponsabilidadModel>(consultarId);
-            return consultarIdModel;
-        }
+        var consultarIdModel = _mapper.Map<CntResponsabilidad, ResponsabilidadModel>(consultarId);
+        return consultarIdModel;
     }
 }

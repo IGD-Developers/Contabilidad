@@ -9,35 +9,32 @@ using MediatR;
 
 namespace ContabilidadWebAPI.Aplicacion.Contabilidad.SeccionCiius;
 
-public class ConsultaId
+public class ConsultarSeccionCiiuRequest : IRequest<SeccionCiiusModel>
 {
-    public class ConsultarId : IRequest<SeccionCiiusModel>
+    public int Id;
+}
+
+public class ConsultarSeccionCiiuHandler : IRequestHandler<ConsultarSeccionCiiuRequest, SeccionCiiusModel>
+{
+    private readonly CntContext _context;
+    private readonly IMapper _mapper;
+
+    public ConsultarSeccionCiiuHandler(CntContext context, IMapper mapper)
     {
-        public int Id;
+        _context = context;
+        _mapper = mapper;
     }
 
-    public class Manejador : IRequestHandler<ConsultarId, SeccionCiiusModel>
+    public async Task<SeccionCiiusModel> Handle(ConsultarSeccionCiiuRequest request, CancellationToken cancellationToken)
     {
-        private readonly CntContext _context;
-        private readonly IMapper _mapper;
+        var consultarId = await _context.CntSeccionCiius.FindAsync(request.Id);
 
-        public Manejador(CntContext context, IMapper mapper)
+        if (consultarId == null)
         {
-            _context = context;
-            _mapper = mapper;
+            throw new Exception("SECCION CIIUS CONSULTADA NO EXISTE");
         }
 
-        public async Task<SeccionCiiusModel> Handle(ConsultarId request, CancellationToken cancellationToken)
-        {
-            var consultarId = await _context.CntSeccionCiius.FindAsync(request.Id);
-
-            if (consultarId == null)
-            {
-                throw new Exception("SECCION CIIUS CONSULTADA NO EXISTE");
-            }
-
-            var consultarIdModel = _mapper.Map<CntSeccionCiiu, SeccionCiiusModel>(consultarId);
-            return consultarIdModel;
-        }
+        var consultarIdModel = _mapper.Map<CntSeccionCiiu, SeccionCiiusModel>(consultarId);
+        return consultarIdModel;
     }
 }

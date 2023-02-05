@@ -10,29 +10,26 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ContabilidadWebAPI.Aplicacion.Contabilidad.Responsabilidades;
 
-public class Consulta
+public class ListarResponsabilidadesRequest : IRequest<List<ResponsabilidadModel>> { }
+
+public class ListarResponsabilidadesHandler : IRequestHandler<ListarResponsabilidadesRequest, List<ResponsabilidadModel>>
 {
-    public class ListarResponsabilidades : IRequest<List<ResponsabilidadModel>> { }
+    private readonly CntContext _context;
+    private readonly IMapper _mapper;
 
-    public class Manejador : IRequestHandler<ListarResponsabilidades, List<ResponsabilidadModel>>
+    public ListarResponsabilidadesHandler(CntContext context, IMapper mapper)
     {
-        private readonly CntContext _context;
-        private readonly IMapper _mapper;
-
-        public Manejador(CntContext context, IMapper mapper)
-        {
-            _context = context;
-            _mapper = mapper;
-        }
-
-        public async Task<List<ResponsabilidadModel>> Handle(ListarResponsabilidades request, CancellationToken cancellationToken)
-        {
-            var responsabilidades = await _context.cntResponsabilidades.ToListAsync();
-            var responsabilidadesModel = _mapper.Map<List<CntResponsabilidad>, List<ResponsabilidadModel>>(responsabilidades);
-
-            return responsabilidadesModel;
-        }
-
-
+        _context = context;
+        _mapper = mapper;
     }
+
+    public async Task<List<ResponsabilidadModel>> Handle(ListarResponsabilidadesRequest request, CancellationToken cancellationToken)
+    {
+        var responsabilidades = await _context.cntResponsabilidades.ToListAsync();
+        var responsabilidadesModel = _mapper.Map<List<CntResponsabilidad>, List<ResponsabilidadModel>>(responsabilidades);
+
+        return responsabilidadesModel;
+    }
+
+
 }

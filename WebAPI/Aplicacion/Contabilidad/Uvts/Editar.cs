@@ -7,63 +7,57 @@ using ContabilidadWebAPI.Persistencia;
 
 namespace ContabilidadWebAPI.Aplicacion.Contabilidad.Uvts;
 
-public class Editar
+public class EditarUvtRequest : IRequest
 {
 
-    public class Ejecuta : IRequest
-    {
+    public int Id { get; set; }
+    public int uvt_ano { get; set; }
+    public double uvt_valor { get; set; }
+    public DateTime CreatedAt { get; set; }
+    public DateTime? UpdatedAt { get; set; }
 
-        public int Id { get; set; }
-        public int uvt_ano { get; set; }
-        public double uvt_valor { get; set; }
-        public DateTime CreatedAt { get; set; }
-        public DateTime? UpdatedAt { get; set; }
+}
+
+public class EditarUvtValidator : AbstractValidator<EditarUvtRequest>
+{
+    public EditarUvtValidator()
+    {
+        RuleFor(x => x.Id).NotEmpty();
+        RuleFor(x => x.uvt_ano).NotEmpty();
+        RuleFor(x => x.uvt_valor).NotEmpty();
 
     }
+}
 
-    public class EjecutaValidador : AbstractValidator<Ejecuta>
+
+public class EditarUvtHandler : IRequestHandler<EditarUvtRequest>
+{
+
+    private readonly CntContext context;
+
+    public EditarUvtHandler(CntContext context)
     {
-        public EjecutaValidador()
-        {
-            RuleFor(x => x.Id).NotEmpty();
-            RuleFor(x => x.uvt_ano).NotEmpty();
-            RuleFor(x => x.uvt_valor).NotEmpty();
-
-        }
+        this.context = context;
     }
 
-
-    public class Manejador : IRequestHandler<Ejecuta>
+    public async Task<Unit> Handle(EditarUvtRequest request, CancellationToken cancellationToken)
     {
-
-        private readonly CntContext context;
-
-        public Manejador(CntContext context)
+        var uvt = await context.cntUvts.FindAsync(request.Id);
+        if (uvt == null)
         {
-            this.context = context;
-        }
+            throw new Exception("Registro no encontrado");
+        };
+        uvt.UvtAno = request.uvt_ano;
+        uvt.UvtValor = request.uvt_valor;
 
-        public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
+        var resultado = await context.SaveChangesAsync();
+        if (resultado > 0)
         {
-            var uvt = await context.cntUvts.FindAsync(request.Id);
-            if (uvt == null)
-            {
-                throw new Exception("Registro no encontrado");
-            };
-            uvt.UvtAno = request.uvt_ano;
-            uvt.UvtValor = request.uvt_valor;
-
-            var resultado = await context.SaveChangesAsync();
-            if (resultado > 0)
-            {
-                return Unit.Value;
-            }
-            throw new Exception("Error al modificar registro");
-
-
-
+            return Unit.Value;
         }
+        throw new Exception("Error al modificar registro");
+
+
+
     }
-
-
 }

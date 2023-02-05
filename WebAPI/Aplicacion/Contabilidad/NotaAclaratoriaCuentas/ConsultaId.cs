@@ -6,28 +6,24 @@ using ContabilidadWebAPI.Dominio.Contabilidad;
 
 namespace ContabilidadWebAPI.Aplicacion.Contabilidad.NotaAclaratoriaCuentas;
 
-public class ConsultaId
+public class ConsultarNotaAclaratoriaCuentaRequest : IRequest<CntNotaAclaratoriaCuenta>
 {
-    public class ConsultarId : IRequest<CntNotaAclaratoriaCuenta>
-    {
 
-        public int Id { get; set; }
+    public int Id { get; set; }
+}
+
+public class ConsultarNotaAclaratoriaCuentaHandler : IRequestHandler<ConsultarNotaAclaratoriaCuentaRequest, CntNotaAclaratoriaCuenta>
+{
+    private readonly CntContext context;
+
+    public ConsultarNotaAclaratoriaCuentaHandler(CntContext context)
+    {
+        this.context = context;
     }
 
-    public class Manejador : IRequestHandler<ConsultarId, CntNotaAclaratoriaCuenta>
+    public async Task<CntNotaAclaratoriaCuenta> Handle(ConsultarNotaAclaratoriaCuentaRequest request, CancellationToken cancellationToken)
     {
-        private readonly CntContext context;
-
-        public Manejador(CntContext context)
-        {
-            this.context = context;
-        }
-
-        public async Task<CntNotaAclaratoriaCuenta> Handle(ConsultarId request, CancellationToken cancellationToken)
-        {
-            var notaAclaratoriaCuenta = await context.cntNotaAclaratoriaCuentas.FindAsync(request.Id);
-            return notaAclaratoriaCuenta;
-        }
+        var notaAclaratoriaCuenta = await context.cntNotaAclaratoriaCuentas.FindAsync(request.Id);
+        return notaAclaratoriaCuenta;
     }
-
 }
