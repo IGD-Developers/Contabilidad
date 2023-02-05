@@ -10,7 +10,7 @@ using ContabilidadWebAPI.Dominio.Contabilidad;
 
 namespace ContabilidadWebAPI.Aplicacion.Contabilidad.TipoImpuestos;
 
-public class ConsultarTipoImpuestoRequest : IdModel, IRequest<ListarTipoImpuestosModel>
+public class ConsultarTipoImpuestoRequest : TipoImpuestosIdModel, IRequest<ListarTipoImpuestosModel>
 { }
 
 public class ConsultarTipoImpuestoHandler : IRequestHandler<ConsultarTipoImpuestoRequest, ListarTipoImpuestosModel>

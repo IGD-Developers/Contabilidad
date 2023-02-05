@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore;
 namespace ContabilidadWebAPI.Aplicacion.Contabilidad.TipoComprobantes;
 
 
-public class ConsultarTipoComprobanteRequest : IdModel, IRequest<ListarTipoComprobanteModel>
+public class ConsultarTipoComprobanteRequest : TipoComprobantesIdModel, IRequest<ListarTipoComprobanteModel>
 { }
 public class ConsultarTipoComprobanteHandler : IRequestHandler<ConsultarTipoComprobanteRequest, ListarTipoComprobanteModel>
 {
