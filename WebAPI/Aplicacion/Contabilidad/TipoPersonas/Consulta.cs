@@ -1,13 +1,3 @@
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
-using AutoMapper;
-using ContabilidadWebAPI.Aplicacion.Models.Contabilidad.TipoPersona;
-using ContabilidadWebAPI.Dominio.Contabilidad;
-using ContabilidadWebAPI.Persistencia;
-using MediatR;
-using Microsoft.EntityFrameworkCore;
-
 namespace ContabilidadWebAPI.Aplicacion.Contabilidad.TipoPersonas;
 
 public class ListarTipoPersonasRequest : IRequest<List<TipoPersonaModel>> { }

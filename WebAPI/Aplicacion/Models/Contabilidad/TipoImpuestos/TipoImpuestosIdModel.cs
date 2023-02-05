@@ -1,6 +1,6 @@
 namespace ContabilidadWebAPI.Aplicacion.Models.Contabilidad.TipoImpuestos;
 
-public class IdModel
+public class TipoImpuestosIdModel
 {
     public int Id { get; set; }
 }

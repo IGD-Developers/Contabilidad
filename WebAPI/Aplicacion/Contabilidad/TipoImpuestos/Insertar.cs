@@ -1,13 +1,3 @@
-using MediatR;
-using System.Threading.Tasks;
-using System.Threading;
-using System;
-using FluentValidation;
-using AutoMapper;
-using ContabilidadWebAPI.Aplicacion.Models.Contabilidad.TipoImpuestos;
-using ContabilidadWebAPI.Persistencia;
-using ContabilidadWebAPI.Dominio.Contabilidad;
-
 namespace ContabilidadWebAPI.Aplicacion.Contabilidad.TipoImpuestos;
 
 public class InsertarTipoImpuestoRequest : InsertarTipoImpuestosModel, IRequest

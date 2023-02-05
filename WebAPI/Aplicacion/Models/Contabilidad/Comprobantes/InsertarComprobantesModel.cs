@@ -1,9 +1,3 @@
-using MediatR;
-using System;
-using System.Collections.Generic;
-using ContabilidadWebAPI.Aplicacion.Contabilidad.Consecutivos;
-using ContabilidadWebAPI.Dominio.Contabilidad;
-using ContabilidadWebAPI.Aplicacion.Models.Contabilidad.Consecutivos;
 using ContabilidadWebAPI.Aplicacion.Models.Contabilidad.DetalleComprobantes;
 
 namespace ContabilidadWebAPI.Aplicacion.Models.Contabilidad.Comprobantes;

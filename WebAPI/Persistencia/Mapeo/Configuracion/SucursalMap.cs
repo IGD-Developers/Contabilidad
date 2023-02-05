@@ -1,7 +1,3 @@
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using ContabilidadWebAPI.Dominio.Configuracion;
-
 namespace ContabilidadWebAPI.Persistencia.Mapeo.Configuracion;
 
 public class SucursalMap : IEntityTypeConfiguration<CnfSucursal>

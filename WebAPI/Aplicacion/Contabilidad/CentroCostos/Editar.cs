@@ -1,13 +1,3 @@
-using MediatR;
-using System;
-using System.Threading.Tasks;
-using System.Threading;
-using FluentValidation;
-using AutoMapper;
-using ContabilidadWebAPI.Dominio.Contabilidad;
-using ContabilidadWebAPI.Aplicacion.Models.Contabilidad.CentroCostos;
-using ContabilidadWebAPI.Persistencia;
-
 namespace ContabilidadWebAPI.Aplicacion.Contabilidad.CentroCostos;
 
 public class EditarCentroCostoRequest : EditarCentroCostosModel, IRequest

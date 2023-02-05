@@ -1,12 +1,3 @@
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using ContabilidadWebAPI.Dominio.Contabilidad;
-using MediatR;
-using Microsoft.AspNetCore.Mvc;
-using ContabilidadWebAPI.Controllers;
-using ContabilidadWebAPI.Aplicacion.Contabilidad.Responsabilidades;
-using ContabilidadWebAPI.Aplicacion.Models.Contabilidad.Responsabilidad;
-
 namespace ContabilidadWebAPI.Controllers.Contabilidad;
 
 [ApiController]

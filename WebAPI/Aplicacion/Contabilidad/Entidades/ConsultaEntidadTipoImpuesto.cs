@@ -1,15 +1,3 @@
-using MediatR;
-using System.Threading.Tasks;
-using System.Threading;
-using System;
-using AutoMapper;
-using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
-using System.Linq;
-using ContabilidadWebAPI.Dominio.Contabilidad;
-using ContabilidadWebAPI.Persistencia;
-using ContabilidadWebAPI.Aplicacion.Models.Contabilidad.Entidades;
-
 namespace ContabilidadWebAPI.Aplicacion.Contabilidad.Entidades;
 
 public class ConsultarEntidadTipoImpuesto : IdEntidadModel, IRequest<List<ListarEntidadesModel>>

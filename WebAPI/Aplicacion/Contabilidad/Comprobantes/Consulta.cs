@@ -1,15 +1,3 @@
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
-using ContabilidadWebAPI.Dominio;
-using MediatR;
-using Microsoft.EntityFrameworkCore;
-using AutoMapper;
-using System.Linq;
-using ContabilidadWebAPI.Persistencia;
-using ContabilidadWebAPI.Aplicacion.Models.Contabilidad.Comprobantes;
-using ContabilidadWebAPI.Dominio.Contabilidad;
-
 namespace ContabilidadWebAPI.Aplicacion.Contabilidad.Comprobantes;
 
 public class ListaCntComprobantesRequest : IRequest<List<ListarComprobantesModel>>

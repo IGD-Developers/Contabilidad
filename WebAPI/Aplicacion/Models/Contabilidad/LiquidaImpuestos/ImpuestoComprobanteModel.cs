@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-using ContabilidadWebAPI.Dominio.Contabilidad;
 namespace ContabilidadWebAPI.Aplicacion.Models.Contabilidad.LiquidaImpuestos;
 
 /// <summary>ImpuestoComprobanteModel:<para> </para> 

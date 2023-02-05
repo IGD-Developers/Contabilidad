@@ -1,14 +1,3 @@
-using MediatR;
-using System.Threading.Tasks;
-using System.Threading;
-using System;
-using AutoMapper;
-using Microsoft.EntityFrameworkCore;
-using System.Linq;
-using ContabilidadWebAPI.Dominio.Configuracion;
-using ContabilidadWebAPI.Persistencia;
-using ContabilidadWebAPI.Aplicacion.Models.Configuracion.Empresas;
-
 namespace ContabilidadWebAPI.Aplicacion.Configuracion.Empresas;
 
 public class ConsultarEmpresaRequest : IdEmpresasModel, IRequest<ListarEmpresasModel>

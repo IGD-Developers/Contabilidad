@@ -1,5 +1,3 @@
-using System.Data;
-
 namespace ContabilidadWebAPI.Persistencia.DapperConexion;
 
 

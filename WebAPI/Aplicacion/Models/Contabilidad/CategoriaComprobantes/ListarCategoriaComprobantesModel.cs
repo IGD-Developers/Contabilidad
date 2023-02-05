@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-
 namespace ContabilidadWebAPI.Aplicacion.Models.Contabilidad.CategoriaComprobantes;
 
 public class ListarCategoriaComprobantesModel

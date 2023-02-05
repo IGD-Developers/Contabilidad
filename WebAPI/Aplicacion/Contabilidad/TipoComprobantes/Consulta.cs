@@ -1,14 +1,3 @@
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
-using AutoMapper;
-using ContabilidadWebAPI.Aplicacion.Models.Contabilidad.TipoComprobantes;
-using ContabilidadWebAPI.Dominio.Contabilidad;
-using ContabilidadWebAPI.Persistencia;
-//using ContabilidadWebAPI.Dominio;
-using MediatR;
-using Microsoft.EntityFrameworkCore;
-
 namespace ContabilidadWebAPI.Aplicacion.Contabilidad.TipoComprobantes;
 
 //Lista de objetos tipo IRequest envolviendo una lista de tipo CntTipoComprobante

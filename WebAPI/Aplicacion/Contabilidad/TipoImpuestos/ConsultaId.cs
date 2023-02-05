@@ -1,16 +1,6 @@
-using MediatR;
-using System.Threading.Tasks;
-using System.Threading;
-using System;
-using AutoMapper;
-using Microsoft.EntityFrameworkCore;
-using ContabilidadWebAPI.Aplicacion.Models.Contabilidad.TipoImpuestos;
-using ContabilidadWebAPI.Persistencia;
-using ContabilidadWebAPI.Dominio.Contabilidad;
-
 namespace ContabilidadWebAPI.Aplicacion.Contabilidad.TipoImpuestos;
 
-public class ConsultarTipoImpuestoRequest : IdModel, IRequest<ListarTipoImpuestosModel>
+public class ConsultarTipoImpuestoRequest : TipoImpuestosIdModel, IRequest<ListarTipoImpuestosModel>
 { }
 
 public class ConsultarTipoImpuestoHandler : IRequestHandler<ConsultarTipoImpuestoRequest, ListarTipoImpuestosModel>

@@ -1,11 +1,3 @@
-using ContabilidadWebAPI.Dominio.Contabilidad;
-using System;
-using MediatR;
-using System.Threading.Tasks;
-using System.Threading;
-using FluentValidation;
-using ContabilidadWebAPI.Persistencia;
-
 namespace ContabilidadWebAPI.Aplicacion.Contabilidad.ExogenaConceptos;
 
 public class InsertarExogenaConceptoRequest : IRequest

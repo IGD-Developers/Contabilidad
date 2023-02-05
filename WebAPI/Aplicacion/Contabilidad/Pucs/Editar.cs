@@ -1,13 +1,3 @@
-using System;
-using MediatR;
-using System.Threading.Tasks;
-using System.Threading;
-using FluentValidation;
-using AutoMapper;
-using ContabilidadWebAPI.Dominio.Contabilidad;
-using ContabilidadWebAPI.Persistencia;
-using ContabilidadWebAPI.Aplicacion.Models.Contabilidad.Pucs;
-
 namespace ContabilidadWebAPI.Aplicacion.Contabilidad.Pucs;
 
 public class EditarPucRequest : EditarPucModel, IRequest

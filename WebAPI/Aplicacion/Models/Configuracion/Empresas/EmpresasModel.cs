@@ -1,5 +1,3 @@
-using ContabilidadWebAPI.Aplicacion.Models.Contabilidad.Tercero;
-
 namespace ContabilidadWebAPI.Aplicacion.Models.Configuracion.Empresas;
 
 public class EmpresasModel

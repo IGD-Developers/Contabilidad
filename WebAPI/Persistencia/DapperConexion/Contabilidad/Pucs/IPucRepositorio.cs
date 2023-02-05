@@ -1,6 +1,3 @@
-using System.Collections.Generic;
-using System.Threading.Tasks;
-
 namespace ContabilidadWebAPI.Persistencia.DapperConexion.Contabilidad.Pucs;
 
 /// <summary>

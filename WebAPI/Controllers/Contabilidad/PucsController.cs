@@ -1,14 +1,3 @@
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using MediatR;
-using Microsoft.AspNetCore.Mvc;
-//using ContabilidadWebAPI.Dominio.Contabilidad;
-using System;
-using ContabilidadWebAPI.Controllers;
-using ContabilidadWebAPI.Aplicacion.Contabilidad.Pucs;
-using ContabilidadWebAPI.Aplicacion.Models.Contabilidad.Pucs;
-using static ContabilidadWebAPI.Aplicacion.Contabilidad.Pucs.Insertar;
-
 namespace ContabilidadWebAPI.Controllers.Contabilidad;
 
 

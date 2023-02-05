@@ -1,9 +1,5 @@
-using System;
-using System.Collections.Generic;
-using ContabilidadWebAPI.Aplicacion.Models.Configuracion.Sucursales;
 using ContabilidadWebAPI.Aplicacion.Models.Configuracion.Usuarios;
 using ContabilidadWebAPI.Aplicacion.Models.Contabilidad.DetalleComprobantes;
-using ContabilidadWebAPI.Aplicacion.Models.Contabilidad.TipoComprobantes;
 
 namespace ContabilidadWebAPI.Aplicacion.Models.Contabilidad.Comprobantes;
 

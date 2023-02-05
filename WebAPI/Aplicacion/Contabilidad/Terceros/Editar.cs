@@ -1,16 +1,3 @@
-using System;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using AutoMapper;
-using ContabilidadWebAPI.Aplicacion.Models.Contabilidad.ResponsabilidadTercero;
-using ContabilidadWebAPI.Aplicacion.Models.Contabilidad.Tercero;
-using ContabilidadWebAPI.Dominio.Contabilidad;
-using ContabilidadWebAPI.Persistencia;
-using FluentValidation;
-using MediatR;
-using Microsoft.EntityFrameworkCore;
-
 namespace ContabilidadWebAPI.Aplicacion.Contabilidad.Terceros;
 
 public class EditarTerceroRequest : EditarTerceroModel, IRequest { }

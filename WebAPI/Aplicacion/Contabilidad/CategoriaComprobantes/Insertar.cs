@@ -1,13 +1,3 @@
-using System;
-using System.Threading;
-using System.Threading.Tasks;
-using AutoMapper;
-using ContabilidadWebAPI.Aplicacion.Models.Contabilidad.CategoriaComprobantes;
-using ContabilidadWebAPI.Dominio.Contabilidad;
-using ContabilidadWebAPI.Persistencia;
-using FluentValidation;
-using MediatR;
-
 namespace ContabilidadWebAPI.Aplicacion.Contabilidad.CategoriaComprobantes;
 
 public class InsertarCategoriaComprobanteRequest : InsertarCategoriaComprobantesModel, IRequest

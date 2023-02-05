@@ -1,5 +1,3 @@
-using System;
-
 namespace ContabilidadWebAPI.Aplicacion.Models.Contabilidad.LiquidaImpuestos;
 
 public class ListarLiquidaImpuestosModel

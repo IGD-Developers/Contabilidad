@@ -1,17 +1,3 @@
-using System;
-using System.Threading;
-using System.Threading.Tasks;
-using FluentValidation;
-using MediatR;
-using Microsoft.EntityFrameworkCore;
-using ContabilidadWebAPI.Dominio.Contabilidad;
-using AutoMapper;
-using System.Linq;
-using ContabilidadWebAPI.Aplicacion.Contabilidad.Consecutivos;
-using ContabilidadWebAPI.Aplicacion.Models.Contabilidad.Consecutivos;
-using ContabilidadWebAPI.Aplicacion.Models.Contabilidad.Comprobantes;
-using ContabilidadWebAPI.Persistencia;
-
 namespace ContabilidadWebAPI.Aplicacion.Contabilidad.Comprobantes;
 
 public class RevertirComprobanteRequest : RevertirComprobantesModel, IRequest

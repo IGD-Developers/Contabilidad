@@ -1,9 +1,3 @@
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using ContabilidadWebAPI.Dominio.Contabilidad;
-using ContabilidadWebAPI.Dominio.Configuracion;
-
 namespace ContabilidadWebAPI.Persistencia.Mapeo.Contabilidad;
 
 public class PucMap : IEntityTypeConfiguration<CntPuc>

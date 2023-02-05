@@ -1,8 +1,3 @@
-
-using System.Data;
-using Microsoft.Extensions.Options;
-using MySqlConnector;
-
 namespace ContabilidadWebAPI.Persistencia.DapperConexion;
 
 public class FactoryConnection : IFactoryConnection

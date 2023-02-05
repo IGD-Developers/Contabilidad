@@ -1,8 +1,3 @@
-using System.Linq;
-using System.Threading.Tasks;
-using ContabilidadWebAPI.Dominio.Configuracion;
-using Microsoft.AspNetCore.Identity;
-
 namespace ContabilidadWebAPI.Persistencia;
 
 public class DataInicial

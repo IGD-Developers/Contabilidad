@@ -1,10 +1,3 @@
-using System.Threading;
-using System.Threading.Tasks;
-using ContabilidadWebAPI.Persistencia;
-using ContabilidadWebAPI.Dominio.Contabilidad;
-using FluentValidation;
-using MediatR;
-
 namespace ContabilidadWebAPI.Aplicacion.Contabilidad.NotaAclaratoriaCuentas;
 
 public class InsertarNotaAclaratoriaCuentaRequest : IRequest

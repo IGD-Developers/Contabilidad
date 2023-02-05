@@ -1,5 +1,3 @@
-using System;
-
 namespace ContabilidadWebAPI.Persistencia.DapperConexion.Contabilidad.Pucs;
 
 

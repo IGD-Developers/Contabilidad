@@ -1,10 +1,3 @@
-using ContabilidadWebAPI.Dominio.Contabilidad;
-using MediatR;
-using System.Threading.Tasks;
-using System.Threading;
-using System;
-using ContabilidadWebAPI.Persistencia;
-
 namespace ContabilidadWebAPI.Aplicacion.Contabilidad.ConceptoCuentas;
 
 public class InsertarConceptoCuentaRequest : IRequest

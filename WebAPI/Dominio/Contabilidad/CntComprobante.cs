@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using ContabilidadWebAPI.Dominio.Configuracion;
 #nullable disable
 
 namespace ContabilidadWebAPI.Dominio.Contabilidad;

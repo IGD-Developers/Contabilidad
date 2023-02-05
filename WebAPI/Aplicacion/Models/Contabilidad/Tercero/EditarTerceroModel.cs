@@ -1,6 +1,3 @@
-using System.Collections.Generic;
-using ContabilidadWebAPI.Aplicacion.Models.Contabilidad.ResponsabilidadTercero;
-
 namespace ContabilidadWebAPI.Aplicacion.Models.Contabilidad.Tercero;
 
 public class EditarTerceroModel

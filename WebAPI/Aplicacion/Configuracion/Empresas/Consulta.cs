@@ -1,14 +1,3 @@
-using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
-using MediatR;
-using AutoMapper;
-using System.Linq;
-using ContabilidadWebAPI.Dominio.Configuracion;
-using ContabilidadWebAPI.Persistencia;
-using ContabilidadWebAPI.Aplicacion.Models.Configuracion.Empresas;
-
 namespace ContabilidadWebAPI.Aplicacion.Configuracion.Empresas;
 
 public class ListaCnfEmpresasRequest : IRequest<List<ListarEmpresasModel>>

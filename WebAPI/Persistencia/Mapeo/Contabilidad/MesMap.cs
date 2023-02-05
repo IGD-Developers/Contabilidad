@@ -1,8 +1,3 @@
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using ContabilidadWebAPI.Dominio.Configuracion;
-using ContabilidadWebAPI.Dominio.Contabilidad;
-
 namespace ContabilidadWebAPI.Persistencia.Mapeo.Contabilidad;
 
 public class MesMap : IEntityTypeConfiguration<CntMes>

@@ -1,12 +1,3 @@
-
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
-using ContabilidadWebAPI.Dominio.Configuracion;
-using ContabilidadWebAPI.Persistencia;
-using MediatR;
-using Microsoft.EntityFrameworkCore;
-
 namespace ContabilidadWebAPI.Aplicacion.Seguridad.Usuarios;
 
 //Lista de objetos tipo IRequest envolviendo una lista de tipo CnfUsuario

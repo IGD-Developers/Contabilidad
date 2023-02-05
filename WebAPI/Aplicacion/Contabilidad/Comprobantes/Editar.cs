@@ -1,16 +1,3 @@
-using MediatR;
-using ContabilidadWebAPI.Dominio.Contabilidad;
-using System;
-using System.Threading.Tasks;
-using System.Threading;
-using FluentValidation;
-using AutoMapper;
-using System.Linq;
-using ContabilidadWebAPI.Aplicacion.Models.Contabilidad.DetalleComprobantes;
-using Microsoft.EntityFrameworkCore;
-using ContabilidadWebAPI.Persistencia;
-using ContabilidadWebAPI.Aplicacion.Models.Contabilidad.Comprobantes;
-
 namespace ContabilidadWebAPI.Aplicacion.Contabilidad.Comprobantes;
 
 public class EditarComprobanteRequest : EditarComprobantesModel, IRequest

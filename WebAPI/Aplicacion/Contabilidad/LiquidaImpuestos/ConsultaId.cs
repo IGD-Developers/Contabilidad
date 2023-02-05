@@ -1,14 +1,3 @@
-using MediatR;
-using System.Threading.Tasks;
-using System.Threading;
-using System;
-using AutoMapper;
-using Microsoft.EntityFrameworkCore;
-using System.Linq;
-using ContabilidadWebAPI.Aplicacion.Models.Contabilidad.LiquidaImpuestos;
-using ContabilidadWebAPI.Persistencia;
-using ContabilidadWebAPI.Dominio.Contabilidad;
-
 namespace ContabilidadWebAPI.Aplicacion.Contabilidad.LiquidaImpuestos;
 
 public class ConsultarLiquidaImpuestoRequest : IdLiquidaImpuestoModel, IRequest<ListarLiquidaImpuestosModel>

@@ -1,17 +1,7 @@
-using System;
-using System.Threading;
-using System.Threading.Tasks;
-using AutoMapper;
-using ContabilidadWebAPI.Aplicacion.Models.Contabilidad.TipoComprobantes;
-using ContabilidadWebAPI.Dominio.Contabilidad;
-using ContabilidadWebAPI.Persistencia;
-using MediatR;
-using Microsoft.EntityFrameworkCore;
-
 namespace ContabilidadWebAPI.Aplicacion.Contabilidad.TipoComprobantes;
 
 
-public class ConsultarTipoComprobanteRequest : IdModel, IRequest<ListarTipoComprobanteModel>
+public class ConsultarTipoComprobanteRequest : TipoComprobantesIdModel, IRequest<ListarTipoComprobanteModel>
 { }
 public class ConsultarTipoComprobanteHandler : IRequestHandler<ConsultarTipoComprobanteRequest, ListarTipoComprobanteModel>
 {

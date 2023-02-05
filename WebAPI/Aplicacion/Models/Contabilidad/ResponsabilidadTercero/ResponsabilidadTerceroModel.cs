@@ -1,5 +1,3 @@
-using ContabilidadWebAPI.Aplicacion.Models.Contabilidad.Responsabilidad;
-
 namespace ContabilidadWebAPI.Aplicacion.Models.Contabilidad.ResponsabilidadTercero;
 
 public class ResponsabilidadTerceroModel

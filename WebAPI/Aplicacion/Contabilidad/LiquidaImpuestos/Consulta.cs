@@ -1,16 +1,3 @@
-using MediatR;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using System.Threading;
-using Microsoft.EntityFrameworkCore;
-using AutoMapper;
-using System.Linq;
-using System;
-using Microsoft.AspNetCore.Mvc;
-using ContabilidadWebAPI.Aplicacion.Models.Contabilidad.LiquidaImpuestos;
-using ContabilidadWebAPI.Persistencia;
-using ContabilidadWebAPI.Dominio.Contabilidad;
-
 namespace ContabilidadWebAPI.Aplicacion.Contabilidad.LiquidaImpuestos;
 
 public class ListaCntLiquidaImpuestosRequest : FiltroLiquidaImpuestosModel, IRequest<List<ListarLiquidaImpuestosModel>>

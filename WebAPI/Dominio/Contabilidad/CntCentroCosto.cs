@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-
 namespace ContabilidadWebAPI.Dominio.Contabilidad;
 
 public class CntCentroCosto

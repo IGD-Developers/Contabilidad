@@ -1,5 +1,3 @@
-using ContabilidadWebAPI.Dominio.Configuracion;
-
 namespace ContabilidadWebAPI.Aplicacion.Interfaces;
 
 public interface IJwtGenerador

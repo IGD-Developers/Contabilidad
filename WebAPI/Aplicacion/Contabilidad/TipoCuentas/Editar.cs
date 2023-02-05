@@ -1,11 +1,3 @@
-using System;
-using MediatR;
-using System.Threading.Tasks;
-using System.Threading;
-using FluentValidation;
-using ContabilidadWebAPI.Persistencia;
-
-
 namespace ContabilidadWebAPI.Aplicacion.Contabilidad.TipoCuentas;
 
 public class EditarTipoCuentaRequest : IRequest

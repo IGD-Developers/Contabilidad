@@ -1,14 +1,3 @@
-
-using MediatR;
-using System.Threading.Tasks;
-using System.Threading;
-using AutoMapper;
-using Microsoft.EntityFrameworkCore;
-using System;
-using ContabilidadWebAPI.Aplicacion.Models.Contabilidad.NotaAclaratoria;
-using ContabilidadWebAPI.Persistencia;
-using ContabilidadWebAPI.Dominio.Contabilidad;
-
 namespace ContabilidadWebAPI.Aplicacion.Contabilidad.NotaAclaratorias;
 
 public class ConsultarNotaAclaratoriaRequest : IRequest<ListarNotaAclaratoriaModel>

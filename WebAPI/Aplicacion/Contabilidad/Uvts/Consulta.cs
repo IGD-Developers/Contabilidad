@@ -1,11 +1,3 @@
-using System.Collections.Generic;
-using MediatR;
-using System.Threading.Tasks;
-using System.Threading;
-using Microsoft.EntityFrameworkCore;
-using ContabilidadWebAPI.Persistencia;
-using ContabilidadWebAPI.Dominio.Contabilidad;
-
 namespace ContabilidadWebAPI.Aplicacion.Contabilidad.Uvts;
 
 public class ListaUvtsRequest : IRequest<List<CntUvt>>

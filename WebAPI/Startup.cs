@@ -1,33 +1,3 @@
-using System;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.OpenApi.Models;
-using MediatR;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.DependencyInjection.Extensions;
-using Microsoft.AspNetCore.Authentication;
-using FluentValidation.AspNetCore;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
-using System.Text;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc.Authorization;
-using FluentValidation;
-using ContabilidadWebAPI.Aplicacion.Contabilidad.Terceros;
-using ContabilidadWebAPI.Aplicacion.Interfaces;
-using ContabilidadWebAPI.Persistencia.DapperConexion.Contabilidad.Pucs;
-using ContabilidadWebAPI.Aplicacion.Contabilidad.Consecutivos;
-using ContabilidadWebAPI.Persistencia.DapperConexion;
-using ContabilidadWebAPI.Seguridad.TokenSeguridad;
-using ContabilidadWebAPI.Persistencia;
-using ContabilidadWebAPI.Aplicacion.Contabilidad.Comprobantes;
-using ContabilidadWebAPI.Aplicacion.Seguridad;
-using ContabilidadWebAPI.Dominio.Configuracion;
-
 namespace ContabilidadWebAPI;
 
 public class Startup
