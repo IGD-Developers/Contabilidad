@@ -80,7 +80,7 @@ public class Startup
 
         services.AddFluentValidationAutoValidation()
                 .AddFluentValidationClientsideAdapters()
-                .AddValidatorsFromAssemblyContaining<Login>();
+                .AddValidatorsFromAssemblyContaining<LoginValidator>();
 
         // services.AddControllers().AddJsonOptions(x =>
         // x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve);
